@@ -420,6 +420,8 @@ const SUPABASE_URL = 'https://edtxamqiuriyzztntxak.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Vw9eiDwDH5IondRL1XAQdw_g43hJ8Hz';
 const ROOT_DOMAIN = 'bioflex.cyou';
 const USERNAME_COOLDOWN_HOURS = 24;
+// Capture this before Supabase consumes/cleans OAuth callback parameters.
+const OAUTH_RETURN = /[?&#](?:code|access_token|error|error_description|error_code)=/i.test(window.location.href);
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const RESERVED = ['admin','dashboard','login','signup','register','api','support','help','settings','about','privacy','terms','www','static','assets','root','bioflex','null','undefined','public','cdn','docs','blog','careers','pricing'];
@@ -588,11 +590,37 @@ function setAuthMode(mode){
   document.getElementById('auth-error').classList.add('hidden');
 }
 function toggleAuthMode(){setAuthMode(App.authMode==='login'?'signup':'login')}
+function showAuthError(message){
+  const errEl=document.getElementById('auth-error');
+  errEl.textContent=message||'Authentication failed. Please try again.';
+  errEl.classList.remove('hidden');
+}
+function getAuthRedirectUrl(){
+  // Keep GitHub Pages project paths (for example /my-site/) in the OAuth return URL.
+  const url=new URL(window.location.href);
+  url.search='';
+  url.hash='';
+  return url.toString();
+}
+function getOAuthCallbackError(){
+  const query=new URLSearchParams(window.location.search);
+  const rawHash=window.location.hash.slice(1);
+  const params=rawHash && !rawHash.startsWith('/') ? new URLSearchParams(rawHash) : query;
+  const description=params.get('error_description')||params.get('error');
+  return description ? description.replace(/\+/g,' ') : '';
+}
 async function signInWith(provider){
+  const buttons=[...document.querySelectorAll('.auth-socials button')];
+  const previousLabels=buttons.map(button=>button.innerHTML);
+  buttons.forEach(button=>{button.disabled=true;button.setAttribute('aria-busy','true')});
+  document.getElementById('auth-error').classList.add('hidden');
   try{
-    const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:window.location.origin+'/'}});
-    if(error)toast(error.message,'error');
-  }catch(e){toast(e.message,'error')}
+    const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:getAuthRedirectUrl()}});
+    if(error)throw error;
+  }catch(e){
+    showAuthError(e.message||'Could not start sign-in. Check the Supabase provider configuration.');
+    buttons.forEach((button,index)=>{button.disabled=false;button.removeAttribute('aria-busy');button.innerHTML=previousLabels[index]});
+  }
 }
 async function handleEmailAuth(e){
   e.preventDefault();
@@ -611,15 +639,14 @@ async function handleEmailAuth(e){
       if(password!==confirm)throw new Error('Passwords do not match.');
       const {data:exist}=await db.from('profiles').select('id').eq('username',username).maybeSingle();
       if(exist)throw new Error('That username is already taken.');
-      const {error}=await db.auth.signUp({email,password,options:{data:{username,display_name:display||username},emailRedirectTo:window.location.origin+'/'}});
+      const {error}=await db.auth.signUp({email,password,options:{data:{username,display_name:display||username},emailRedirectTo:getAuthRedirectUrl()}});
       if(error)throw error;
       toast('Account created! Check your email to verify.','success');
     }else{
-      const {error}=await db.auth.signInWithPassword({email,password});
+      const {data,error}=await db.auth.signInWithPassword({email,password});
       if(error)throw error;
       toast('Signed in!','success');
-      await loadUserData();
-      navigate('#/dashboard');
+      await completeSignedInSession(data.session,true);
     }
   }catch(err){
     errEl.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(err.message||'Something went wrong.');
@@ -651,6 +678,20 @@ async function loadUserData(){
   App.links=links||[];
   App.socials=socials||[];
   return true;
+}
+let signedInLoadPromise=null;
+async function completeSignedInSession(session,goToDashboard){
+  if(!session||!session.user)return false;
+  if(App.user&&App.user.id===session.user.id&&App.profile){
+    if(goToDashboard&&!getSubdomain())navigate('#/dashboard');
+    return true;
+  }
+  if(!signedInLoadPromise){
+    signedInLoadPromise=loadUserData().finally(()=>{signedInLoadPromise=null});
+  }
+  const loaded=await signedInLoadPromise;
+  if(loaded&&goToDashboard&&!getSubdomain())navigate('#/dashboard');
+  return loaded;
 }
 async function promptForUsername(){
   return new Promise(resolve=>{
@@ -1442,6 +1483,16 @@ document.addEventListener('click',e=>{
 });
 
 /* ── BOOT ── */
+// Register before getSession so OAuth returns during initialization are not missed.
+db.auth.onAuthStateChange((event,session)=>{
+  if(event==='SIGNED_IN'&&session){
+    // Defer Supabase calls until its auth-state callback has completed.
+    setTimeout(()=>completeSignedInSession(session,true).catch(error=>{
+      console.error('Could not finish sign-in:',error);
+      showAuthError(error.message||'Signed in, but your BioFlex profile could not be loaded.');
+    }),0);
+  }
+});
 async function boot(){
   document.getElementById('footer-year').textContent=new Date().getFullYear();
 
@@ -1453,16 +1504,21 @@ async function boot(){
   }
 
   // Root domain: normal auth + routing
-  const {data:{session}}=await db.auth.getSession();
-  if(session) await loadUserData();
-  else db.auth.onAuthStateChange(async(ev,s)=>{
-    if(ev==='SIGNED_IN' && s){
-      await loadUserData();
-      if(!getSubdomain()) navigate('#/dashboard');
+  const callbackError=getOAuthCallbackError();
+  const {data:{session},error}=await db.auth.getSession();
+  if(error)console.error('Could not restore the Supabase session:',error);
+  if(session){
+    const shouldOpenDashboard=OAUTH_RETURN||location.hash==='#/login'||location.hash==='#/signup';
+    await completeSignedInSession(session,shouldOpenDashboard);
+    if(!shouldOpenDashboard)route();
+  }else{
+    route();
+    if(callbackError||OAUTH_RETURN){
+      setAuthMode('login');
+      showScreen('auth');
+      showAuthError(callbackError||'Sign-in did not complete. Please try again, and check the Supabase OAuth provider settings if it repeats.');
     }
-  });
-
-  route();
+  }
 }
 boot();
 window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
