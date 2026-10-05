@@ -67,12 +67,12 @@ code{font-family:'JetBrains Mono',monospace;background:rgba(96,165,250,.12);colo
 .btn-lg{padding:.85rem 1.4rem;font-size:.95rem}
 .btn-block{width:100%}
 .btn-icon{width:38px;height:38px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}
-.btn-oauth{display:flex;align-items:center;justify-content:center;gap:.85rem;width:100%;padding:.85rem 1.1rem;border-radius:12px;font-weight:500;font-size:.9rem;border:1px solid transparent;transition:all .18s ease}
+.btn-oauth{display:flex;align-items:center;gap:.85rem;width:100%;padding:.85rem 1.1rem;border-radius:12px;font-weight:500;font-size:.9rem;border:1px solid transparent}
 .btn-oauth-google{background:#fff;color:#1f2937}
-.btn-oauth-google:hover{background:#eef2f7;transform:translateY(-1px)}
+.btn-oauth-google:hover{background:#eef2f7}
 .btn-oauth-discord{background:#5865F2;color:#fff}
-.btn-oauth-discord:hover{background:#4752c4;transform:translateY(-1px)}
-.input,select.input,textarea.input{width:100%;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18);color:#f5f7ff;padding:.72rem 1rem;border-radius:12px;font-size:.875rem;outline:none;font-family:inherit;transition:border-color .18s,box-shadow .18s}
+.btn-oauth-discord:hover{background:#4752c4}
+.input,select.input,textarea.input{width:100%;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18);color:#f5f7ff;padding:.72rem 1rem;border-radius:12px;font-size:.875rem;outline:none;font-family:inherit}
 .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.18)}
 .input::placeholder{color:rgba(219,234,254,.35)}
 select.input option{background:#0a1120;color:#f5f7ff}
@@ -109,12 +109,6 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .claim-result.bad{border:1px solid rgba(248,113,113,.4);background:rgba(248,113,113,.08);color:#fca5a5}
 .claim-result.warn{border:1px solid rgba(251,191,36,.4);background:rgba(251,191,36,.08);color:#fcd34d}
 .claim-hint{margin-top:.75rem;font-size:.72rem;color:rgba(219,234,254,.4);display:flex;align-items:center;gap:.5rem;justify-content:center}
-/* Landing auth card */
-.landing-auth{max-width:26rem;margin:2.5rem auto 0;padding:1.5rem;border-radius:20px;background:rgba(15,25,50,.5);border:1px solid rgba(96,165,250,.14);backdrop-filter:blur(20px);box-shadow:0 12px 48px rgba(0,0,0,.55)}
-.landing-auth h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:1rem;text-align:center}
-.landing-auth .auth-divider{display:flex;align-items:center;gap:.75rem;color:rgba(219,234,254,.4);font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;margin:1.1rem 0;font-weight:600}
-.landing-auth .auth-divider::before,.landing-auth .auth-divider::after{content:'';flex:1;height:1px;background:rgba(96,165,250,.15)}
-.landing-auth .email-row{display:flex;flex-direction:column;gap:.6rem}
 .features{margin-top:6rem;display:grid;grid-template-columns:1fr;gap:1.25rem}
 @media(min-width:768px){.features{grid-template-columns:repeat(3,1fr)}}
 .feature{border-radius:18px;padding:1.65rem;transition:transform .3s}
@@ -308,6 +302,9 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .chip{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem .8rem;border-radius:10px;font-size:.78rem;font-weight:600;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.18);color:rgba(219,234,254,.8);cursor:pointer;transition:all .18s}
 .chip:hover{background:rgba(96,165,250,.16)}
 .chip.active{background:linear-gradient(135deg,rgba(59,130,246,.35),rgba(29,78,216,.25));border-color:rgba(96,165,250,.6);color:#fff}
+/* File upload info text */
+.file-info{font-size:.72rem;color:rgba(219,234,254,.5);margin-top:.35rem;display:flex;align-items:center;gap:.35rem}
+.file-info b{color:#86efac}
 </style>
 </head>
 <body>
@@ -318,57 +315,27 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 <div id="toast-container"></div>
 <div id="modal-container"></div>
 
-<!-- ═══════════════ LANDING ═══════════════ -->
+<!-- LANDING -->
 <div id="screen-landing" class="screen active">
   <header class="site-header">
     <a href="#/landing" class="brand" data-nav="#/landing"><div class="brand-logo"><i class="fa-solid fa-bolt"></i></div><span class="brand-name">Bio<span>Flex</span></span></a>
     <nav class="flex items-center gap-2">
-      <button id="header-login-btn" class="btn btn-ghost btn-sm" onclick="scrollToAuth()"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
-      <button id="header-signup-btn" class="btn btn-primary btn-sm" onclick="scrollToAuth('signup')"><i class="fa-solid fa-rocket"></i> Get started</button>
+      <a href="#/login" class="btn btn-ghost btn-sm" data-nav="#/login"><i class="fa-solid fa-right-to-bracket"></i> Log in</a>
+      <a href="#/signup" class="btn btn-primary btn-sm" data-nav="#/signup"><i class="fa-solid fa-rocket"></i> Get started</a>
     </nav>
   </header>
   <main class="container" style="padding-bottom:4rem">
     <section class="hero">
       <div class="pill"><i class="fa-solid fa-gem"></i> Premium Link-in-Bio</div>
       <h1 class="hero-title font-display">Your world. <span class="grad">One BioFlex.</span></h1>
-      <p class="hero-sub">Claim your username and get your own page at <code>username.bioflex.cyou</code> — premium, custom, and instantly shareable.</p>
+      <p class="hero-sub">Claim your username, customize your identity, and share every link from a single beautiful page at <code>username.bioflex.cyou</code></p>
       <div class="claim-wrap">
         <div class="claim-row">
-          <div class="claim-input-wrap">
-            <input id="claim-input" autocomplete="off" maxlength="30" placeholder="yourname" style="color:#f5f7ff;font-size:1rem;font-weight:500;font-family:'JetBrains Mono',monospace">
-            <span class="claim-prefix">.bioflex.cyou</span>
-          </div>
+          <div class="claim-input-wrap"><span class="claim-prefix">bioflex.cyou/</span><input id="claim-input" autocomplete="off" maxlength="30" placeholder="yourname" style="color:#f5f7ff;font-size:1rem;font-weight:500"></div>
           <button id="claim-btn" class="btn btn-primary" style="padding:.7rem 1.35rem"><i class="fa-solid fa-magnifying-glass"></i> Check</button>
         </div>
         <div id="claim-result" class="claim-result hidden"></div>
         <div class="claim-hint"><i class="fa-solid fa-circle-info"></i><span>3–30 characters · lowercase · letters, numbers, <code>_</code>, <code>-</code></span></div>
-      </div>
-
-      <!-- Landing auth section -->
-      <div id="landing-auth" class="landing-auth">
-        <h3>Sign in or create your account</h3>
-        <div class="auth-socials">
-          <button class="btn-oauth btn-oauth-google" onclick="signInWith('google')">
-            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.9 6.1 29.8 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.9 6.1 29.8 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.8 0 10.9-2.1 14.8-5.7l-6.8-5.8C29.9 34.1 27.1 35 24 35c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.5 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.8 5.8C41.8 35.7 44 30.3 44 24c0-1.3-.1-2.3-.4-3.5z"/></svg>
-            <span>Continue with Google</span>
-          </button>
-          <button class="btn-oauth btn-oauth-discord" onclick="signInWith('discord')">
-            <i class="fa-brands fa-discord" style="font-size:20px"></i>
-            <span>Continue with Discord</span>
-          </button>
-        </div>
-        <div class="auth-divider">or continue with email</div>
-        <form id="landing-auth-form" class="email-row" onsubmit="handleEmailAuth(event)">
-          <input id="la-email" type="email" class="input" placeholder="Email" required>
-          <input id="la-password" type="password" class="input" placeholder="Password (min 8 characters)" required minlength="8">
-          <button type="submit" class="btn btn-primary btn-block">
-            <i class="fa-solid fa-right-to-bracket"></i> <span id="la-submit-text">Sign in</span>
-          </button>
-          <div class="text-xs muted text-center" style="margin-top:.25rem">
-            <span id="la-toggle-text">Don't have an account?</span>
-            <button type="button" id="la-toggle-btn" onclick="toggleLandingAuthMode()" style="color:var(--accent-2);font-weight:700;margin-left:.35rem">Sign up</button>
-          </div>
-        </form>
       </div>
     </section>
     <section class="features">
@@ -380,7 +347,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
   <footer class="site-footer"><div class="container"><p>&copy; <span id="footer-year"></span> BioFlex &middot; bioflex.cyou</p></div></footer>
 </div>
 
-<!-- ═══════════════ FULL AUTH SCREEN (for direct links) ═══════════════ -->
+<!-- AUTH -->
 <div id="screen-auth" class="screen">
   <div class="auth-wrap">
     <a href="#/landing" class="auth-back" data-nav="#/landing"><i class="fa-solid fa-arrow-left"></i> Back to home</a>
@@ -407,7 +374,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
   </div>
 </div>
 
-<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<!-- DASHBOARD -->
 <div id="screen-dashboard" class="screen">
   <div id="drawer-backdrop" class="drawer-backdrop" onclick="closeDrawer()"></div>
   <aside id="drawer" class="drawer"></aside>
@@ -439,31 +406,21 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
   </div>
 </div>
 
-<!-- ═══════════════ PREVIEW ═══════════════ -->
+<!-- PREVIEW -->
 <div id="screen-preview" class="screen">
   <div id="preview-bg"></div>
   <div id="enter-overlay"><div style="text-align:center"><div class="enter-pulse"><i class="fa-solid fa-play"></i></div><div style="margin-top:1.5rem"><div style="font-weight:700;font-size:1.1rem;font-family:'Space Grotesk',sans-serif">Tap to enter</div><div class="text-sm muted">Audio will begin after you tap</div></div></div></div>
-  <button id="preview-back-btn" class="btn btn-ghost preview-back" onclick="exitPreview()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+  <button class="btn btn-ghost preview-back" onclick="exitPreview()"><i class="fa-solid fa-arrow-left"></i> Back</button>
   <main id="preview-content"><div id="preview-body" class="preview-body"></div></main>
 </div>
 
 <script>
 /* ═══════════════ CONFIG ═══════════════ */
 const SUPABASE_URL = 'https://edtxamqiuriyzztntxak.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_Vw9eiDwIH5IondRL1XAQdw_g43hJ8Hz'.replace('DwIH5','DwDH5'); // safety normalize
+const SUPABASE_ANON_KEY = 'sb_publishable_Vw9eiDwDH5IondRL1XAQdw_g43hJ8Hz';
 const ROOT_DOMAIN = 'bioflex.cyou';
 const USERNAME_COOLDOWN_HOURS = 24;
-
-/* Create Supabase client with proper auth options */
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true,
-    storageKey: 'bioflex-auth',
-    flowType: 'pkce'
-  }
-});
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const RESERVED = ['admin','dashboard','login','signup','register','api','support','help','settings','about','privacy','terms','www','static','assets','root','bioflex','null','undefined','public','cdn','docs','blog','careers','pricing'];
 const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
@@ -490,7 +447,6 @@ const PLATFORMS = [
   {id:'website',label:'Website',icon:'fa-solid fa-globe',color:'#60a5fa',prefix:'https://'}
 ];
 const TEMPLATES = [
-  {slug:'default',name:'Default',from:'#0a1120',to:'#1d4ed8',accent:'#3b82f6'},
   {slug:'midnight',name:'Midnight',from:'#0a1120',to:'#1d4ed8',accent:'#3b82f6'},
   {slug:'aurora',name:'Aurora',from:'#041e42',to:'#0891b2',accent:'#22d3ee'},
   {slug:'cobalt',name:'Cobalt',from:'#0a1a3a',to:'#2563eb',accent:'#60a5fa'},
@@ -519,7 +475,7 @@ const NAV_CUSTOMIZE = [
 ];
 const NAV_OTHER = [{id:'premium',label:'Premium',icon:'fa-solid fa-gem',badge:'NEW'}];
 
-const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',landingAuthMode:'login',usernameEffect:'none',_authReady:false};
+const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',usernameEffect:'none'};
 
 /* ═══════════════ HELPERS ═══════════════ */
 function esc(s){if(s==null)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
@@ -560,35 +516,37 @@ function validateUsername(u){
   if(RESERVED.includes(s))return 'That username is reserved.';
   return null;
 }
+
+/* ═══════════════ SUBDOMAIN DETECTION ═══════════════
+   Detects the current subdomain on *.bioflex.cyou
+   - bioflex.cyou         → null (landing)
+   - www.bioflex.cyou     → null (landing)
+   - semx.bioflex.cyou    → "semx" (public profile)
+   - api/admin/... etc    → null (reserved)
+=================================================== */
+const RESERVED_SUBDOMAINS = ['api','admin','dashboard','static','assets','cdn','auth','app','mail','status','www'];
 function getSubdomain(){
-  const host=window.location.hostname.toLowerCase();
-  if(host==='localhost'||host==='127.0.0.1'||host.endsWith('.localhost'))return null;
-  if(!host.endsWith('.'+ROOT_DOMAIN))return null;
-  const sub=host.slice(0,-(ROOT_DOMAIN.length+1));
-  if(!sub||sub==='www')return null;
-  if(['api','auth','dashboard','admin','static','assets','cdn'].includes(sub))return null;
+  const host = window.location.hostname.toLowerCase();
+  // Local dev / preview: no subdomain routing
+  if(host==='localhost' || host==='127.0.0.1' || host.endsWith('.localhost') || host.endsWith('.vercel.app')) return null;
+  // Root domain
+  if(host === ROOT_DOMAIN) return null;
+  // www
+  if(host === 'www.'+ROOT_DOMAIN) return null;
+  // Wildcard subdomain check
+  if(!host.endsWith('.'+ROOT_DOMAIN)) return null;
+  const sub = host.slice(0, -(ROOT_DOMAIN.length+1));
+  if(!sub || sub.includes('.')) return null;
+  if(RESERVED_SUBDOMAINS.includes(sub)) return null;
+  // Must match username rules
+  if(!USERNAME_RE.test(sub)) return null;
   return sub;
 }
-function isPublicSubdomain(){return !!getSubdomain()}
-function getRedirectUrl(){
-  const host=window.location.hostname.toLowerCase();
-  if(host==='localhost'||host==='127.0.0.1'||host.endsWith('.localhost')){
-    return window.location.origin + '/';
-  }
-  if(host.endsWith('.'+ROOT_DOMAIN) && host!=='www.'+ROOT_DOMAIN && host!==ROOT_DOMAIN){
-    return 'https://'+ROOT_DOMAIN+'/';
-  }
-  return 'https://'+ROOT_DOMAIN+'/';
-}
 
-/* ═══════════════ ROUTING ═══════════════ */
-function navigate(hash){
-  if(isPublicSubdomain()){route();return}
-  if(location.hash===hash){route();return}
-  location.hash=hash;
-}
+function navigate(hash){if(getSubdomain()){route();return}if(location.hash===hash){route();return}location.hash=hash}
 function route(){
   const sub=getSubdomain();
+  // ═══ SUBDOMAIN ROUTING: If on *.bioflex.cyou, load public profile ═══
   if(sub){
     if(location.hash && location.hash!==''){
       try{history.replaceState(null,'',location.pathname+location.search)}catch(_){}
@@ -602,12 +560,7 @@ function route(){
   if(name==='landing')showScreen('landing');
   else if(name==='login'){showScreen('auth');setAuthMode('login')}
   else if(name==='signup'){showScreen('auth');setAuthMode('signup')}
-  else if(name==='dashboard'){
-    if(!App.user){navigate('#/landing');return}
-    App.currentTab=(raw.split('/')[1])||'overview';
-    showScreen('dashboard');
-    renderDashboard();
-  }
+  else if(name==='dashboard'){if(!App.user){navigate('#/login');return}App.currentTab=(raw.split('/')[1])||'overview';showScreen('dashboard');renderDashboard()}
   else if(name==='preview'){showScreen('preview');renderPreview()}
   else showScreen('landing');
 }
@@ -635,149 +588,60 @@ function setAuthMode(mode){
   document.getElementById('auth-error').classList.add('hidden');
 }
 function toggleAuthMode(){setAuthMode(App.authMode==='login'?'signup':'login')}
-
-function toggleLandingAuthMode(){
-  const s=App.landingAuthMode!=='signup';
-  App.landingAuthMode=s?'signup':'login';
-  document.getElementById('la-submit-text').textContent=s?'Create account':'Sign in';
-  document.getElementById('la-toggle-text').textContent=s?'Already have an account?':"Don't have an account?";
-  document.getElementById('la-toggle-btn').textContent=s?'Sign in':'Sign up';
-}
-function scrollToAuth(mode){
-  if(mode==='signup'){App.landingAuthMode='signup';toggleLandingAuthMode();}
-  const el=document.getElementById('landing-auth');
-  if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
-}
-
 async function signInWith(provider){
-  const btns=document.querySelectorAll('.btn-oauth');
-  btns.forEach(b=>{b.disabled=true;b.style.opacity='.5'});
   try{
-    const redirectTo=getRedirectUrl();
-    const {error}=await db.auth.signInWithOAuth({
-      provider,
-      options:{
-        redirectTo,
-        queryParams: provider==='google' ? {prompt:'select_account'} : {}
-      }
-    });
-    if(error){
-      toast(error.message,'error');
-      btns.forEach(b=>{b.disabled=false;b.style.opacity=''});
-    }
-  }catch(e){
-    toast(e.message||'Sign in failed','error');
-    btns.forEach(b=>{b.disabled=false;b.style.opacity=''});
-  }
+    const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:window.location.origin+'/'}});
+    if(error)toast(error.message,'error');
+  }catch(e){toast(e.message,'error')}
 }
-
 async function handleEmailAuth(e){
   e.preventDefault();
-  // Detect which form triggered
-  const isLanding = e.target.id === 'landing-auth-form';
-  const errEl = isLanding ? null : document.getElementById('auth-error');
-  const mode = isLanding ? App.landingAuthMode : App.authMode;
-  if(errEl){errEl.classList.add('hidden')}
-  const email = (isLanding ? document.getElementById('la-email') : document.getElementById('auth-email')).value.trim();
-  const password = (isLanding ? document.getElementById('la-password') : document.getElementById('auth-password')).value;
-  const submitBtn = e.target.querySelector('button[type=submit]');
-  if(submitBtn){submitBtn.disabled=true;submitBtn.style.opacity='.6'}
+  const errEl=document.getElementById('auth-error');
+  errEl.classList.add('hidden');
+  const email=document.getElementById('auth-email').value.trim();
+  const password=document.getElementById('auth-password').value;
   try{
-    if(mode==='signup'){
-      // For landing signup, first need a username
-      let username='';
-      let display='';
-      let confirm=password;
-      if(isLanding){
-        // Prompt for username via modal
-        const uname = await promptForUsername();
-        if(!uname){if(submitBtn){submitBtn.disabled=false;submitBtn.style.opacity=''};return}
-        username = uname;
-        display = '';
-        confirm = password;
-      } else {
-        username = slug(document.getElementById('auth-username').value);
-        display = document.getElementById('auth-display').value.trim();
-        confirm = document.getElementById('auth-confirm').value;
-      }
+    if(App.authMode==='signup'){
+      const username=slug(document.getElementById('auth-username').value);
+      const display=document.getElementById('auth-display').value.trim();
+      const confirm=document.getElementById('auth-confirm').value;
       const uErr=validateUsername(username);
       if(uErr)throw new Error(uErr);
       if(password.length<8)throw new Error('Password must be at least 8 characters.');
-      if(!isLanding && password!==confirm)throw new Error('Passwords do not match.');
+      if(password!==confirm)throw new Error('Passwords do not match.');
       const {data:exist}=await db.from('profiles').select('id').eq('username',username).maybeSingle();
       if(exist)throw new Error('That username is already taken.');
-      const {error}=await db.auth.signUp({
-        email,password,
-        options:{
-          data:{username,display_name:display||username},
-          emailRedirectTo:getRedirectUrl()
-        }
-      });
+      const {error}=await db.auth.signUp({email,password,options:{data:{username,display_name:display||username},emailRedirectTo:window.location.origin+'/'}});
       if(error)throw error;
       toast('Account created! Check your email to verify.','success');
-      // If auto-signed in (no email confirmation), onAuthenticated will handle
-      const {data:{session}}=await db.auth.getSession();
-      if(session && session.user){
-        await onAuthenticated(session.user);
-      }
     }else{
       const {error}=await db.auth.signInWithPassword({email,password});
       if(error)throw error;
       toast('Signed in!','success');
-      // onAuthStateChange will handle
-      const {data:{session}}=await db.auth.getSession();
-      if(session && session.user){
-        await onAuthenticated(session.user);
-      }
+      await loadUserData();
+      navigate('#/dashboard');
     }
   }catch(err){
-    const msg = err.message || 'Something went wrong.';
-    if(errEl){errEl.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(msg);errEl.classList.remove('hidden')}
-    else toast(msg,'error');
-  } finally {
-    if(submitBtn){submitBtn.disabled=false;submitBtn.style.opacity=''}
+    errEl.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(err.message||'Something went wrong.');
+    errEl.classList.remove('hidden');
   }
 }
-
 async function handleLogout(){
   await db.auth.signOut();
   App.user=null;App.profile=null;App.links=[];App.socials=[];
   toast('Signed out.','info');
   navigate('#/landing');
 }
-
-/* Central post-auth handler — used by both bootstrap and auth state listener */
-async function onAuthenticated(user, opts={}){
-  if(!user){return false}
-  // Avoid double-handling same user
-  if(App.user && App.user.id===user.id && App.profile && !opts.force){
-    return true;
-  }
+async function loadUserData(){
+  const {data:{user}}=await db.auth.getUser();
+  if(!user){App.user=null;return false}
   App.user=user;
-  let {data:profile,error}=await db.from('profiles').select('*').eq('user_id',user.id).maybeSingle();
-  if(error && error.code!=='PGRST116'){
-    console.warn('Profile fetch error:',error.message);
-  }
+  let {data:profile}=await db.from('profiles').select('*').eq('user_id',user.id).maybeSingle();
   if(!profile){
-    // New user — need username onboarding
-    const uname = await promptForUsername();
-    if(!uname){
-      await db.auth.signOut();
-      return false;
-    }
-    const {data:np,error:insErr}=await db.from('profiles').insert({
-      user_id:user.id,
-      username:uname,
-      display_name:uname
-    }).select().single();
-    if(insErr){
-      const msg = insErr.message.includes('duplicate') || insErr.code==='23505'
-        ? 'Username already taken'
-        : 'Failed to create profile: '+insErr.message;
-      toast(msg,'error');
-      await db.auth.signOut();
-      return false;
-    }
+    const uname=await promptForUsername();
+    if(!uname){await db.auth.signOut();return false}
+    const {data:np,error}=await db.from('profiles').insert({user_id:user.id,username:uname,display_name:uname}).select().single();
+    if(error){toast('Failed: '+error.message,'error');await db.auth.signOut();return false}
     profile=np;
   }
   App.profile=profile;
@@ -786,103 +650,56 @@ async function onAuthenticated(user, opts={}){
   const {data:socials}=await db.from('socials').select('*').eq('user_id',user.id).order('position');
   App.links=links||[];
   App.socials=socials||[];
-  if(!isPublicSubdomain()){
-    if(!opts.silent){navigate('#/dashboard')}
-    else if(location.hash.startsWith('#/dashboard')){renderDashboard()}
-  }
   return true;
 }
-
-/* Username prompt modal — used both for onboarding and email signup */
-function promptForUsername(){
+async function promptForUsername(){
   return new Promise(resolve=>{
-    const m=openModal(
-      '<div class="modal-head"><div><h3>Choose your BioFlex username</h3><p>This becomes your permanent URL at <b style="color:#93c5fd">username.bioflex.cyou</b></p></div></div>'+
-      '<div style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18)">'+
-        '<input id="prompt-uname" placeholder="yourname" maxlength="30" style="flex:1;color:#fff;font-family:\'JetBrains Mono\',monospace;font-size:.95rem" autocomplete="off" spellcheck="false">'+
-        '<span style="color:rgba(219,234,254,.5);font-family:\'JetBrains Mono\',monospace;font-size:.85rem">.bioflex.cyou</span>'+
-      '</div>'+
-      '<div id="prompt-result" class="claim-result hidden"></div>'+
-      '<div class="mt-5 flex justify-end gap-2"><button class="btn btn-ghost" data-act="cancel">Cancel</button><button class="btn btn-primary" data-act="ok" disabled><i class="fa-solid fa-check"></i> Claim username</button></div>'
-    );
+    const m=openModal('<div class="modal-head"><div><h3>Choose your username</h3><p>This becomes your permanent URL.</p></div></div><input id="prompt-uname" class="input mt-2" placeholder="yourname" maxlength="30"><div id="prompt-result" class="claim-result hidden"></div><div class="mt-5 flex justify-end gap-2"><button class="btn btn-ghost" data-act="cancel">Cancel</button><button class="btn btn-primary" data-act="ok">Claim</button></div>');
     const inp=m.querySelector('#prompt-uname');
     const res=m.querySelector('#prompt-result');
-    const okBtn=m.querySelector('[data-act=ok]');
-    let lastCheck = null;
-    let checkToken = 0;
     inp.addEventListener('input',async()=>{
       inp.value=slug(inp.value);
       const v=inp.value;
-      okBtn.disabled=true;
       if(!v){res.classList.add('hidden');return}
       const err=validateUsername(v);
       if(err){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(err);res.classList.remove('hidden');return}
-      const token = ++checkToken;
-      res.className='claim-result warn';res.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Checking...';res.classList.remove('hidden');
-      const {data,error}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
-      if(token !== checkToken) return;
-      if(error){
-        res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> Could not verify. Try again.';return;
-      }
-      if(data){
-        res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(v)+' is already taken';
-        return;
-      }
-      res.className='claim-result ok';res.innerHTML='<i class="fa-solid fa-check"></i> '+esc(v)+' is available';
-      okBtn.disabled=false;
-      lastCheck = v;
+      const {data}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
+      if(data){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(v)+' is taken';res.classList.remove('hidden');return}
+      res.className='claim-result ok';res.innerHTML='<i class="fa-solid fa-check"></i> '+esc(v)+' is available';res.classList.remove('hidden');
     });
     m.querySelector('[data-act=cancel]').onclick=()=>{closeModal(m);resolve(null)};
-    okBtn.onclick=async()=>{
+    m.querySelector('[data-act=ok]').onclick=async()=>{
       const v=slug(inp.value);
       const err=validateUsername(v);
       if(err){toast(err,'error');return}
-      // Final check
       const {data}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
       if(data){toast('Username is already taken.','error');return}
       closeModal(m);resolve(v);
     };
-    setTimeout(()=>inp.focus(),150);
   });
 }
 
 /* ═══════════════ LANDING CLAIM ═══════════════ */
-let claimCheckTimer = null;
-document.getElementById('claim-input').addEventListener('input',e=>{
-  e.target.value=slug(e.target.value);
-  const res=document.getElementById('claim-result');
-  const v=e.target.value;
-  if(claimCheckTimer)clearTimeout(claimCheckTimer);
-  if(!v){res.classList.add('hidden');return}
-  claimCheckTimer=setTimeout(async()=>{
-    const err=validateUsername(v);
-    if(err){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(err);res.classList.remove('hidden');return}
-    res.className='claim-result warn';res.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Checking...';res.classList.remove('hidden');
-    const {data}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
-    if(data){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(v)+' is already taken';return}
-    res.className='claim-result ok';
-    res.innerHTML='<i class="fa-solid fa-check"></i> '+esc(v)+' is available — <a href="javascript:void(0)" onclick="startClaim(\''+esc(v)+'\')" style="text-decoration:underline;font-weight:700;margin-left:.35rem">claim now</a>';
-  },400);
-});
-document.getElementById('claim-btn').addEventListener('click',()=>{
+document.getElementById('claim-btn').addEventListener('click',async()=>{
   const v=slug(document.getElementById('claim-input').value);
   const res=document.getElementById('claim-result');
   if(!v){toast('Please enter a username.','error');return}
-  res.className='claim-result warn';res.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Checking...';res.classList.remove('hidden');
-  document.getElementById('claim-input').dispatchEvent(new Event('input'));
+  const err=validateUsername(v);
+  if(err){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(err);res.classList.remove('hidden');return}
+  res.className='claim-result';
+  res.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+  res.classList.remove('hidden');
+  const {data}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
+  if(data){res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> '+esc(v)+' is taken';return}
+  res.className='claim-result ok';
+  res.innerHTML='<i class="fa-solid fa-check"></i> '+esc(v)+' is available — <a href="#/signup" data-nav="#/signup" onclick="setTimeout(function(){document.getElementById(\'auth-username\').value=\''+esc(v)+'\'},80)" style="text-decoration:underline;font-weight:700;margin-left:.35rem">claim now</a>';
 });
+document.getElementById('claim-input').addEventListener('input',e=>{e.target.value=slug(e.target.value)});
 document.getElementById('claim-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('claim-btn').click()});
-
-function startClaim(username){
-  // Store to use after auth
-  window.__pendingUsername = username;
-  scrollToAuth('signup');
-  toast('Sign up or log in to claim '+username+'.','info');
-}
 
 /* ═══════════════ DASHBOARD ═══════════════ */
 function renderDashboard(){
-  if(!App.user||!App.profile){navigate('#/landing');return}
+  if(!App.user||!App.profile){navigate('#/login');return}
   const p=App.profile;
   document.getElementById('sb-username').textContent='@'+p.username;
   document.getElementById('sb-uid').textContent='UID '+fmtUID(p.uid||1000000);
@@ -972,7 +789,7 @@ function tabCustomize(){
     '<div class="card glass mt-6">'+
       '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Assets Uploader</h3><p>Upload files to BioFlex storage</p></div></div>'+
       '<div class="grid g-4" style="grid-template-columns:1fr">'+
-        buildUploadBox('bg','Background','Image, GIF, or video (max 50MB)','fa-image','JPG, PNG, GIF, MP4, WebM','backgrounds','background_url',p.background_url)+
+        buildUploadBox('bg','Background','Upload JPG, PNG, GIF, MP4 or WebM (max 50MB) — video plays muted','fa-image','JPG, PNG, GIF, MP4, WebM · Max 50MB','backgrounds','background_url',p.background_url)+
         buildAudioBox(p.music_url,p.music_title)+
         buildUploadBox('avatar','Profile Avatar','Square image (max 5MB)','fa-user','JPG, PNG, GIF','avatars','avatar_url',p.avatar_url)+
         buildUploadBox('cursor','Custom Cursor','PNG cursor (max 1MB). 32x32 best','fa-arrow-pointer','PNG recommended','cursors','cursor_url',p.cursor_url)+
@@ -982,7 +799,7 @@ function tabCustomize(){
       '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-sliders"></i></div><div><h3>General Customization</h3><p>Description, effects, and display</p></div></div>'+
       '<div class="mb-4"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Display Name <span class="help" data-tip="Your display name — shown as the main heading on your profile.">?</span></label><input id="c-display" class="input" maxlength="60" placeholder="Your Name" value="'+esc(p.display_name||'')+'"></div>'+
       '<div class="mb-4"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Description <span class="help" data-tip="Short bio shown below your name. Max 280 characters.">?</span></label><textarea id="c-bio" class="input" maxlength="280" placeholder="Tell the world who you are...">'+esc(p.bio||'')+'</textarea></div>'+
-      '<div class="mb-4"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Location / Tag <span class="help" data-tip="Optional location or tag shown under your name.">?</span></label><input id="c-location" class="input" maxlength="60" placeholder="Your Location" value="'+esc(p.location_text||'')+'"></div>'+
+      '<div class="mb-4"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Location <span class="help" data-tip="Optional location shown under your name.">?</span></label><input id="c-location" class="input" maxlength="60" placeholder="Your Location" value="'+esc(p.location_text||'')+'"></div>'+
       '<div class="settings-row"><div><div class="settings-row-label"><i class="fa-solid fa-star" style="color:var(--accent-2);font-size:.85rem"></i> Username Effects</div><div class="settings-row-desc">Current: <b style="color:#dbeafe">'+esc(effect.name)+'</b></div></div><button class="btn btn-ghost btn-sm" onclick="openUsernameEffects()"><i class="fa-solid fa-wand-magic-sparkles"></i> Choose</button></div>'+
       '<div class="settings-row"><div><div class="settings-row-label"><i class="fa-solid fa-moon" style="color:var(--accent-2);font-size:.85rem"></i> Background Effects</div></div><select id="c-bgeffect" class="input" style="width:auto;min-width:160px;padding:.5rem .75rem;font-size:.82rem">'+['none','night time','rain','snow','stars','waves'].map(e=>'<option value="'+e+'"'+(p.background_effect===e?' selected':'')+'>'+e.replace(/\b\w/g,c=>c.toUpperCase())+'</option>').join('')+'</select></div>'+
       '<div class="mb-4 mt-4"><label style="display:flex;justify-content:space-between;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem"><span>Profile Opacity <span class="help" data-tip="How transparent the profile card is.">?</span></span><span style="color:var(--accent-2)" id="c-opacity-val">'+Math.round((p.profile_opacity||1)*100)+'%</span></label><input type="range" id="c-opacity" min="0.2" max="1" step="0.05" value="'+(p.profile_opacity||1)+'" oninput="document.getElementById(\'c-opacity-val\').textContent=Math.round(this.value*100)+\'%\'"></div>'+
@@ -1011,14 +828,19 @@ function tabCustomize(){
 function buildUploadBox(id,label,tip,icon,sub,bucket,field,currentUrl){
   const hasFile=!!currentUrl;
   const isVideo=currentUrl&&currentUrl.match(/\.(mp4|webm)$/i);
+  // For background field, allow image + video. For others, image only.
+  const acceptAttr = field==='background_url'
+    ? 'image/*,video/mp4,video/webm'
+    : (field==='cursor_url' ? 'image/png,image/*' : 'image/*');
   return '<div>'+
     '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">'+label+' <span class="help" data-tip="'+tip+'">?</span></label>'+
-    '<input type="file" id="up-'+id+'" accept="'+(field==='cursor_url'?'image/png,image/*':field==='music_url'?'audio/*':'image/*,video/mp4,video/webm')+'" style="display:none" onchange="handleUpload(this,\''+bucket+'\',\''+field+'\')">'+
+    '<input type="file" id="up-'+id+'" accept="'+acceptAttr+'" style="display:none" onchange="handleUpload(this,\''+bucket+'\',\''+field+'\')">'+
     '<div class="upload-box '+(hasFile?'has-file':'')+'" id="up-'+id+'-box" onclick="if(!this.classList.contains(\'has-file\'))document.getElementById(\'up-'+id+'\').click()">'+
       (hasFile
         ? '<div class="upload-preview-wrap">'+(isVideo?'<video class="upload-preview" src="'+esc(currentUrl)+'" muted autoplay loop playsinline></video>':'<img class="upload-preview" src="'+esc(currentUrl)+'" onerror="this.style.objectFit=\'contain\'" style="'+(field==='cursor_url'?'object-fit:contain;background:rgba(0,0,0,.4)':'')+'">')+'<div class="upload-preview-overlay"><span class="upload-chip">'+currentUrl.split('.').pop().toUpperCase().slice(0,4)+'</span><button class="upload-remove-btn" onclick="event.stopPropagation();removeUpload(\''+field+'\')"><i class="fa-solid fa-xmark"></i></button></div></div>'
         : '<div class="upload-icon"><i class="fa-solid '+icon+'"></i></div><div class="upload-title">Click to upload</div><div class="upload-sub">'+sub+'</div>')+
     '</div>'+
+    (field==='background_url' ? '<div class="file-info"><i class="fa-solid fa-circle-info"></i><span>Image, GIF, MP4, WebM · <b>Max 50MB</b> · Video is auto-muted</span></div>' : '')+
   '</div>';
 }
 function buildAudioBox(musicUrl,musicTitle){
@@ -1082,17 +904,49 @@ function openUsernameEffects(){
     renderDashboard();
   };
 }
+
+/* ═══════════════ UPLOAD HANDLER WITH 50MB VIDEO SUPPORT ═══════════════ */
 async function handleUpload(input,bucket,field){
   const file=input.files[0];
   if(!file)return;
-  const maxSizes={avatars:5,backgrounds:50,audio:20,cursors:1};
-  const maxMB=maxSizes[bucket]||10;
-  if(file.size>maxMB*1024*1024){toast('File too large (max '+maxMB+'MB)','error');return}
+
+  // Size limits per bucket
+  const maxSizes={avatars:5, background_small:5, backgrounds:50, audio:20, cursors:1};
+  const maxMB = field==='background_url' ? 50 : (maxSizes[bucket]||10);
+
+  // ═══ Validate file type for background ═══
+  if(field==='background_url'){
+    const ext = (file.name.split('.').pop()||'').toLowerCase();
+    const isImage = file.type.startsWith('image/') || ['jpg','jpeg','png','gif','webp','avif'].includes(ext);
+    const isVideo = file.type.startsWith('video/') || ['mp4','webm'].includes(ext);
+    if(!isImage && !isVideo){
+      toast('Only images and videos (MP4/WebM) are allowed for backgrounds.','error');
+      input.value='';
+      return;
+    }
+    if(isVideo && !['mp4','webm'].includes(ext)){
+      toast('Video format must be MP4 or WebM.','error');
+      input.value='';
+      return;
+    }
+  }
+
+  // ═══ Enforce 50MB limit for videos, 50MB for background images too ═══
+  if(file.size > maxMB*1024*1024){
+    toast('File too large. Maximum size for this asset is '+maxMB+'MB.','error');
+    input.value='';
+    return;
+  }
+
   toast('Uploading...','info');
   try{
     const ext=file.name.split('.').pop().toLowerCase();
     const path=App.user.id+'/'+Date.now()+'.'+ext;
-    const {error}=await db.storage.from(bucket).upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});
+    const {error}=await db.storage.from(bucket).upload(path,file,{
+      cacheControl:'3600',
+      upsert:false,
+      contentType:file.type
+    });
     if(error)throw error;
     const {data:{publicUrl}}=db.storage.from(bucket).getPublicUrl(path);
     const upd={};
@@ -1101,6 +955,7 @@ async function handleUpload(input,bucket,field){
     if(field==='cursor_url')upd.cursor_url=publicUrl;
     if(field==='background_url'){
       upd.background_url=publicUrl;
+      // Determine background type by extension
       if(['mp4','webm'].includes(ext))upd.background_type='video';
       else if(ext==='gif')upd.background_type='gif';
       else upd.background_type='image';
@@ -1109,9 +964,13 @@ async function handleUpload(input,bucket,field){
     const {error:upErr}=await db.from('profiles').update(upd).eq('user_id',App.user.id);
     if(upErr)throw upErr;
     App.profile={...App.profile,...upd};
-    toast('Uploaded!','success');
+    toast('Uploaded successfully!','success');
     renderDashboard();
-  }catch(err){toast('Upload failed: '+(err.message||err),'error')}
+  }catch(err){
+    toast('Upload failed: '+(err.message||err),'error');
+  }finally{
+    input.value='';
+  }
 }
 async function removeUpload(field){
   confirmModal('Remove file?','This will clear this asset.',async()=>{
@@ -1288,7 +1147,7 @@ function setupDragDrop(container){
 
 /* ── TEMPLATES ── */
 function tabTemplates(){
-  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">One-click themes. Additional templates coming soon.</p><div class="grid grid-2 md-3 g-4 mt-6">'+TEMPLATES.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;background:linear-gradient(135deg,'+t.from+','+t.to+');position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+t.accent+';color:#fff">'+esc(t.name)+'</span></div><button class="btn btn-primary btn-sm btn-block mt-3" onclick="applyTemplate(\''+t.slug+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Apply</button></div>').join('')+'</div>';
+  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">One-click themes.</p><div class="grid grid-2 md-3 g-4 mt-6">'+TEMPLATES.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;background:linear-gradient(135deg,'+t.from+','+t.to+');position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+t.accent+';color:#fff">'+esc(t.name)+'</span></div><button class="btn btn-primary btn-sm btn-block mt-3" onclick="applyTemplate(\''+t.slug+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Apply</button></div>').join('')+'</div>';
 }
 function applyTemplate(slug){
   const t=TEMPLATES.find(x=>x.slug===slug);if(!t)return;
@@ -1318,7 +1177,7 @@ function tabSettings(){
     '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-at"></i></div><div><h3>Username</h3><p>Your public subdomain</p></div></div>'+
     '<div class="glass-soft" style="border-radius:12px;padding:1rem;margin-bottom:1rem"><div class="flex items-center justify-between flex-wrap gap-2"><div><div class="text-xs muted uppercase tracking-widest">Current URL</div><div class="mt-1" style="font-family:\'JetBrains Mono\',monospace;font-size:.95rem;color:var(--accent-2);word-break:break-all">'+esc(p.username)+'.'+ROOT_DOMAIN+'</div></div><span class="member-badge"><i class="fa-solid fa-lock"></i> Locked</span></div></div>'+
     '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Change username <span class="help" data-tip="You can change once every 24 hours. Old usernames stay locked to you.">?</span></label>'+
-    '<div style="display:flex;gap:.6rem;flex-wrap:wrap"><div style="flex:1;min-width:220px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18);border-radius:12px;display:flex;align-items:center"><input id="un-new" placeholder="newusername" maxlength="30" style="padding:.7rem .85rem;color:#fff"><span style="padding-right:.85rem;color:rgba(219,234,254,.5);font-family:\'JetBrains Mono\',monospace;font-size:.8rem;white-space:nowrap">.bioflex.cyou</span></div><button class="btn btn-primary" id="un-change" '+(canChange?'':'disabled')+'><i class="fa-solid fa-check"></i> Change</button></div>'+
+    '<div style="display:flex;gap:.6rem;flex-wrap:wrap"><div style="flex:1;min-width:220px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18);border-radius:12px;display:flex;align-items:center"><span class="claim-prefix" style="padding-left:.85rem">'+ROOT_DOMAIN+'/</span><input id="un-new" placeholder="newusername" maxlength="30" style="padding:.7rem .85rem .7rem .25rem;color:#fff"></div><button class="btn btn-primary" id="un-change" '+(canChange?'':'disabled')+'><i class="fa-solid fa-check"></i> Change</button></div>'+
     '<div id="un-result" class="claim-result hidden"></div>'+
     (canChange?'<div class="info success mt-3"><i class="fa-solid fa-circle-check"></i><div>Eligible to change now.</div></div>':'<div class="info warn mt-3"><i class="fa-solid fa-clock"></i><div>Cooldown active. Try again in <b>'+hoursLeft+' hour'+(hoursLeft===1?'':'s')+'</b>.</div></div>')+
   '</div>'+
@@ -1399,23 +1258,24 @@ function toggleQuickMenu(){
 function closeQuickMenu(){const m=document.querySelector('.quick-menu');if(m)m.remove()}
 function openShareModal(){
   const url='https://'+App.profile.username+'.'+ROOT_DOMAIN;
-  openModal('<div class="modal-head"><div><h3>Share Your Profile</h3><p>Get more views by sharing your link.</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="display:flex;flex-direction:column;gap:.6rem"><button class="quick-menu-item" style="background:rgba(96,165,250,.08);border-radius:12px;padding:.9rem 1rem;border:1px solid rgba(96,165,250,.15)" onclick="window.open(\''+esc(url)+'\',\'_blank\')"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open my Page</button></div><div style="margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.15);display:flex;align-items:center;gap:.75rem"><i class="fa-solid fa-bolt" style="color:var(--accent-2)"></i><span style="flex:1;font-family:\'JetBrains Mono\',monospace;font-size:.8rem;color:#93c5fd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(url)+'</span><button class="btn btn-ghost btn-sm" onclick="copyUrl(\''+esc(url)+'\')">Copy URL</button></div>');
+  openModal('<div class="modal-head"><div><h3>Share Your Profile</h3><p>Get more views by sharing your link.</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="display:flex;flex-direction:column;gap:.6rem"><button class="quick-menu-item" style="background:rgba(96,165,250,.08);border-radius:12px;padding:.9rem 1rem;border:1px solid rgba(96,165,250,.15)" onclick="window.open(\''+esc(url)+'\',\'_blank\')"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open my Page</button><button class="quick-menu-item" style="background:rgba(96,165,250,.08);border-radius:12px;padding:.9rem 1rem;border:1px solid rgba(96,165,250,.15)" onclick="window.open(\'https://twitter.com/intent/tweet?text=\'+encodeURIComponent(\'Check out my BioFlex: \'+ \''+esc(url)+'\'),\'_blank\')"><i class="fa-brands fa-x-twitter"></i> Share on X</button></div><div style="margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.15);display:flex;align-items:center;gap:.75rem"><i class="fa-solid fa-bolt" style="color:var(--accent-2)"></i><span style="flex:1;font-family:\'JetBrains Mono\',monospace;font-size:.8rem;color:#93c5fd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(url)+'</span><button class="btn btn-ghost btn-sm" onclick="copyUrl(\''+esc(url)+'\')">Copy URL</button></div>');
 }
 
-/* ── PREVIEW (PUBLIC PROFILE) ── */
+/* ═══════════════ PREVIEW — WITH SUBDOMAIN + VIDEO BACKGROUND + MUTED AUDIO ═══════════════ */
 async function renderPreview(){
-  let profile=App.profile,links=App.links,socials=App.socials;
+  let profile=App.profile, links=App.links, socials=App.socials;
   const sub=getSubdomain();
-  const isPublic = !!sub;
-
-  // Hide back button on the actual public subdomain
-  const backBtn = document.getElementById('preview-back-btn');
-  if(backBtn) backBtn.style.display = isPublic ? 'none' : '';
 
   if(sub){
-    const {data}=await db.from('profiles').select('*').eq('username',sub).maybeSingle();
-    if(!data){
-      document.getElementById('preview-body').innerHTML='<div class="empty" style="margin-top:4rem">@'+esc(sub)+' not found.</div>';
+    // ═══ PUBLIC SUBDOMAIN: Load profile by username ═══
+    const {data, error} = await db.from('profiles').select('*').eq('username',sub).maybeSingle();
+    if(error || !data){
+      document.getElementById('preview-body').innerHTML=
+        '<div class="empty" style="margin-top:4rem;text-align:center">'+
+          '<div style="font-size:3rem;margin-bottom:1rem;color:var(--accent-2)"><i class="fa-solid fa-user-slash"></i></div>'+
+          '<div style="font-weight:700;font-size:1.2rem;margin-bottom:.5rem">@'+esc(sub)+' not found</div>'+
+          '<div class="muted text-sm">This BioFlex profile doesn\'t exist or has been removed.</div>'+
+        '</div>';
       return;
     }
     profile=data;
@@ -1425,33 +1285,53 @@ async function renderPreview(){
     socials=s||[];
     try{await db.rpc('increment_view_count',{pid:profile.id})}catch(_){}
   }
+
   if(!profile){
-    document.getElementById('preview-body').innerHTML='<div class="empty" style="margin-top:4rem">No profile.</div>';
+    document.getElementById('preview-body').innerHTML='<div class="empty" style="margin-top:4rem">No profile to preview.</div>';
     return;
   }
+
+  /* Custom cursor */
   if(profile.cursor_url){document.body.style.cursor='url('+profile.cursor_url+') 16 16, auto'}
   else{document.body.style.cursor=''}
 
-  /* Background: video always muted; audio comes from separate music player */
+  /* ═══ BACKGROUND RENDERER (Image / Video — Video is always muted) ═══ */
   const bgEl=document.getElementById('preview-bg');
   const bgType=profile.background_type||'gradient';
   const bgVal=profile.background_value||{from:'#0a1120',to:'#1d4ed8',angle:135,overlay:0.35};
+  const bgUrl = profile.background_url || bgVal.url || '';
+  const isVideoBg = bgUrl.match(/\.(mp4|webm)(\?|$)/i);
+
   let bgHtml='';
-  if(profile.background_url){
-    const url=profile.background_url;
-    if(url.match(/\.(mp4|webm)$/i)){
-      // MUTED background video — never plays its own audio
-      bgHtml='<video class="bg-media" src="'+esc(url)+'" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>';
-    }else{
-      bgHtml='<div class="bg-media" style="background-image:url(\''+esc(url)+'\');background-size:cover;background-position:center"></div>';
-    }
-  }else if(bgType==='solid'){bgHtml='<div class="bg-media" style="background:'+esc(bgVal.from||'#0a1120')+'"></div>';}
-  else if(bgType==='gradient'){bgHtml='<div class="bg-media" style="background:linear-gradient('+(bgVal.angle||135)+'deg,'+esc(bgVal.from||'#0a1120')+','+esc(bgVal.to||'#1d4ed8')+')"></div>';}
-  else{bgHtml='<div class="bg-media" style="background:linear-gradient(135deg,#04060f,#0a1120 50%,#0f1932)"></div>';}
-  bgHtml+='<div class="overlay" style="background:rgba(0,0,0,'+(bgVal.overlay??0.35)+')"></div>';
-  bgEl.innerHTML=bgHtml;
-  // Force-mute any video that got rendered
-  bgEl.querySelectorAll('video').forEach(v=>{v.muted=true;v.volume=0;try{v.play().catch(()=>{})}catch(_){}});
+  if(bgUrl && isVideoBg){
+    /* Video background — ALWAYS MUTED, no audio output */
+    bgHtml = '<video class="bg-media" '+
+      'src="'+esc(bgUrl)+'" '+
+      'autoplay muted loop playsinline preload="auto" '+
+      'disablepictureinpicture disableremoteplayback '+
+      'style="pointer-events:none"></video>';
+  } else if(bgUrl){
+    /* Image / GIF background */
+    bgHtml = '<div class="bg-media" style="background-image:url(\''+esc(bgUrl)+'\');background-size:cover;background-position:center"></div>';
+  } else if(bgType==='solid'){
+    bgHtml = '<div class="bg-media" style="background:'+esc(bgVal.from||'#0a1120')+'"></div>';
+  } else if(bgType==='gradient'){
+    bgHtml = '<div class="bg-media" style="background:linear-gradient('+(bgVal.angle||135)+'deg,'+esc(bgVal.from||'#0a1120')+','+esc(bgVal.to||'#1d4ed8')+')"></div>';
+  } else {
+    bgHtml = '<div class="bg-media" style="background:linear-gradient(135deg,#04060f,#0a1120 50%,#0f1932)"></div>';
+  }
+  bgHtml += '<div class="overlay" style="background:rgba(0,0,0,'+(bgVal.overlay??0.35)+')"></div>';
+  bgEl.innerHTML = bgHtml;
+
+  /* Ensure any video in background is muted and playing (safety net) */
+  bgEl.querySelectorAll('video').forEach(v=>{
+    v.muted = true;
+    v.volume = 0;
+    v.defaultMuted = true;
+    v.setAttribute('muted','');
+    v.removeAttribute('controls');
+    try{ const p = v.play(); if(p && p.catch) p.catch(()=>{}); }catch(_){}
+  });
 
   document.documentElement.style.setProperty('--accent',profile.accent_color||'#3b82f6');
   document.body.style.fontFamily="'"+profile.font_family+"',Inter,sans-serif";
@@ -1459,7 +1339,9 @@ async function renderPreview(){
   const bioClass={none:'',fade:'bio-fade',typewriter:'bio-tw',shimmer:'bio-shimmer',glow:'bio-glow'}[profile.bio_animation||'none']||'';
   const ue=(USERNAME_EFFECTS.find(e=>e.id===(profile.username_effect||'none'))||{}).class||'';
   const initial=(profile.display_name||profile.username||'?').charAt(0).toUpperCase();
-  const avatar=profile.avatar_url?'<img src="'+esc(profile.avatar_url)+'" alt="" onerror="this.outerHTML=\'<div class=\\\'av-inner\\\'>'+esc(initial)+'</div>\'">':'<div class="av-inner">'+esc(initial)+'</div>';
+  const avatar=profile.avatar_url
+    ?'<img src="'+esc(profile.avatar_url)+'" alt="" onerror="this.outerHTML=\'<div class=\\\'av-inner\\\'>'+esc(initial)+'</div>\'">'
+    :'<div class="av-inner">'+esc(initial)+'</div>';
   const displayName=profile.display_name||profile.username;
 
   const socialsHtml=socials.filter(s=>s.is_visible!==false).map(s=>{
@@ -1468,18 +1350,25 @@ async function renderPreview(){
     return '<a class="social-btn" href="'+esc(s.url)+'" target="_blank" rel="noopener noreferrer" style="'+glow+'"><i class="'+pf.icon+'" style="color:'+(profile.monochrome_icons?'inherit':pf.color)+'"></i></a>';
   }).join('');
 
-  const linksHtml=links.filter(l=>l.is_visible!==false).map(l=>'<a class="link-card" href="'+esc(l.url)+'" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="'+esc(l.icon||'fa-solid fa-link')+'"></i></span><span class="tt"><span class="t truncate">'+esc(l.title)+'</span>'+(l.description?'<span class="d truncate">'+esc(l.description)+'</span>':'')+'</span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>').join('');
+  const linksHtml=links.filter(l=>l.is_visible!==false).map(l=>
+    '<a class="link-card" href="'+esc(l.url)+'" target="_blank" rel="noopener noreferrer">'+
+      '<span class="ic"><i class="'+esc(l.icon||'fa-solid fa-link')+'"></i></span>'+
+      '<span class="tt"><span class="t truncate">'+esc(l.title)+'</span>'+(l.description?'<span class="d truncate">'+esc(l.description)+'</span>':'')+'</span>'+
+      '<span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>'+
+    '</a>').join('');
 
-  const musicHtml=profile.music_url?'<div class="player glass"><div class="player-row"><div class="player-art"><i class="fa-solid fa-music"></i></div><div class="player-meta"><div class="player-title truncate">'+esc(profile.music_title||'Untitled')+'</div><div class="player-artist truncate">'+esc(profile.music_artist||'BioFlex Audio')+'</div></div><button class="player-btn" id="pv-play"><i class="fa-solid fa-play"></i></button></div><div class="player-times"><span class="text-xs muted tabular-nums" style="width:2.5rem" id="pv-cur">0:00</span><div class="player-bar" id="pv-bar" style="flex:1"><div class="player-fill" id="pv-fill"></div></div><span class="text-xs muted tabular-nums text-right" style="width:2.5rem" id="pv-dur">0:00</span></div><div class="player-controls"><button id="pv-mute"><i class="fa-solid fa-volume-high"></i></button><input id="pv-vol" type="range" min="0" max="1" step="0.05" value="0.5" style="flex:1"><button id="pv-loop"><i class="fa-solid fa-repeat"></i></button></div><audio id="pv-audio" src="'+esc(profile.music_url)+'" preload="metadata" crossorigin="anonymous"></audio></div>':'';
+  const musicHtml=profile.music_url
+    ?'<div class="player glass"><div class="player-row"><div class="player-art"><i class="fa-solid fa-music"></i></div><div class="player-meta"><div class="player-title truncate">'+esc(profile.music_title||'Untitled')+'</div><div class="player-artist truncate">'+esc(profile.music_artist||'BioFlex Audio')+'</div></div><button class="player-btn" id="pv-play"><i class="fa-solid fa-play"></i></button></div><div class="player-times"><span class="text-xs muted tabular-nums" style="width:2.5rem" id="pv-cur">0:00</span><div class="player-bar" id="pv-bar" style="flex:1"><div class="player-fill" id="pv-fill"></div></div><span class="text-xs muted tabular-nums text-right" style="width:2.5rem" id="pv-dur">0:00</span></div><div class="player-controls"><button id="pv-mute"><i class="fa-solid fa-volume-high"></i></button><input id="pv-vol" type="range" min="0" max="1" step="0.05" value="0.5" style="flex:1"><button id="pv-loop"><i class="fa-solid fa-repeat"></i></button></div><audio id="pv-audio" src="'+esc(profile.music_url)+'" preload="metadata" crossorigin="anonymous"></audio></div>'
+    :'';
 
   const glowName=profile.glow_username?'text-shadow:0 0 12px '+(profile.accent_color||'#3b82f6')+',0 0 24px '+(profile.accent_color||'#3b82f6'):'';
-  const tagText = profile.location_text ? ('✦ '+profile.location_text+' ✦') : '';
+  const tag = profile.location_text ? ('✦ '+profile.location_text+' ✦') : '';
 
   document.getElementById('preview-body').innerHTML=
     '<section class="text-center">'+
       '<div class="avatar-ring">'+avatar+'</div>'+
       '<h1 class="preview-name '+ue+'" style="'+glowName+'">'+esc(displayName)+'</h1>'+
-      (tagText?'<div class="preview-location">'+esc(tagText)+'</div>':'')+
+      (tag?'<div class="preview-location">'+esc(tag)+'</div>':'')+
       (profile.bio?'<p class="preview-bio '+bioClass+'" style="color:'+esc(profile.text_color||'#fff')+'">'+esc(profile.bio)+'</p>':'')+
     '</section>'+
     (socialsHtml?'<nav class="social-row">'+socialsHtml+'</nav>':'')+
@@ -1487,7 +1376,7 @@ async function renderPreview(){
     musicHtml+
     '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
 
-  if(profile.music_url)setupPlayer(profile);
+  if(profile.music_url) setupPlayer(profile);
 }
 
 function setupPlayer(profile){
@@ -1501,18 +1390,25 @@ function setupPlayer(profile){
   const muteBtn=document.getElementById('pv-mute');
   const loopBtn=document.getElementById('pv-loop');
   const overlay=document.getElementById('enter-overlay');
-  if(!audio)return;
+  if(!audio) return;
+
   audio.volume=0.5;
   audio.loop=profile.music_loop!==false;
   audio.addEventListener('loadedmetadata',()=>dur.textContent=fmtTime(audio.duration));
-  audio.addEventListener('timeupdate',()=>{const pct=audio.duration?(audio.currentTime/audio.duration)*100:0;fill.style.width=pct+'%';cur.textContent=fmtTime(audio.currentTime)});
+  audio.addEventListener('timeupdate',()=>{
+    const pct=audio.duration?(audio.currentTime/audio.duration)*100:0;
+    fill.style.width=pct+'%';
+    cur.textContent=fmtTime(audio.currentTime);
+  });
   audio.addEventListener('play',()=>playBtn.innerHTML='<i class="fa-solid fa-pause"></i>');
   audio.addEventListener('pause',()=>playBtn.innerHTML='<i class="fa-solid fa-play"></i>');
+
   playBtn.onclick=e=>{e.stopPropagation();if(audio.paused)audio.play().catch(()=>{});else audio.pause()};
   bar.onclick=e=>{const r=bar.getBoundingClientRect();const ratio=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));if(audio.duration)audio.currentTime=ratio*audio.duration};
   vol.oninput=()=>{audio.volume=parseFloat(vol.value);audio.muted=audio.volume===0};
   muteBtn.onclick=e=>{e.stopPropagation();audio.muted=!audio.muted;muteBtn.innerHTML='<i class="fa-solid '+(audio.muted?'fa-volume-xmark':'fa-volume-high')+'"></i>'};
   loopBtn.onclick=e=>{e.stopPropagation();audio.loop=!audio.loop;loopBtn.style.color=audio.loop?'#60a5fa':''};
+
   overlay.classList.remove('hide');
   const once=()=>{
     overlay.classList.add('hide');
@@ -1524,9 +1420,13 @@ function setupPlayer(profile){
   document.addEventListener('click',once);
   document.addEventListener('touchstart',once,{passive:true});
   document.addEventListener('keydown',once);
-  // Attempt autoplay (will often be blocked, then first-tap listener handles it)
-  setTimeout(()=>{audio.play().then(()=>overlay.classList.add('hide')).catch(()=>{})},100);
+
+  // Try autoplay (may be blocked; overlay will show until user taps)
+  setTimeout(()=>{
+    audio.play().then(()=>overlay.classList.add('hide')).catch(()=>{});
+  },100);
 }
+
 function exitPreview(){
   const audio=document.getElementById('pv-audio');
   if(audio)audio.pause();
@@ -1541,61 +1441,31 @@ document.addEventListener('click',e=>{
   if(a){e.preventDefault();navigate(a.dataset.nav)}
 });
 
-/* ═══════════════ AUTH BOOTSTRAP ═══════════════ */
-let _bootDone = false;
-let _handledUserId = null;
-
+/* ── BOOT ── */
 async function boot(){
-  if(_bootDone) return;
-  _bootDone = true;
   document.getElementById('footer-year').textContent=new Date().getFullYear();
 
-  const sub=getSubdomain();
-
-  /* Public subdomain — load profile and stop. Never touch auth redirect. */
-  if(sub){
+  // ═══ SUBDOMAIN BOOT: If on *.bioflex.cyou, load public profile directly ═══
+  if(getSubdomain()){
     showScreen('preview');
     await renderPreview();
     return;
   }
 
-  /* 1. Restore any existing Supabase session (from cookie/localStorage) */
-  try{
-    const {data:{session}}=await db.auth.getSession();
-    if(session && session.user){
-      _handledUserId = session.user.id;
-      await onAuthenticated(session.user, {silent:true});
-    }
-  }catch(e){
-    console.warn('Session restore failed:', e.message);
-  }
-
-  /* 2. Listen for auth state changes (one listener only) */
-  db.auth.onAuthStateChange(async (event, session) => {
-    if(event==='SIGNED_IN' && session?.user){
-      if(_handledUserId === session.user.id && App.profile) return;
-      _handledUserId = session.user.id;
-      // Small delay lets detectSessionInUrl finish processing
-      setTimeout(async ()=>{
-        await onAuthenticated(session.user);
-      }, 50);
-    } else if(event==='SIGNED_OUT'){
-      _handledUserId = null;
-      App.user=null;App.profile=null;App.links=[];App.socials=[];
+  // Root domain: normal auth + routing
+  const {data:{session}}=await db.auth.getSession();
+  if(session) await loadUserData();
+  else db.auth.onAuthStateChange(async(ev,s)=>{
+    if(ev==='SIGNED_IN' && s){
+      await loadUserData();
+      if(!getSubdomain()) navigate('#/dashboard');
     }
   });
 
-  /* 3. Route based on current hash */
   route();
-
-  /* 4. If a pending username was stashed, auto-fill the landing input */
-  if(window.__pendingUsername){
-    const el=document.getElementById('claim-input');
-    if(el){el.value=window.__pendingUsername; el.dispatchEvent(new Event('input'))}
-  }
 }
 boot();
-window.BioFlex={App,db,toast,navigate,safeUrl,esc};
+window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
 </script>
 </body>
 </html>
