@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -568,6 +569,121 @@ body.is-subdomain .preview-back{display:none!important}
 .lp-feature h3{font-size:.95rem;font-weight:700;color:#fff}
 .lp-feature p{margin-top:.4rem;font-size:.82rem;color:rgba(219,234,254,.62);line-height:1.55}
 #screen-landing .site-footer{border-top:1px solid rgba(96,165,250,.12);margin-top:5rem;color:rgba(219,234,254,.45)}
+
+/* BioFlex premium refresh — additive, responsive enhancements */
+.bg-fx::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.34;background-image:radial-gradient(1.5px 1.5px at 12% 28%,rgba(191,219,254,.7) 45%,transparent 70%),radial-gradient(1px 1px at 35% 68%,rgba(96,165,250,.65) 45%,transparent 70%),radial-gradient(2px 2px at 72% 31%,rgba(219,234,254,.55) 45%,transparent 70%),radial-gradient(1px 1px at 86% 75%,rgba(96,165,250,.55) 45%,transparent 70%);background-size:360px 320px;animation:bioflexParticles 16s linear infinite alternate}
+@keyframes bioflexParticles{to{transform:translate3d(10px,-12px);opacity:.2}}
+.dash-sidebar{background:rgba(5,9,20,.82);border-right-color:rgba(148,163,184,.11);box-shadow:12px 0 48px rgba(0,0,0,.12)}
+.sidebar-section-label{letter-spacing:.12em;color:rgba(203,213,225,.48)}
+.nav-item{border-radius:11px;color:rgba(226,232,240,.72);transition:background .18s,color .18s,border-color .18s}
+.nav-item:hover{background:rgba(148,163,184,.09);border-color:rgba(148,163,184,.08)}
+.nav-item.active{background:linear-gradient(100deg,rgba(59,130,246,.2),rgba(59,130,246,.055));border-color:rgba(96,165,250,.22);box-shadow:inset 2px 0 0 #60a5fa}
+.card.glass,.analytics-panel{border-color:rgba(148,190,255,.15);box-shadow:0 18px 54px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.035)}
+.asset-coming-box{min-width:0}
+.asset-current-preview{height:100px;position:relative;overflow:hidden;border-radius:12px;border:1px solid rgba(96,165,250,.22);background:rgba(4,8,18,.72);margin-bottom:.55rem}
+.asset-current-preview img,.asset-current-preview video{width:100%;height:100%;object-fit:cover}
+.asset-current-preview .upload-remove-btn{position:absolute;right:.4rem;top:.4rem}
+.coming-soon-btn{width:100%;min-height:54px;border-radius:13px;background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(29,78,216,.1));border:1px solid rgba(96,165,250,.34);display:flex;align-items:center;justify-content:center;gap:.55rem;color:#dbeafe;font-weight:800;letter-spacing:.04em;transition:transform .2s,border-color .2s,box-shadow .2s}
+.coming-soon-btn:hover{transform:translateY(-2px);border-color:rgba(96,165,250,.75);box-shadow:0 12px 30px rgba(37,99,235,.18)}
+.coming-soon-note{font-size:.7rem;color:rgba(219,234,254,.52);margin-top:.45rem;line-height:1.45}
+.video-hosting-card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;align-items:center;padding:1rem;margin:.75rem 0 0;border:1px solid rgba(96,165,250,.17);border-radius:15px;background:linear-gradient(120deg,rgba(15,25,50,.8),rgba(9,17,36,.48))}
+.video-hosting-card .upload-icon{margin:0;width:42px;height:42px;font-size:1.1rem}
+.video-hosting-copy{display:flex;align-items:center;gap:.8rem;min-width:0}
+.video-hosting-copy p{font-size:.75rem;color:rgba(219,234,254,.54);margin-top:.2rem}
+.plan-modal{text-align:center;padding:.35rem .15rem .1rem}
+.plan-mark{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(59,130,246,.32),rgba(29,78,216,.13));border:1px solid rgba(96,165,250,.32);color:#bfdbfe;font-size:1.45rem;box-shadow:0 12px 34px rgba(37,99,235,.18)}
+.plan-kicker{font-size:.68rem;text-transform:uppercase;letter-spacing:.19em;font-weight:800;color:#93c5fd}
+.plan-coming{font:800 clamp(1.55rem,5vw,2rem) 'Space Grotesk',sans-serif;letter-spacing:.01em;margin:.42rem 0;color:#f8fbff}
+.plan-copy{max-width:28rem;margin:.5rem auto 1.2rem;color:rgba(219,234,254,.68);font-size:.86rem;line-height:1.6}
+.plan-price{display:inline-flex;align-items:baseline;gap:.35rem;padding:.75rem 1.1rem;border:1px solid rgba(96,165,250,.22);border-radius:14px;background:rgba(59,130,246,.1);font:700 1.35rem 'Space Grotesk',sans-serif;color:#eff6ff}
+.plan-price small{font:500 .72rem Inter,sans-serif;color:rgba(219,234,254,.6)}
+.plan-payment{margin:1rem 0;color:#fcd34d;font-size:.78rem;font-weight:700}
+.plan-modal .btn[disabled]{opacity:.58;cursor:not-allowed}
+.theme-builder{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(240px,.95fr);gap:1.1rem;align-items:stretch}
+.theme-controls{display:grid;gap:.85rem}
+.theme-color-pair{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.theme-control{padding:.72rem .8rem;border-radius:12px;background:rgba(8,15,30,.52);border:1px solid rgba(96,165,250,.12)}
+.theme-control label{display:flex;justify-content:space-between;gap:.5rem;margin-bottom:.45rem;font-size:.75rem;font-weight:700;color:#dbeafe}
+.theme-preview{min-height:230px;position:relative;display:flex;align-items:center;justify-content:center;padding:1rem;border:1px solid rgba(96,165,250,.2);border-radius:17px;overflow:hidden;background:#07111f;isolation:isolate}
+.theme-preview-bg{position:absolute;inset:0;z-index:-2}
+.theme-preview::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(1,5,15,.33)}
+.theme-preview-card{width:min(100%,255px);padding:1rem;border-radius:18px;border:1px solid rgba(255,255,255,.22);background:rgba(7,14,29,.42);backdrop-filter:blur(var(--theme-preview-blur,8px));text-align:center;box-shadow:0 0 var(--theme-preview-glow,16px) var(--theme-preview-color,rgba(59,130,246,.35))}
+.theme-preview-avatar{width:45px;height:45px;border-radius:50%;display:grid;place-items:center;margin:0 auto .55rem;background:linear-gradient(135deg,#60a5fa,#1d4ed8);font-weight:800}
+.theme-preview-line{height:8px;border-radius:20px;margin:.45rem auto;background:rgba(226,232,240,.6)}
+.theme-preview-link{padding:.48rem;margin-top:.4rem;border-radius:9px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.08);font-size:.66rem}
+.featured-link-options{display:grid;gap:.45rem;max-height:230px;overflow:auto;padding:.2rem}
+.featured-link-option{display:flex;align-items:center;gap:.65rem;padding:.65rem .75rem;border:1px solid rgba(96,165,250,.12);background:rgba(8,15,30,.42);border-radius:10px;font-size:.79rem;color:#dbeafe}
+.featured-link-option input{width:auto;accent-color:#60a5fa}
+.ai-profile-shell{max-width:920px}
+.ai-profile-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-top:1rem}
+.ai-profile-result{padding:.8rem;border:1px solid rgba(96,165,250,.15);border-radius:12px;background:rgba(8,15,30,.55);min-width:0}
+.ai-profile-result small{display:block;color:rgba(219,234,254,.49);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.28rem}
+.ai-profile-result div{font-size:.81rem;line-height:1.5;color:#e0e9ff;overflow-wrap:anywhere}
+.ai-emoji-picker{display:flex;flex-wrap:wrap;gap:.42rem;margin:.55rem 0 1rem}
+.ai-emoji-picker button{width:40px;height:40px;border-radius:11px;border:1px solid rgba(96,165,250,.16);background:rgba(8,15,30,.55);font-size:1.2rem}
+.ai-emoji-picker button.selected{border-color:#60a5fa;background:rgba(59,130,246,.24);box-shadow:0 0 0 2px rgba(59,130,246,.15)}
+.video-card-media{position:relative}
+.video-card-badges{position:absolute;left:.55rem;top:.55rem;display:flex;gap:.35rem;z-index:2}
+.video-card-badge{padding:.22rem .48rem;border-radius:99px;background:rgba(37,99,235,.9);border:1px solid rgba(191,219,254,.32);box-shadow:0 5px 16px rgba(0,0,0,.28);font-size:.58rem;font-weight:900;letter-spacing:.1em;color:#fff;text-transform:uppercase;backdrop-filter:blur(8px)}
+.video-card-badge.subtle{background:rgba(5,10,22,.76);color:#bfdbfe}
+.video-card-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.video-card-actions .btn{height:40px;min-height:40px;font-size:.7rem}
+.featured-carousel{padding:1rem;border-radius:17px;border:1px solid rgba(96,165,250,.22);background:linear-gradient(125deg,rgba(37,99,235,.19),rgba(8,15,30,.58));box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.featured-carousel-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.65rem}
+.featured-carousel-slide{display:none}
+.featured-carousel-slide.active{display:block;animation:fadeIn .24s ease}
+.featured-carousel-slide .link-card{margin:0;background:rgba(5,10,21,.45)}
+.featured-carousel-controls{display:flex;justify-content:flex-end;align-items:center;gap:.4rem;margin-top:.7rem}
+.featured-carousel-controls button{width:31px;height:31px;border-radius:9px;border:1px solid rgba(96,165,250,.2);background:rgba(8,15,30,.6);color:#bfdbfe}
+.layout-modern-2{max-width:790px}
+.layout-modern-2 .profile-hero{display:grid;grid-template-columns:90px minmax(0,1fr);column-gap:1rem;align-items:center;text-align:left!important;padding:1rem 1.25rem;border:1px solid rgba(147,197,253,.14);border-radius:20px;background:rgba(15,25,50,.36);backdrop-filter:blur(var(--profile-blur,12px))}
+.layout-modern-2 .avatar-ring{grid-row:1/4;width:82px;height:82px;margin:0}
+.layout-modern-2 .avatar-ring img,.layout-modern-2 .avatar-ring .av-inner{width:76px;height:76px;font-size:1.8rem}
+.layout-modern-2 .preview-name{margin:.1rem 0 0;font-size:1.45rem}
+.layout-modern-2 .preview-location,.layout-modern-2 .preview-bio{margin:.25rem 0 0;max-width:none;justify-content:flex-start}
+.layout-modern-2 .profile-stack{margin-top:1rem}
+.layout-modern-3{max-width:540px;padding-top:4rem}
+.layout-modern-3 .profile-hero{padding:2rem 1.3rem;border-radius:30px;background:linear-gradient(145deg,rgba(15,25,50,.62),rgba(6,11,23,.3));border:1px solid rgba(147,197,253,.18);backdrop-filter:blur(var(--profile-blur,12px));box-shadow:0 0 var(--profile-glow,24px) rgba(59,130,246,.25)}
+.layout-modern-3 .link-card{border-radius:999px;padding:1rem 1.25rem}
+.layout-modern-3 .social-btn{border-radius:50%}
+.world-map-shell{position:relative;min-height:210px;overflow:hidden;border:1px solid rgba(96,165,250,.12);border-radius:13px;background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,.11),rgba(5,10,22,.22) 70%)}
+.world-map-shell svg{display:block;width:100%;height:auto;min-height:190px}
+.world-map-land{fill:rgba(96,165,250,.11);stroke:rgba(147,197,253,.14);stroke-width:1.2}
+.world-map-marker{fill:#60a5fa;stroke:#dbeafe;stroke-width:1.5;cursor:pointer;filter:drop-shadow(0 0 5px rgba(59,130,246,.75))}
+.world-map-marker:hover{fill:#fbbf24;transform:scale(1.15);transform-origin:center}
+.world-map-empty{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:.7rem;text-align:center;font-size:.68rem;color:rgba(219,234,254,.58);pointer-events:none;background:linear-gradient(transparent 45%,rgba(3,7,16,.72))}
+.device-analytics{display:grid;grid-template-columns:minmax(120px,.8fr) minmax(0,1.2fr);align-items:center;gap:1rem}
+.device-analytics svg{width:100%;max-width:170px;margin:auto;overflow:visible}
+.device-legend{display:grid;gap:.5rem}
+.device-legend-row{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:#dbeafe}
+.device-legend-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.referrer-table{width:100%;border-collapse:collapse;font-size:.76rem}
+.referrer-table th,.referrer-table td{padding:.58rem .42rem;text-align:left;border-bottom:1px solid rgba(96,165,250,.1)}
+.referrer-table th{font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(219,234,254,.48);font-weight:700}
+.referrer-table td:last-child,.referrer-table th:last-child{text-align:right;font-family:'JetBrains Mono',monospace;color:#bfdbfe}
+.fake-preview-counter{position:fixed;right:1rem;top:1rem;z-index:40;display:flex;align-items:center;gap:.5rem;padding:.56rem .78rem;border-radius:13px;background:rgba(5,12,24,.72);border:1px solid rgba(96,165,250,.22);backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:.72rem;color:#dbeafe}
+.fake-preview-counter .sample-label{font-size:.57rem;text-transform:uppercase;letter-spacing:.1em;color:#93c5fd}
+.discord-widget{background:linear-gradient(145deg,rgba(15,25,50,.78),rgba(8,13,27,.65));border-color:rgba(129,140,248,.24);box-shadow:0 18px 48px rgba(0,0,0,.22)}
+.discord-widget iframe{max-width:100%;box-shadow:0 8px 25px rgba(0,0,0,.2)}
+.music-service-links{display:flex;gap:.45rem;margin-top:.65rem}
+.music-service-links a{flex:1;text-align:center;padding:.45rem .4rem;border:1px solid rgba(96,165,250,.15);border-radius:9px;background:rgba(8,15,30,.4);font-size:.65rem;color:#bfdbfe}
+.music-service-links a:hover{border-color:rgba(96,165,250,.5);background:rgba(59,130,246,.12)}
+@media(max-width:680px){.theme-builder{grid-template-columns:1fr}.theme-preview{min-height:205px}.video-hosting-card{grid-template-columns:1fr}.video-hosting-card>.btn{width:100%}.device-analytics{grid-template-columns:1fr}.device-analytics svg{width:150px}.ai-profile-summary{grid-template-columns:1fr}.fake-preview-counter{top:auto;right:.7rem;bottom:.7rem}.layout-modern-2 .profile-hero{grid-template-columns:72px minmax(0,1fr);padding:.85rem}.layout-modern-2 .avatar-ring{width:68px;height:68px}.layout-modern-2 .avatar-ring img,.layout-modern-2 .avatar-ring .av-inner{width:62px;height:62px;font-size:1.5rem}}
+@media(prefers-reduced-motion:reduce){.bg-fx::after{animation:none}.coming-soon-btn,.nav-item{transition:none}}
+
+
+.screen#screen-preview{position:relative;isolation:isolate}
+.screen#screen-preview::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.24;background-image:radial-gradient(1.5px 1.5px at 10% 22%,rgba(191,219,254,.7) 45%,transparent 70%),radial-gradient(1px 1px at 32% 78%,rgba(96,165,250,.65) 45%,transparent 70%),radial-gradient(2px 2px at 72% 25%,rgba(219,234,254,.55) 45%,transparent 70%),radial-gradient(1px 1px at 90% 65%,rgba(96,165,250,.55) 45%,transparent 70%);background-size:340px 300px;animation:bioflexParticles 18s linear infinite alternate}
+#preview-content{position:relative;z-index:1}
+#screen-dashboard{position:relative;isolation:isolate}
+#screen-dashboard::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.19;background-image:radial-gradient(1.5px 1.5px at 12% 28%,rgba(191,219,254,.7) 45%,transparent 70%),radial-gradient(1px 1px at 35% 68%,rgba(96,165,250,.65) 45%,transparent 70%),radial-gradient(2px 2px at 72% 31%,rgba(219,234,254,.55) 45%,transparent 70%);background-size:360px 320px;animation:bioflexParticles 22s linear infinite alternate}
+#screen-dashboard .dash-sidebar,#screen-dashboard .dash-main{position:relative;z-index:1}
+#ana-countries{display:block}
+#ana-country-leaflet{height:205px;width:100%;border-radius:13px;background:#07111f;overflow:hidden}
+.leaflet-container{font-family:Inter,sans-serif!important;background:#081323!important;color:#e0e9ff!important}
+.leaflet-tooltip{background:rgba(5,12,24,.94)!important;border:1px solid rgba(96,165,250,.32)!important;color:#e0e9ff!important;box-shadow:0 8px 24px rgba(0,0,0,.35)!important}
+.leaflet-tooltip:before{display:none}
+
 </style>
 </head>
 <body>
@@ -826,6 +942,7 @@ body.is-subdomain .preview-back{display:none!important}
   <footer class="site-footer"><div class="container"><p>&copy; <span class="footer-yr"></span> BioFlex &middot; bioflex.cyou</p></div></footer>
 </div>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 /* CONFIG */
 const SUPABASE_URL = 'https://edtxamqiuriyzztntxak.supabase.co';
@@ -931,6 +1048,7 @@ const NAV_ACCOUNT = [
 ];
 const NAV_CUSTOMIZE = [
   {id:'customize',label:'Customize',icon:'fa-solid fa-palette'},
+  {id:'ai-profile',label:'AI Profile',icon:'fa-solid fa-wand-magic-sparkles',badge:'NEW'},
   {id:'links',label:'Links',icon:'fa-solid fa-link'},
   {id:'templates',label:'Templates',icon:'fa-solid fa-layer-group'},
   {id:'video-library',label:'Video Library',icon:'fa-solid fa-film',badge:'NEW'},
@@ -1433,6 +1551,7 @@ function renderTab(tab){
     case 'badges':return tabBadges();
     case 'settings':return tabSettings();
     case 'customize':return tabCustomize();
+    case 'ai-profile':return tabAIProfile();
     case 'video-library':return tabVideoLibrary();
     case 'music-library':return tabMusicLibrary();
     case 'links':return tabLinks();
@@ -1870,7 +1989,7 @@ async function loadMusicLibrary(reset){
       if(seen.has(id))return false;
       seen.add(id);
       return true;
-    }).slice(0,36);
+    }).slice(0,10);
     MusicLibrary.loading=false;
     renderMusicLibraryResults();
     hydrateMusicArtwork(MusicLibrary.tracks,requestId);
@@ -2990,6 +3109,307 @@ async function boot(){
   }
   route();
 }
+
+/* BioFlex premium additions. Existing auth, profile tables, and presence remain unchanged. */
+function openPlanModal(kind){
+  const image=kind==='image', video=kind==='video';
+  const title=image?'Image hosting':video?'Video hosting':kind==='music'?'Music hosting':'Media hosting';
+  const message=image?'Image hosting coming soon. Click to purchase plan.':video?'Video hosting coming soon. Click to purchase plan.':kind==='music'?'Video and music hosting coming soon. Click to purchase plan.':'Media hosting coming soon. Click to purchase plan.';
+  const price=image?'৳250':(video?'৳350':'');
+  const icon=image?'fa-image':video?'fa-film':'fa-music';
+  const modal=openModal('<div class="plan-modal"><div class="modal-head"><span></span><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="plan-mark"><i class="fa-solid '+icon+'"></i></div><div class="plan-kicker">BioFlex creator plans</div><h2 class="plan-coming">COMING SOON</h2><p class="plan-copy">'+esc(message)+'</p>'+(price?'<div class="plan-price">'+price+' <small>/ month</small></div>':'<div class="plan-price">Creator media <small>plan</small></div>')+'<div class="plan-payment">Payment coming soon</div><button class="btn btn-primary btn-block" type="button" disabled><i class="fa-solid fa-lock"></i> Purchase plan</button><button class="btn btn-ghost btn-block mt-3" type="button" data-act="close">Close</button></div>');
+  modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
+}
+function buildVideoHostingBox(){
+  return '<div class="video-hosting-card"><div class="video-hosting-copy"><div class="upload-icon"><i class="fa-solid fa-film"></i></div><div><strong>Video Hosting</strong><p>MP4 / WebM · Up to 50 MB per video. Hosted uploads are not enabled yet.</p></div></div><button type="button" class="coming-soon-btn" onclick="openPlanModal(\'video\')"><i class="fa-solid fa-clock"></i> Coming Soon</button></div>';
+}
+const bioflexOriginalBuildUploadBox=buildUploadBox;
+buildUploadBox=function(id,label,tip,icon,sub,bucket,field,currentUrl){
+  const safe=safeWebUrl(currentUrl||'');
+  const video=safe&&isVideoAssetUrl(safe);
+  const file=safe?'<div class="asset-current-preview">'+(video?'<video src="'+esc(safe)+'" muted autoplay loop playsinline preload="metadata"></video>':'<img src="'+esc(safe)+'" alt="Current '+esc(label)+'" loading="lazy">')+'<button class="upload-remove-btn" type="button" onclick="event.stopPropagation();removeUpload(\''+field+'\')" aria-label="Remove '+esc(label)+'"><i class="fa-solid fa-xmark"></i></button></div>':'';
+  const placeholder=field==='background_url'?'Paste an image or video URL':'Paste an image URL';
+  return '<div class="asset-coming-box"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">'+esc(label)+' <span class="help" data-tip="'+esc(tip)+'">?</span></label>'+file+'<button class="coming-soon-btn" type="button" onclick="openPlanModal(\'image\')"><i class="fa-solid fa-clock"></i> Coming Soon</button><div class="coming-soon-note">Image hosting is not available yet. Your already-saved asset stays on your profile.</div>'+buildAssetLinkControl(id,field,placeholder)+'</div>';
+};
+function bioflexThemeCard(){
+  const saved=profileExtras(App.profile).theme||{};
+  const from=safeColor(saved.from,'#07111f'),to=safeColor(saved.to,'#1d4ed8');
+  const glow=Math.max(0,Math.min(50,Number(saved.glow!=null?saved.glow:22)));
+  const blur=Math.max(0,Math.min(24,Number(saved.blur!=null?saved.blur:10)));
+  return '<div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><h3>Theme Customizer</h3><p>Build a gradient and preview the glow and glass blur as you adjust them.</p></div></div><div class="theme-builder"><div class="theme-controls"><div class="theme-color-pair"><div class="theme-control"><label for="c-theme-from">Gradient from</label><input id="c-theme-from" type="color" value="'+from+'" oninput="updateThemePreview()"></div><div class="theme-control"><label for="c-theme-to">Gradient to</label><input id="c-theme-to" type="color" value="'+to+'" oninput="updateThemePreview()"></div></div><div class="theme-control"><label for="c-theme-glow"><span>Glow strength</span><span id="c-theme-glow-value">'+glow+'px</span></label><input id="c-theme-glow" type="range" min="0" max="50" step="1" value="'+glow+'" oninput="updateThemePreview()"></div><div class="theme-control"><label for="c-theme-blur"><span>Blur intensity</span><span id="c-theme-blur-value">'+blur+'px</span></label><input id="c-theme-blur" type="range" min="0" max="24" step="1" value="'+blur+'" oninput="updateThemePreview()"></div><p class="text-xs muted">Save all changes below to store your theme in <code>bioflex_extras</code>.</p></div><div id="theme-live-preview" class="theme-preview" aria-label="Live theme preview"><div class="theme-preview-bg"></div><div class="theme-preview-card"><div class="theme-preview-avatar">B</div><strong>BioFlex creator</strong><div class="theme-preview-line" style="width:65%"></div><div class="theme-preview-link">Featured link</div><div class="theme-preview-link">Social profile</div></div></div></div></div>';
+}
+function safeColor(value,fallback){return /^#[0-9a-f]{6}$/i.test(String(value||''))?String(value):fallback}
+function updateThemePreview(){
+  const from=document.getElementById('c-theme-from'),to=document.getElementById('c-theme-to'),glow=document.getElementById('c-theme-glow'),blur=document.getElementById('c-theme-blur'),preview=document.getElementById('theme-live-preview');
+  if(!from||!to||!glow||!blur||!preview)return;
+  preview.querySelector('.theme-preview-bg').style.background='linear-gradient(135deg,'+from.value+','+to.value+')';
+  preview.style.setProperty('--theme-preview-glow',glow.value+'px');
+  preview.style.setProperty('--theme-preview-blur',blur.value+'px');
+  preview.style.setProperty('--theme-preview-color',from.value+'88');
+  const gv=document.getElementById('c-theme-glow-value'),bv=document.getElementById('c-theme-blur-value');
+  if(gv)gv.textContent=glow.value+'px';if(bv)bv.textContent=blur.value+'px';
+}
+function bioflexFeaturedOptions(){
+  const selected=profileExtras(App.profile).featured_link_ids||[];
+  const links=(App.links||[]).filter(function(link){return link.is_visible!==false}).sort(function(a,b){return (a.position||0)-(b.position||0)});
+  if(!links.length)return '<p class="text-sm muted">Add and enable links first, then return here to feature them in your portfolio layout.</p>';
+  return '<div class="featured-link-options">'+links.map(function(link){return '<label class="featured-link-option"><input class="featured-link-check" type="checkbox" value="'+esc(link.id)+'"'+(selected.indexOf(link.id)>=0?' checked':'')+'><span class="truncate">'+esc(link.title||link.url||'Link')+'</span></label>'}).join('')+'</div><p class="text-xs muted mt-2">Choose up to 5 visible links. They appear in the Portfolio layout carousel.</p>';
+}
+const bioflexBaseTabCustomize=tabCustomize;
+tabCustomize=function(){
+  let out=bioflexBaseTabCustomize();
+  const colorHeader='<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-palette"></i></div><div><h3>Color Customization</h3>';
+  out=out.replace(colorHeader,bioflexThemeCard()+'<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-palette"></i></div><div><h3>Color Customization</h3>');
+  const otherHeader='<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-gears"></i></div><div><h3>Other Customization</h3>';
+  out=out.replace(otherHeader,'<div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-star"></i></div><div><h3>Featured Links</h3><p>Pick the links shown in the Portfolio carousel.</p></div></div>'+bioflexFeaturedOptions()+'</div>'+otherHeader);
+  const layout=profileExtras(App.profile).layout||'classic';
+  const modernOptions='<option value="modern-2"'+(layout==='modern-2'?' selected':'')+'>Modern 2</option><option value="modern-3"'+(layout==='modern-3'?' selected':'')+'>Modern 3</option>';
+  out=out.replace('<option value="portfolio"',modernOptions+'<option value="portfolio"');
+  const assetsEnd='</div></div><div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-sliders"></i>';
+  out=out.replace(assetsEnd,'</div>'+buildVideoHostingBox()+'</div><div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-sliders"></i>');
+  setTimeout(updateThemePreview,0);
+  return out;
+};
+const bioflexBaseSaveCustomize=saveCustomize;
+saveCustomize=async function(){
+  const extras=profileExtras(App.profile);
+  const from=document.getElementById('c-theme-from'),to=document.getElementById('c-theme-to'),glow=document.getElementById('c-theme-glow'),blur=document.getElementById('c-theme-blur');
+  const checks=Array.from(document.querySelectorAll('.featured-link-check:checked')).slice(0,5).map(function(el){return el.value});
+  if(from&&to&&glow&&blur){extras.theme={from:from.value,to:to.value,glow:Number(glow.value),blur:Number(blur.value)}}
+  extras.featured_link_ids=checks;
+  App.profile={...App.profile,bioflex_extras:extras};
+  return bioflexBaseSaveCustomize();
+};
+function tabAIProfile(){
+  const saved=profileExtras(App.profile).ai_profile||null;
+  const savedHtml=saved?'<div class="ai-profile-summary"><div class="ai-profile-result"><small>Suggested name</small><div>'+esc(saved.display_name||'—')+'</div></div><div class="ai-profile-result"><small>Bio draft</small><div>'+esc(saved.bio||'—')+'</div></div><div class="ai-profile-result"><small>Avatar direction</small><div>'+esc(saved.avatar_suggestion||'—')+'</div></div><div class="ai-profile-result"><small>Link ideas · Username effect</small><div>'+esc((saved.link_ideas||[]).join(' · '))+' · '+esc(saved.username_effect||'none')+'</div></div></div>':'<div class="empty mt-4"><i class="fa-solid fa-wand-magic-sparkles" style="color:#93c5fd;font-size:1.4rem"></i><div class="font-semibold mt-2">Your profile draft will appear here</div><p class="muted text-sm mt-1">Describe your work, personality, or the audience you want to reach.</p></div>';
+  return '<div class="ai-profile-shell"><div class="flex items-center justify-between gap-3 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">AI Profile Generator</h1><p class="muted mt-1">Turn a few details about yourself into a profile draft.</p></div><span class="member-badge"><i class="fa-solid fa-sparkles"></i> BioFlex AI</span></div><section class="card glass mt-6"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><h3>BioFlex AI Profile Studio</h3><p>Drafts locally from your prompt; no external AI service or prompt data is sent.</p></div></div><p class="text-sm muted">The generator creates a display name, bio, avatar direction, link ideas, and a username-effect suggestion. It saves the draft under your existing <code>bioflex_extras</code> JSON field.</p><button class="btn btn-primary btn-lg mt-5" type="button" onclick="openAIGenerator()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI</button>'+savedHtml+'</section></div>';
+}
+function openAIGenerator(){
+  const modal=openModal('<div class="modal-head"><div><h3>BioFlex AI</h3><p>Describe the profile you want people to remember.</p></div><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><label class="field-label" for="ai-prompt">What do you create or care about?</label><textarea id="ai-prompt" class="input" maxlength="360" placeholder="Example: I am a travel photographer sharing quiet places, simple gear tips, and stories from Bangladesh."></textarea><div class="field-label mt-3">Pick a signature emoji</div><div class="ai-emoji-picker">'+['✨','🌙','🎨','📷','🎧','🚀','🌿','💻','🔥','💙','🌸','🧭'].map(function(emoji,index){return '<button type="button" class="'+(index===0?'selected':'')+'" data-ai-emoji="'+emoji+'" aria-label="Use '+emoji+'">'+emoji+'</button>'}).join('')+'</div><div id="ai-generator-status" class="text-xs muted" role="status">Drafts are saved only when generation succeeds.</div><div id="ai-generator-result"></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Close</button><button id="ai-generate" class="btn btn-primary" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI</button></div>');
+  modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
+  modal.querySelectorAll('[data-ai-emoji]').forEach(function(button){button.onclick=function(){modal.querySelectorAll('[data-ai-emoji]').forEach(function(x){x.classList.remove('selected')});button.classList.add('selected')}});
+  modal.querySelector('#ai-generate').onclick=function(){generateAIDraft(modal)};
+  return modal;
+}
+async function generateAIDraft(modal){
+  const prompt=modal.querySelector('#ai-prompt').value.trim();
+  const status=modal.querySelector('#ai-generator-status'),result=modal.querySelector('#ai-generator-result'),button=modal.querySelector('#ai-generate');
+  if(prompt.length<8){status.textContent='Add a little more detail (at least 8 characters) so the draft has a useful direction.';return}
+  const emojiButton=modal.querySelector('[data-ai-emoji].selected');
+  const emoji=emojiButton?emojiButton.dataset.aiEmoji:'✨';
+  const words=prompt.replace(/[.,!?;:]+/g,' ').trim().split(/\s+/).filter(Boolean);
+  const personaRules=[[/photo|camera|visual|film/i,'visual storyteller'],[/code|developer|software|tech/i,'builder and tech creator'],[/music|song|audio|dj/i,'music creator'],[/travel|journey|explor|place/i,'travel storyteller'],[/design|art|draw|creative/i,'creative maker'],[/food|cook|recipe/i,'food creator'],[/write|book|poem|story/i,'writer and storyteller']];
+  let persona='independent creator';for(const rule of personaRules){if(rule[0].test(prompt)){persona=rule[1];break}}
+  const current=(App.profile.display_name||App.profile.username||'').trim();
+  const inferred=words.slice(0,2).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()}).join(' ');
+  const displayName=current||inferred+' Creator';
+  const clean=prompt.replace(/[.!?]+$/,'');
+  const bio=(emoji+' '+clean+'. '+ 'A '+persona+' sharing useful ideas, new work, and the details behind it.').slice(0,260);
+  const avatarSuggestion='A clean, close-up portrait with cool electric-blue lighting and a background inspired by '+(words.slice(-3).join(' ')||'your creative work')+'.';
+  const links=/code|developer|software|tech/i.test(prompt)?['GitHub','Portfolio','LinkedIn']: /photo|camera|visual|film|art|design/i.test(prompt)?['Instagram','Portfolio','Behance']: /music|song|audio|dj/i.test(prompt)?['Spotify','YouTube','SoundCloud']:['Instagram','TikTok','Portfolio'];
+  const effect=/neon|cyber|bold|electric/i.test(prompt)?'neon':/calm|soft|gentle/i.test(prompt)?'lavender':/creative|visual|art|music/i.test(prompt)?'glow':'blue';
+  const draft={prompt:prompt,emoji:emoji,display_name:displayName,bio:bio,avatar_suggestion:avatarSuggestion,link_ideas:links,username_effect:effect,created_at:new Date().toISOString(),generator:'local-template-v1'};
+  const extras={...profileExtras(App.profile),ai_profile:draft};
+  button.disabled=true;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Generating…';status.textContent='Creating and saving your profile draft…';
+  try{
+    const {error}=await db.from('profiles').update({bioflex_extras:extras}).eq('user_id',App.user.id);
+    if(error)throw error;
+    App.profile={...App.profile,bioflex_extras:extras};
+    result.innerHTML='<div class="ai-profile-summary"><div class="ai-profile-result"><small>Display name</small><div>'+esc(draft.display_name)+'</div></div><div class="ai-profile-result"><small>Bio</small><div>'+esc(draft.bio)+'</div></div><div class="ai-profile-result"><small>Avatar suggestion</small><div>'+esc(draft.avatar_suggestion)+'</div></div><div class="ai-profile-result"><small>Link ideas · Username effect</small><div>'+esc(draft.link_ideas.join(' · '))+' · '+esc(draft.username_effect)+'</div></div></div>';
+    status.textContent='Saved to your BioFlex profile in bioflex_extras. These are suggestions; they do not replace your published profile fields.';
+    toast('Your BioFlex AI draft was saved.','success');
+  }catch(error){status.textContent='Could not save the draft: '+(error.message||'Check the bioflex_extras migration and try again.');toast('AI draft was not saved. '+(error.message||''),'error')}
+  finally{button.disabled=false;button.innerHTML='<i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI'}
+}
+const bioflexBaseTabAnalytics=tabAnalytics;
+tabAnalytics=function(){
+  let out=bioflexBaseTabAnalytics();
+  out=out.replace('<h3>Countries</h3><p>Geo data is not collected by this version</p>','<h3>Country Map</h3><p>Views by country, when country metadata exists</p>');
+  out=out.replace('id="ana-countries" class="analytics-list"','id="ana-countries" class="analytics-list"');
+  out=out.replace('Country is unavailable without a server-side geo lookup. No IP address is stored.','Country data appears here only when already supplied; this page does not collect IP addresses.');
+  out=out.replace('<h3>Devices</h3><p>Visitor device categories</p>','<h3>Device &amp; OS</h3><p>Visitor device and operating-system mix</p>');
+  return out;
+};
+const bioflexBaseUpdateAnalytics=updateAnalyticsUI;
+function countryCoordinate(value){
+  const key=String(value||'').trim().toLowerCase();
+  const lookup={bd:[90.4,23.8],bangladesh:[90.4,23.8],in:[78.9,22.5],india:[78.9,22.5],us:[-98,39],usa:[-98,39],'united states':[-98,39],gb:[-2,54],uk:[-2,54],'united kingdom':[-2,54],ca:[-106,56],canada:[-106,56],pk:[69.3,30.4],pakistan:[69.3,30.4],au:[134, -25],australia:[134,-25],jp:[138,36],japan:[138,36],sg:[103.8,1.3],singapore:[103.8,1.3],de:[10,51],germany:[10,51],fr:[2,46],france:[2,46],br:[-51,-10],brazil:[-51,-10],id:[117,-2],indonesia:[117,-2],ae:[54,24],'united arab emirates':[54,24],ng:[8,9],nigeria:[8,9],mx:[-102,23],mexico:[-102,23],za:[24,-29],'south africa':[24,-29],lk:[81,7],sri:[81,7],'sri lanka':[81,7]};
+  return lookup[key]||null;
+}
+function renderCountryMap(events,error){
+  const root=document.getElementById('ana-countries');if(!root)return;
+  const rows=error?[]:countBy(events,'country','page_view');
+  const points=rows.map(function(row){const coord=countryCoordinate(row[0]);return coord?{name:row[0],count:row[1],x:(coord[0]+180)*480/360,y:(90-coord[1])*220/180+10}:null}).filter(Boolean);
+  const markers=points.map(function(p){return '<circle class="world-map-marker" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="'+Math.min(10,4+Math.sqrt(p.count))+'"><title>'+esc(p.name)+': '+fmtUID(p.count)+' profile views</title></circle>'}).join('');
+  const unknown=rows.filter(function(row){return !countryCoordinate(row[0])});
+  const paths='<path class="world-map-land" d="M35 53 58 31 91 26 117 42 109 66 88 71 79 95 60 90 51 74 38 69Z"/><path class="world-map-land" d="M105 104 124 111 131 137 122 169 112 190 105 163 99 139Z"/><path class="world-map-land" d="M190 51 207 37 237 39 246 50 265 47 282 36 320 40 338 55 373 54 395 71 382 88 356 82 344 101 320 104 307 126 287 124 279 105 259 98 249 82 227 80 218 66 201 69Z"/><path class="world-map-land" d="M221 91 246 91 261 109 256 135 242 161 229 151 223 126 212 111Z"/><path class="world-map-land" d="M366 145 388 137 409 146 414 161 400 175 379 171 366 158Z"/><path class="world-map-land" d="M421 81 431 77 439 84 435 95 425 95Z"/>';
+  root.innerHTML='<div class="world-map-shell"><svg viewBox="0 0 480 240" role="img" aria-label="World map with visitor view counts"><g>'+paths+markers+'</g></svg>'+(!points.length?'<div class="world-map-empty">'+(error?'Install the optional analytics table to view stored activity.':'Country metadata is not currently collected. No IP addresses are stored.')+'</div>':'')+'</div>'+(unknown.length?'<div class="analytics-list mt-3">'+analyticsRowsHtml(unknown,'')+'</div>':'');
+}
+function renderDevicePie(events,error){
+  const root=document.getElementById('ana-devices');if(!root)return;
+  if(error){root.innerHTML='<div class="muted text-sm">Device history is unavailable until the optional analytics table is installed.</div>';return}
+  const rows=countBy(events,'device','page_view');
+  if(!rows.length){root.innerHTML='<div class="muted text-sm">No device and OS data recorded yet.</div>';return}
+  const colors=['#60a5fa','#a78bfa','#34d399','#fbbf24','#f472b6','#22d3ee'];
+  const total=rows.reduce(function(n,r){return n+r[1]},0),circ=2*Math.PI*39;
+  let offset=0;
+  const circles=rows.map(function(row,index){const amount=row[1]/total*circ,svg='<circle cx="60" cy="60" r="39" fill="none" stroke="'+colors[index%colors.length]+'" stroke-width="15" stroke-dasharray="'+amount.toFixed(2)+' '+(circ-amount).toFixed(2)+'" stroke-dashoffset="-'+offset.toFixed(2)+'" transform="rotate(-90 60 60)"/>';offset+=amount;return svg}).join('');
+  root.className='device-analytics';
+  root.innerHTML='<svg viewBox="0 0 120 120" role="img" aria-label="Device and operating system share"><circle cx="60" cy="60" r="39" fill="none" stroke="rgba(148,163,184,.12)" stroke-width="15"/>'+circles+'<text x="60" y="57" text-anchor="middle" fill="#f8fbff" font-size="16" font-weight="700">'+fmtUID(total)+'</text><text x="60" y="72" text-anchor="middle" fill="#94a3b8" font-size="7">VISITS</text></svg><div class="device-legend">'+rows.map(function(row,index){return '<div class="device-legend-row"><span class="device-legend-dot" style="background:'+colors[index%colors.length]+'"></span><span>'+esc(row[0])+'</span><b style="margin-left:auto;font-family:JetBrains Mono,monospace">'+fmtUID(row[1])+'</b></div>'}).join('')+'</div>';
+}
+function renderReferrerTable(events,error){
+  const root=document.getElementById('ana-referrers');if(!root)return;
+  if(error){root.innerHTML='<div class="muted text-sm">Referrer history is unavailable until the optional analytics table is installed.</div>';return}
+  const rows=countBy(events,'referrer','page_view');
+  if(!rows.length){root.innerHTML='<div class="muted text-sm">No profile visits recorded yet.</div>';return}
+  root.innerHTML='<table class="referrer-table"><thead><tr><th>Referrer</th><th>Views</th></tr></thead><tbody>'+rows.map(function(row){return '<tr><td title="'+esc(row[0])+'">'+esc(row[0])+'</td><td>'+fmtUID(row[1])+'</td></tr>'}).join('')+'</tbody></table>';
+}
+updateAnalyticsUI=function(events,error){
+  bioflexBaseUpdateAnalytics(events,error);
+  renderCountryMap(events,error);
+  renderDevicePie(events,error);
+  renderReferrerTable(events,error);
+};
+
+let BioFlexLeafletCountryMap=null;
+function bioflexCountryMapSvg(){return '<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 480 240"><rect width="480" height="240" fill="#07111f"/><g fill="#18345a" stroke="#355781" stroke-width="1.2"><path d="M35 53 58 31 91 26 117 42 109 66 88 71 79 95 60 90 51 74 38 69Z"/><path d="M105 104 124 111 131 137 122 169 112 190 105 163 99 139Z"/><path d="M190 51 207 37 237 39 246 50 265 47 282 36 320 40 338 55 373 54 395 71 382 88 356 82 344 101 320 104 307 126 287 124 279 105 259 98 249 82 227 80 218 66 201 69Z"/><path d="M221 91 246 91 261 109 256 135 242 161 229 151 223 126 212 111Z"/><path d="M366 145 388 137 409 146 414 161 400 175 379 171 366 158Z"/><path d="M421 81 431 77 439 84 435 95 425 95Z"/></g><path d="M0 120H480M240 0V240" stroke="#244166" stroke-opacity=".22" stroke-dasharray="3 6"/></svg>'}
+renderCountryMap=function(events,error){
+  const root=document.getElementById('ana-countries');if(!root)return;
+  const aggregate={};
+  (error?[]:(events||[])).forEach(function(event){if(!event.country)return;const key=String(event.country).slice(0,100);if(!aggregate[key])aggregate[key]={name:key,views:0,clicks:0};if(event.event_type==='page_view')aggregate[key].views++;if(event.event_type==='link_click')aggregate[key].clicks++});
+  const rows=Object.values(aggregate).sort(function(a,b){return b.views-a.views}).slice(0,20);
+  const points=rows.map(function(row){const coord=countryCoordinate(row.name);return coord?{row:row,coord:coord}:null}).filter(Boolean);
+  const unknown=rows.filter(function(row){return !countryCoordinate(row.name)});
+  root.innerHTML='<div class="world-map-shell"><div id="ana-country-leaflet" role="img" aria-label="Visitor activity by country"></div>'+((error||!points.length)?'<div class="world-map-empty">'+(error?'Install the optional analytics table to view stored activity.':'Country metadata is not currently collected. This map only plots existing country values; no IP address is stored.')+'</div>':'')+'</div>'+(unknown.length?'<div class="analytics-list mt-3">'+analyticsRowsHtml(unknown.map(function(row){return [row.name,row.views]}),'')+'</div>':'');
+  const host=document.getElementById('ana-country-leaflet');
+  if(!host||!window.L)return;
+  try{
+    if(BioFlexLeafletCountryMap){BioFlexLeafletCountryMap.remove();BioFlexLeafletCountryMap=null}
+    const bounds=[[-90,-180],[90,180]];
+    const map=L.map(host,{crs:L.CRS.Simple,minZoom:0,maxZoom:0,zoomControl:false,attributionControl:false,scrollWheelZoom:false,dragging:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false});
+    L.imageOverlay('data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(bioflexCountryMapSvg()),bounds,{interactive:false}).addTo(map);
+    map.fitBounds(bounds,{padding:[3,3]});
+    points.forEach(function(point){const row=point.row,lat=point.coord[1],lng=point.coord[0];L.circleMarker([-lat,lng],{radius:Math.min(10,4+Math.sqrt(row.views)),color:'#dbeafe',weight:1,fillColor:'#60a5fa',fillOpacity:.9}).addTo(map).bindTooltip(esc(row.name)+' · '+fmtUID(row.views)+' views · '+fmtUID(row.clicks)+' link clicks')});
+    BioFlexLeafletCountryMap=map;setTimeout(function(){try{map.invalidateSize()}catch(_){}},60);
+  }catch(_){if(BioFlexLeafletCountryMap){try{BioFlexLeafletCountryMap.remove()}catch(__){}BioFlexLeafletCountryMap=null}}
+};
+
+visitorDevice=function(){
+  const ua=navigator.userAgent||'';
+  let device=/ipad|tablet|playbook|silk/i.test(ua)?'Tablet':(/mobi|iphone|ipod|android/i.test(ua)?'Mobile':'Desktop');
+  let os=/windows/i.test(ua)?'Windows':(/android/i.test(ua)?'Android':(/iphone|ipad|ipod/i.test(ua)?'iOS':(/mac os|macintosh/i.test(ua)?'macOS':(/cros/i.test(ua)?'ChromeOS':(/linux/i.test(ua)?'Linux':'Other')))));
+  return device+' · '+os;
+};
+const bioflexBaseStartPresence=startDashboardPresence;
+startDashboardPresence=function(){
+  bioflexBaseStartPresence();
+  if(!App.liveRefreshTimer)App.liveRefreshTimer=setInterval(function(){
+    const channel=App.dashboardPresence;
+    if(!channel||typeof channel.presenceState!=='function'){setLiveVisitorCount('unavailable');return}
+    try{setLiveVisitorCount(Object.values(channel.presenceState()).reduce(function(n,items){return n+items.length},0))}catch(_){setLiveVisitorCount('unavailable')}
+  },10000);
+};
+const bioflexBaseBindTab=bindTab;
+bindTab=function(tab){
+  if(tab!=='analytics'&&App.liveRefreshTimer){clearInterval(App.liveRefreshTimer);App.liveRefreshTimer=null}
+  return bioflexBaseBindTab(tab);
+};
+const bioflexBaseLogout=handleLogout;
+handleLogout=async function(){if(App.liveRefreshTimer){clearInterval(App.liveRefreshTimer);App.liveRefreshTimer=null}return bioflexBaseLogout()};
+const bioflexBaseRenderVideo=renderVideoLibraryResults;
+renderVideoLibraryResults=function(){
+  bioflexBaseRenderVideo();
+  const cards=document.querySelectorAll('#video-library-grid .video-card');
+  cards.forEach(function(card,index){
+    const video=VideoLibrary.hits[index];if(!video)return;
+    const media=card.querySelector('.video-card-media');if(!media)return;
+    const badge=document.createElement('div');badge.className='video-card-badges';
+    badge.innerHTML='<span class="video-card-badge">NEW</span>'+(Number(video.views)>500000?'<span class="video-card-badge subtle">Popular</span>':'');
+    media.appendChild(badge);
+    const actions=card.querySelector('.video-card-actions');
+    if(actions){const preview=actions.querySelector('[data-video-action="preview"]');if(preview&&actions.firstElementChild!==preview)actions.insertBefore(preview,actions.firstElementChild)}
+  });
+};
+const bioflexBaseMusicRender=renderMusicLibraryResults;
+renderMusicLibraryResults=function(){
+  bioflexBaseMusicRender();
+  const grid=document.getElementById('music-library-grid');if(!grid)return;
+  grid.querySelectorAll('.music-card').forEach(function(card,index){
+    const track=MusicLibrary.tracks[index];if(!track)return;
+    if(!card.querySelector('.music-service-links')){
+      const query=encodeURIComponent(track.name+' '+track.artist);
+      const links=document.createElement('div');links.className='music-service-links';
+      links.innerHTML='<a href="https://open.spotify.com/search/'+query+'" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-spotify"></i> Spotify</a><a href="https://www.youtube.com/results?search_query='+query+'" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube</a>';
+      const body=card.querySelector('.music-card-body');if(body)body.appendChild(links);
+    }
+  });
+};
+const bioflexBaseTabMusic=tabMusicLibrary;
+tabMusicLibrary=function(){
+  let out=bioflexBaseTabMusic();
+  out=out.replace('<span class="member-badge"><i class="fa-solid fa-music"></i> Last.fm discovery</span>','<div class="flex items-center gap-2 flex-wrap"><span class="member-badge"><i class="fa-solid fa-music"></i> Up to 10 results</span><button class="btn btn-ghost btn-sm" type="button" onclick="openPlanModal(\'music\')"><i class="fa-solid fa-plus"></i> Add my own music</button></div>');
+  out=out.replace('Track discovery by Last.fm. Playable 30-second previews come from Apple’s iTunes catalog; availability varies by track and region.','Track discovery by Last.fm. Playable 30-second previews come from Apple’s iTunes catalog. Spotify and YouTube buttons open search results; full-track downloads are not offered here.');
+  return out;
+};
+const bioflexBaseRenderPreview=renderPreview;
+async function bioflexAddFeaturedCarousel(profile,layout){
+  if(layout!=='portfolio')return;
+  const extras=profileExtras(profile),ids=Array.isArray(extras.featured_link_ids)?extras.featured_link_ids.slice(0,5):[];
+  if(!ids.length)return;
+  let rows=(App.links||[]).filter(function(link){return ids.indexOf(link.id)>=0&&link.is_visible!==false});
+  if(!rows.length&&profile.user_id){
+    try{const result=await db.from('links').select('id,title,url,description,icon,icon_url,position,is_visible').eq('user_id',profile.user_id).eq('is_visible',true).order('position');if(!result.error)rows=(result.data||[]).filter(function(link){return ids.indexOf(link.id)>=0})}catch(_){}
+  }
+  rows.sort(function(a,b){return ids.indexOf(a.id)-ids.indexOf(b.id)});
+  if(!rows.length)return;
+  const stack=document.querySelector('#preview-body .profile-stack');if(!stack)return;
+  const slides=rows.map(function(link,index){const href=safeUrl(link.url);if(!href)return '';return '<div class="featured-carousel-slide'+(index===0?' active':'')+'"><a class="link-card" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer" data-analytics-target="'+esc(link.title||'Featured link')+'"><span class="ic">'+(link.icon_url?'<img src="'+esc(link.icon_url)+'" alt="">':'<i class="'+esc(link.icon||'fa-solid fa-link')+'"></i>')+'</span><span class="tt"><span class="t truncate">'+esc(link.title||'Featured link')+'</span>'+(link.description?'<span class="d truncate">'+esc(link.description)+'</span>':'')+'</span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a></div>'}).join('');
+  if(!slides)return;
+  const section=document.createElement('section');section.className='featured-carousel';section.innerHTML='<div class="featured-carousel-head"><strong><i class="fa-solid fa-star" style="color:#fbbf24"></i> Featured links</strong><span class="text-xs muted">Portfolio</span></div><div class="featured-carousel-slides">'+slides+'</div><div class="featured-carousel-controls"><span class="text-xs muted" data-carousel-count>1 / '+rows.length+'</span><button type="button" data-carousel-prev aria-label="Previous featured link"><i class="fa-solid fa-chevron-left"></i></button><button type="button" data-carousel-next aria-label="Next featured link"><i class="fa-solid fa-chevron-right"></i></button></div>';
+  stack.insertBefore(section,stack.firstChild);
+  let index=0;const set=function(next){const items=section.querySelectorAll('.featured-carousel-slide');if(!items.length)return;index=(next+items.length)%items.length;items.forEach(function(item,i){item.classList.toggle('active',i===index)});const count=section.querySelector('[data-carousel-count]');if(count)count.textContent=(index+1)+' / '+items.length};
+  section.querySelector('[data-carousel-prev]').onclick=function(){set(index-1)};section.querySelector('[data-carousel-next]').onclick=function(){set(index+1)};
+  if(rows.length>1)App.widgetTimers.push(setInterval(function(){if(document.body.contains(section))set(index+1)},6000));
+}
+async function bioflexEnhancePreview(){
+  const profile=App.previewProfile||App.profile;if(!profile)return;
+  const extras=profileExtras(profile),layout=['classic','modern','modern-2','modern-3','portfolio'].includes(extras.layout)?extras.layout:'classic';
+  const body=document.getElementById('preview-body');if(body){body.className='preview-body layout-'+layout;const theme=extras.theme||{};body.style.setProperty('--profile-blur',Math.max(0,Math.min(24,Number(theme.blur)||0))+'px');body.style.setProperty('--profile-glow',Math.max(0,Math.min(50,Number(theme.glow)||0))+'px');}
+  const theme=extras.theme||{},bgUrl=profile.background_url||(profile.background_value&&profile.background_value.url)||'';
+  if(!bgUrl&&theme.from&&theme.to){const media=document.querySelector('#preview-bg .bg-media');if(media)media.style.background='linear-gradient(135deg,'+safeColor(theme.from,'#07111f')+','+safeColor(theme.to,'#1d4ed8')+')'}
+  await bioflexAddFeaturedCarousel(profile,layout);
+  if(!getSubdomain()){
+    const content=document.getElementById('preview-content');if(content){let counter=content.querySelector('.fake-preview-counter');if(!counter){counter=document.createElement('div');counter.className='fake-preview-counter';counter.innerHTML='<span class="live-dot"></span><span><span class="sample-label">Sample preview</span><br><span data-simulated-visitors>18</span> visitors exploring</span>';content.appendChild(counter)}
+      const value=counter.querySelector('[data-simulated-visitors]');App.widgetTimers.push(setInterval(function(){if(!document.body.contains(counter))return;const current=Number(value.textContent)||18;value.textContent=String(Math.max(7,Math.min(42,current+(Math.random()>.5?1:-1))))},10000));
+    }
+  }
+}
+renderPreview=async function(){
+  const result=await bioflexBaseRenderPreview();
+  await bioflexEnhancePreview();
+  return result;
+};
+const bioflexBaseDragDrop=setupDragDrop;
+setupDragDrop=function(container){
+  let dragId=null;
+  container.querySelectorAll('[data-link-id],[data-soc-id]').forEach(function(item){
+    item.addEventListener('dragstart',function(){dragId=item.dataset.linkId||item.dataset.socId;item.classList.add('dragging')});
+    item.addEventListener('dragend',function(){item.classList.remove('dragging');container.querySelectorAll('.drag-over').forEach(function(n){n.classList.remove('drag-over')});dragId=null});
+    item.addEventListener('dragover',function(e){e.preventDefault();if(dragId)item.classList.add('drag-over')});
+    item.addEventListener('dragleave',function(){item.classList.remove('drag-over')});
+    item.addEventListener('drop',async function(e){
+      e.preventDefault();item.classList.remove('drag-over');const targetId=item.dataset.linkId||item.dataset.socId;if(!dragId||dragId===targetId)return;
+      const social=!!item.dataset.socId,arr=[...(social?App.socials:App.links)].sort(function(a,b){return (a.position||0)-(b.position||0)}),before=arr.map(function(x){return {id:x.id,position:x.position}});
+      const from=arr.findIndex(function(x){return x.id===dragId}),to=arr.findIndex(function(x){return x.id===targetId});if(from<0||to<0)return;
+      const moved=arr.splice(from,1)[0];arr.splice(to,0,moved);arr.forEach(function(x,i){x.position=i});if(social)App.socials=arr;else App.links=arr;renderLinksList();
+      const table=social?'socials':'links';
+      try{const results=await Promise.all(arr.map(function(x){return db.from(table).update({position:x.position}).eq('id',x.id)}));const failed=results.find(function(r){return r.error});if(failed)throw failed.error;toast('Order saved to your profile.','success')}
+      catch(error){before.forEach(function(old){const row=arr.find(function(x){return x.id===old.id});if(row)row.position=old.position});if(social)App.socials=arr;else App.links=arr;renderLinksList();const rollback=await Promise.all(before.map(function(old){return db.from(table).update({position:old.position}).eq('id',old.id)}));const rollbackFailed=rollback.some(function(r){return r.error});toast(rollbackFailed?'Reorder failed. Local order reverted; refresh to verify the saved order.':'Could not save the new order. Previous order restored.','error')}
+    });
+  });
+};
+
 boot();
 window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
 </script>
