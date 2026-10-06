@@ -461,7 +461,6 @@ body.is-subdomain .preview-back{display:none!important}
         <a href="#/services" class="lp-menu-item" data-nav="#/services"><i class="fa-solid fa-cubes"></i> Services</a>
         <a href="#/policy" class="lp-menu-item" data-nav="#/policy"><i class="fa-solid fa-shield-halved"></i> Policy</a>
         <div class="lp-menu-sep"></div>
-        <a href="#/dashboard" class="lp-menu-item" data-nav="#/dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
       </div>
     </header>
 
@@ -789,6 +788,7 @@ const NAV_CUSTOMIZE = [
 const NAV_OTHER = [{id:'premium',label:'Premium',icon:'fa-solid fa-gem',badge:'NEW'}];
 
 const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',usernameEffect:'none',usernameAvailable:false,analytics:null,analyticsError:null,publicPresence:null,dashboardPresence:null,previewProfile:null};
+let authFlowPromise=null;
 
 /* HELPERS */
 function esc(s){if(s==null)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
@@ -860,12 +860,16 @@ function route(){
   const raw=location.hash.replace(/^#\/?/,'')||'landing';
   const name=raw.split('/')[0]||'landing';
   if(name!=='dashboard'&&App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
+  if(App.user&&App.profile&&['landing','login','signup'].includes(name)){
+    navigate('#/dashboard/overview');
+    return;
+  }
   if(name==='landing')showScreen('landing');
   else if(name==='login'){showScreen('auth');setAuthMode('login')}
   else if(name==='signup'){showScreen('auth');setAuthMode('signup')}
   else if(name==='services')showScreen('services');
   else if(name==='policy')showScreen('policy');
-  else if(name==='dashboard'){if(!App.user){navigate('#/login');return}App.currentTab=(raw.split('/')[1])||'overview';showScreen('dashboard');renderDashboard()}
+  else if(name==='dashboard'){if(!App.user){navigate('#/login');return}if(!App.profile){showScreen('landing');return}App.currentTab=(raw.split('/')[1])||'overview';showScreen('dashboard');renderDashboard()}
   else if(name==='preview'){showScreen('preview');renderPreview()}
   else showScreen('landing');
 }
@@ -966,9 +970,23 @@ function setAuthMode(mode){
 function toggleAuthMode(){setAuthMode(App.authMode==='login'?'signup':'login')}
 async function signInWith(provider){
   try{
-    const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:window.location.origin+'/'}});
-    if(error)toast(error.message,'error');
-  }catch(e){toast(e.message,'error')}
+    const errEl=document.getElementById('auth-error');
+    errEl.classList.add('hidden');
+    if(App.authMode==='signup'){
+      const pending=slug(document.getElementById('auth-username').value);
+      if(pending){
+        const validation=validateUsername(pending);
+        if(validation)throw new Error(validation);
+        try{sessionStorage.setItem('bioflex.prefillUsername',pending)}catch(_){}
+      }
+    }
+    const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:new URL('/',window.location.origin).toString()}});
+    if(error)throw error;
+  }catch(e){
+    const errEl=document.getElementById('auth-error');
+    errEl.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(e.message||'Could not start sign-in.');
+    errEl.classList.remove('hidden');
+  }
 }
 async function handleEmailAuth(e){
   e.preventDefault();
@@ -984,6 +1002,7 @@ async function handleEmailAuth(e){
       if(password.length<8)throw new Error('Password must be at least 8 characters.');
       const {data:exist}=await db.from('profiles').select('id').eq('username',username).maybeSingle();
       if(exist)throw new Error('That username is already taken.');
+      try{sessionStorage.setItem('bioflex.prefillUsername',username)}catch(_){}
       const {error}=await db.auth.signUp({email,password,options:{data:{username,display_name:username},emailRedirectTo:window.location.origin+'/'}});
       if(error)throw error;
       toast('Account created! Check your email to verify.','success');
@@ -991,8 +1010,7 @@ async function handleEmailAuth(e){
       const {error}=await db.auth.signInWithPassword({email,password});
       if(error)throw error;
       toast('Signed in!','success');
-      await loadUserData();
-      navigate('#/dashboard');
+      await completeAuthFlow();
     }
   }catch(err){
     errEl.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(err.message||'Something went wrong.');
@@ -1046,18 +1064,37 @@ async function handleLogout(){
   navigate('#/landing');
 }
 async function loadUserData(){
-  const {data:{user}}=await db.auth.getUser();
+  const {data:{user},error:userError}=await db.auth.getUser();
+  if(userError)throw userError;
   if(!user){App.user=null;return false}
   App.user=user;
-  let {data:profile}=await db.from('profiles').select('*').eq('user_id',user.id).maybeSingle();
-  if(!profile){
-    const uname=await promptForUsername();
-    if(!uname){await db.auth.signOut();return false}
-    const {data:np,error}=await db.from('profiles').insert({user_id:user.id,username:uname,display_name:uname}).select().single();
-    if(error){toast('Failed: '+error.message,'error');await db.auth.signOut();return false}
-    profile=np;
+  let {data:profile,error:profileError}=await db.from('profiles').select('*').eq('user_id',user.id).maybeSingle();
+  if(profileError)throw profileError;
+  let suggested='';
+  try{suggested=sessionStorage.getItem('bioflex.prefillUsername')||slug(user.user_metadata?.username||'')}catch(_){suggested=slug(user.user_metadata?.username||'')}
+  const needsUsername=()=>!profile||!USERNAME_RE.test(String(profile.username||''));
+  let claimError='';
+  while(needsUsername()){
+    const uname=await promptForUsername(suggested,claimError);
+    if(!uname){
+      await db.auth.signOut();
+      App.user=null;App.profile=null;
+      return false;
+    }
+    const payload={username:uname,display_name:profile?.display_name||uname};
+    const result=profile
+      ?await db.from('profiles').update(payload).eq('user_id',user.id).select().single()
+      :await db.from('profiles').insert({user_id:user.id,...payload}).select().single();
+    if(result.error){
+      suggested=uname;
+      claimError='Could not save that username: '+result.error.message;
+      continue;
+    }
+    profile=result.data;
+    claimError='';
   }
   App.profile=profile;
+  try{sessionStorage.removeItem('bioflex.prefillUsername')}catch(_){}
   App.usernameEffect=profile.username_effect||'none';
   const {data:links}=await db.from('links').select('*').eq('user_id',user.id).order('position');
   const {data:socials}=await db.from('socials').select('*').eq('user_id',user.id).order('position');
@@ -1066,12 +1103,13 @@ async function loadUserData(){
   return true;
 }
 
-async function promptForUsername(){
+async function promptForUsername(initialValue='',notice=''){
   return new Promise(resolve=>{
     const m=openModal(
       '<div class="modal-head"><div><h3>Claim your BioFlex username</h3><p>This becomes your permanent URL. You can only change it once every 24 hours.</p></div></div>'+
+      (notice?'<div class="claim-result bad" style="margin-top:.65rem"><i class="fa-solid fa-circle-exclamation"></i> '+esc(notice)+'</div>':'')+
       '<div style="display:flex;align-items:center;gap:.35rem;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18);border-radius:12px;padding:.72rem 1rem;margin-top:.75rem">'+
-        '<input id="prompt-uname" placeholder="username" maxlength="30" style="flex:1;font-size:.95rem">'+
+        '<input id="prompt-uname" placeholder="username" value="'+esc(initialValue)+'" maxlength="30" style="flex:1;font-size:.95rem">'+
         '<span style="color:rgba(219,234,254,.5);font-size:.85rem;font-family:\'JetBrains Mono\',monospace;white-space:nowrap">.bioflex.cyou</span>'+
       '</div>'+
       '<div id="prompt-result" class="claim-result hidden" style="margin-top:.65rem"></div>'+
@@ -1096,15 +1134,31 @@ async function promptForUsername(){
     },250);
     inp.addEventListener('input',()=>{inp.value=slug(inp.value);available=false;check()});
     inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();m.querySelector('[data-act=ok]').click()}});
-    setTimeout(()=>inp.focus(),100);
+    if(initialValue)check();
+    setTimeout(()=>{inp.focus();inp.select()},100);
     m.querySelector('[data-act=cancel]').onclick=()=>{closeModal(m);resolve(null)};
     m.querySelector('[data-act=ok]').onclick=async()=>{
       const v=slug(inp.value);
       const err=validateUsername(v);
       if(err){toast(err,'error');return}
-      const {data}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
-      if(data){toast('That username is already taken.','error');return}
-      closeModal(m);resolve(v);
+      const btn=m.querySelector('[data-act=ok]');
+      btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Checking…';
+      try{
+        const {data,error}=await db.from('profiles').select('id').eq('username',v).maybeSingle();
+        if(error)throw error;
+        if(data){
+          available=false;
+          res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-xmark"></i> <b>'+esc(v)+'.bioflex.cyou</b> is already taken.';
+          res.classList.remove('hidden');
+          return;
+        }
+        closeModal(m);resolve(v);
+      }catch(err){
+        res.className='claim-result bad';res.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> Could not check or claim this username: '+esc(err.message||'Please try again.');
+        res.classList.remove('hidden');
+      }finally{
+        if(m.isConnected){btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-check"></i> Claim username'}
+      }
     };
   });
 }
@@ -2049,6 +2103,31 @@ document.addEventListener('click',function(e){
   if(!e.target.closest('#lp-menu')&&!e.target.closest('.lp-menu-btn'))m.classList.add('hidden');
 });
 
+async function completeAuthFlow(){
+  if(authFlowPromise)return authFlowPromise;
+  const current=(async()=>{
+    try{
+      const ready=await loadUserData();
+      if(ready){
+        try{sessionStorage.removeItem('bioflex.prefillUsername')}catch(_){}
+        navigate('#/dashboard/overview');
+        return true;
+      }
+      if(!App.user)navigate('#/landing');
+      return false;
+    }catch(err){
+      const message=err.message||'Please try again.';
+      toast('You are signed in, but profile setup did not finish: '+message,'error');
+      navigate('#/landing');
+      setLpStatus('bad','fa-triangle-exclamation','Signed in, but profile setup could not finish: '+esc(message));
+      return false;
+    }
+  })();
+  authFlowPromise=current;
+  try{return await current}
+  finally{if(authFlowPromise===current)authFlowPromise=null}
+}
+
 async function boot(){
   const yr=new Date().getFullYear();
   const fy=document.getElementById('footer-year');if(fy)fy.textContent=yr;
@@ -2065,15 +2144,18 @@ async function boot(){
     return;
   }
 
-  const {data:{session}}=await db.auth.getSession();
-  if(session) await loadUserData();
-  else db.auth.onAuthStateChange(async(ev,s)=>{
-    if(ev==='SIGNED_IN' && s){
-      await loadUserData();
-      if(!getSubdomain() && App.user) navigate('#/dashboard');
+  db.auth.onAuthStateChange((event,session)=>{
+    if(session?.user&&(event==='SIGNED_IN'||event==='INITIAL_SESSION')){
+      setTimeout(()=>{void completeAuthFlow()},0);
     }
   });
-
+  try{
+    const {data,error}=await db.auth.getSession();
+    if(error)throw error;
+    if(data.session){await completeAuthFlow();return}
+  }catch(err){
+    toast('Could not restore your sign-in: '+(err.message||'Please try again.'),'error');
+  }
   route();
 }
 boot();
