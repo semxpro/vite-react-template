@@ -183,7 +183,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .nav-item.active{background:linear-gradient(90deg,rgba(59,130,246,.22),rgba(59,130,246,.04));color:#fff;border-color:rgba(96,165,250,.3)}
 .nav-item.active i:first-child{color:var(--accent-2)}
 .nav-item .badge-new{margin-left:auto;padding:.1rem .45rem;border-radius:5px;font-size:.6rem;font-weight:700;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff}
-.sidebar-footer{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(96,165,250,.12);display:flex;flex-direction:column;gap:.5rem}
+.sidebar-footer{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(96,165,250,.12);display:flex;flex-direction:column;gap:.5rem;position:relative}
 .sidebar-footer-btn{display:flex;align-items:center;gap:.6rem;padding:.6rem .85rem;border-radius:10px;font-size:.82rem;font-weight:600;text-align:left;cursor:pointer;border:1px solid transparent;width:100%}
 .sidebar-footer-btn.help{background:rgba(37,99,235,.2);color:#bfdbfe;border-color:rgba(96,165,250,.25)}
 .sidebar-footer-btn.share{background:rgba(96,165,250,.1);color:#dbeafe;border-color:rgba(96,165,250,.2)}
@@ -195,8 +195,29 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 @media(min-width:1200px){.dash-sidebar{width:18rem;padding:1rem}.dash-content{padding-block:2.25rem}}
 .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);z-index:800;display:none}
 .drawer-backdrop.open{display:block}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:290px;max-width:86vw;background:#0a1120;border-right:1px solid rgba(96,165,250,.15);z-index:801;overflow-y:auto;display:none;flex-direction:column}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:310px;max-width:88vw;background:linear-gradient(180deg,rgba(10,17,32,.99),rgba(4,6,15,.99));border-right:1px solid rgba(96,165,250,.18);z-index:801;overflow:hidden;display:none;flex-direction:column}
 .drawer.open{display:flex}
+.drawer .nav-item{color:rgba(219,234,254,.82)}
+.drawer .nav-item i:first-child{color:rgba(147,197,253,.9)}
+.drawer .nav-item:hover{background:rgba(96,165,250,.1);color:#fff}
+.drawer .nav-item.active{background:linear-gradient(90deg,rgba(37,99,235,.24),rgba(59,130,246,.06));border-color:rgba(96,165,250,.3)}
+.drawer .nav-item.active i:first-child{color:#93c5fd}
+.drawer-nav-wrap{padding:.5rem .75rem .85rem;display:flex;flex-direction:column;gap:2px;flex:1;overflow-y:auto}
+.drawer-footer-area{position:relative;margin-top:auto;padding:.75rem .75rem max(.75rem,env(safe-area-inset-bottom));border-top:1px solid rgba(96,165,250,.12);background:rgba(4,6,15,.96)}
+.drawer-support-card{padding:.9rem;border-radius:15px;background:rgba(10,17,32,.9);border:1px solid rgba(96,165,250,.14);margin-bottom:.65rem}
+.drawer-support-card p{font-size:.78rem;color:rgba(245,247,255,.75);line-height:1.45;margin-bottom:.55rem}
+.drawer-support-btn{display:flex;align-items:center;gap:.6rem;width:100%;min-height:38px;padding:.5rem .7rem;border-radius:10px;background:rgba(37,99,235,.18);border:1px solid rgba(96,165,250,.3);color:#dbeafe;font-size:.78rem;text-align:left}
+.drawer-page-btn{display:flex;align-items:center;gap:.6rem;width:100%;min-height:38px;padding:.5rem .7rem;margin-top:.55rem;border-radius:10px;background:rgba(59,130,246,.15);border:1px solid rgba(96,165,250,.28);color:#dbeafe;font-size:.78rem;text-align:left}
+.drawer-share-btn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;min-height:42px;margin:.65rem 0;padding:.55rem .7rem;border-radius:999px;background:rgba(37,99,235,.22);border:1px solid rgba(96,165,250,.34);color:#fff;font-size:.82rem}
+.drawer-user-area{position:relative;padding:.55rem .65rem;border-radius:999px;background:rgba(10,17,32,.94);border:1px solid rgba(96,165,250,.18)}
+.drawer-user-row{display:flex;align-items:center;gap:.65rem;min-width:0}
+.drawer-user-avatar{width:48px;height:48px;flex:0 0 48px;border-radius:50%;overflow:hidden;background:rgba(37,99,235,.24);display:grid;place-items:center;color:#bfdbfe;font-size:1.2rem}
+.drawer-user-avatar img{width:100%;height:100%;object-fit:cover}
+.drawer-user-copy{min-width:0;flex:1}
+.drawer-user-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-size:.9rem}
+.drawer-user-uid{font-size:.68rem;color:rgba(245,247,255,.45);font-family:'JetBrains Mono',monospace}
+.drawer-quick-trigger{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:grid;place-items:center;color:rgba(191,219,254,.75);font-size:1rem}
+.drawer-quick-trigger:hover{background:rgba(96,165,250,.14);color:#fff}
 .card{border-radius:18px;padding:1.5rem}
 .card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
 .card-header-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(29,78,216,.1));color:var(--accent-2);display:inline-flex;align-items:center;justify-content:center;font-size:.95rem;border:1px solid rgba(96,165,250,.2)}
@@ -339,12 +360,52 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .color-swatch{width:32px;height:32px;border-radius:9px;border:1px solid rgba(255,255,255,.15);flex-shrink:0}
 .color-hex{flex:1;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#dbeafe}
 .color-row .edit-btn{color:rgba(147,197,253,.7);cursor:pointer;font-size:.85rem;padding:.35rem;border-radius:6px;background:transparent;border:0}
-.quick-menu{position:absolute;bottom:100%;left:0;right:0;margin-bottom:.5rem;border-radius:14px;padding:.6rem;background:rgba(10,17,32,.98);border:1px solid rgba(96,165,250,.25);backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.7);z-index:200}
-.quick-menu-item{display:flex;align-items:center;gap:.75rem;padding:.7rem .85rem;border-radius:9px;font-size:.85rem;font-weight:500;color:#e0e9ff;cursor:pointer;background:transparent;width:100%;text-align:left;border:0}
-.quick-menu-item:hover{background:rgba(96,165,250,.12)}
-.quick-menu-item i:first-child{width:1.1rem;text-align:center;color:var(--accent-2)}
-.quick-menu-item.danger{color:#fca5a5}
-.quick-menu-item.danger i:first-child{color:#fca5a5}
+.quick-menu{position:absolute;bottom:100%;left:0;right:0;margin-bottom:.5rem;border-radius:16px;padding:.65rem;background:linear-gradient(155deg,rgba(9,20,42,.98),rgba(5,11,25,.98));border:1px solid rgba(96,165,250,.24);backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.58),0 0 28px rgba(37,99,235,.1);z-index:850;max-height:min(72vh,560px);overflow-y:auto}
+.quick-menu-heading{padding:.25rem .25rem .65rem}
+.quick-menu-title{font-size:.95rem;font-weight:750;color:#eff6ff}
+.quick-menu-subtitle{font-size:.76rem;line-height:1.4;color:rgba(219,234,254,.58);margin-top:.1rem}
+.quick-menu-item{display:flex;align-items:center;gap:.7rem;padding:.62rem .75rem;margin-top:.35rem;border-radius:12px;font-size:.82rem;font-weight:500;color:#eaf3ff;cursor:pointer;background:rgba(59,130,246,.075);width:100%;text-align:left;border:1px solid rgba(96,165,250,.14);min-height:40px}
+.quick-menu-item:hover{filter:brightness(1.15)}
+.quick-menu-item i:first-child{width:1.1rem;text-align:center;color:#93c5fd}
+.quick-menu-item.quick-home{background:rgba(37,99,235,.2);border-color:rgba(96,165,250,.3)}
+.quick-menu-item.quick-leaderboard{background:rgba(29,78,216,.17);border-color:rgba(96,165,250,.27)}
+.quick-menu-item.quick-leaderboard i:first-child{color:#bfdbfe}
+.quick-menu-item.quick-discord{background:rgba(37,99,235,.16);border-color:rgba(96,165,250,.24)}
+.quick-menu-item.quick-discord i:first-child{color:#bfdbfe}
+.quick-menu-item.danger{background:rgba(30,64,110,.22);border-color:rgba(96,165,250,.2);color:#eaf3ff}
+.quick-menu-item.danger i:first-child{color:#93c5fd}
+.account-accordion-trigger{display:flex;align-items:center;gap:.75rem;width:100%;padding:.66rem .85rem;border-radius:999px;color:#dbeafe;background:rgba(37,99,235,.16);border:1px solid rgba(96,165,250,.2);font-size:.88rem;font-weight:650;text-align:left}
+.account-accordion-trigger:hover,.account-accordion-trigger[aria-expanded="true"]{background:rgba(37,99,235,.28);border-color:rgba(96,165,250,.34)}
+.account-accordion-trigger .accordion-chevron{margin-left:auto;transition:transform .2s ease;color:#93c5fd}
+.account-accordion-trigger[aria-expanded="true"] .accordion-chevron{transform:rotate(180deg)}
+.account-accordion-items{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .22s ease,opacity .18s ease}
+.account-accordion-items.open{grid-template-rows:1fr;opacity:1}
+.account-accordion-inner{min-height:0;overflow:hidden}
+.account-accordion-items .nav-item{padding:.48rem .85rem .48rem 2.65rem;font-size:.82rem;color:rgba(219,234,254,.68)}
+.account-accordion-items .nav-item:hover{background:rgba(96,165,250,.09);color:#fff}
+.leaderboard-row{display:grid;grid-template-columns:40px 42px minmax(0,1fr) auto;align-items:center;gap:.75rem;padding:.78rem .9rem;border-bottom:1px solid rgba(96,165,250,.09);width:100%;text-align:left}
+.leaderboard-row:last-child{border-bottom:0}
+.leaderboard-row:hover{background:rgba(96,165,250,.08)}
+.leaderboard-rank{font:700 .8rem 'JetBrains Mono',monospace;color:#fbbf24}
+.leaderboard-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#3b82f6,#9333ea);font-weight:800}
+.leaderboard-avatar img{width:100%;height:100%;object-fit:cover}
+.leaderboard-podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem;padding:1rem;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(107,33,117,.12),transparent)}
+.leaderboard-podium-card{display:flex;flex-direction:column;align-items:center;gap:.28rem;min-width:0;padding:.9rem .45rem;border-radius:14px;text-align:center;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);transition:transform .18s,background .18s}
+.leaderboard-podium-card:hover{transform:translateY(-2px);background:rgba(255,255,255,.07)}
+.leaderboard-podium-card:nth-child(1){border-color:rgba(251,191,36,.36);background:rgba(120,75,15,.12)}
+.leaderboard-podium-rank{font:700 .72rem 'JetBrains Mono',monospace;color:#fcd34d}
+.leaderboard-podium-card:nth-child(2) .leaderboard-podium-rank{color:#d1d5db}
+.leaderboard-podium-card:nth-child(3) .leaderboard-podium-rank{color:#fdba74}
+.leaderboard-podium-avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#6b21a8,#1d4ed8);font-weight:800}
+.leaderboard-podium-avatar img{width:100%;height:100%;object-fit:cover}
+.leaderboard-podium-name{max-width:100%;font-size:.75rem;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.leaderboard-podium-views{font-size:.67rem;color:rgba(245,247,255,.58);white-space:nowrap}
+.profile-view-counter{position:fixed;z-index:30;right:1rem;bottom:1rem;display:inline-flex;align-items:center;gap:.48rem;padding:.55rem .8rem;border-radius:999px;background:rgba(9,12,20,.82);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px);color:#f4f4f5;font-size:.78rem;font-weight:650;box-shadow:0 8px 28px rgba(0,0,0,.3)}
+.profile-view-counter i{color:#c4b5fd}
+.video-card-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.video-card-actions .btn[data-video-action="copy"]{grid-column:1/-1;width:100%}
+.video-card-actions .btn{min-width:0}
+@media(max-width:460px){.video-card-actions{grid-template-columns:1fr}.video-card-actions .btn[data-video-action="copy"]{grid-column:auto}.leaderboard-row{grid-template-columns:30px 38px minmax(0,1fr) auto;gap:.5rem}.profile-view-counter{right:.65rem;bottom:.65rem}}
 .modal-overlay{position:fixed;inset:0;z-index:9000;background:rgba(2,4,9,.8);backdrop-filter:blur(10px);display:flex;align-items:flex-end;justify-content:center;padding:1rem;animation:fadeIn .18s ease}
 @media(min-width:600px){.modal-overlay{align-items:center}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -614,14 +675,6 @@ body.is-subdomain .preview-back{display:none!important}
 .featured-link-options{display:grid;gap:.45rem;max-height:230px;overflow:auto;padding:.2rem}
 .featured-link-option{display:flex;align-items:center;gap:.65rem;padding:.65rem .75rem;border:1px solid rgba(96,165,250,.12);background:rgba(8,15,30,.42);border-radius:10px;font-size:.79rem;color:#dbeafe}
 .featured-link-option input{width:auto;accent-color:#60a5fa}
-.ai-profile-shell{max-width:920px}
-.ai-profile-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin-top:1rem}
-.ai-profile-result{padding:.8rem;border:1px solid rgba(96,165,250,.15);border-radius:12px;background:rgba(8,15,30,.55);min-width:0}
-.ai-profile-result small{display:block;color:rgba(219,234,254,.49);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.28rem}
-.ai-profile-result div{font-size:.81rem;line-height:1.5;color:#e0e9ff;overflow-wrap:anywhere}
-.ai-emoji-picker{display:flex;flex-wrap:wrap;gap:.42rem;margin:.55rem 0 1rem}
-.ai-emoji-picker button{width:40px;height:40px;border-radius:11px;border:1px solid rgba(96,165,250,.16);background:rgba(8,15,30,.55);font-size:1.2rem}
-.ai-emoji-picker button.selected{border-color:#60a5fa;background:rgba(59,130,246,.24);box-shadow:0 0 0 2px rgba(59,130,246,.15)}
 .video-card-media{position:relative}
 .video-card-badges{position:absolute;left:.55rem;top:.55rem;display:flex;gap:.35rem;z-index:2}
 .video-card-badge{padding:.22rem .48rem;border-radius:99px;background:rgba(37,99,235,.9);border:1px solid rgba(191,219,254,.32);box-shadow:0 5px 16px rgba(0,0,0,.28);font-size:.58rem;font-weight:900;letter-spacing:.1em;color:#fff;text-transform:uppercase;backdrop-filter:blur(8px)}
@@ -661,14 +714,12 @@ body.is-subdomain .preview-back{display:none!important}
 .referrer-table th,.referrer-table td{padding:.58rem .42rem;text-align:left;border-bottom:1px solid rgba(96,165,250,.1)}
 .referrer-table th{font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(219,234,254,.48);font-weight:700}
 .referrer-table td:last-child,.referrer-table th:last-child{text-align:right;font-family:'JetBrains Mono',monospace;color:#bfdbfe}
-.fake-preview-counter{position:fixed;right:1rem;top:1rem;z-index:40;display:flex;align-items:center;gap:.5rem;padding:.56rem .78rem;border-radius:13px;background:rgba(5,12,24,.72);border:1px solid rgba(96,165,250,.22);backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(0,0,0,.18);font-size:.72rem;color:#dbeafe}
-.fake-preview-counter .sample-label{font-size:.57rem;text-transform:uppercase;letter-spacing:.1em;color:#93c5fd}
 .discord-widget{background:linear-gradient(145deg,rgba(15,25,50,.78),rgba(8,13,27,.65));border-color:rgba(129,140,248,.24);box-shadow:0 18px 48px rgba(0,0,0,.22)}
 .discord-widget iframe{max-width:100%;box-shadow:0 8px 25px rgba(0,0,0,.2)}
 .music-service-links{display:flex;gap:.45rem;margin-top:.65rem}
 .music-service-links a{flex:1;text-align:center;padding:.45rem .4rem;border:1px solid rgba(96,165,250,.15);border-radius:9px;background:rgba(8,15,30,.4);font-size:.65rem;color:#bfdbfe}
 .music-service-links a:hover{border-color:rgba(96,165,250,.5);background:rgba(59,130,246,.12)}
-@media(max-width:680px){.theme-builder{grid-template-columns:1fr}.theme-preview{min-height:205px}.video-hosting-card{grid-template-columns:1fr}.video-hosting-card>.btn{width:100%}.device-analytics{grid-template-columns:1fr}.device-analytics svg{width:150px}.ai-profile-summary{grid-template-columns:1fr}.fake-preview-counter{top:auto;right:.7rem;bottom:.7rem}.layout-modern-2 .profile-hero{grid-template-columns:72px minmax(0,1fr);padding:.85rem}.layout-modern-2 .avatar-ring{width:68px;height:68px}.layout-modern-2 .avatar-ring img,.layout-modern-2 .avatar-ring .av-inner{width:62px;height:62px;font-size:1.5rem}}
+@media(max-width:680px){.theme-builder{grid-template-columns:1fr}.theme-preview{min-height:205px}.video-hosting-card{grid-template-columns:1fr}.video-hosting-card>.btn{width:100%}.device-analytics{grid-template-columns:1fr}.device-analytics svg{width:150px}.layout-modern-2 .profile-hero{grid-template-columns:72px minmax(0,1fr);padding:.85rem}.layout-modern-2 .avatar-ring{width:68px;height:68px}.layout-modern-2 .avatar-ring img,.layout-modern-2 .avatar-ring .av-inner{width:62px;height:62px;font-size:1.5rem}}
 @media(prefers-reduced-motion:reduce){.bg-fx::after{animation:none}.coming-soon-btn,.nav-item{transition:none}}
 
 
@@ -683,6 +734,32 @@ body.is-subdomain .preview-back{display:none!important}
 .leaflet-container{font-family:Inter,sans-serif!important;background:#081323!important;color:#e0e9ff!important}
 .leaflet-tooltip{background:rgba(5,12,24,.94)!important;border:1px solid rgba(96,165,250,.32)!important;color:#e0e9ff!important;box-shadow:0 8px 24px rgba(0,0,0,.35)!important}
 .leaflet-tooltip:before{display:none}
+
+/* BioFlex-owned visual language for quick actions, plans and the guided setup. */
+.quick-menu-item:hover{background:rgba(59,130,246,.18);border-color:rgba(96,165,250,.34)}
+.quick-menu-item.danger:hover{background:rgba(37,99,235,.24)}
+.demo-cta{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;margin:.8rem auto 0;padding:.72rem 1.05rem;border:1px solid rgba(96,165,250,.26);border-radius:12px;background:rgba(10,17,32,.62);color:#dbeafe;font-size:.86rem;font-weight:650;transition:transform .18s,background .18s,border-color .18s}
+.demo-cta:hover{transform:translateY(-1px);background:rgba(37,99,235,.18);border-color:rgba(96,165,250,.48)}
+.plan-page{max-width:920px;margin:0 auto;padding:3rem 1.25rem 5rem}
+.plan-page-card{position:relative;overflow:hidden;padding:clamp(1.4rem,4vw,2.5rem);border:1px solid rgba(96,165,250,.2);border-radius:24px;background:radial-gradient(ellipse at 90% 0,rgba(59,130,246,.19),transparent 48%),linear-gradient(145deg,rgba(12,25,50,.88),rgba(5,10,22,.94));box-shadow:0 28px 90px rgba(0,0,0,.4)}
+.plan-page-mark{display:grid;place-items:center;width:58px;height:58px;border-radius:18px;color:#bfdbfe;background:linear-gradient(135deg,rgba(59,130,246,.28),rgba(29,78,216,.13));border:1px solid rgba(96,165,250,.26);font-size:1.3rem}
+.plan-page-kicker{margin-top:1.35rem;color:#93c5fd;font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.plan-page-title{margin-top:.55rem;font:800 clamp(2rem,6vw,3.3rem)/1.05 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.plan-page-copy{max-width:42rem;margin-top:.9rem;color:rgba(219,234,254,.68);line-height:1.7}
+.plan-page-price{display:flex;align-items:baseline;gap:.55rem;margin:1.5rem 0 1rem;font:800 2.2rem 'Space Grotesk',sans-serif;color:#eff6ff}
+.plan-page-price small{font:500 .78rem Inter,sans-serif;color:rgba(219,234,254,.54)}
+.plan-page-note{display:flex;gap:.6rem;align-items:flex-start;margin:1rem 0 1.35rem;padding:.85rem 1rem;border:1px solid rgba(96,165,250,.16);border-radius:12px;background:rgba(59,130,246,.07);color:rgba(219,234,254,.7);font-size:.8rem;line-height:1.5}
+.plan-page-note i{margin-top:.12rem;color:#93c5fd}
+.plan-page .btn-purchase{min-height:48px}
+.onboarding-progress{display:flex;gap:.35rem;margin:.1rem 0 1rem}
+.onboarding-progress span{height:4px;flex:1;border-radius:9px;background:rgba(96,165,250,.15)}
+.onboarding-progress span.done{background:linear-gradient(90deg,#2563eb,#60a5fa)}
+.onboarding-step-icon{display:grid;place-items:center;width:48px;height:48px;margin-bottom:.85rem;border-radius:15px;background:rgba(59,130,246,.15);border:1px solid rgba(96,165,250,.23);color:#bfdbfe;font-size:1.1rem}
+.demo-profile-note{display:inline-flex;gap:.4rem;align-items:center;margin:0 auto 1rem;padding:.38rem .7rem;border:1px solid rgba(96,165,250,.24);border-radius:999px;background:rgba(10,17,32,.72);color:#bfdbfe;font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.demo-profile-note i{color:#60a5fa}
+.demo-bg-motion{animation:demoGradientDrift 18s ease-in-out infinite alternate;will-change:transform}
+@keyframes demoGradientDrift{to{transform:scale(1.08) translate3d(-1.2%,1%,0)}}
+@media(prefers-reduced-motion:reduce){.demo-bg-motion{animation:none}}
 
 </style>
 </head>
@@ -742,6 +819,7 @@ body.is-subdomain .preview-back{display:none!important}
 
       <div class="lp-actions">
         <a href="#/signup" class="lp-cta" data-nav="#/signup">Sign Up for Free <i class="fa-solid fa-arrow-right"></i></a>
+        <button class="demo-cta" type="button" onclick="navigate('#/demo')"><i class="fa-solid fa-eye"></i> Preview a sample profile</button>
       </div>
 
       <div class="lp-phones">
@@ -840,7 +918,6 @@ body.is-subdomain .preview-back{display:none!important}
     <div id="sidebar-account-card"></div>
     <div class="sidebar-section-label">Account</div>
     <nav class="sidebar-nav" id="sb-nav-account"></nav>
-    <div class="sidebar-section-label">Customize</div>
     <nav class="sidebar-nav" id="sb-nav-customize"></nav>
     <div class="sidebar-footer">
       <button class="sidebar-footer-btn share" onclick="openShareModal()"><i class="fa-solid fa-share-nodes"></i> Share Your Profile</button>
@@ -1048,8 +1125,9 @@ const NAV_ACCOUNT = [
 ];
 const NAV_CUSTOMIZE = [
   {id:'customize',label:'Customize',icon:'fa-solid fa-palette'},
-  {id:'ai-profile',label:'AI Profile',icon:'fa-solid fa-wand-magic-sparkles',badge:'NEW'},
   {id:'links',label:'Links',icon:'fa-solid fa-link'},
+  {id:'premium',label:'Premium',icon:'fa-solid fa-gem'},
+  {id:'image-host',label:'Image Host',icon:'fa-solid fa-cloud-arrow-up'},
   {id:'templates',label:'Templates',icon:'fa-solid fa-layer-group'},
   {id:'video-library',label:'Video Library',icon:'fa-solid fa-film',badge:'NEW'},
   {id:'music-library',label:'Music Library',icon:'fa-solid fa-music',badge:'NEW'}
@@ -1173,6 +1251,8 @@ function route(){
   resetPageMetadata();
   const raw=location.hash.replace(/^#\/?/,'')||'landing';
   const name=raw.split('/')[0]||'landing';
+  App.demoMode=name==='demo';
+  if(name!=='profile')App.publicProfileUsername='';
   if(name!=='preview')clearWidgetTimers();
   if(name!=='dashboard'&&App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
   if(App.user&&App.profile&&['landing','login','signup'].includes(name)){
@@ -1184,6 +1264,8 @@ function route(){
   else if(name==='signup'){showScreen('auth');setAuthMode('signup')}
   else if(name==='services')showScreen('services');
   else if(name==='policy')showScreen('policy');
+  else if(name==='profile'){App.publicProfileUsername=slug(raw.split('/')[1]||'');showScreen('preview');renderPreview()}
+  else if(name==='demo'){App.demoMode=true;App.publicProfileUsername='sample';document.body.classList.remove('is-subdomain');showScreen('preview');renderPreview()}
   else if(name==='dashboard'){if(!App.user){navigate('#/login');return}if(!App.profile){showScreen('landing');return}App.currentTab=(raw.split('/')[1])||'overview';showScreen('dashboard');renderDashboard()}
   else if(name==='preview'){showScreen('preview');renderPreview()}
   else showScreen('landing');
@@ -1495,8 +1577,23 @@ function renderDashboard(){
 function renderNavGroup(id,items){
   const el=document.getElementById(id);
   if(!el)return;
-  el.innerHTML=items.map(n=>'<button class="nav-item '+(n.id===App.currentTab?'active':'')+'" data-nav-id="'+n.id+'"><i class="'+n.icon+'"></i><span>'+esc(n.label)+'</span>'+(n.badge?'<span class="badge-new">'+esc(n.badge)+'</span>':'')+'</button>').join('');
-  el.querySelectorAll('[data-nav-id]').forEach(b=>{b.onclick=()=>{closeDrawer();navigate('#/dashboard/'+b.dataset.navId)}});
+  const isAccount=id==='sb-nav-account'||id==='drawer-nav-account';
+  const open=isAccount&&NAV_ACCOUNT.some(n=>n.id===App.currentTab);
+  const navButtons=items.map(n=>'<button class="nav-item '+(n.id===App.currentTab?'active':'')+'" type="button" data-nav-id="'+n.id+'"><i class="'+n.icon+'"></i><span>'+esc(n.label)+'</span>'+(n.badge?'<span class="badge-new">'+esc(n.badge)+'</span>':'')+'</button>').join('');
+  if(isAccount){
+    el.innerHTML='<button class="account-accordion-trigger" type="button" aria-expanded="'+(open?'true':'false')+'" aria-controls="'+id+'-items"><i class="fa-solid fa-user-gear"></i><span>Account</span><i class="fa-solid fa-chevron-down accordion-chevron"></i></button><div id="'+id+'-items" class="account-accordion-items '+(open?'open':'')+'"><div class="account-accordion-inner">'+navButtons+'</div></div>';
+    el.querySelector('.account-accordion-trigger').onclick=function(){
+      const trigger=this,itemsEl=el.querySelector('.account-accordion-items'),expanded=trigger.getAttribute('aria-expanded')==='true';
+      trigger.setAttribute('aria-expanded',String(!expanded));itemsEl.classList.toggle('open',!expanded);
+    };
+  }else el.innerHTML=navButtons;
+  el.querySelectorAll('[data-nav-id]').forEach(b=>{b.onclick=()=>{
+    const item=items.find(n=>n.id===b.dataset.navId);
+    closeDrawer();
+    if(item&&item.comingSoon){toast(item.label+' — Coming Soon','info');return}
+    if(item&&(item.id==='premium'||item.id==='image-host')){navigate('#/dashboard/'+item.id);return}
+    navigate('#/dashboard/'+b.dataset.navId);
+  }});
 }
 function accountPresentation(){
   const user=App.user||{};
@@ -1535,11 +1632,11 @@ function accountCardMarkup(surface){
 }
 function renderDrawer(){
   const d=document.getElementById('drawer');
-  d.innerHTML='<div style="padding:1rem;border-bottom:1px solid rgba(96,165,250,.15);display:flex;justify-content:space-between;align-items:center"><div class="flex items-center gap-2"><div class="brand-logo" style="width:26px;height:26px;font-size:.75rem"><i class="fa-solid fa-bolt"></i></div><span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700">BioFlex</span></div><button class="btn btn-ghost btn-icon" type="button" onclick="closeDrawer()" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button></div><div class="drawer-account">'+accountCardMarkup('drawer')+'</div><nav id="drawer-nav" style="padding:.5rem .75rem .85rem;display:flex;flex-direction:column;gap:2px"></nav>';
-  const nav=d.querySelector('#drawer-nav');
-  const all=NAV_ACCOUNT.concat(NAV_CUSTOMIZE);
-  nav.innerHTML=all.map(n=>'<button class="nav-item '+(n.id===App.currentTab?'active':'')+'" data-nav-id="'+n.id+'"><i class="'+n.icon+'"></i><span>'+esc(n.label)+'</span></button>').join('');
-  nav.querySelectorAll('[data-nav-id]').forEach(b=>{b.onclick=()=>{closeDrawer();navigate('#/dashboard/'+b.dataset.navId)}});
+  const account=accountPresentation();
+  const avatar=account.avatar?'<img src="'+esc(account.avatar)+'" alt="">':'<i class="fa-solid fa-user"></i>';
+  d.innerHTML='<div style="padding:1rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center"><div class="flex items-center gap-2"><div class="brand-logo" style="width:26px;height:26px;font-size:.75rem"><i class="fa-solid fa-bolt"></i></div><span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700">BioFlex</span></div><button class="btn btn-ghost btn-icon" type="button" onclick="closeDrawer()" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button></div><nav class="drawer-nav-wrap"><div class="sidebar-nav" id="drawer-nav-account"></div><div class="sidebar-nav" id="drawer-nav-customize"></div></nav><div class="drawer-footer-area"><section class="drawer-support-card"><p>Have a question or need support?</p><button class="drawer-support-btn" type="button" onclick="closeDrawer();toast(\'Help Center — Coming Soon\',\'info\')"><i class="fa-solid fa-circle-question"></i> Help Center</button><p style="margin:.75rem 0 .45rem">Check out your page</p><button class="drawer-page-btn" type="button" onclick="closeDrawer();navigate(\'#/preview\')"><i class="fa-solid fa-arrow-up-right-from-square"></i> My Page</button></section><button class="drawer-share-btn" type="button" onclick="closeDrawer();openShareModal()"><i class="fa-solid fa-share-nodes"></i> Share Your Profile</button><div class="drawer-user-area"><div class="drawer-user-row"><div class="drawer-user-avatar">'+avatar+'</div><div class="drawer-user-copy"><div class="drawer-user-name">'+esc(account.displayName)+'</div><div class="drawer-user-uid">UID '+esc(account.uid)+'</div></div><button class="drawer-quick-trigger" type="button" onclick="toggleQuickMenu()" aria-label="Open Quick Menu" aria-haspopup="true"><i class="fa-solid fa-ellipsis"></i></button></div></div></div>';
+  renderNavGroup('drawer-nav-account',NAV_ACCOUNT);
+  renderNavGroup('drawer-nav-customize',NAV_CUSTOMIZE);
 }
 function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('drawer-backdrop').classList.add('open')}
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-backdrop').classList.remove('open')}
@@ -1548,14 +1645,16 @@ function renderTab(tab){
   switch(tab){
     case 'overview':return tabOverview();
     case 'analytics':return tabAnalytics();
+    case 'leaderboard':return tabLeaderboard();
     case 'badges':return tabBadges();
     case 'settings':return tabSettings();
     case 'customize':return tabCustomize();
-    case 'ai-profile':return tabAIProfile();
     case 'video-library':return tabVideoLibrary();
     case 'music-library':return tabMusicLibrary();
     case 'links':return tabLinks();
     case 'templates':return tabTemplates();
+    case 'premium':return tabPremiumPage();
+    case 'image-host':return tabImageHostPage();
     default:return tabOverview();
   }
 }
@@ -1564,9 +1663,10 @@ function bindTab(tab){
   if(tab==='links')bindLinks();
   if(tab==='video-library')bindVideoLibrary();
   if(tab==='music-library')bindMusicLibrary();
-  if(tab!=='analytics'&&App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
+  if(tab!=='analytics'&&tab!=='overview'&&App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
   if(tab==='overview'||tab==='analytics')loadAnalytics();
-  if(tab==='analytics')startDashboardPresence();
+  if(tab==='overview'||tab==='analytics')startDashboardPresence();
+  if(tab==='leaderboard')loadLeaderboard();
 }
 function statCard(label,value,icon,color){
   return '<div class="glass" style="border-radius:14px;padding:1.1rem"><div class="flex items-center justify-between"><span class="text-xs muted">'+esc(label)+'</span><i class="fa-solid '+icon+'" style="color:'+color+';font-size:.85rem"></i></div><div class="mt-2 font-display" style="font-size:1.75rem;font-weight:800">'+value+'</div></div>';
@@ -1575,9 +1675,9 @@ function statCard(label,value,icon,color){
 function tabOverview(){
   const p=App.profile;
   const url='https://'+p.username+'.'+ROOT_DOMAIN;
-  return '<div class="flex items-center justify-between gap-3 mb-6 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">Overview</h1><p class="muted mt-1">Welcome back, <b style="color:#fff">@'+esc(p.username)+'</b></p></div><span class="member-badge"><i class="fa-solid fa-user"></i> '+(p.member_role||'user')+'</span></div>'+
+  return '<div class="flex items-center justify-between gap-3 mb-6 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">'+esc(p.display_name||p.username)+'</h1><p class="muted mt-1">Overview · <b style="color:#fff">@'+esc(p.username)+'</b></p></div><span class="member-badge"><i class="fa-solid fa-user"></i> '+(p.member_role||'user')+'</span></div>'+
   '<div class="glass" style="border-radius:16px;padding:1.35rem"><div class="flex items-center justify-between flex-wrap gap-2"><div class="text-xs muted-2 uppercase tracking-widest">Your public URL</div><button class="btn btn-ghost btn-sm" onclick="copyUrl(\''+esc(url)+'\')"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="mt-2"><code style="font-size:.9rem;padding:.35rem .6rem;background:rgba(59,130,246,.15);color:#93c5fd">'+esc(url)+'</code></div></div>'+
-   '<div class="grid grid-2 md-4 g-4 mt-6">'+statCard('Profile Views',fmtUID(p.view_count||0),'fa-eye','#60a5fa')+statCard('Unique Visitors (30d)','<span id="ov-unique">—</span>','fa-users','#4ade80')+statCard('Link Clicks (30d)','<span id="ov-clicks">—</span>','fa-arrow-pointer','#fbbf24')+statCard('Active Links',fmtUID(App.links.length+App.socials.length),'fa-link','#60a5fa')+'</div>'+
+    '<div class="grid grid-2 md-4 g-4 mt-6">'+statCard('Profile Views',fmtUID(p.view_count||0),'fa-eye','#60a5fa')+statCard('Live Visitors','<span id="ov-live-value">—</span>','fa-user-check','#4ade80')+statCard('Unique Visitors (30d)','<span id="ov-unique">—</span>','fa-users','#4ade80')+statCard('Link Clicks (30d)','<span id="ov-clicks">—</span>','fa-arrow-pointer','#fbbf24')+statCard('Active Links',fmtUID(App.links.length+App.socials.length),'fa-link','#60a5fa')+'</div>'+
    '<p class="text-xs muted mt-3">Member since '+esc(new Date(p.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'}))+' · Detailed visitor and click data is privacy-friendly and anonymous.</p><div id="ov-analytics-note" class="info warn mt-4 hidden"></div>';
 }
 function copyUrl(url){navigator.clipboard.writeText(url).then(()=>toast('URL copied!','success')).catch(()=>toast('Copy failed','error'))}
@@ -1660,11 +1760,34 @@ async function trackAnalyticsEvent(profile,eventType,targetId){
   }catch(err){App.analyticsError=err;return false}
 }
 function trackProfileView(profile){
-  if(!analyticsAllowed()||!profile||!profile.id)return;
-  const key='bioflex.viewed.'+profile.id;
-  try{if(sessionStorage.getItem(key))return;sessionStorage.setItem(key,'1')}catch(_){}
-  try{Promise.resolve(db.rpc('increment_view_count',{pid:profile.id})).catch(()=>{})}catch(_){}
-  trackAnalyticsEvent(profile,'page_view',null);
+  if(!analyticsAllowed()||!profile||!profile.id||(App.user&&App.user.id===profile.user_id))return;
+  const viewKey='bioflex.viewed.once.'+profile.id;
+  const eventKey='bioflex.analytics.viewed.'+profile.id;
+  let firstView=false,recordAnalytics=false;
+  try{
+    if(!localStorage.getItem(viewKey)){localStorage.setItem(viewKey,'1');firstView=true}
+    const last=Number(localStorage.getItem(eventKey)||0);
+    if(Date.now()-last>30*24*60*60*1000){localStorage.setItem(eventKey,String(Date.now()));recordAnalytics=true}
+  }catch(_){
+    try{if(!sessionStorage.getItem(viewKey)){sessionStorage.setItem(viewKey,'1');firstView=true}
+      const last=Number(sessionStorage.getItem(eventKey)||0);
+      if(Date.now()-last>30*24*60*60*1000){sessionStorage.setItem(eventKey,String(Date.now()));recordAnalytics=true}
+    }catch(__){firstView=true;recordAnalytics=true}
+  }
+  if(firstView){
+    profile.view_count=(Number(profile.view_count)||0)+1;
+    const counter=document.querySelector('[data-profile-view-count]');
+    if(counter)counter.textContent=fmtUID(profile.view_count);
+    try{Promise.resolve(db.rpc('increment_view_count',{pid:profile.id})).then(async result=>{
+      if(result&&result.error)return;
+      const refreshed=await db.from('profiles').select('view_count').eq('id',profile.id).maybeSingle();
+      if(refreshed.data&&typeof refreshed.data.view_count==='number'){
+        profile.view_count=refreshed.data.view_count;
+        const el=document.querySelector('[data-profile-view-count]');if(el)el.textContent=fmtUID(profile.view_count);
+      }
+    }).catch(()=>{})}catch(_){}
+  }
+  if(recordAnalytics)trackAnalyticsEvent(profile,'page_view',null);
 }
 function countBy(events,field,filterType){
   const counts={};
@@ -1710,7 +1833,7 @@ function startDashboardPresence(){
   if(App.dashboardPresence)db.removeChannel(App.dashboardPresence);
   const channel=db.channel('bioflex-presence-'+id,{config:{presence:{key:'dashboard-'+visitorIdentity()}}});
   channel.__profileId=id;
-  channel.on('presence',{event:'sync'},()=>setLiveVisitorCount(Object.values(channel.presenceState()).reduce((n,items)=>n+items.length,0)))
+  channel.on('presence',{event:'sync'},()=>setLiveVisitorCount(Object.keys(channel.presenceState()).length))
     .subscribe(status=>{if(status==='SUBSCRIBED')setLiveVisitorCount(0);else if(status==='CHANNEL_ERROR'||status==='TIMED_OUT')setLiveVisitorCount('unavailable')});
   App.dashboardPresence=channel;
 }
@@ -1786,6 +1909,34 @@ function tabBadges(){
   return '<h1 class="font-display text-3xl font-extrabold">Badges</h1><p class="muted mt-1">Badges shown next to your name.</p><div class="info warn mt-4"><i class="fa-solid fa-triangle-exclamation"></i><div>Privileged badges are assigned by BioFlex staff only.</div></div><div class="glass badges-shell mt-6" style="border-radius:16px"><div class="badges-grid">'+badges.map(b=>'<article class="glass-soft badge-card"><div class="badge-card-icon" style="background:rgba(96,165,250,.12);color:'+b.color+'"><i class="fa-solid '+b.icon+'"></i></div><div class="badge-card-copy"><strong class="font-semibold" style="font-size:.85rem">'+esc(b.name)+'</strong><span class="text-xs muted-2" title="'+esc(b.desc)+'">'+esc(b.desc)+'</span></div><i class="badge-card-status '+(b.owned?'fa-solid fa-circle-check':'fa-solid fa-lock')+'" style="color:'+(b.owned?'#4ade80':'rgba(219,234,254,.3)')+'" aria-label="'+(b.owned?'Earned':'Locked')+'"></i></article>').join('')+'</div></div>';
 }
 
+function tabLeaderboard(){
+  return '<div class="flex items-center justify-between gap-3 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">Leaderboard</h1><p class="muted mt-1">Top public profiles ranked by recorded profile views.</p></div><button type="button" class="btn btn-ghost btn-sm" onclick="loadLeaderboard()"><i class="fa-solid fa-rotate"></i> Refresh</button></div><section class="glass mt-6" style="border-radius:16px;overflow:hidden"><div id="leaderboard-list" role="list" aria-live="polite"><div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div class="mt-2">Loading leaderboard…</div></div></div></section><p class="text-xs muted mt-3">Rankings use each profile’s saved view_count. Repeated visits from the same browser/device are deduplicated locally; this cannot identify one person across different devices or cleared browser storage.</p>';
+}
+async function loadLeaderboard(){
+  const root=document.getElementById('leaderboard-list');
+  if(!root)return;
+  root.innerHTML='<div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div class="mt-2">Loading leaderboard…</div></div>';
+  try{
+    const {data,error}=await db.from('profiles').select('username,display_name,view_count,avatar_url').not('username','is',null).order('view_count',{ascending:false,nullsFirst:false}).limit(100);
+    if(error)throw error;
+    const rows=(data||[]).filter(row=>row.username).slice(0,100);
+    if(!rows.length){root.innerHTML='<div class="empty"><i class="fa-solid fa-ranking-star"></i><div class="mt-2">No public profiles to rank yet.</div></div>';return}
+    const podium=rows.slice(0,3).map((row,index)=>{
+      const name=row.display_name||row.username,avatar=safeWebUrl(row.avatar_url||'');
+      return '<button class="leaderboard-podium-card" type="button" data-profile-username="'+esc(row.username)+'"><span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><strong class="leaderboard-podium-name">'+esc(name)+'</strong><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+fmtUID(row.view_count||0)+'</span></button>';
+    }).join('');
+    const remaining=rows.slice(3).map((row,index)=>{
+      const rank=index+4;
+      const name=row.display_name||row.username,avatar=safeWebUrl(row.avatar_url||'');
+      return '<button class="leaderboard-row" type="button" role="listitem" data-profile-username="'+esc(row.username)+'"><span class="leaderboard-rank">#'+rank+'</span><span class="leaderboard-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><span class="min-w-0"><strong class="truncate" style="display:block">'+esc(name)+'</strong><span class="text-xs muted">@'+esc(row.username)+'</span></span><span class="text-sm tabular-nums"><i class="fa-solid fa-eye muted"></i> '+fmtUID(row.view_count||0)+'</span></button>';
+    }).join('');
+    root.innerHTML='<div class="leaderboard-podium" aria-label="Top three profiles">'+podium+'</div>'+(remaining?'<div class="sidebar-section-label" style="padding:.75rem 1rem .35rem">All Rankings</div>'+remaining:'');
+    root.querySelectorAll('[data-profile-username]').forEach(button=>button.addEventListener('click',()=>navigate('#/profile/'+encodeURIComponent(button.dataset.profileUsername))));
+  }catch(error){
+    root.innerHTML='<div class="empty"><i class="fa-solid fa-database"></i><div class="font-semibold mt-2">Leaderboard unavailable</div><p class="text-sm muted mt-1">'+esc(error.message||'Check public profile read permissions and try again.')+'</p></div>';
+  }
+}
+
 function tabVideoLibrary(){
   const categories=[
     ['','All portrait videos'],['animation','Animation'],['action','Action'],['nature','Nature'],
@@ -1812,10 +1963,12 @@ function bindVideoLibrary(){
     if(!video)return;
     const url=getPixabayVideoUrl(video,'medium');
     if(button.dataset.videoAction==='preview'){previewLibraryVideo(video);return}
+    if(button.dataset.videoAction==='copy'){copyText(getPixabayVideoUrl(video,'large')||getPixabayVideoUrl(video,'medium'),'Direct video link copied.');return}
     if(button.dataset.videoAction==='add'){
     if(!url){toast('This video has no playable URL.','error');return}
       button.disabled=true;
-      await saveAssetUrl('background_url',url,'');
+      const saved=await saveAssetUrl('background_url',url,'');
+      if(saved){App.currentTab='customize';navigate('#/dashboard/customize');toast('Video saved as your profile background.','success')}
       return;
     }
   });
@@ -1847,7 +2000,7 @@ function renderVideoLibraryResults(){
     const thumb=pixabayThumbnail(video);
     const duration=Number(video.duration)||0;
     const durationText=duration?Math.floor(duration/60)+':'+String(duration%60).padStart(2,'0'):'HD';
-    return '<article class="video-card"><div class="video-card-media" aria-hidden="true">'+(thumb?'<img src="'+esc(thumb)+'" alt="" loading="lazy">':'<span class="muted">Preview unavailable</span>')+'<span class="video-card-play"><i class="fa-solid fa-play"></i></span><span class="video-card-duration">'+durationText+'</span></div><div class="video-card-body"><div class="video-card-title" title="'+esc(video.tags||'Pixabay video')+'">'+esc(tags||'Vertical video')+'</div><div class="video-card-meta">By '+esc(video.user||'Pixabay contributor')+' · '+Number(video.views||0).toLocaleString()+' views</div><div class="video-card-actions"><button class="btn btn-primary" type="button" data-video-action="add" data-video-index="'+index+'"><i class="fa-solid fa-image"></i><span>Add as Background</span></button><button class="btn btn-ghost" type="button" data-video-action="preview" data-video-index="'+index+'" title="Preview" aria-label="Preview video"><i class="fa-solid fa-play"></i><span>Preview</span></button></div></div></article>';
+    return '<article class="video-card"><div class="video-card-media" aria-hidden="true">'+(thumb?'<img src="'+esc(thumb)+'" alt="" loading="lazy">':'<span class="muted">Preview unavailable</span>')+'<span class="video-card-play"><i class="fa-solid fa-play"></i></span><span class="video-card-duration">'+durationText+'</span></div><div class="video-card-body"><div class="video-card-title" title="'+esc(video.tags||'Pixabay video')+'">'+esc(tags||'Vertical video')+'</div><div class="video-card-meta">By '+esc(video.user||'Pixabay contributor')+' · '+Number(video.views||0).toLocaleString()+' views</div><div class="video-card-actions"><button class="btn btn-primary" type="button" data-video-action="add" data-video-index="'+index+'"><i class="fa-solid fa-image"></i><span>Add as Background</span></button><button class="btn btn-ghost" type="button" data-video-action="preview" data-video-index="'+index+'" title="Preview" aria-label="Preview video"><i class="fa-solid fa-play"></i><span>Preview</span></button><button class="btn btn-ghost btn-sm" type="button" data-video-action="copy" data-video-index="'+index+'"><i class="fa-solid fa-link"></i><span>Copy direct link</span></button></div></div></article>';
   }).join('');
   const count=VideoLibrary.hits.length;
   status.innerHTML=VideoLibrary.loading?'<div class="info"><i class="fa-solid fa-spinner fa-spin"></i><div>Loading portrait videos…</div></div>':count?'<div class="text-xs muted">'+count+' portrait video'+(count===1?'':'s')+' shown'+(VideoLibrary.total? ' · '+Number(VideoLibrary.total).toLocaleString()+' results available':'')+'</div>':(status.dataset.error?'<div class="empty"><i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24;font-size:1.3rem"></i><div class="font-semibold mt-2">Video search is unavailable</div><p class="text-sm muted mt-1">'+esc(status.dataset.error)+'</p><button class="btn btn-ghost btn-sm mt-3" onclick="loadVideoLibrary(true)"><i class="fa-solid fa-rotate"></i> Try again</button></div>':'<div class="empty"><i class="fa-solid fa-film" style="font-size:1.3rem;color:var(--accent-2)"></i><div class="font-semibold mt-2">No portrait videos found</div><p class="text-sm muted mt-1">Try another search or category.</p></div>');
@@ -2179,7 +2332,7 @@ function tabCustomize(){
   return (
     '<h1 class="font-display text-3xl font-extrabold">Customize</h1><p class="muted mt-1">Make your BioFlex profile truly yours.</p>'+
     '<div class="card glass mt-6">'+
-      '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Assets Uploader</h3><p>Upload files to BioFlex storage</p></div></div>'+
+      '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Assets Uploader</h3><p>Files upload and attach automatically; no manual direct-link step.</p></div></div>'+
       '<div class="asset-upload-grid">'+
         buildUploadBox('bg','Background','Upload JPG, PNG, GIF, MP4 or WebM (max 50MB) — video plays muted','fa-image','JPG, PNG, GIF, MP4, WebM · Max 50MB','backgrounds','background_url',p.background_url)+
         buildAudioBox(p.music_url,p.music_title)+
@@ -2251,11 +2404,7 @@ function buildUploadBox(id,label,tip,icon,sub,bucket,field,currentUrl){
         : '<div class="upload-icon"><i class="fa-solid '+icon+'"></i></div><div class="upload-title">Click to upload</div><div class="upload-sub">'+sub+'</div>')+
     '</div>'+
     (field==='background_url' ? '<div class="file-info"><i class="fa-solid fa-circle-info"></i><span>Image, GIF, MP4, WebM · <b>Max 50MB</b> · Video is auto-muted</span></div>' : '')+
-     buildAssetLinkControl(id,field,field==='background_url'?'Paste an image or video URL':'Paste an image URL')+
   '</div>';
-}
-function buildAssetLinkControl(id,field,placeholder){
-  return '<div class="asset-link-control"><input class="input" id="asset-url-'+id+'" type="url" inputmode="url" placeholder="'+esc(placeholder)+'" aria-label="'+esc(placeholder)+'"><button class="btn btn-ghost" type="button" onclick="applyAssetUrl(\''+field+'\',\'asset-url-'+id+'\')"><i class="fa-solid fa-link"></i> Apply Link</button></div><div class="asset-link-note">Applies and saves this direct URL to your profile.</div>';
 }
 function buildAudioBox(musicUrl,musicTitle){
   const fileName=musicUrl?musicUrl.split('/').pop():'';
@@ -2274,17 +2423,10 @@ function buildAudioBox(musicUrl,musicTitle){
           '</div>'
         : '<div class="upload-icon"><i class="fa-solid fa-file-audio"></i></div><div class="upload-title">Click to upload audio</div><div class="upload-sub">MP3, OGG, WAV</div>')+
      '</div>'+
-     buildAssetLinkControl('music','music_url','Paste a direct MP3, OGG, or WAV URL')+
    '</div>';
 }
 function isVideoAssetUrl(value){
   try{return /\.(mp4|webm|mov|m4v)$/i.test(new URL(value,window.location.href).pathname)}catch(_){return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(String(value||''))}
-}
-async function applyAssetUrl(field,inputId){
-  const input=document.getElementById(inputId);
-  const url=input&&safeWebUrl(input.value.trim());
-  if(!url){toast('Paste a valid direct URL beginning with http:// or https://.','error');return}
-  await saveAssetUrl(field,url,'');
 }
 async function saveAssetUrl(field,url,title){
   const safe=safeWebUrl(url);
@@ -2717,7 +2859,8 @@ function tabSettings(){
   '</div>'+
   '<div class="glass mt-4" style="border-radius:16px;padding:1.5rem">'+
     '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-user"></i></div><div><h3>Account</h3><p>Your details</p></div></div>'+
-    '<div class="grid grid-2 g-4"><div><label class="field-label">Email</label><input class="input" value="'+esc(App.user.email||'')+'" disabled></div><div><label class="field-label">Username</label><input class="input" value="'+esc(p.username)+'" disabled></div></div>'+
+    '<div class="mb-4"><label class="field-label" for="settings-display-name">Display Name</label><div class="flex items-center gap-2 flex-wrap"><input id="settings-display-name" class="input" maxlength="60" placeholder="Your display name" value="'+esc(p.display_name||'')+'" style="flex:1;min-width:180px"><button class="btn btn-primary" id="save-display-name" type="button"><i class="fa-solid fa-check"></i> Save</button></div><p class="settings-row-desc">Shown as the main name on your profile and dashboard.</p></div>'+
+    '<div class="grid grid-2 g-4"><div><label class="field-label">Username</label><input class="input" value="'+esc(p.username)+'" disabled></div><div><label class="field-label">Email</label><input class="input" value="'+esc(App.user.email||'')+'" disabled></div></div>'+
     '<div class="flex items-center gap-3 mt-4"><span class="member-badge"><i class="fa-solid fa-user"></i> '+(p.member_role||'user')+'</span></div>'+
   '</div>'+
   '<div class="glass mt-4" style="border-radius:16px;padding:1.5rem;border:1px solid rgba(248,113,113,.3)">'+
@@ -2727,6 +2870,22 @@ function tabSettings(){
   '</div>';
 }
 function bindSettings(){
+  const displayInput=document.getElementById('settings-display-name');
+  const displaySave=document.getElementById('save-display-name');
+  if(displayInput&&displaySave){
+    displaySave.onclick=async function(){
+      const value=displayInput.value.trim().slice(0,60)||App.profile.username;
+      displaySave.disabled=true;
+      try{
+        const {error}=await db.from('profiles').update({display_name:value}).eq('user_id',App.user.id);
+        if(error)throw error;
+        App.profile.display_name=value;
+        toast('Display name saved.','success');
+        renderDashboard();
+      }catch(error){toast('Could not save display name: '+(error.message||'Please try again.'),'error')}
+      finally{displaySave.disabled=false}
+    };
+  }
   const inp=document.getElementById('un-new');
   const btn=document.getElementById('un-change');
   const res=document.getElementById('un-result');
@@ -2777,18 +2936,22 @@ function deleteAccount(){
 
 function toggleQuickMenu(){
   const existing=document.querySelector('.quick-menu');
-  if(existing){existing.remove();return}
+  if(existing){closeQuickMenu();return}
   const menu=document.createElement('div');
   menu.className='quick-menu';
-  menu.innerHTML='<div style="padding:.5rem .85rem .65rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(219,234,254,.4);font-weight:700">Quick Menu</div><button class="quick-menu-item" onclick="closeQuickMenu();navigate(\'#/landing\')"><i class="fa-solid fa-house"></i> Home</button><button class="quick-menu-item" onclick="closeQuickMenu();navigate(\'#/preview\')"><i class="fa-solid fa-eye"></i> Preview</button><div style="height:1px;background:rgba(96,165,250,.15);margin:.4rem .35rem"></div><button class="quick-menu-item danger" onclick="closeQuickMenu();handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>';
-  const sidebar=document.querySelector('.dash-sidebar');
-  if(sidebar){sidebar.style.position='relative';sidebar.appendChild(menu)}
-  setTimeout(()=>{
-    const h=e=>{if(!menu.contains(e.target)&&!e.target.closest('.sidebar-footer-btn')){menu.remove();document.removeEventListener('click',h)}};
-    document.addEventListener('click',h);
-  },0);
+  menu.setAttribute('role','menu');
+  menu.innerHTML='<div class="quick-menu-heading"><div class="quick-menu-title">Quick Menu</div><div class="quick-menu-subtitle">Navigate quickly through BioFlex</div></div><button class="quick-menu-item" type="button" role="menuitem" onclick="closeQuickMenu();toast(\'Switching accounts is not available yet.\',\'info\')"><i class="fa-solid fa-users-gear"></i> Switch Accounts <i class="fa-solid fa-arrow-right" style="margin-left:auto"></i></button><button class="quick-menu-item quick-home" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/landing\')"><i class="fa-solid fa-house"></i> Home</button><button class="quick-menu-item quick-leaderboard" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/dashboard/leaderboard\')"><i class="fa-solid fa-chart-column"></i> Leaderboard</button><button class="quick-menu-item quick-discord" type="button" role="menuitem" onclick="closeQuickMenu();toast(\'Discord Server — Coming Soon\',\'info\')"><i class="fa-brands fa-discord"></i> Discord Server</button><button class="quick-menu-item danger" type="button" role="menuitem" onclick="closeQuickMenu();handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>';
+  const anchor=document.querySelector('#drawer.open .drawer-user-area')||document.querySelector('.sidebar-footer');
+  if(anchor)anchor.appendChild(menu);
+  App.quickMenuOutsideHandler=function(e){
+    if(!menu.contains(e.target)&&!e.target.closest('.sidebar-footer-btn')&&!e.target.closest('.drawer-quick-trigger'))closeQuickMenu();
+  };
+  setTimeout(()=>document.addEventListener('click',App.quickMenuOutsideHandler),0);
 }
-function closeQuickMenu(){const m=document.querySelector('.quick-menu');if(m)m.remove()}
+function closeQuickMenu(){
+  const m=document.querySelector('.quick-menu');if(m)m.remove();
+  if(App.quickMenuOutsideHandler){document.removeEventListener('click',App.quickMenuOutsideHandler);App.quickMenuOutsideHandler=null}
+}
 function openShareModal(){
   const url='https://'+App.profile.username+'.'+ROOT_DOMAIN;
   openModal('<div class="modal-head"><div><h3>Share Your Profile</h3><p>Get more views by sharing your link.</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="display:flex;flex-direction:column;gap:.6rem"><button class="quick-menu-item" style="background:rgba(96,165,250,.08);border-radius:12px;padding:.9rem 1rem;border:1px solid rgba(96,165,250,.15)" onclick="window.open(\''+esc(url)+'\',\'_blank\')"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open my Page</button><button class="quick-menu-item" style="background:rgba(96,165,250,.08);border-radius:12px;padding:.9rem 1rem;border:1px solid rgba(96,165,250,.15)" onclick="window.open(\'https://twitter.com/intent/tweet?text=\'+encodeURIComponent(\'Check out my BioFlex: \'+ \''+esc(url)+'\'),\'_blank\')"><i class="fa-brands fa-x-twitter"></i> Share on X</button></div><div style="margin-top:1rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.15);display:flex;align-items:center;gap:.75rem"><i class="fa-solid fa-bolt" style="color:var(--accent-2)"></i><span style="flex:1;font-family:\'JetBrains Mono\',monospace;font-size:.8rem;color:#93c5fd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(url)+'</span><button class="btn btn-ghost btn-sm" onclick="copyUrl(\''+esc(url)+'\')">Copy URL</button></div>');
@@ -2799,14 +2962,15 @@ async function renderPreview(){
   clearWidgetTimers();
   let profile=App.profile, links=App.links, socials=App.socials;
   const sub=getSubdomain();
+  const requestedProfile=sub||App.publicProfileUsername;
 
-  if(sub){
-    const {data, error} = await db.from('profiles').select('*').eq('username',sub).maybeSingle();
+  if(requestedProfile){
+    const {data, error} = await db.from('profiles').select('*').eq('username',requestedProfile).maybeSingle();
     if(error || !data){
       document.getElementById('preview-body').innerHTML=
         '<div class="empty" style="margin-top:4rem;text-align:center">'+
           '<div style="font-size:3rem;margin-bottom:1rem;color:var(--accent-2)"><i class="fa-solid fa-user-slash"></i></div>'+
-          '<div style="font-weight:700;font-size:1.2rem;margin-bottom:.5rem">@'+esc(sub)+' not found</div>'+
+          '<div style="font-weight:700;font-size:1.2rem;margin-bottom:.5rem">@'+esc(requestedProfile)+' not found</div>'+
           '<div class="muted text-sm">This BioFlex profile doesn\'t exist or has been removed.</div>'+
         '</div>';
       return;
@@ -3120,17 +3284,6 @@ function openPlanModal(kind){
   const modal=openModal('<div class="plan-modal"><div class="modal-head"><span></span><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="plan-mark"><i class="fa-solid '+icon+'"></i></div><div class="plan-kicker">BioFlex creator plans</div><h2 class="plan-coming">COMING SOON</h2><p class="plan-copy">'+esc(message)+'</p>'+(price?'<div class="plan-price">'+price+' <small>/ month</small></div>':'<div class="plan-price">Creator media <small>plan</small></div>')+'<div class="plan-payment">Payment coming soon</div><button class="btn btn-primary btn-block" type="button" disabled><i class="fa-solid fa-lock"></i> Purchase plan</button><button class="btn btn-ghost btn-block mt-3" type="button" data-act="close">Close</button></div>');
   modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
 }
-function buildVideoHostingBox(){
-  return '<div class="video-hosting-card"><div class="video-hosting-copy"><div class="upload-icon"><i class="fa-solid fa-film"></i></div><div><strong>Video Hosting</strong><p>MP4 / WebM · Up to 50 MB per video. Hosted uploads are not enabled yet.</p></div></div><button type="button" class="coming-soon-btn" onclick="openPlanModal(\'video\')"><i class="fa-solid fa-clock"></i> Coming Soon</button></div>';
-}
-const bioflexOriginalBuildUploadBox=buildUploadBox;
-buildUploadBox=function(id,label,tip,icon,sub,bucket,field,currentUrl){
-  const safe=safeWebUrl(currentUrl||'');
-  const video=safe&&isVideoAssetUrl(safe);
-  const file=safe?'<div class="asset-current-preview">'+(video?'<video src="'+esc(safe)+'" muted autoplay loop playsinline preload="metadata"></video>':'<img src="'+esc(safe)+'" alt="Current '+esc(label)+'" loading="lazy">')+'<button class="upload-remove-btn" type="button" onclick="event.stopPropagation();removeUpload(\''+field+'\')" aria-label="Remove '+esc(label)+'"><i class="fa-solid fa-xmark"></i></button></div>':'';
-  const placeholder=field==='background_url'?'Paste an image or video URL':'Paste an image URL';
-  return '<div class="asset-coming-box"><label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">'+esc(label)+' <span class="help" data-tip="'+esc(tip)+'">?</span></label>'+file+'<button class="coming-soon-btn" type="button" onclick="openPlanModal(\'image\')"><i class="fa-solid fa-clock"></i> Coming Soon</button><div class="coming-soon-note">Image hosting is not available yet. Your already-saved asset stays on your profile.</div>'+buildAssetLinkControl(id,field,placeholder)+'</div>';
-};
 function bioflexThemeCard(){
   const saved=profileExtras(App.profile).theme||{};
   const from=safeColor(saved.from,'#07111f'),to=safeColor(saved.to,'#1d4ed8');
@@ -3165,8 +3318,6 @@ tabCustomize=function(){
   const layout=profileExtras(App.profile).layout||'classic';
   const modernOptions='<option value="modern-2"'+(layout==='modern-2'?' selected':'')+'>Modern 2</option><option value="modern-3"'+(layout==='modern-3'?' selected':'')+'>Modern 3</option>';
   out=out.replace('<option value="portfolio"',modernOptions+'<option value="portfolio"');
-  const assetsEnd='</div></div><div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-sliders"></i>';
-  out=out.replace(assetsEnd,'</div>'+buildVideoHostingBox()+'</div><div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-sliders"></i>');
   setTimeout(updateThemePreview,0);
   return out;
 };
@@ -3180,48 +3331,6 @@ saveCustomize=async function(){
   App.profile={...App.profile,bioflex_extras:extras};
   return bioflexBaseSaveCustomize();
 };
-function tabAIProfile(){
-  const saved=profileExtras(App.profile).ai_profile||null;
-  const savedHtml=saved?'<div class="ai-profile-summary"><div class="ai-profile-result"><small>Suggested name</small><div>'+esc(saved.display_name||'—')+'</div></div><div class="ai-profile-result"><small>Bio draft</small><div>'+esc(saved.bio||'—')+'</div></div><div class="ai-profile-result"><small>Avatar direction</small><div>'+esc(saved.avatar_suggestion||'—')+'</div></div><div class="ai-profile-result"><small>Link ideas · Username effect</small><div>'+esc((saved.link_ideas||[]).join(' · '))+' · '+esc(saved.username_effect||'none')+'</div></div></div>':'<div class="empty mt-4"><i class="fa-solid fa-wand-magic-sparkles" style="color:#93c5fd;font-size:1.4rem"></i><div class="font-semibold mt-2">Your profile draft will appear here</div><p class="muted text-sm mt-1">Describe your work, personality, or the audience you want to reach.</p></div>';
-  return '<div class="ai-profile-shell"><div class="flex items-center justify-between gap-3 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">AI Profile Generator</h1><p class="muted mt-1">Turn a few details about yourself into a profile draft.</p></div><span class="member-badge"><i class="fa-solid fa-sparkles"></i> BioFlex AI</span></div><section class="card glass mt-6"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><h3>BioFlex AI Profile Studio</h3><p>Drafts locally from your prompt; no external AI service or prompt data is sent.</p></div></div><p class="text-sm muted">The generator creates a display name, bio, avatar direction, link ideas, and a username-effect suggestion. It saves the draft under your existing <code>bioflex_extras</code> JSON field.</p><button class="btn btn-primary btn-lg mt-5" type="button" onclick="openAIGenerator()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI</button>'+savedHtml+'</section></div>';
-}
-function openAIGenerator(){
-  const modal=openModal('<div class="modal-head"><div><h3>BioFlex AI</h3><p>Describe the profile you want people to remember.</p></div><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><label class="field-label" for="ai-prompt">What do you create or care about?</label><textarea id="ai-prompt" class="input" maxlength="360" placeholder="Example: I am a travel photographer sharing quiet places, simple gear tips, and stories from Bangladesh."></textarea><div class="field-label mt-3">Pick a signature emoji</div><div class="ai-emoji-picker">'+['✨','🌙','🎨','📷','🎧','🚀','🌿','💻','🔥','💙','🌸','🧭'].map(function(emoji,index){return '<button type="button" class="'+(index===0?'selected':'')+'" data-ai-emoji="'+emoji+'" aria-label="Use '+emoji+'">'+emoji+'</button>'}).join('')+'</div><div id="ai-generator-status" class="text-xs muted" role="status">Drafts are saved only when generation succeeds.</div><div id="ai-generator-result"></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Close</button><button id="ai-generate" class="btn btn-primary" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI</button></div>');
-  modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
-  modal.querySelectorAll('[data-ai-emoji]').forEach(function(button){button.onclick=function(){modal.querySelectorAll('[data-ai-emoji]').forEach(function(x){x.classList.remove('selected')});button.classList.add('selected')}});
-  modal.querySelector('#ai-generate').onclick=function(){generateAIDraft(modal)};
-  return modal;
-}
-async function generateAIDraft(modal){
-  const prompt=modal.querySelector('#ai-prompt').value.trim();
-  const status=modal.querySelector('#ai-generator-status'),result=modal.querySelector('#ai-generator-result'),button=modal.querySelector('#ai-generate');
-  if(prompt.length<8){status.textContent='Add a little more detail (at least 8 characters) so the draft has a useful direction.';return}
-  const emojiButton=modal.querySelector('[data-ai-emoji].selected');
-  const emoji=emojiButton?emojiButton.dataset.aiEmoji:'✨';
-  const words=prompt.replace(/[.,!?;:]+/g,' ').trim().split(/\s+/).filter(Boolean);
-  const personaRules=[[/photo|camera|visual|film/i,'visual storyteller'],[/code|developer|software|tech/i,'builder and tech creator'],[/music|song|audio|dj/i,'music creator'],[/travel|journey|explor|place/i,'travel storyteller'],[/design|art|draw|creative/i,'creative maker'],[/food|cook|recipe/i,'food creator'],[/write|book|poem|story/i,'writer and storyteller']];
-  let persona='independent creator';for(const rule of personaRules){if(rule[0].test(prompt)){persona=rule[1];break}}
-  const current=(App.profile.display_name||App.profile.username||'').trim();
-  const inferred=words.slice(0,2).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()}).join(' ');
-  const displayName=current||inferred+' Creator';
-  const clean=prompt.replace(/[.!?]+$/,'');
-  const bio=(emoji+' '+clean+'. '+ 'A '+persona+' sharing useful ideas, new work, and the details behind it.').slice(0,260);
-  const avatarSuggestion='A clean, close-up portrait with cool electric-blue lighting and a background inspired by '+(words.slice(-3).join(' ')||'your creative work')+'.';
-  const links=/code|developer|software|tech/i.test(prompt)?['GitHub','Portfolio','LinkedIn']: /photo|camera|visual|film|art|design/i.test(prompt)?['Instagram','Portfolio','Behance']: /music|song|audio|dj/i.test(prompt)?['Spotify','YouTube','SoundCloud']:['Instagram','TikTok','Portfolio'];
-  const effect=/neon|cyber|bold|electric/i.test(prompt)?'neon':/calm|soft|gentle/i.test(prompt)?'lavender':/creative|visual|art|music/i.test(prompt)?'glow':'blue';
-  const draft={prompt:prompt,emoji:emoji,display_name:displayName,bio:bio,avatar_suggestion:avatarSuggestion,link_ideas:links,username_effect:effect,created_at:new Date().toISOString(),generator:'local-template-v1'};
-  const extras={...profileExtras(App.profile),ai_profile:draft};
-  button.disabled=true;button.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Generating…';status.textContent='Creating and saving your profile draft…';
-  try{
-    const {error}=await db.from('profiles').update({bioflex_extras:extras}).eq('user_id',App.user.id);
-    if(error)throw error;
-    App.profile={...App.profile,bioflex_extras:extras};
-    result.innerHTML='<div class="ai-profile-summary"><div class="ai-profile-result"><small>Display name</small><div>'+esc(draft.display_name)+'</div></div><div class="ai-profile-result"><small>Bio</small><div>'+esc(draft.bio)+'</div></div><div class="ai-profile-result"><small>Avatar suggestion</small><div>'+esc(draft.avatar_suggestion)+'</div></div><div class="ai-profile-result"><small>Link ideas · Username effect</small><div>'+esc(draft.link_ideas.join(' · '))+' · '+esc(draft.username_effect)+'</div></div></div>';
-    status.textContent='Saved to your BioFlex profile in bioflex_extras. These are suggestions; they do not replace your published profile fields.';
-    toast('Your BioFlex AI draft was saved.','success');
-  }catch(error){status.textContent='Could not save the draft: '+(error.message||'Check the bioflex_extras migration and try again.');toast('AI draft was not saved. '+(error.message||''),'error')}
-  finally{button.disabled=false;button.innerHTML='<i class="fa-solid fa-wand-magic-sparkles"></i> Generate with AI'}
-}
 const bioflexBaseTabAnalytics=tabAnalytics;
 tabAnalytics=function(){
   let out=bioflexBaseTabAnalytics();
@@ -3307,7 +3416,7 @@ startDashboardPresence=function(){
   if(!App.liveRefreshTimer)App.liveRefreshTimer=setInterval(function(){
     const channel=App.dashboardPresence;
     if(!channel||typeof channel.presenceState!=='function'){setLiveVisitorCount('unavailable');return}
-    try{setLiveVisitorCount(Object.values(channel.presenceState()).reduce(function(n,items){return n+items.length},0))}catch(_){setLiveVisitorCount('unavailable')}
+    try{setLiveVisitorCount(Object.keys(channel.presenceState()).length)}catch(_){setLiveVisitorCount('unavailable')}
   },10000);
 };
 const bioflexBaseBindTab=bindTab;
@@ -3379,11 +3488,6 @@ async function bioflexEnhancePreview(){
   const theme=extras.theme||{},bgUrl=profile.background_url||(profile.background_value&&profile.background_value.url)||'';
   if(!bgUrl&&theme.from&&theme.to){const media=document.querySelector('#preview-bg .bg-media');if(media)media.style.background='linear-gradient(135deg,'+safeColor(theme.from,'#07111f')+','+safeColor(theme.to,'#1d4ed8')+')'}
   await bioflexAddFeaturedCarousel(profile,layout);
-  if(!getSubdomain()){
-    const content=document.getElementById('preview-content');if(content){let counter=content.querySelector('.fake-preview-counter');if(!counter){counter=document.createElement('div');counter.className='fake-preview-counter';counter.innerHTML='<span class="live-dot"></span><span><span class="sample-label">Sample preview</span><br><span data-simulated-visitors>18</span> visitors exploring</span>';content.appendChild(counter)}
-      const value=counter.querySelector('[data-simulated-visitors]');App.widgetTimers.push(setInterval(function(){if(!document.body.contains(counter))return;const current=Number(value.textContent)||18;value.textContent=String(Math.max(7,Math.min(42,current+(Math.random()>.5?1:-1))))},10000));
-    }
-  }
 }
 renderPreview=async function(){
   const result=await bioflexBaseRenderPreview();
@@ -3408,6 +3512,146 @@ setupDragDrop=function(container){
       catch(error){before.forEach(function(old){const row=arr.find(function(x){return x.id===old.id});if(row)row.position=old.position});if(social)App.socials=arr;else App.links=arr;renderLinksList();const rollback=await Promise.all(before.map(function(old){return db.from(table).update({position:old.position}).eq('id',old.id)}));const rollbackFailed=rollback.some(function(r){return r.error});toast(rollbackFailed?'Reorder failed. Local order reverted; refresh to verify the saved order.':'Could not save the new order. Previous order restored.','error')}
     });
   });
+};
+
+const bioflexPreviewWithRealViews=renderPreview;
+renderPreview=async function(){
+  const result=await bioflexPreviewWithRealViews();
+  document.querySelectorAll('.profile-view-counter').forEach(function(node){node.remove()});
+  const profile=App.previewProfile||App.profile;
+  if(profile&&(getSubdomain()||App.publicProfileUsername)){
+    const content=document.getElementById('preview-content');
+    if(content){
+      const badge=document.createElement('div');
+      badge.className='profile-view-counter';
+      badge.setAttribute('aria-label',fmtUID(profile.view_count||0)+' profile visitors');
+      badge.innerHTML='<i class="fa-solid fa-eye" aria-hidden="true"></i><span data-profile-view-count>'+fmtUID(profile.view_count||0)+'</span><span>visitors</span>';
+      content.appendChild(badge);
+    }
+  }
+  return result;
+};
+
+/* Local preview-only example; real profiles still use Supabase. */
+function renderLocalSampleProfile(){
+  const key='bioflex.sample-profile.views.v1';
+  let views=128;
+  try{
+    views=Number(localStorage.getItem(key+'.count'))||128;
+    if(!localStorage.getItem(key+'.seen')){
+      views+=1;localStorage.setItem(key+'.count',String(views));localStorage.setItem(key+'.seen','1');
+    }
+  }catch(_){}
+  App.previewProfile={id:'sample-profile',username:'sample',display_name:'Rafi Hasan',bio:'Designer, music lover, and maker of things for the web.',location_text:'Dhaka, Bangladesh',view_count:views,accent_color:'#60a5fa'};
+  document.body.classList.remove('is-subdomain');document.body.classList.add('profile-entered');document.body.style.cursor='';
+  const back=document.querySelector('.preview-back');if(back)back.style.display='';
+  const enter=document.getElementById('enter-overlay');if(enter)enter.classList.add('hide');
+  document.documentElement.style.setProperty('--accent','#60a5fa');
+  document.getElementById('preview-bg').innerHTML='<div class="bg-media demo-bg-motion" style="background:radial-gradient(ellipse at 18% 12%,rgba(96,165,250,.6),transparent 34%),radial-gradient(ellipse at 82% 78%,rgba(37,99,235,.56),transparent 38%),linear-gradient(145deg,#050b18,#0d1d37 54%,#050a14)"></div><div class="overlay" style="background:linear-gradient(180deg,rgba(2,6,18,.12),rgba(2,6,18,.38))"></div>';
+  const body=document.getElementById('preview-body');body.className='preview-body layout-modern-3';
+  body.innerHTML='<div class="text-center"><div class="demo-profile-note"><i class="fa-solid fa-wand-magic-sparkles"></i> Sample profile preview</div></div>'+
+    '<section class="text-center profile-hero"><div class="avatar-ring"><div class="av-inner">R</div></div><h1 class="preview-name ue-glow" style="text-shadow:0 0 12px #60a5fa,0 0 24px #3b82f6">Rafi Hasan</h1><div class="preview-location">✦ Dhaka, Bangladesh ✦</div><p class="preview-bio" style="color:#f8fbff">Designer, music lover, and maker of things for the web.</p></section>'+
+    '<div class="profile-stack"><nav class="social-row" aria-label="Social links"><a class="social-btn" href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:#e1306c"></i></a><a class="social-btn" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a><a class="social-btn" href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color:#ef4444"></i></a></nav>'+
+    '<section class="profile-links mt-6"><a class="link-card" href="https://github.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-github"></i></span><span class="tt"><span class="t truncate">My latest work</span><span class="d truncate">Projects and experiments</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>'+
+    '<a class="link-card" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-spotify" style="color:#1db954"></i></span><span class="tt"><span class="t truncate">What I’m listening to</span><span class="d truncate">A little soundtrack for the day</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>'+
+    '<a class="link-card" href="https://instagram.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-instagram" style="color:#e1306c"></i></span><span class="tt"><span class="t truncate">Follow on Instagram</span><span class="d truncate">Photos, sketches, and updates</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a></section>'+
+    '<div class="live-counter" style="justify-content:center;margin:1rem auto 0;width:max-content;max-width:100%"><i class="fa-solid fa-eye" style="color:#93c5fd"></i><span><span class="live-counter-label">Total profile views · demo</span><br><span class="live-counter-value">'+fmtUID(views)+'</span></span></div></div>'+
+    '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
+  return Promise.resolve();
+}
+const bioflexPreviewBeforeDemo=renderPreview;
+renderPreview=async function(){if(App.demoMode)return renderLocalSampleProfile();return bioflexPreviewBeforeDemo()};
+
+/* BDT price-preview pages. Checkout deliberately stops at Coming Soon. */
+function planPageMarkup(kind){
+  const premium=kind==='premium',name=premium?'Premium':'Image Host',price=premium?'৳1,100':'৳150';
+  const icon=premium?'fa-gem':'fa-cloud-arrow-up';
+  const copy=premium?'A planned upgrade for creators who want more profile customization and premium styling.':'A planned image-hosting add-on for profile artwork and shareable image links.';
+  const benefit=premium?'Premium styling, expanded customization, and priority profile options are planned for this tier.':'Image uploads and hosted image links are planned as an add-on.';
+  return '<div class="plan-page"><button class="btn btn-ghost btn-sm" type="button" onclick="navigate(\'#/dashboard/overview\')"><i class="fa-solid fa-arrow-left"></i> Overview</button>'+
+    '<section class="plan-page-card mt-5"><div class="plan-page-mark"><i class="fa-solid '+icon+'"></i></div><div class="plan-page-kicker">BioFlex creator plans · Bangladesh</div><h1 class="plan-page-title">'+name+'</h1>'+
+    '<p class="plan-page-copy">'+copy+'</p><div class="plan-page-price">'+price+' <small>one time · BDT</small></div>'+
+    '<div class="plan-page-note"><i class="fa-solid '+icon+'"></i><span>'+benefit+'</span></div>'+
+    '<button class="btn btn-primary btn-block btn-lg btn-purchase" type="button" onclick="openBioFlexPurchase(\''+(premium?'premium':'image')+'\')"><i class="fa-solid fa-bag-shopping"></i> Purchase option <span aria-hidden="true">·</span> Coming Soon</button>'+
+    '<p class="text-xs muted mt-3">Draft preview price only. Checkout and payment are not connected; final price may change.</p></section></div>';
+}
+function tabPremiumPage(){return planPageMarkup('premium')}
+function tabImageHostPage(){return planPageMarkup('image')}
+function openBioFlexPurchase(kind){
+  const premium=kind==='premium',name=premium?'BioFlex Premium':'Image Host',price=premium?'৳1,100':'৳150';
+  const modal=openModal('<div class="plan-modal"><div class="modal-head"><div><h3>'+name+'</h3><p>'+price+' BDT · one-time preview price</p></div><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="plan-mark"><i class="fa-solid '+(premium?'fa-gem':'fa-cloud-arrow-up')+'"></i></div><h2 class="plan-coming">COMING SOON</h2><p class="plan-copy">Purchase and payment are not available yet. No payment will be taken.</p><button class="btn btn-primary btn-block" type="button" data-act="purchase"><i class="fa-solid fa-bag-shopping"></i> Purchase</button><button class="btn btn-ghost btn-block mt-3" type="button" data-act="close">Close</button></div>');
+  modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
+  modal.querySelector('[data-act="purchase"]').onclick=function(){closeModal(modal);toast('Coming Soon — payment is not enabled yet.','info')};
+}
+const bioflexLegacyPlanModal=openPlanModal;
+openPlanModal=function(kind){return kind==='image'||kind==='premium'?openBioFlexPurchase(kind):bioflexLegacyPlanModal(kind)};
+
+/* First-login setup wizard. Completion is remembered per account in this browser. */
+const BIOFLEX_GUIDED_STEPS=[
+  {icon:'fa-palette',title:'Make the page feel like yours',body:'Choose a template, set your colors, and add a short bio.',button:'Open Customize',target:'#/dashboard/customize'},
+  {icon:'fa-image',title:'Add an avatar',body:'A profile image helps people recognize your page.',button:'Go to avatar settings',target:'#/dashboard/customize'},
+  {icon:'fa-link',title:'Add your first link',body:'Add your portfolio, shop, channel, or another page people should visit.',button:'Add a link',target:'#/dashboard/links',action:'link'},
+  {icon:'fa-share-nodes',title:'Add your social profiles',body:'Choose the social accounts you want visitors to find.',button:'Open Links & Socials',target:'#/dashboard/links'},
+  {icon:'fa-arrow-up-right-from-square',title:'Your page is ready to share',body:'Your username is your permanent BioFlex profile address.',button:'Copy my profile link',action:'share'}
+];
+function onboardingStorageKey(){return 'bioflex.onboarding.v1.'+String(App.user&&App.user.id||'unknown')}
+function completeGuidedOnboarding(){
+  try{localStorage.setItem(onboardingStorageKey(),'done')}catch(_){}
+  if(App.profile&&App.user){
+    const extras=profileExtras(App.profile);extras.onboarding_complete=true;App.profile={...App.profile,bioflex_extras:extras};
+    try{Promise.resolve(db.from('profiles').update({bioflex_extras:extras}).eq('user_id',App.user.id)).catch(function(){})}catch(_){}
+  }
+  App.onboardingWizardOpen=false;toast('Setup guide complete. You can keep customizing any time.','success');
+}
+function showGuidedOnboarding(index){
+  if(!App.user||!App.profile)return;
+  const i=Math.max(0,Math.min(BIOFLEX_GUIDED_STEPS.length-1,index)),step=BIOFLEX_GUIDED_STEPS[i];
+  const modal=openModal('<div class="modal-head"><div><div class="text-xs muted uppercase tracking-widest">Getting started · '+(i+1)+' of '+BIOFLEX_GUIDED_STEPS.length+'</div><p>Set up your shareable BioFlex profile at your own pace.</p></div><button class="modal-close" type="button" data-act="finish" aria-label="Finish setup"><i class="fa-solid fa-xmark"></i></button></div>'+
+    '<div class="onboarding-progress">'+BIOFLEX_GUIDED_STEPS.map(function(_,n){return '<span class="'+(n<=i?'done':'')+'"></span>'}).join('')+'</div>'+
+    '<div class="onboarding-step-icon"><i class="fa-solid '+step.icon+'"></i></div><h2 class="font-display" style="font-size:1.35rem;font-weight:800">'+esc(step.title)+'</h2><p class="muted text-sm mt-2" style="line-height:1.65">'+esc(step.body)+'</p>'+
+    '<div class="flex flex-wrap justify-between gap-2 mt-6"><button class="btn btn-ghost btn-sm" type="button" data-act="skip">Skip this step</button><div class="flex gap-2"><button class="btn btn-primary" type="button" data-act="go">'+esc(step.button)+'</button><button class="btn btn-ghost btn-sm" type="button" data-act="next">'+(i===BIOFLEX_GUIDED_STEPS.length-1?'Finish':'Next')+'</button></div></div>');
+  modal.addEventListener('click',function(event){if(event.target===modal)event.stopImmediatePropagation()},true);
+  function advance(){closeModal(modal);if(i===BIOFLEX_GUIDED_STEPS.length-1){completeGuidedOnboarding();return}showGuidedOnboarding(i+1)}
+  modal.querySelector('[data-act="skip"]').onclick=advance;
+  modal.querySelector('[data-act="next"]').onclick=advance;
+  modal.querySelector('[data-act="finish"]').onclick=function(){closeModal(modal);completeGuidedOnboarding()};
+  modal.querySelector('[data-act="go"]').onclick=function(){
+    if(step.action==='share'){copyText('https://'+App.profile.username+'.'+ROOT_DOMAIN,'Profile link copied.');return}
+    navigate(step.target);
+    if(step.action==='link')setTimeout(function(){if(App.user&&App.currentTab==='links')openCustomLinkAdd()},350);
+    else if(i===3)toast('Use “Add Social” in Links to choose a platform.','info');
+  };
+}
+const bioflexCompleteAuthBeforeGuide=completeAuthFlow;
+completeAuthFlow=async function(){
+  const ready=await bioflexCompleteAuthBeforeGuide();
+  if(ready&&App.user&&App.profile&&!App.onboardingWizardOpen){
+    let done=!!profileExtras(App.profile).onboarding_complete;
+    try{done=done||localStorage.getItem(onboardingStorageKey())==='done'}catch(_){}
+    if(!done){App.onboardingWizardOpen=true;setTimeout(function(){if(App.user&&App.profile)showGuidedOnboarding(0);else App.onboardingWizardOpen=false},280)}
+  }
+  return ready;
+};
+
+const bioflexSetLiveCountBeforeOverview=setLiveVisitorCount;
+setLiveVisitorCount=function(count){
+  bioflexSetLiveCountBeforeOverview(count);
+  const overview=document.getElementById('ov-live-value');
+  if(overview)overview.textContent=typeof count==='number'?fmtUID(count):String(count);
+};
+const bioflexBindTabBeforeOverview=bindTab;
+bindTab=function(tab){
+  if(tab!=='analytics'&&tab!=='overview'&&App.liveRefreshTimer){clearInterval(App.liveRefreshTimer);App.liveRefreshTimer=null}
+  return bioflexBindTabBeforeOverview(tab);
+};
+const bioflexStartPresenceBeforeOverview=startDashboardPresence;
+startDashboardPresence=function(){
+  bioflexStartPresenceBeforeOverview();
+  if(!App.liveRefreshTimer)App.liveRefreshTimer=setInterval(function(){
+    const channel=App.dashboardPresence;
+    if(!channel||typeof channel.presenceState!=='function'){setLiveVisitorCount('unavailable');return}
+    try{setLiveVisitorCount(Object.keys(channel.presenceState()).length)}catch(_){setLiveVisitorCount('unavailable')}
+  },10000);
 };
 
 boot();
