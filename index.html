@@ -452,9 +452,9 @@ body.is-subdomain .preview-back{display:none!important}
 .link-card .ic img{width:24px;height:24px;object-fit:cover;border-radius:6px}
 .link-card .tt{flex:1;min-width:0}
 .link-card .tt .t{display:block;font-weight:600;font-size:.95rem}
-.link-card .tt .d{display:block;font-size:.75rem;color:rgba(219,234,254,.6);margin-top:.15rem}
+.link-card .tt .d{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;white-space:normal;overflow-wrap:anywhere;font-size:.75rem;color:rgba(219,234,254,.68);line-height:1.45;margin-top:.2rem}
 .link-card .ar{color:rgba(219,234,254,.4);font-size:.85rem}
-.player{margin-top:1.25rem;border-radius:16px;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.player{width:100%;max-width:460px;margin:1.1rem auto 0;border-radius:16px;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
 .player.glass{background:rgba(8,14,28,.24);border-color:rgba(147,197,253,.14);backdrop-filter:blur(10px);box-shadow:0 14px 36px rgba(0,0,0,.14)}
 .player-row{display:flex;align-items:center;gap:.85rem}
 .player-art{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3b82f6,#1d4ed8);flex-shrink:0;color:#fff;font-size:1.1rem}
@@ -518,7 +518,7 @@ body.is-subdomain .preview-back{display:none!important}
 .editor-handle{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;background:rgba(96,165,250,.08);color:rgba(219,234,254,.6);cursor:grab;flex-shrink:0}
 .field-label{display:block;font-size:.75rem;color:rgba(219,234,254,.6);margin-bottom:.25rem}
 .preview-name{font-family:'Space Grotesk',sans-serif;font-size:1.75rem;font-weight:800;letter-spacing:-.02em;margin-top:1.25rem}
-.preview-location{font-size:.8rem;color:rgba(219,234,254,.6);margin-top:.35rem;display:flex;align-items:center;justify-content:center;gap:.35rem}
+.preview-location{font-size:.8rem;color:rgba(219,234,254,.72);margin:.4rem auto 0;max-width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.35rem;text-align:center;overflow-wrap:anywhere}
 .preview-bio{margin-top:.85rem;font-size:.9rem;color:rgba(219,234,254,.8);line-height:1.55;max-width:32rem;margin-left:auto;margin-right:auto;word-break:break-word}
 .social-picker{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-top:1.25rem}
 .social-pick-btn{aspect-ratio:1;border-radius:14px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;cursor:pointer;padding:.5rem;transition:all .18s}
@@ -1526,6 +1526,17 @@ async function handleLogout(){
   toast('Signed out.','info');
   navigate('#/landing');
 }
+function discordSnowflakeFromAuthUser(user){
+  if(!user)return '';
+  const meta=user.user_metadata||{};
+  const candidates=[meta.provider_id,meta.discord_id,meta.discord_user_id,meta.sub];
+  (user.identities||[]).forEach(function(identity){
+    if(!identity||identity.provider!=='discord')return;
+    const data=identity.identity_data||{};
+    candidates.push(identity.provider_id,identity.id,identity.user_id,data.provider_id,data.discord_id,data.sub);
+  });
+  return String(candidates.find(function(value){return /^\d{17,20}$/.test(String(value||''))})||'');
+}
 async function loadUserData(){
   const {data:{user},error:userError}=await db.auth.getUser();
   if(userError)throw userError;
@@ -1555,6 +1566,17 @@ async function loadUserData(){
     }
     profile=result.data;
     claimError='';
+  }
+  const discordId=discordSnowflakeFromAuthUser(user);
+  if(discordId){
+    const extras=profileExtras(profile);
+    if(String(extras.discord_user_id||'')!==discordId){
+      const nextExtras={...extras,discord_user_id:discordId};
+      try{
+        const {error}=await db.from('profiles').update({bioflex_extras:nextExtras}).eq('user_id',user.id);
+        if(!error)profile={...profile,bioflex_extras:nextExtras};
+      }catch(_){}
+    }
   }
   App.profile=profile;
   try{sessionStorage.removeItem('bioflex.prefillUsername')}catch(_){}
@@ -2450,7 +2472,7 @@ function tabCustomize(){
         '<div class="compact-field"><label for="c-favicon">Favicon image URL</label><input id="c-favicon" class="input" type="url" maxlength="500" placeholder="https://example.com/icon.png" value="'+esc(extra.favicon_url||'')+'"></div>'+
         '<div class="compact-field"><label for="c-og-image">Open Graph image URL</label><input id="c-og-image" class="input" type="url" maxlength="500" placeholder="https://example.com/preview.jpg" value="'+esc(extra.og_image_url||'')+'"></div>'+
       '</div>'+
-      '<p class="settings-row-desc mt-3">Discord presence comes from the public Lanyard service; the account owner must opt in there. Music is a manually maintained Now Playing card. Metadata updates this page in browsers; social preview crawlers may require server-side metadata injection. Weather is not enabled; the clock uses the chosen timezone.</p>'+
+      '<p class="settings-row-desc mt-3">Discord sign-in can automatically link the account ID when Discord supplies it. Public live presence is shown only when that account opts in to Lanyard; a bot token is not used. Music is manually maintained. Social preview metadata may require server-side injection.</p>'+
     '</div>'+
     '<div class="flex justify-end gap-3 mt-6"><button class="btn btn-primary btn-lg" onclick="saveCustomize()"><i class="fa-solid fa-floppy-disk"></i> Save all changes</button></div>'
   );
@@ -3802,6 +3824,7 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
   }
   async function captureCurrent(){
     try{
+      if(localPreview)return;
       var response=await window.BioFlex.db.auth.getSession(),session=response.data&&response.data.session;
       var current=window.BioFlex.App.profile;
       rememberSession(session,current);
@@ -3832,7 +3855,12 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       }).join(''):'<div class="bf-account-empty">No other saved accounts on this device.</div>';
       var modal=window.openModal('<section class="bf-account-modal" role="dialog" aria-modal="true" aria-labelledby="bf-account-title"><div class="modal-head"><div><h3 id="bf-account-title">Switch account</h3><p>Choose an account to continue with.</p></div><button class="modal-close" type="button" data-bf-close aria-label="Close account switcher"><i class="fa-solid fa-xmark"></i></button></div><div class="bf-account-current">'+accountMarkup(current,current.email||('@'+(current.username||'account')))+'<span class="bf-current-tag">Current</span></div><div class="bf-account-section-label">Saved accounts</div><div class="bf-account-list">'+otherMarkup+'</div><div class="bf-account-status" aria-live="polite"></div><button class="btn btn-ghost bf-account-add" type="button" data-bf-add><i class="fa-solid fa-plus"></i> Add account</button></section>');
       var dialog=modal.querySelector('[role="dialog"]'),status=modal.querySelector('.bf-account-status');
-      modal.querySelector('[data-bf-close]').onclick=function(){closeAndRestoreFocus(modal,trigger)};
+       modal.addEventListener('click',function(event){
+         var closeButton=event.target&&event.target.closest?event.target.closest('[data-bf-close]'):null;
+         if(!closeButton)return;
+         event.preventDefault();event.stopPropagation();
+         closeAndRestoreFocus(modal,trigger);
+       });
       modal.querySelector('[data-bf-add]').onclick=async function(){
         if(app.localPreviewMode){app.toast('Real sign-in needs this page to run on an HTTP or HTTPS address.','info');return}
         var button=this;button.disabled=true;status.textContent='Opening sign in…';
