@@ -706,6 +706,41 @@ body.is-subdomain .preview-back{display:none!important}
 .layout-modern-3 .profile-hero{padding:2rem 1.3rem;border-radius:30px;background:linear-gradient(145deg,rgba(15,25,50,.62),rgba(6,11,23,.3));border:1px solid rgba(147,197,253,.18);backdrop-filter:blur(var(--profile-blur,12px));box-shadow:0 0 var(--profile-glow,24px) rgba(59,130,246,.25)}
 .layout-modern-3 .link-card{border-radius:999px;padding:1rem 1.25rem}
 .layout-modern-3 .social-btn{border-radius:50%}
+.layout-bio-template{max-width:360px;padding-top:2rem;padding-bottom:3rem}
+.layout-bio-template .bio-template-card{padding:1.45rem 1.15rem 1.1rem;border-radius:28px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);box-shadow:0 25px 60px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.05);text-align:center}
+.layout-bio-template .profile-hero{padding:0;background:transparent;border:0;box-shadow:none}
+.layout-bio-template .avatar-ring{width:86px;height:86px;padding:3px;background:conic-gradient(from 0deg,#a78bfa,#6ee7b7,#f472b6,#a78bfa);box-shadow:0 8px 24px rgba(0,0,0,.4);animation:spin 7s linear infinite}
+.layout-bio-template .avatar-ring img,.layout-bio-template .avatar-ring .av-inner{width:80px;height:80px;border:2px solid rgba(255,255,255,.1);animation:spinRev 7s linear infinite}
+.layout-bio-template .avatar-ring .av-inner{font-size:1.7rem}
+.layout-bio-template .preview-name{font-family:'Inter',sans-serif;font-size:1.5rem;letter-spacing:-.025em;margin-top:.75rem}
+.layout-bio-template .preview-location{width:max-content;max-width:100%;margin:.55rem auto 0;padding:.24rem .72rem;border-radius:999px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.2);color:#d8ccff;font-size:.62rem;font-weight:700;letter-spacing:.05em}
+.layout-bio-template .preview-bio{margin-top:.55rem;margin-bottom:0;color:rgba(255,255,255,.72)!important;font-size:.76rem;line-height:1.45}
+.layout-bio-template .profile-stack{display:flex;flex-direction:column;gap:.6rem;margin-top:.85rem}
+.layout-bio-template .profile-stack>.social-row,.layout-bio-template .profile-stack>.profile-links{margin-top:0}
+.layout-bio-template .social-row{gap:.65rem;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.08)}
+.layout-bio-template .social-btn{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:.95rem}
+.layout-bio-template .social-btn:hover{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.42);color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+.layout-bio-template .link-card{border-radius:16px;background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09);backdrop-filter:blur(16px)}
+.layout-bio-template .link-card:hover{border-color:rgba(167,139,250,.42);box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.layout-bio-template .profile-widget,.layout-bio-template .player,.layout-bio-template .discord-widget{border-radius:18px;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.layout-bio-template .bio-template-player-dock{position:fixed;z-index:40;left:50%;bottom:calc(.6rem + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(190px,calc(100vw - 3rem));pointer-events:none}
+.layout-bio-template .bio-template-player-dock .player{pointer-events:auto;display:grid;grid-template-columns:30px 66px 30px;justify-content:center;align-items:center;gap:.35rem;width:100%;height:46px;max-width:none;margin:0;padding:.3rem .55rem;border-radius:999px;background:rgba(8,8,12,.78);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+.layout-bio-template .bio-template-player-dock .player-row,.layout-bio-template .bio-template-player-dock .player-times,.layout-bio-template .bio-template-player-dock .player-controls{display:contents}
+.layout-bio-template .bio-template-player-dock .player-art,.layout-bio-template .bio-template-player-dock .player-meta,.layout-bio-template .bio-template-player-dock #pv-cur,.layout-bio-template .bio-template-player-dock #pv-dur,.layout-bio-template .bio-template-player-dock #pv-loop,.layout-bio-template .bio-template-player-dock #pv-audio,.layout-bio-template .bio-template-player-dock #pv-bar{display:none!important}
+.layout-bio-template .bio-template-player-dock #pv-play{grid-column:1;grid-row:1;width:30px;height:30px;border-radius:50%;background:transparent;color:#fff;font-size:.95rem}
+.layout-bio-template .bio-template-player-dock #pv-vol{display:block!important;grid-column:2;grid-row:1;width:66px!important;min-width:0;max-width:66px;flex:none;height:4px;padding:0;appearance:none;-webkit-appearance:none;border:0;border-radius:99px;background:rgba(255,255,255,.33);accent-color:#b38cff;cursor:pointer}
+.layout-bio-template .bio-template-player-dock #pv-vol::-webkit-slider-thumb{width:12px;height:12px;appearance:none;-webkit-appearance:none;border:0;border-radius:50%;background:#b38cff;box-shadow:0 0 8px rgba(179,140,255,.4)}
+.layout-bio-template .bio-template-player-dock #pv-vol::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:#b38cff;box-shadow:0 0 8px rgba(179,140,255,.4)}
+.layout-bio-template .bio-template-player-dock #pv-mute{grid-column:3;grid-row:1;width:30px;height:30px;border-radius:50%;background:transparent;color:rgba(255,255,255,.88);font-size:.95rem}
+.layout-bio-template .bio-template-widgets{width:min(440px,calc(100% - 1.2rem));margin:.65rem auto 6rem;display:flex;flex-direction:column;gap:.5rem}
+.layout-bio-template .bio-template-widgets .discord-widget,.layout-bio-template .bio-template-widgets .presence-widget,.layout-bio-template .bio-template-widgets .now-playing-widget,.layout-bio-template .bio-template-widgets .timezone-widget{width:100%;max-width:none;margin:0;padding:.65rem .8rem;border-radius:15px;background:rgba(8,8,12,.62);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-size:.75rem}
+.layout-bio-template .bio-template-widgets .discord-widget iframe{height:112px;max-width:100%;margin-top:.45rem}
+.layout-bio-template .bio-template-widgets .discord-widget .mb-3{margin-bottom:.25rem}
+.layout-bio-template.bio-template-no-widgets{min-height:100vh;min-height:100svh;display:grid;grid-template-rows:minmax(max-content,1fr) auto;align-items:center;padding-top:4rem;padding-bottom:1.25rem}
+.layout-bio-template.bio-template-no-widgets .bio-template-card{grid-row:1;align-self:center;justify-self:center;margin:0 auto}
+.layout-bio-template.bio-template-no-widgets>footer{grid-row:2;justify-self:center;margin:.75rem auto 0!important}
+@media(max-width:500px){.layout-bio-template{padding:4.25rem .9rem 3rem}.layout-bio-template .bio-template-card{padding:1.2rem .9rem .9rem;border-radius:25px}.layout-bio-template .avatar-ring{width:72px;height:72px}.layout-bio-template .avatar-ring img,.layout-bio-template .avatar-ring .av-inner{width:66px;height:66px}.layout-bio-template .avatar-ring .av-inner{font-size:1.4rem}.layout-bio-template .preview-name{font-size:1.3rem;margin-top:.6rem}.layout-bio-template .preview-location{margin-top:.45rem}.layout-bio-template .preview-bio{font-size:.72rem;margin-top:.45rem}.layout-bio-template .social-row{padding-top:.65rem}.layout-bio-template .social-btn{width:38px;height:38px}.layout-bio-template .bio-template-player-dock{width:190px;bottom:calc(.55rem + env(safe-area-inset-bottom))}.layout-bio-template .bio-template-player-dock .player{height:44px}.layout-bio-template .bio-template-player-dock #pv-vol{width:60px!important;max-width:60px}.layout-bio-template .bio-template-widgets{margin-bottom:5.5rem}}
+@media(max-width:500px){.layout-bio-template.bio-template-no-widgets{padding:4.25rem .9rem 1rem}}
 .world-map-shell{position:relative;min-height:210px;overflow:hidden;border:1px solid rgba(96,165,250,.12);border-radius:13px;background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,.11),rgba(5,10,22,.22) 70%)}
 .world-map-shell svg{display:block;width:100%;height:auto;min-height:190px}
 .world-map-land{fill:rgba(96,165,250,.11);stroke:rgba(147,197,253,.14);stroke-width:1.2}
@@ -2459,7 +2494,7 @@ function tabCustomize(){
     '<div class="card glass mt-4">'+
       '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-window-restore"></i></div><div><h3>Layout, SEO & Widgets</h3><p>Optional profile settings. Run the additive SQL migration in this file to persist them.</p></div></div>'+
       '<div class="compact-settings-grid">'+
-        '<div class="compact-field"><label for="c-layout">Profile layout</label><select id="c-layout" class="input">'+[['classic','Classic'],['modern','Modern'],['portfolio','Portfolio']].map(([v,l])=>'<option value="'+v+'"'+((extra.layout||'classic')===v?' selected':'')+'>'+l+'</option>').join('')+'</select></div>'+
+         '<div class="compact-field"><label for="c-layout">Profile layout</label><select id="c-layout" class="input"><option value="bio-template" selected>Bio Glass (Default)</option></select></div>'+
         '<div class="compact-field"><label for="c-timezone">Timezone clock</label><select id="c-timezone" class="input"><option value="">Disabled</option>'+TIMEZONES.map(z=>'<option value="'+esc(z.value)+'"'+(extra.timezone===z.value?' selected':'')+'>'+esc(z.label)+'</option>').join('')+'</select></div>'+
         '<div class="compact-field"><label for="c-widget-location">Clock label (optional)</label><input id="c-widget-location" class="input" maxlength="48" placeholder="e.g. Dhaka" value="'+esc(extra.timezone_label||'')+'"></div>'+
         '<div class="compact-field"><label for="c-discord-user-id">Discord user ID (optional)</label><input id="c-discord-user-id" class="input" inputmode="numeric" maxlength="20" placeholder="Discord snowflake ID" value="'+esc(extra.discord_user_id||'')+'"></div>'+
@@ -2497,8 +2532,13 @@ function buildUploadBox(id,label,tip,icon,sub,bucket,field,currentUrl){
     (field==='background_url' ? '<div class="file-info"><i class="fa-solid fa-circle-info"></i><span>Image, GIF, MP4, WebM · <b>Max 50MB</b> · Video is auto-muted</span></div>' : '')+
   '</div>';
 }
+function isUploadedAudioUrl(url){
+  try{return /\/storage\/v1\/object\/(?:public|sign)\/audio\//i.test(new URL(url,window.location.href).pathname)}catch(_){return false}
+}
 function buildAudioBox(musicUrl,musicTitle){
+  const uploadedAudio=isUploadedAudioUrl(musicUrl);
   const fileName=musicUrl?musicUrl.split('/').pop():'';
+  const audioUrlControl='<div class="asset-url-row"><input class="input" type="url" id="asset-url-audio" value="'+esc(uploadedAudio?'':(musicUrl||''))+'" placeholder="Paste direct audio file URL" aria-label="Audio direct URL"><button class="btn btn-ghost btn-sm" type="button" onclick="applyAssetUrl(\'music_url\',\'audio\')"><i class="fa-solid fa-link"></i> Use link</button></div><div class="asset-url-hint">Paste a direct MP3, OGG, or WAV file URL (not a Spotify/YouTube page). Upload or use a URL.</div>';
   return '<div>'+
     '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Audio <span class="help" data-tip="MP3 or OGG (max 20MB).">?</span></label>'+
     '<input type="file" id="up-audio" accept="audio/*" style="display:none" onchange="handleUpload(this,\'audio\',\'music_url\')">'+
@@ -2514,6 +2554,7 @@ function buildAudioBox(musicUrl,musicTitle){
           '</div>'
         : '<div class="upload-icon"><i class="fa-solid fa-file-audio"></i></div><div class="upload-title">Click to upload audio</div><div class="upload-sub">MP3, OGG, WAV</div>')+
      '</div>'+
+      audioUrlControl+
    '</div>';
 }
 function isVideoAssetUrl(value){
@@ -3101,6 +3142,7 @@ async function renderPreview(){
     return;
   }
   const extras=profileExtras(profile);
+  const layout='bio-template';
   setProfileMetadata(profile);
 
   if(profile.cursor_url){document.body.style.cursor='url('+profile.cursor_url+') 16 16, auto'}
@@ -3108,7 +3150,7 @@ async function renderPreview(){
 
   const bgEl=document.getElementById('preview-bg');
   const bgType=profile.background_type||'gradient';
-  const bgVal=profile.background_value||{from:'#0a1120',to:'#1d4ed8',angle:135,overlay:0.35};
+  const bgVal=profile.background_value||(layout==='bio-template'?{from:'#08080b',to:'#171522',angle:135,overlay:0.25}:{from:'#0a1120',to:'#1d4ed8',angle:135,overlay:0.35});
   const bgUrl = profile.background_url || bgVal.url || '';
   const isVideoBg = bgUrl.match(/\.(mp4|webm)(\?|$)/i);
 
@@ -3160,7 +3202,7 @@ async function renderPreview(){
     '</a>').join('');
 
   const musicHtml=profile.music_url
-    ?'<div class="player glass"><div class="player-row"><div class="player-art"><i class="fa-solid fa-music"></i></div><div class="player-meta"><div class="player-title truncate">'+esc(profile.music_title||'Untitled')+'</div><div class="player-artist truncate">'+esc(profile.music_artist||'BioFlex Audio')+'</div></div><button class="player-btn" id="pv-play"><i class="fa-solid fa-play"></i></button></div><div class="player-times"><span class="text-xs muted tabular-nums" style="width:2.5rem" id="pv-cur">0:00</span><div class="player-bar" id="pv-bar" style="flex:1"><div class="player-fill" id="pv-fill"></div></div><span class="text-xs muted tabular-nums text-right" style="width:2.5rem" id="pv-dur">0:00</span></div><div class="player-controls"><button id="pv-mute"><i class="fa-solid fa-volume-high"></i></button><input id="pv-vol" type="range" min="0" max="1" step="0.05" value="0.5" style="flex:1"><button id="pv-loop"><i class="fa-solid fa-repeat"></i></button></div><audio id="pv-audio" src="'+esc(profile.music_url)+'" preload="metadata" crossorigin="anonymous"></audio></div>'
+    ?'<div class="player glass"><div class="player-row"><div class="player-art"><i class="fa-solid fa-music"></i></div><div class="player-meta"><div class="player-title truncate">'+esc(profile.music_title||'Untitled')+'</div><div class="player-artist truncate">'+esc(profile.music_artist||'BioFlex Audio')+'</div></div><button class="player-btn" id="pv-play"><i class="fa-solid fa-play"></i></button></div><div class="player-times"><span class="text-xs muted tabular-nums" style="width:2.5rem" id="pv-cur">0:00</span><div class="player-bar" id="pv-bar" style="flex:1"><div class="player-fill" id="pv-fill"></div></div><span class="text-xs muted tabular-nums text-right" style="width:2.5rem" id="pv-dur">0:00</span></div><div class="player-controls"><button id="pv-mute"><i class="fa-solid fa-volume-high"></i></button><input id="pv-vol" type="range" min="0" max="1" step="0.05" value="0.5" style="flex:1"><button id="pv-loop"><i class="fa-solid fa-repeat"></i></button></div><audio id="pv-audio" src="'+esc(profile.music_url)+'" preload="metadata"></audio></div>'
     :'';
 
   const glowName=profile.glow_username?'text-shadow:0 0 12px '+(profile.accent_color||'#3b82f6')+',0 0 24px '+(profile.accent_color||'#3b82f6'):'';
@@ -3184,31 +3226,39 @@ async function renderPreview(){
   const timezoneHtml=extras.timezone
     ?'<section class="timezone-widget profile-widget glass" aria-label="Local time"><div class="widget-subtitle" id="timezone-caption">'+esc(extras.timezone_label||extras.timezone)+'</div><div id="timezone-clock" class="timezone-clock">--:--</div></section>'
     :'';
-  const layout=['classic','modern','portfolio'].includes(extras.layout)?extras.layout:'classic';
   const previewBody=document.getElementById('preview-body');
   previewBody.className='preview-body layout-'+layout;
 
-  previewBody.innerHTML=
+  const profileHero=
     '<section class="text-center profile-hero">'+
       '<div class="avatar-ring">'+avatar+'</div>'+
       '<h1 class="preview-name '+ue+'" style="'+glowName+'">'+esc(displayName)+'</h1>'+
       (tag?'<div class="preview-location">'+esc(tag)+'</div>':'')+
       (profile.bio?'<p class="preview-bio '+bioClass+'" style="color:'+esc(profile.text_color||'#fff')+'">'+esc(profile.bio)+'</p>':'')+
-    '</section>'+
+    '</section>';
+  const profileStack=
     '<div class="profile-stack">'+
     (socialsHtml?'<nav class="social-row">'+socialsHtml+'</nav>':'')+
     '<section class="profile-links mt-6">'+(linksHtml||'')+'</section>'+
-    musicHtml+
-    discordHtml+
-    presenceHtml+
-    nowPlayingHtml+
-    timezoneHtml+
-    '</div>'+
+    '</div>';
+  const playerDock=musicHtml?'<div class="bio-template-player-dock">'+musicHtml+'</div>':'';
+  const profileWidgets=(discordHtml||presenceHtml||nowPlayingHtml||timezoneHtml)
+    ?'<div class="bio-template-widgets">'+discordHtml+presenceHtml+nowPlayingHtml+timezoneHtml+'</div>'
+    :'';
+  previewBody.innerHTML=
+    (layout==='bio-template'?'<div class="bio-template-card">'+profileHero+profileStack+'</div>':profileHero+profileStack)+
+    playerDock+
+    profileWidgets+
     '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
 
   startDiscordPresence(discordUserId);
   startTimezoneClock(extras.timezone,extras.timezone_label);
-  if(profile.music_url) setupPlayer(profile);
+  if(layout==='bio-template'){
+    if(profile.music_url) setupPlayer(profile);
+    document.body.classList.add('profile-entered');
+    const enterOverlay=document.getElementById('enter-overlay');
+    if(enterOverlay)enterOverlay.classList.add('hide');
+  }else if(profile.music_url) setupPlayer(profile);
   else setupEnterOverlay(profile,null);
 }
 
@@ -3426,9 +3476,6 @@ tabCustomize=function(){
   out=out.replace(colorHeader,bioflexThemeCard()+'<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-palette"></i></div><div><h3>Color Customization</h3>');
   const otherHeader='<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-gears"></i></div><div><h3>Other Customization</h3>';
   out=out.replace(otherHeader,'<div class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-star"></i></div><div><h3>Featured Links</h3><p>Pick the links shown in the Portfolio carousel.</p></div></div>'+bioflexFeaturedOptions()+'</div>'+otherHeader);
-  const layout=profileExtras(App.profile).layout||'classic';
-  const modernOptions='<option value="modern-2"'+(layout==='modern-2'?' selected':'')+'>Modern 2</option><option value="modern-3"'+(layout==='modern-3'?' selected':'')+'>Modern 3</option>';
-  out=out.replace('<option value="portfolio"',modernOptions+'<option value="portfolio"');
   setTimeout(updateThemePreview,0);
   return out;
 };
@@ -3594,8 +3641,8 @@ async function bioflexAddFeaturedCarousel(profile,layout){
 }
 async function bioflexEnhancePreview(){
   const profile=App.previewProfile||App.profile;if(!profile)return;
-  const extras=profileExtras(profile),layout=['classic','modern','modern-2','modern-3','portfolio'].includes(extras.layout)?extras.layout:'classic';
-  const body=document.getElementById('preview-body');if(body){body.className='preview-body layout-'+layout;const theme=extras.theme||{};body.style.setProperty('--profile-blur',Math.max(0,Math.min(24,Number(theme.blur)||0))+'px');body.style.setProperty('--profile-glow',Math.max(0,Math.min(50,Number(theme.glow)||0))+'px');}
+  const extras=profileExtras(profile),layout='bio-template';
+  const body=document.getElementById('preview-body');if(body){const hasWidgets=!!body.querySelector('.bio-template-widgets');body.className='preview-body layout-'+layout+(hasWidgets?'':' bio-template-no-widgets');const theme=extras.theme||{};body.style.setProperty('--profile-blur',Math.max(0,Math.min(24,Number(theme.blur)||0))+'px');body.style.setProperty('--profile-glow',Math.max(0,Math.min(50,Number(theme.glow)||0))+'px');}
   const theme=extras.theme||{},bgUrl=profile.background_url||(profile.background_value&&profile.background_value.url)||'';
   if(!bgUrl&&theme.from&&theme.to){const media=document.querySelector('#preview-bg .bg-media');if(media)media.style.background='linear-gradient(135deg,'+safeColor(theme.from,'#07111f')+','+safeColor(theme.to,'#1d4ed8')+')'}
   await bioflexAddFeaturedCarousel(profile,layout);
@@ -3659,15 +3706,15 @@ function renderLocalSampleProfile(){
   const enter=document.getElementById('enter-overlay');if(enter)enter.classList.add('hide');
   document.documentElement.style.setProperty('--accent','#60a5fa');
   document.getElementById('preview-bg').innerHTML='<div class="bg-media demo-bg-motion" style="background:radial-gradient(ellipse at 18% 12%,rgba(96,165,250,.6),transparent 34%),radial-gradient(ellipse at 82% 78%,rgba(37,99,235,.56),transparent 38%),linear-gradient(145deg,#050b18,#0d1d37 54%,#050a14)"></div><div class="overlay" style="background:linear-gradient(180deg,rgba(2,6,18,.12),rgba(2,6,18,.38))"></div>';
-  const body=document.getElementById('preview-body');body.className='preview-body layout-modern-3';
-  body.innerHTML='<div class="text-center"><div class="demo-profile-note"><i class="fa-solid fa-wand-magic-sparkles"></i> Sample profile preview</div></div>'+
+  const body=document.getElementById('preview-body');body.className='preview-body layout-bio-template';
+  body.innerHTML='<div class="text-center"><div class="demo-profile-note"><i class="fa-solid fa-wand-magic-sparkles"></i> Sample profile preview</div></div><div class="bio-template-card">'+
     '<section class="text-center profile-hero"><div class="avatar-ring"><div class="av-inner">R</div></div><h1 class="preview-name ue-glow" style="text-shadow:0 0 12px #60a5fa,0 0 24px #3b82f6">Rafi Hasan</h1><div class="preview-location">✦ Dhaka, Bangladesh ✦</div><p class="preview-bio" style="color:#f8fbff">Designer, music lover, and maker of things for the web.</p></section>'+
     '<div class="profile-stack"><nav class="social-row" aria-label="Social links"><a class="social-btn" href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" style="color:#e1306c"></i></a><a class="social-btn" href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a><a class="social-btn" href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube" style="color:#ef4444"></i></a></nav>'+
     '<section class="profile-links mt-6"><a class="link-card" href="https://github.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-github"></i></span><span class="tt"><span class="t truncate">My latest work</span><span class="d truncate">Projects and experiments</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>'+
     '<a class="link-card" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-spotify" style="color:#1db954"></i></span><span class="tt"><span class="t truncate">What I’m listening to</span><span class="d truncate">A little soundtrack for the day</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>'+
     '<a class="link-card" href="https://instagram.com/" target="_blank" rel="noopener noreferrer"><span class="ic"><i class="fa-brands fa-instagram" style="color:#e1306c"></i></span><span class="tt"><span class="t truncate">Follow on Instagram</span><span class="d truncate">Photos, sketches, and updates</span></span><span class="ar"><i class="fa-solid fa-arrow-up-right-from-square"></i></span></a></section>'+
-    '<div class="live-counter" style="justify-content:center;margin:1rem auto 0;width:max-content;max-width:100%"><i class="fa-solid fa-eye" style="color:#93c5fd"></i><span><span class="live-counter-label">Total profile views · demo</span><br><span class="live-counter-value">'+fmtUID(views)+'</span></span></div></div>'+
-    '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
+     '<div class="live-counter" style="justify-content:center;margin:1rem auto 0;width:max-content;max-width:100%"><i class="fa-solid fa-eye" style="color:#93c5fd"></i><span><span class="live-counter-label">Total profile views · demo</span><br><span class="live-counter-value">'+fmtUID(views)+'</span></span></div></div></div>'+
+     '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
   return Promise.resolve();
 }
 const bioflexPreviewBeforeDemo=renderPreview;
