@@ -2988,12 +2988,13 @@ function setupDragDrop(container){
 }
 
 function tabTemplates(){
-  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">20 distinct moods and palettes. Applying a template changes profile colors only.</p><div class="grid grid-2 md-3 g-4 mt-6">'+TEMPLATES.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;background:linear-gradient(135deg,'+t.from+','+t.to+');position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+t.accent+';color:#fff">'+esc(t.name)+'</span></div><p class="muted text-xs mt-2">'+esc(t.description)+'</p><button class="btn btn-primary btn-sm btn-block mt-3" onclick="applyTemplate(\''+t.slug+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Apply</button></div>').join('')+'</div>';
+  const templates=Array.isArray(App.siteTemplates)&&App.siteTemplates.length?App.siteTemplates:TEMPLATES;
+  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">Choose a look for your profile. Templates managed by the site admin update live.</p><div class="grid grid-2 md-3 g-4 mt-6">'+templates.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;background:linear-gradient(135deg,'+safeHexColor(t.from,'#07111f')+','+safeHexColor(t.to,'#102b4e')+');position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+safeHexColor(t.accent,'#60a5fa')+';color:#fff">'+esc(t.name)+'</span></div><p class="muted text-xs mt-2">'+esc(t.description||'')+'</p><button class="btn btn-primary btn-sm btn-block mt-3" onclick="applyTemplate(\''+esc(t.slug)+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Apply</button></div>').join('')+'</div>';
 }
 function applyTemplate(slug){
-  const t=TEMPLATES.find(x=>x.slug===slug);if(!t)return;
+  const t=(Array.isArray(App.siteTemplates)?App.siteTemplates:[]).find(x=>x.slug===slug)||TEMPLATES.find(x=>x.slug===slug);if(!t)return;
   confirmModal('Apply template?','This will restyle your profile.',async()=>{
-    const upd={background_type:'gradient',background_value:{from:t.from,to:t.to,angle:135,url:'',overlay:0.28},accent_color:t.accent,bg_color:t.from,primary_color:t.accent,secondary_color:t.to};
+    const upd={background_type:'gradient',background_value:{from:safeHexColor(t.from,'#07111f'),to:safeHexColor(t.to,'#102b4e'),angle:Number(t.angle)||135,url:'',overlay:0.28},accent_color:safeHexColor(t.accent,'#60a5fa'),bg_color:safeHexColor(t.from,'#07111f'),primary_color:safeHexColor(t.accent,'#60a5fa'),secondary_color:safeHexColor(t.to,'#102b4e')};
     const {error}=await db.from('profiles').update(upd).eq('user_id',App.user.id);
     if(error){toast('Failed','error');return}
     App.profile={...App.profile,...upd};
@@ -3091,6 +3092,9 @@ function bindSettings(){
       renderDashboard();
     });
   };
+}
+function safeHexColor(value,fallback){
+  return /^#[0-9a-f]{6}$/i.test(String(value||''))?String(value):fallback;
 }
 function deleteAccount(){
   confirmModal('Delete account?','All data will be permanently removed.',async()=>{
@@ -3861,12 +3865,13 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
   var STORE_KEY='bioflex.savedAccounts.v1';
   var escapeHtml=window.BioFlex&&window.BioFlex.esc||function(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
   var localPreview=window.location.protocol==='file:';
+  var landingPreview=new URLSearchParams(window.location.search).get('preview')==='landing';
   var previewAccounts=[
     {userId:'bioflex-preview-sem',email:'semx@example.test',name:'Semx',username:'semx',avatar:'',uid:1042,accessToken:'preview',refreshToken:'preview'},
     {userId:'bioflex-preview-rafi',email:'rafi@example.test',name:'Rafi Hasan',username:'rafi',avatar:'',uid:1008,accessToken:'preview',refreshToken:'preview'},
     {userId:'bioflex-preview-azre',email:'azre@example.test',name:'Azre',username:'azre',avatar:'',uid:1004,accessToken:'preview',refreshToken:'preview'}
   ];
-  if(localPreview&&window.BioFlex){
+  if(localPreview&&window.BioFlex&&!landingPreview){
     window.BioFlex.localPreviewMode=true;
     window.BioFlex.App.user={id:previewAccounts[0].userId,email:previewAccounts[0].email,user_metadata:{full_name:previewAccounts[0].name,username:previewAccounts[0].username},app_metadata:{provider:'email'},identities:[]};
     window.BioFlex.App.profile={user_id:previewAccounts[0].userId,username:previewAccounts[0].username,display_name:previewAccounts[0].name,uid:previewAccounts[0].uid,avatar_url:'',view_count:128,created_at:'2025-01-15T00:00:00.000Z'};
@@ -4082,7 +4087,7 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
   };
 
   if(localPreview&&!window.location.hash){
-    window.location.hash='#/dashboard/leaderboard';
+    window.location.hash=landingPreview?'#/landing':'#/dashboard/leaderboard';
     window.route();
   }
 
@@ -4096,6 +4101,196 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
   }
 })();
 
+</script>
+<script>
+(function(){
+  'use strict';
+  var app=window.BioFlex, db=app&&app.db;
+  if(!db||window.location.protocol==='file:')return;
+
+  var values={}, timestamps={};
+  var defaults={
+    landing_pill:'BioFlex · Link-in-bio & File Hosting',
+    landing_title:'Everything you',
+    landing_title_grad:'want, right here.',
+    landing_sub:'BioFlex is your go-to for modern, feature-rich link-in-bio pages and fast, secure file hosting — claim your username in seconds.',
+    landing_cta:'Sign Up for Free',
+    landing_f1_icon:'fa-fingerprint', landing_f1_title:'Own your handle',
+    landing_f1_desc:'A permanent username on your own subdomain — secure, unique, and instantly shareable.',
+    landing_f2_icon:'fa-wand-magic-sparkles', landing_f2_title:'Make it yours',
+    landing_f2_desc:'Backgrounds, music, effects, animations, custom fonts, cursors, glow settings, and templates.',
+    landing_f3_icon:'fa-chart-line', landing_f3_title:'Know your audience',
+    landing_f3_desc:'Privacy-friendly analytics with views, clicks, referrers, and country insights.'
+  };
+  function safeUrl(value){
+    try{var u=new URL(String(value||''),window.location.href);return /^https?:$/.test(u.protocol)?u.href:''}catch(_){return ''}
+  }
+  function setMeta(selector,value,attribute){
+    var el=document.querySelector(selector);
+    if(el&&value!=null&&value!=='')el.setAttribute(attribute||'content',String(value));
+  }
+  function applySettings(){
+    var landing=document.getElementById('screen-landing');
+    if(!landing)return;
+    var get=function(key){return values[key]==null?defaults[key]:values[key]};
+    var name=String(values.site_name||'BioFlex');
+    var brand=landing.querySelector('.lp-brand > span:last-child');
+    if(brand)brand.textContent=name;
+    var pill=landing.querySelector('.lp-pill');
+    if(pill)pill.innerHTML='<i class="fa-solid fa-bolt" aria-hidden="true"></i> '+app.esc(get('landing_pill'));
+    var heading=landing.querySelector('.lp-title');
+    if(heading)heading.innerHTML=app.esc(get('landing_title'))+'<br><span class="lp-grad">'+app.esc(get('landing_title_grad'))+'</span>';
+    var subtitle=landing.querySelector('.lp-sub');
+    if(subtitle)subtitle.textContent=get('landing_sub');
+    var cta=landing.querySelector('.lp-cta');
+    if(cta&&cta.firstChild)cta.firstChild.textContent=String(get('landing_cta'))+' ';
+    var cards=landing.querySelectorAll('.lp-feature');
+    for(var i=1;i<=3;i++){
+      var card=cards[i-1];
+      if(!card)continue;
+      var icon=card.querySelector('.lp-feature-icon i');
+      var title=card.querySelector('h3'),desc=card.querySelector('p');
+      if(icon)icon.className='fa-solid '+String(get('landing_f'+i+'_icon'));
+      if(title)title.textContent=get('landing_f'+i+'_title');
+      if(desc)desc.textContent=get('landing_f'+i+'_desc');
+    }
+
+    var branding=values.branding||{},identity=values.identity||{};
+    if(branding.accent&&/^#[0-9a-f]{6}$/i.test(branding.accent)){
+      document.documentElement.style.setProperty('--accent',branding.accent);
+      document.documentElement.style.setProperty('--accent-2',branding.accent);
+    }
+    if(branding.bg&&/^#[0-9a-f]{6}$/i.test(branding.bg))document.body.style.backgroundColor=branding.bg;
+    if(branding.text&&/^#[0-9a-f]{6}$/i.test(branding.text))document.body.style.color=branding.text;
+    var theme=document.getElementById('bioflex-site-theme');
+    if(!theme){theme=document.createElement('style');theme.id='bioflex-site-theme';document.head.appendChild(theme)}
+    var themeRules=[];
+    if(branding.bg&&/^#[0-9a-f]{6}$/i.test(branding.bg)){
+      themeRules.push('#screen-landing .lp-bg{background:'+branding.bg+'!important}.bg-fx{background:'+branding.bg+'!important}');
+    }
+    if(branding.accent&&/^#[0-9a-f]{6}$/i.test(branding.accent)){
+      themeRules.push('#screen-landing .lp-grad{background-image:linear-gradient(135deg,'+branding.accent+','+branding.accent+')!important}#screen-landing .lp-cta,#screen-landing .lp-claim-btn,#screen-landing .lp-logo{background:'+branding.accent+'!important}');
+    }
+    if(branding.text&&/^#[0-9a-f]{6}$/i.test(branding.text)){
+      themeRules.push('#screen-landing .lp-title,#screen-landing .lp-feature h3{color:'+branding.text+'!important}');
+    }
+    theme.textContent=themeRules.join('\n');
+    var logo=landing.querySelector('.lp-logo'),logoUrl=safeUrl(branding.logo_url);
+    if(logo){
+      if(logoUrl){
+        var img=document.createElement('img');img.src=logoUrl;img.alt=name+' logo';
+        img.style.cssText='width:100%;height:100%;object-fit:contain;border-radius:inherit';
+        logo.replaceChildren(img);
+      }else logo.innerHTML='<i class="fa-solid fa-bolt" aria-hidden="true"></i>';
+      logo.setAttribute('aria-label',name);
+    }
+    var favicon=document.getElementById('profile-favicon'),faviconUrl=safeUrl(branding.favicon_url);
+    if(favicon&&faviconUrl)favicon.href=faviconUrl;
+
+    var description=String(values.site_description||defaults.landing_sub);
+    var pageTitle=String(identity.page_title||name+' — '+String(values.site_tagline||'Your world. One BioFlex.'));
+    document.title=pageTitle;
+    setMeta('meta[name="description"]',description);
+    setMeta('meta[property="og:title"]',pageTitle);
+    setMeta('meta[property="og:description"]',description);
+    setMeta('meta[name="twitter:title"]',pageTitle);
+    setMeta('meta[name="twitter:description"]',description);
+    var ogUrl=safeUrl(identity.og_image);
+    if(ogUrl){setMeta('meta[property="og:image"]',ogUrl);setMeta('meta[name="twitter:image"]',ogUrl)}
+
+    var signupEnabled=values.signups_enabled!==false;
+    var claimEnabled=values.landing_claim_enabled!==false;
+    var claim=landing.querySelector('.lp-claim');
+    if(claim)claim.hidden=!claimEnabled;
+    landing.querySelectorAll('[data-nav="#/signup"]').forEach(function(el){el.hidden=!signupEnabled});
+    if(cta)cta.hidden=!signupEnabled;
+
+    var banner=landing.querySelector('.bf-maintenance-banner');
+    if(values.maintenance_mode===true){
+      if(!banner){
+        banner=document.createElement('div');banner.className='bf-maintenance-banner';
+        banner.setAttribute('role','status');
+        banner.style.cssText='max-width:76rem;margin:1rem auto 0;padding:.75rem 1rem;border:1px solid rgba(251,191,36,.4);border-radius:12px;background:rgba(245,158,11,.12);color:#fde68a;text-align:center;font-size:.85rem';
+        var header=landing.querySelector('.lp-header');
+        if(header)header.insertAdjacentElement('afterend',banner);
+      }
+      if(banner)banner.textContent='BioFlex is in maintenance mode. Some actions may be temporarily unavailable.';
+    }else if(banner)banner.remove();
+  }
+  function receiveRow(row){
+    if(!row||!row.key)return;
+    var incoming=Date.parse(row.updated_at||'')||0,previous=timestamps[row.key]||0;
+    if(incoming&&previous>incoming)return;
+    timestamps[row.key]=incoming||Date.now();
+    values[row.key]=row.value;
+    applySettings();
+  }
+
+  function normalizeTemplate(row){
+    var slug=String(row.slug||'').toLowerCase().replace(/[^a-z0-9_-]/g,'').slice(0,40);
+    if(!slug)return null;
+    return {
+      slug:slug,name:String(row.name||'Template').slice(0,80),
+      description:String(row.description||row.category||'').slice(0,240),
+      from:safeHexColor(row.gradient_from,'#07111f'),
+      to:safeHexColor(row.gradient_to,'#102b4e'),
+      accent:safeHexColor(row.accent_color,'#60a5fa'),
+      angle:Math.max(0,Math.min(360,Number(row.gradient_angle)||135))
+    };
+  }
+  function refreshTemplates(){
+    db.from('templates').select('slug,name,description,category,gradient_from,gradient_to,gradient_angle,accent_color,is_active').order('sort_order')
+      .then(function(result){
+        if(result.error){console.warn('Could not load site templates:',result.error.message);return}
+        app.App.siteTemplates=(result.data||[]).filter(function(row){return row.is_active!==false}).map(normalizeTemplate).filter(Boolean);
+        if(app.App.user&&app.App.currentTab==='templates'&&typeof window.renderDashboard==='function')window.renderDashboard();
+      }).catch(function(error){console.warn('Could not load site templates:',error)});
+  }
+  function refreshAnnouncements(){
+    db.from('announcements').select('id,title,body,type,is_active,created_at').eq('is_active',true).order('created_at',{ascending:false}).limit(1)
+      .then(function(result){
+        if(result.error){console.warn('Could not load site announcements:',result.error.message);return}
+        var landing=document.getElementById('screen-landing');
+        if(!landing)return;
+        var old=landing.querySelector('.bf-site-announcement');
+        if(old)old.remove();
+        var item=(result.data||[])[0];
+        if(!item)return;
+        var banner=document.createElement('aside');
+        banner.className='bf-site-announcement';
+        banner.setAttribute('role','status');
+        var palette={info:['rgba(96,165,250,.18)','#bfdbfe'],success:['rgba(34,197,94,.16)','#bbf7d0'],warning:['rgba(245,158,11,.16)','#fde68a'],error:['rgba(239,68,68,.16)','#fecaca']};
+        var style=palette[item.type]||palette.info;
+        banner.style.cssText='max-width:76rem;margin:.75rem auto 0;padding:.75rem 1rem;border:1px solid '+style[1]+'55;border-radius:12px;background:'+style[0]+';color:'+style[1]+';font-size:.85rem;line-height:1.5';
+        var title=document.createElement('strong');title.textContent=String(item.title||'');
+        var body=document.createElement('span');body.textContent=item.body?' — '+String(item.body):'';
+        banner.append(title,body);
+        var header=landing.querySelector('.lp-header');
+        if(header)header.insertAdjacentElement('afterend',banner);
+      }).catch(function(error){console.warn('Could not load site announcements:',error)});
+  }
+
+  var channel=db.channel('bioflex-public-site-settings')
+    .on('postgres_changes',{event:'*',schema:'public',table:'site_settings'},function(payload){
+      if(payload.eventType==='DELETE'&&payload.old&&payload.old.key){
+        delete values[payload.old.key];applySettings();return;
+      }
+      receiveRow(payload.new);
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'templates'},refreshTemplates)
+    .on('postgres_changes',{event:'*',schema:'public',table:'announcements'},refreshAnnouncements)
+    .subscribe(function(status){
+      if(status==='SUBSCRIBED'){
+        db.from('site_settings').select('key,value,updated_at').then(function(result){
+          if(result.error){console.warn('Could not load public site settings:',result.error.message);return}
+          (result.data||[]).forEach(receiveRow);
+        }).catch(function(error){console.warn('Could not load public site settings:',error)});
+        refreshTemplates();
+        refreshAnnouncements();
+      }
+    });
+  window.addEventListener('beforeunload',function(){db.removeChannel(channel)});
+})();
 </script>
 <script>
 /* Small, accessible click feedback for interactive controls, without disturbing layout. */
