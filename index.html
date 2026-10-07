@@ -939,7 +939,7 @@ body.is-subdomain .preview-back{display:none!important}
 
       <div class="lp-actions">
         <a href="#/signup" class="lp-cta" data-nav="#/signup">Sign Up for Free <i class="fa-solid fa-arrow-right"></i></a>
-        <button class="demo-cta" type="button" onclick="navigate('#/demo')"><i class="fa-solid fa-eye"></i> Preview a sample profile</button>
+        <button class="demo-cta" type="button" onclick="openSamplePreview()"><i class="fa-solid fa-eye"></i> Preview a sample profile</button>
       </div>
 
       <div class="lp-phones">
@@ -3728,7 +3728,105 @@ renderPreview=async function(){
 };
 
 /* Local preview-only example; real profiles still use Supabase. */
-function renderLocalSampleProfile(){
+async function readSampleProfileConfig(){
+  const cached=window.BioFlex&&window.BioFlex.sampleProfileConfig;
+  try{
+    const {data,error}=await db.from('site_settings').select('value').eq('key','sample_profile').maybeSingle();
+    if(error)throw error;
+    const config=data&&data.value&&typeof data.value==='object'?data.value:{};
+    if(window.BioFlex)window.BioFlex.sampleProfileConfig=config;
+    return config;
+  }catch(error){
+    if(cached)return cached;
+    console.warn('Could not load the configured sample profile:',error&&error.message||error);
+    return {};
+  }
+}
+async function openSamplePreview(){
+  const config=await readSampleProfileConfig();
+  if(config.mode==='url'){
+    const target=safeWebUrl(config.url);
+    if(target){window.location.assign(target);return}
+    toast('The sample preview URL is not valid.','error');return;
+  }
+  if(config.mode==='subdomain'){
+    const username=slug(config.subdomain);
+    if(username.length<3){toast('The sample profile subdomain is not valid.','error');return}
+    window.location.assign('https://'+username+'.'+ROOT_DOMAIN);return;
+  }
+  navigate('#/demo');
+}
+async function renderConfiguredSampleProfile(custom){
+  const data=custom&&typeof custom==='object'?custom:{};
+  const previous={
+    profile:App.profile,previewProfile:App.previewProfile,links:App.links,
+    socials:App.socials,username:App.publicProfileUsername
+  };
+  const safeColor=(value,fallback)=>safeHexColor(value,fallback);
+  const bgValue=data.background_value&&typeof data.background_value==='object'?data.background_value:{};
+  const profile={
+    id:'sample-profile',user_id:'sample-profile',
+    username:String(data.username||'sample').slice(0,30),
+    display_name:String(data.display_name||data.username||'Sample User').slice(0,60),
+    bio:String(data.bio||'').slice(0,280),
+    location_text:String(data.location_text||'').slice(0,60),
+    avatar_url:safeWebUrl(data.avatar_url),
+    background_type:'gradient',
+    background_url:safeWebUrl(data.background_url),
+    background_value:{
+      from:safeColor(bgValue.from,'#050b18'),
+      to:safeColor(bgValue.to,'#0d1d37'),
+      angle:Math.max(0,Math.min(360,Number(bgValue.angle)||145)),
+      overlay:Math.max(0,Math.min(1,Number(bgValue.overlay??0.25)))
+    },
+    accent_color:safeColor(data.accent_color,'#60a5fa'),
+    text_color:safeColor(data.text_color,'#f8fbff'),
+    music_url:safeWebUrl(data.music_url),
+    music_title:String(data.music_title||'').slice(0,100),
+    music_artist:String(data.music_artist||'').slice(0,80),
+    music_autoplay:false,
+    view_count:0
+  };
+  const links=(Array.isArray(data.links)?data.links:[]).map((link,index)=>({
+    id:'sample-link-'+index,
+    title:String(link&&link.title||'').slice(0,100),
+    url:safeWebUrl(link&&link.url),
+    description:String(link&&link.description||'').slice(0,180),
+    icon:String(link&&link.icon||'fa-solid fa-link').slice(0,100),
+    is_visible:true,position:index
+  })).filter(link=>link.url);
+  const socials=(Array.isArray(data.socials)?data.socials:[]).map((social,index)=>({
+    id:'sample-social-'+index,
+    platform:String(social&&social.platform||'').slice(0,40),
+    url:safeWebUrl(social&&social.url),
+    is_visible:true,position:index
+  })).filter(social=>social.url);
+
+  App.profile=profile;App.previewProfile=profile;App.links=links;App.socials=socials;
+  App.publicProfileUsername='';
+  document.body.classList.remove('is-subdomain','profile-not-found');
+  document.body.classList.add('profile-entered');
+  document.body.style.cursor='';
+  const back=document.querySelector('.preview-back');if(back)back.style.display='';
+  const enter=document.getElementById('enter-overlay');if(enter)enter.classList.add('hide');
+  try{
+    await bioflexPreviewWithRealViews();
+    const body=document.getElementById('preview-body');
+    if(body){
+      const note=document.createElement('div');
+      note.className='text-center';
+      note.innerHTML='<div class="demo-profile-note"><i class="fa-solid fa-wand-magic-sparkles"></i> Sample profile preview</div>';
+      body.prepend(note);
+    }
+  }finally{
+    App.profile=previous.profile;App.previewProfile=previous.previewProfile;
+    App.links=previous.links;App.socials=previous.socials;
+    App.publicProfileUsername=previous.username;
+  }
+}
+async function renderLocalSampleProfile(){
+  const config=await readSampleProfileConfig();
+  if(config.mode==='custom')return renderConfiguredSampleProfile(config.custom);
   const key='bioflex.sample-profile.views.v1';
   let views=128;
   try{
@@ -4223,6 +4321,10 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
     if(incoming&&previous>incoming)return;
     timestamps[row.key]=incoming||Date.now();
     values[row.key]=row.value;
+    if(row.key==='sample_profile'&&app){
+      app.sampleProfileConfig=row.value;
+      if(app.App&&app.App.demoMode&&typeof window.renderPreview==='function')window.renderPreview();
+    }
     applySettings();
   }
 
