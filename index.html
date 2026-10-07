@@ -130,7 +130,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .feature h3{font-size:1.05rem;font-weight:700}
 .feature p{margin-top:.55rem;color:rgba(219,234,254,.7);font-size:.875rem}
 .section-title{margin-top:6rem;text-align:center}
-.section-title h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,4vw,2.5rem);font-weight:800}
+.section-title h2{font-family:'Space Grotesk',sans-serif;-size:clamp(1.9rem,4vw,2.5rem);font-weight:800}
 .section-title p{margin-top:.6rem;color:rgba(219,234,254,.65);font-size:.95rem}
 .site-footer{border-top:1px solid rgba(96,165,250,.12);padding:2rem 0;text-align:center;color:rgba(219,234,254,.45);font-size:.85rem;margin-top:6rem}
 .auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
@@ -760,6 +760,65 @@ body.is-subdomain .preview-back{display:none!important}
 .demo-bg-motion{animation:demoGradientDrift 18s ease-in-out infinite alternate;will-change:transform}
 @keyframes demoGradientDrift{to{transform:scale(1.08) translate3d(-1.2%,1%,0)}}
 @media(prefers-reduced-motion:reduce){.demo-bg-motion{animation:none}}
+
+ </style>
+<style>
+/* BioFlex account switcher and leaderboard finish */
+.bf-account-modal{width:min(100%,470px);padding:1.25rem}
+.bf-account-modal .modal-head{margin-bottom:1rem}
+.bf-account-modal .modal-head h3{font-size:1.2rem}
+.bf-account-current{display:flex;align-items:center;gap:.8rem;padding:.85rem;margin:.85rem 0 1rem;border:1px solid rgba(96,165,250,.26);border-radius:14px;background:linear-gradient(120deg,rgba(37,99,235,.16),rgba(15,23,42,.5))}
+.bf-account-avatar{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;overflow:hidden;border-radius:50%;background:linear-gradient(145deg,#2563eb,#60a5fa);color:#eff6ff;font-weight:800}
+.bf-account-avatar img{width:100%;height:100%;object-fit:cover}
+.bf-account-copy{min-width:0;flex:1}
+.bf-account-copy strong,.bf-account-copy span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bf-account-copy strong{font-size:.88rem;color:#eff6ff}
+.bf-account-copy span{margin-top:.17rem;font-size:.73rem;color:rgba(219,234,254,.62)}
+.bf-current-tag{padding:.27rem .48rem;border-radius:999px;background:rgba(96,165,250,.14);color:#bfdbfe;font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.bf-account-section-label{padding:.4rem .15rem;color:rgba(219,234,254,.53);font-size:.68rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.bf-account-list{display:grid;gap:.45rem;max-height:min(34vh,260px);overflow:auto}
+.bf-account-option{display:flex;align-items:center;gap:.75rem;width:100%;padding:.7rem .75rem;border:1px solid rgba(96,165,250,.12);border-radius:12px;background:rgba(8,16,31,.54);color:#dbeafe;text-align:left;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+.bf-account-option:hover,.bf-account-option:focus-visible{outline:none;transform:translateY(-1px);border-color:rgba(96,165,250,.38);background:rgba(37,99,235,.13)}
+.bf-account-option[aria-busy="true"]{opacity:.62;cursor:wait}
+.bf-account-option .bf-account-avatar{width:36px;height:36px;flex-basis:36px;font-size:.82rem}
+.bf-account-option .bf-account-copy strong{font-size:.8rem}
+.bf-account-option .bf-account-copy span{font-size:.7rem}
+.bf-account-option > i{margin-left:auto;color:#93c5fd;font-size:.8rem}
+.bf-account-empty{padding:.75rem .2rem;color:rgba(219,234,254,.56);font-size:.78rem}
+.bf-account-add{width:100%;margin-top:.8rem;justify-content:center;border-style:dashed!important}
+.bf-account-status{min-height:1rem;margin-top:.6rem;color:#fca5a5;font-size:.76rem}
+.quick-menu{z-index:1200}
+.quick-menu-item:focus-visible{outline:2px solid #93c5fd;outline-offset:2px}
+.sidebar-account-card{position:relative}
+.bf-account-menu-trigger{flex:0 0 34px;width:34px;height:34px;margin-left:.1rem;border:1px solid rgba(96,165,250,.16);background:rgba(96,165,250,.07)}
+.bf-account-menu-trigger:hover,.bf-account-menu-trigger[aria-expanded="true"]{border-color:rgba(96,165,250,.38);background:rgba(37,99,235,.2)}
+.sidebar-account-card>.quick-menu{top:calc(100% + .45rem);right:0;bottom:auto;left:0}
+.sidebar-footer>.sidebar-footer-btn:not(.share){display:none!important}
+.bf-preview-label{margin-top:.75rem;color:rgba(219,234,254,.5);font:600 .64rem 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+
+.leaderboard-podium{align-items:end;gap:.7rem;padding:1.35rem 1rem 1.1rem;background:linear-gradient(180deg,rgba(37,99,235,.1),transparent)}
+.leaderboard-podium-card{position:relative;gap:.42rem;min-height:150px;padding:1.2rem .55rem .9rem;border-radius:16px;background:rgba(14,26,47,.78);border-color:rgba(147,197,253,.13)}
+.leaderboard-podium-card.place-1{min-height:174px;border-color:rgba(251,191,36,.44);background:linear-gradient(160deg,rgba(120,83,19,.19),rgba(14,26,47,.9) 60%)}
+.leaderboard-podium-card.place-2{min-height:158px}
+.leaderboard-podium-card.place-3{min-height:148px}
+.leaderboard-crown{position:absolute;top:-15px;left:50%;display:grid;place-items:center;width:30px;height:30px;transform:translateX(-50%);border:1px solid rgba(253,224,71,.36);border-radius:50%;background:#15253d;color:#fcd34d;font-size:.83rem;box-shadow:0 5px 16px rgba(0,0,0,.22)}
+.leaderboard-podium-rank{margin-top:.15rem;color:#fcd34d}
+.leaderboard-podium-card.place-2 .leaderboard-podium-rank{color:#dbeafe}
+.leaderboard-podium-card.place-3 .leaderboard-podium-rank{color:#c7d2fe}
+.leaderboard-podium-avatar{width:52px;height:52px;border:2px solid rgba(147,197,253,.22);background:linear-gradient(135deg,#1d4ed8,#334155)}
+.leaderboard-podium-card.place-1 .leaderboard-podium-avatar{width:60px;height:60px;border-color:rgba(251,191,36,.45)}
+.leaderboard-podium-name{font-size:.78rem}
+.leaderboard-podium-views{font-size:.7rem}
+@media(max-width:520px){
+  .bf-account-modal{padding:1rem}
+  .leaderboard-podium{gap:.4rem;padding:1.2rem .55rem .8rem}
+  .leaderboard-podium-card{min-height:138px;padding-inline:.3rem}
+  .leaderboard-podium-card.place-1{min-height:158px}
+  .leaderboard-podium-card.place-2{min-height:146px}
+  .leaderboard-podium-card.place-3{min-height:136px}
+  .leaderboard-podium-avatar{width:42px;height:42px}
+  .leaderboard-podium-card.place-1 .leaderboard-podium-avatar{width:50px;height:50px}
+}
 
 </style>
 </head>
@@ -1910,7 +1969,7 @@ function tabBadges(){
 }
 
 function tabLeaderboard(){
-  return '<div class="flex items-center justify-between gap-3 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">Leaderboard</h1><p class="muted mt-1">Top public profiles ranked by recorded profile views.</p></div><button type="button" class="btn btn-ghost btn-sm" onclick="loadLeaderboard()"><i class="fa-solid fa-rotate"></i> Refresh</button></div><section class="glass mt-6" style="border-radius:16px;overflow:hidden"><div id="leaderboard-list" role="list" aria-live="polite"><div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div class="mt-2">Loading leaderboard…</div></div></div></section><p class="text-xs muted mt-3">Rankings use each profile’s saved view_count. Repeated visits from the same browser/device are deduplicated locally; this cannot identify one person across different devices or cleared browser storage.</p>';
+  return '<div class="flex items-center justify-between gap-3 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">Leaderboard</h1></div><button type="button" class="btn btn-ghost btn-sm" onclick="loadLeaderboard()"><i class="fa-solid fa-rotate"></i> Refresh</button></div><section class="glass mt-6" style="border-radius:16px;overflow:hidden"><div id="leaderboard-list" role="list" aria-live="polite"><div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div class="mt-2">Loading leaderboard…</div></div></div></section>';
 }
 async function loadLeaderboard(){
   const root=document.getElementById('leaderboard-list');
@@ -1923,7 +1982,7 @@ async function loadLeaderboard(){
     if(!rows.length){root.innerHTML='<div class="empty"><i class="fa-solid fa-ranking-star"></i><div class="mt-2">No public profiles to rank yet.</div></div>';return}
     const podium=rows.slice(0,3).map((row,index)=>{
       const name=row.display_name||row.username,avatar=safeWebUrl(row.avatar_url||'');
-      return '<button class="leaderboard-podium-card" type="button" data-profile-username="'+esc(row.username)+'"><span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><strong class="leaderboard-podium-name">'+esc(name)+'</strong><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+fmtUID(row.view_count||0)+'</span></button>';
+      return '<button class="leaderboard-podium-card place-'+(index+1)+'" type="button" data-profile-username="'+esc(row.username)+'">'+(index===0?'<span class="leaderboard-crown" aria-label="First place"><i class="fa-solid fa-crown" aria-hidden="true"></i></span>':'')+'<span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><strong class="leaderboard-podium-name">'+esc(name)+'</strong><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+fmtUID(row.view_count||0)+'</span></button>';
     }).join('');
     const remaining=rows.slice(3).map((row,index)=>{
       const rank=index+4;
@@ -2940,7 +2999,7 @@ function toggleQuickMenu(){
   const menu=document.createElement('div');
   menu.className='quick-menu';
   menu.setAttribute('role','menu');
-  menu.innerHTML='<div class="quick-menu-heading"><div class="quick-menu-title">Quick Menu</div><div class="quick-menu-subtitle">Navigate quickly through BioFlex</div></div><button class="quick-menu-item" type="button" role="menuitem" onclick="closeQuickMenu();toast(\'Switching accounts is not available yet.\',\'info\')"><i class="fa-solid fa-users-gear"></i> Switch Accounts <i class="fa-solid fa-arrow-right" style="margin-left:auto"></i></button><button class="quick-menu-item quick-home" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/landing\')"><i class="fa-solid fa-house"></i> Home</button><button class="quick-menu-item quick-leaderboard" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/dashboard/leaderboard\')"><i class="fa-solid fa-chart-column"></i> Leaderboard</button><button class="quick-menu-item quick-discord" type="button" role="menuitem" onclick="closeQuickMenu();toast(\'Discord Server — Coming Soon\',\'info\')"><i class="fa-brands fa-discord"></i> Discord Server</button><button class="quick-menu-item danger" type="button" role="menuitem" onclick="closeQuickMenu();handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>';
+  menu.innerHTML='<div class="quick-menu-heading"><div class="quick-menu-title">Quick Menu</div><div class="quick-menu-subtitle">Navigate quickly through BioFlex</div></div><button class="quick-menu-item" type="button" role="menuitem" data-bf-switch-accounts><i class="fa-solid fa-users-gear"></i> Switch Accounts <i class="fa-solid fa-arrow-right" style="margin-left:auto"></i></button><button class="quick-menu-item quick-home" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/landing\')"><i class="fa-solid fa-house"></i> Home</button><button class="quick-menu-item quick-leaderboard" type="button" role="menuitem" onclick="closeQuickMenu();navigate(\'#/dashboard/leaderboard\')"><i class="fa-solid fa-chart-column"></i> Leaderboard</button><button class="quick-menu-item quick-discord" type="button" role="menuitem" onclick="closeQuickMenu();toast(\'Discord Server — Coming Soon\',\'info\')"><i class="fa-brands fa-discord"></i> Discord Server</button><button class="quick-menu-item danger" type="button" role="menuitem" onclick="closeQuickMenu();handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>';
   const anchor=document.querySelector('#drawer.open .drawer-user-area')||document.querySelector('.sidebar-footer');
   if(anchor)anchor.appendChild(menu);
   App.quickMenuOutsideHandler=function(e){
@@ -3656,6 +3715,242 @@ startDashboardPresence=function(){
 
 boot();
 window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
+</script>
+<script>
+(function(){
+  'use strict';
+  var STORE_KEY='bioflex.savedAccounts.v1';
+  var escapeHtml=window.BioFlex&&window.BioFlex.esc||function(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+  var localPreview=window.location.protocol==='file:';
+  var previewAccounts=[
+    {userId:'bioflex-preview-sem',email:'semx@example.test',name:'Semx',username:'semx',avatar:'',uid:1042,accessToken:'preview',refreshToken:'preview'},
+    {userId:'bioflex-preview-rafi',email:'rafi@example.test',name:'Rafi Hasan',username:'rafi',avatar:'',uid:1008,accessToken:'preview',refreshToken:'preview'},
+    {userId:'bioflex-preview-azre',email:'azre@example.test',name:'Azre',username:'azre',avatar:'',uid:1004,accessToken:'preview',refreshToken:'preview'}
+  ];
+  if(localPreview&&window.BioFlex){
+    window.BioFlex.localPreviewMode=true;
+    window.BioFlex.App.user={id:previewAccounts[0].userId,email:previewAccounts[0].email,user_metadata:{full_name:previewAccounts[0].name,username:previewAccounts[0].username},app_metadata:{provider:'email'},identities:[]};
+    window.BioFlex.App.profile={user_id:previewAccounts[0].userId,username:previewAccounts[0].username,display_name:previewAccounts[0].name,uid:previewAccounts[0].uid,avatar_url:'',view_count:128,created_at:'2025-01-15T00:00:00.000Z'};
+    window.BioFlex.App.links=[];window.BioFlex.App.socials=[];
+    window.loadAnalytics=function(){
+      var note=document.getElementById('ov-analytics-note');
+      if(note){note.textContent='Local preview uses sample data.';note.classList.remove('hidden')}
+      ['ov-unique','ov-clicks'].forEach(function(id){var item=document.getElementById(id);if(item)item.textContent='—'});
+    };
+    window.startDashboardPresence=function(){
+      ['ov-live-value','an-live-value'].forEach(function(id){var item=document.getElementById(id);if(item)item.textContent='3'});
+    };
+  }
+
+  function readAccounts(){
+    if(localPreview)return previewAccounts.slice();
+    try{var value=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');return Array.isArray(value)?value.filter(function(item){return item&&item.userId&&item.refreshToken}):[]}catch(_){return []}
+  }
+  function saveAccounts(accounts){if(localPreview){previewAccounts=accounts.slice(0,12);return}try{localStorage.setItem(STORE_KEY,JSON.stringify(accounts.slice(0,12)))}catch(_){if(window.BioFlex)window.BioFlex.toast('Could not save account switching on this device.','error')}}
+  function accountInfo(user,profile){
+    var matchingProfile=profile&&profile.user_id===user.id?profile:null;
+    var meta=user.user_metadata||{}, name=matchingProfile&&matchingProfile.display_name||meta.full_name||meta.name||meta.username||user.email||'BioFlex account';
+    return {userId:user.id,email:user.email||meta.email||'',name:String(name),username:matchingProfile&&matchingProfile.username||meta.username||'',avatar:safeAvatar(matchingProfile&&matchingProfile.avatar_url||meta.avatar_url||meta.picture||'')};
+  }
+  function safeAvatar(value){var candidate=String(value||'');return /^https?:\/\//i.test(candidate)?candidate:''}
+  function rememberSession(session,profile){
+    if(!session||!session.user||!session.refresh_token)return;
+    var accounts=readAccounts(),info=accountInfo(session.user,profile),record={
+      userId:session.user.id,email:info.email,name:info.name,username:info.username,avatar:info.avatar,
+      accessToken:session.access_token,refreshToken:session.refresh_token,updatedAt:Date.now()
+    };
+    var index=accounts.findIndex(function(item){return item.userId===record.userId});
+    if(index<0)accounts.unshift(record);else accounts[index]=Object.assign({},accounts[index],record);
+    saveAccounts(accounts);
+  }
+  async function captureCurrent(){
+    try{
+      var response=await window.BioFlex.db.auth.getSession(),session=response.data&&response.data.session;
+      var current=window.BioFlex.App.profile;
+      rememberSession(session,current);
+    }catch(_){}
+  }
+  function avatarMarkup(info){
+    var initial=(info.name||info.email||'B').trim().charAt(0).toUpperCase()||'B';
+    return '<span class="bf-account-avatar">'+(info.avatar?'<img src="'+escapeHtml(info.avatar)+'" alt="">':escapeHtml(initial))+'</span>';
+  }
+  function accountMarkup(info,subline){
+    return avatarMarkup(info)+'<span class="bf-account-copy"><strong>'+escapeHtml(info.name||'BioFlex account')+'</strong><span>'+escapeHtml(subline||info.email||'Signed-in account')+'</span></span>';
+  }
+  function currentDetails(){
+    var app=window.BioFlex.App,user=app.user||{},profile=app.profile||{},metadata=user.user_metadata||{};
+    return {userId:user.id,email:user.email||metadata.email||'',name:profile.display_name||metadata.full_name||metadata.name||profile.username||user.email||'BioFlex account',username:profile.username||'',avatar:safeAvatar(profile.avatar_url||metadata.avatar_url||metadata.picture||'')};
+  }
+  function closeAndRestoreFocus(modal,trigger){
+    window.closeModal(modal);
+    if(trigger&&trigger.isConnected)trigger.focus();
+  }
+  function openAccountSwitcher(trigger){
+    var app=window.BioFlex;
+    if(!app||!app.App.user)return;
+    captureCurrent().then(function(){
+      var current=currentDetails(),others=readAccounts().filter(function(item){return item.userId!==current.userId});
+      var otherMarkup=others.length?others.map(function(item,index){
+        return '<button class="bf-account-option" type="button" data-account-index="'+index+'">'+accountMarkup(item,item.email||('@'+(item.username||'account')))+'<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>';
+      }).join(''):'<div class="bf-account-empty">No other saved accounts on this device.</div>';
+      var modal=window.openModal('<section class="bf-account-modal" role="dialog" aria-modal="true" aria-labelledby="bf-account-title"><div class="modal-head"><div><h3 id="bf-account-title">Switch account</h3><p>Choose an account to continue with.</p></div><button class="modal-close" type="button" data-bf-close aria-label="Close account switcher"><i class="fa-solid fa-xmark"></i></button></div><div class="bf-account-current">'+accountMarkup(current,current.email||('@'+(current.username||'account')))+'<span class="bf-current-tag">Current</span></div><div class="bf-account-section-label">Saved accounts</div><div class="bf-account-list">'+otherMarkup+'</div><div class="bf-account-status" aria-live="polite"></div><button class="btn btn-ghost bf-account-add" type="button" data-bf-add><i class="fa-solid fa-plus"></i> Add account</button></section>');
+      var dialog=modal.querySelector('[role="dialog"]'),status=modal.querySelector('.bf-account-status');
+      modal.querySelector('[data-bf-close]').onclick=function(){closeAndRestoreFocus(modal,trigger)};
+      modal.querySelector('[data-bf-add]').onclick=async function(){
+        if(app.localPreviewMode){app.toast('Real sign-in needs this page to run on an HTTP or HTTPS address.','info');return}
+        var button=this;button.disabled=true;status.textContent='Opening sign in…';
+        try{
+          var response=await app.db.auth.signOut({scope:'local'});
+          if(response.error)throw response.error;
+          app.App.user=null;app.App.profile=null;app.App.links=[];app.App.socials=[];
+          closeAndRestoreFocus(modal,null);app.navigate('#/login');
+        }catch(error){
+          status.textContent=error.message||'Could not open sign in.';
+          button.disabled=false;
+        }
+      };
+      modal.querySelectorAll('[data-account-index]').forEach(function(button){
+        button.onclick=async function(){
+          var index=Number(button.getAttribute('data-account-index')),chosen=others[index];
+          if(!chosen)return;
+          modal.querySelectorAll('button').forEach(function(item){item.disabled=true});
+          button.setAttribute('aria-busy','true');status.textContent='Restoring session…';
+          try{
+            if(app.localPreviewMode){
+              app.App.user={id:chosen.userId,email:chosen.email,user_metadata:{full_name:chosen.name,username:chosen.username,avatar_url:chosen.avatar},app_metadata:{provider:'email'},identities:[]};
+              app.App.profile={user_id:chosen.userId,username:chosen.username,display_name:chosen.name,uid:chosen.uid,avatar_url:chosen.avatar||'',view_count:128,created_at:'2025-01-15T00:00:00.000Z'};
+              app.App.links=[];app.App.socials=[];
+              window.renderDashboard();window.closeModal(modal);app.toast('Preview account switched.','success');return;
+            }
+            var result=await app.db.auth.setSession({access_token:chosen.accessToken,refresh_token:chosen.refreshToken});
+            if(result.error)throw result.error;
+            var session=result.data&&result.data.session;
+            if(!session||!session.user)throw new Error('This saved session has expired. Sign in again to add this account.');
+            rememberSession(session,null);
+            await window.completeAuthFlow();
+            if(app.App.user&&app.App.user.id===chosen.userId){window.closeModal(modal);app.toast('Account switched.','success')}
+            else throw new Error('Could not load the selected account profile.');
+          }catch(error){
+            status.textContent=error.message||'Could not restore this account.';
+            button.removeAttribute('aria-busy');
+            modal.querySelectorAll('button').forEach(function(item){item.disabled=false});
+          }
+        };
+      });
+      modal.addEventListener('keydown',function(event){
+        if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeAndRestoreFocus(modal,trigger);return}
+        if(event.key==='Tab'){
+          var focusable=Array.from(dialog.querySelectorAll('button:not(:disabled)'));
+          if(!focusable.length)return;
+          var first=focusable[0],last=focusable[focusable.length-1];
+          if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+          else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+        }
+      });
+      modal.querySelector('[data-bf-close]').focus();
+    });
+  }
+
+  var originalRenderDashboard=window.renderDashboard;
+  window.renderDashboard=function(){
+    var result=originalRenderDashboard.apply(this,arguments);
+    var head=document.querySelector('#sidebar-account-card .account-card-head');
+    if(head&&!head.querySelector('.bf-account-menu-trigger')){
+      var trigger=document.createElement('button');
+      trigger.type='button';trigger.className='drawer-quick-trigger bf-account-menu-trigger';
+      trigger.setAttribute('aria-label','Open Quick Menu');trigger.setAttribute('aria-haspopup','menu');trigger.setAttribute('aria-expanded','false');
+      trigger.innerHTML='<i class="fa-solid fa-ellipsis" aria-hidden="true"></i>';
+      trigger.addEventListener('click',window.toggleQuickMenu);
+      head.appendChild(trigger);
+    }
+    return result;
+  };
+
+  window.bioflexOpenAccountSwitcher=openAccountSwitcher;
+  window.bioflexCloseQuickMenu=window.closeQuickMenu;
+  window.closeQuickMenu=function(){
+    if(window.bioflexCloseQuickMenu)window.bioflexCloseQuickMenu();
+    document.removeEventListener('keydown',quickMenuEscape,true);
+    document.querySelectorAll('.bf-account-menu-trigger,.drawer-quick-trigger').forEach(function(trigger){trigger.setAttribute('aria-expanded','false')});
+  };
+  function quickMenuEscape(event){
+    if(event.key==='Escape'&&document.querySelector('.quick-menu')){
+      event.preventDefault();event.stopPropagation();window.closeQuickMenu();
+    }
+  }
+  var originalToggle=window.toggleQuickMenu;
+  window.toggleQuickMenu=function(){
+    originalToggle();
+    if(document.querySelector('.quick-menu')){
+      document.addEventListener('keydown',quickMenuEscape,true);
+      var menu=document.querySelector('.quick-menu'),item=menu.querySelector('[data-bf-switch-accounts]');
+      var opener=document.querySelector('#drawer.open .drawer-quick-trigger')||document.querySelector('.bf-account-menu-trigger');
+      if(opener)opener.setAttribute('aria-expanded','true');
+      var closeForAction=function(){
+        var fromDrawer=!!(opener&&opener.closest('#drawer.open'));
+        window.closeQuickMenu();
+        if(fromDrawer&&typeof window.closeDrawer==='function')window.closeDrawer();
+      };
+      var navigateFromMenu=function(path){
+        closeForAction();
+        window.setTimeout(function(){window.navigate(path)},0);
+      };
+      var subtitle=menu.querySelector('.quick-menu-subtitle');if(subtitle)subtitle.remove();
+      var discord=menu.querySelector('.quick-discord');if(discord)discord.remove();
+      var home=menu.querySelector('.quick-home');
+      if(home)home.onclick=function(event){event.preventDefault();event.stopPropagation();navigateFromMenu('#/dashboard/overview')};
+      var leaderboard=menu.querySelector('.quick-leaderboard');
+      if(leaderboard)leaderboard.onclick=function(event){event.preventDefault();event.stopPropagation();navigateFromMenu('#/dashboard/leaderboard')};
+      var logout=menu.querySelector('.quick-menu-item.danger');
+      if(logout)logout.onclick=function(event){event.preventDefault();event.stopPropagation();closeForAction();window.setTimeout(function(){window.handleLogout()},0)};
+      if(opener&&opener.classList.contains('bf-account-menu-trigger')){
+        var card=opener.closest('.sidebar-account-card');
+        if(card)card.appendChild(menu);
+      }
+      if(item)item.onclick=function(){
+        var returnFocus=opener&&opener.isConnected?opener:null;
+        closeForAction();window.setTimeout(function(){openAccountSwitcher(returnFocus)},0);
+      };
+    }else document.removeEventListener('keydown',quickMenuEscape,true);
+  };
+
+  var originalLeaderboard=window.loadLeaderboard;
+  window.loadLeaderboard=async function(){
+    if(!localPreview)return originalLeaderboard.apply(this,arguments);
+    var root=document.getElementById('leaderboard-list');
+    if(!root)return;
+    var rows=[
+      {username:'semx',display_name:'Semx',view_count:1280},
+      {username:'rafi',display_name:'Rafi Hasan',view_count:960},
+      {username:'azre',display_name:'Azre',view_count:740},
+      {username:'vuer',display_name:'Vuer',view_count:520}
+    ];
+    var podium=rows.slice(0,3).map(function(row,index){
+      var name=row.display_name||row.username;
+      return '<button class="leaderboard-podium-card place-'+(index+1)+'" type="button" data-preview-profile="'+escapeHtml(row.username)+'">'+(index===0?'<span class="leaderboard-crown" aria-label="First place"><i class="fa-solid fa-crown" aria-hidden="true"></i></span>':'')+'<span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+escapeHtml(name.trim().charAt(0).toUpperCase()||'?')+'</span><strong class="leaderboard-podium-name">'+escapeHtml(name)+'</strong><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+row.view_count.toLocaleString()+'</span></button>';
+    }).join('');
+    var remaining=rows.slice(3).map(function(row,index){
+      return '<button class="leaderboard-row" type="button" role="listitem" data-preview-profile="'+escapeHtml(row.username)+'"><span class="leaderboard-rank">#'+(index+4)+'</span><span class="leaderboard-avatar">'+escapeHtml(row.display_name.charAt(0))+'</span><span class="min-w-0"><strong class="truncate" style="display:block">'+escapeHtml(row.display_name)+'</strong><span class="text-xs muted">@'+escapeHtml(row.username)+'</span></span><span class="text-sm tabular-nums"><i class="fa-solid fa-eye muted"></i> '+row.view_count.toLocaleString()+'</span></button>';
+    }).join('');
+    root.innerHTML='<div class="bf-preview-label">Local preview · sample data</div><div class="leaderboard-podium" aria-label="Top three profiles">'+podium+'</div>'+remaining;
+    root.querySelectorAll('[data-preview-profile]').forEach(function(item){item.addEventListener('click',function(){window.BioFlex.toast('Profile links are available on the live site.','info')})});
+  };
+
+  if(localPreview&&!window.location.hash){
+    window.location.hash='#/dashboard/leaderboard';
+    window.route();
+  }
+
+  if(!localPreview&&window.BioFlex&&window.BioFlex.db){
+    window.BioFlex.db.auth.onAuthStateChange(function(event,session){
+      if(session&&(event==='SIGNED_IN'||event==='TOKEN_REFRESHED'||event==='INITIAL_SESSION')){
+        window.setTimeout(function(){rememberSession(session,window.BioFlex.App.profile)},0);
+      }
+    });
+    captureCurrent();
+  }
+})();
+
 </script>
 </body>
 </html>
