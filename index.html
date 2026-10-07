@@ -106,6 +106,8 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .site-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem;max-width:76rem;margin:0 auto;position:relative;z-index:5}
 .brand{display:flex;align-items:center;gap:.6rem;font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;flex-shrink:0}
 .brand-logo{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3b82f6,#1d4ed8);box-shadow:0 0 20px rgba(59,130,246,.5);color:#fff;font-size:.95rem}
+.brand-logo.has-site-logo,.lp-logo.has-site-logo{overflow:hidden;padding:2px;background:transparent!important;box-shadow:none!important}
+.brand-logo.has-site-logo>img,.lp-logo.has-site-logo>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
 .brand-name span{color:var(--accent-2)}
 .hero{padding:2rem 0 0;text-align:center}
 .pill{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.4rem 1rem;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.28);font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:#bfdbfe;font-weight:600}
@@ -580,6 +582,16 @@ body.is-subdomain .preview-back{display:none!important}
 .lp-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.25rem;padding:.5rem .5rem .5rem 1rem;border-radius:999px;background:rgba(10,17,32,.72);border:1px solid rgba(96,165,250,.18);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);position:relative;z-index:1000;box-shadow:0 16px 46px rgba(0,0,0,.55),inset 0 1px 0 rgba(147,197,253,.08)}
 .lp-brand{display:flex;align-items:center;gap:.6rem;font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;color:#fff;letter-spacing:-.01em}
 .lp-logo{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;font-size:.85rem;box-shadow:0 0 22px rgba(59,130,246,.6)}
+.lp-logo img,.brand-logo img{width:100%;height:100%;object-fit:contain;border-radius:inherit}
+.landing-showcase{width:min(100%,560px);margin:2.3rem auto 0;padding:12px;border:1px solid rgba(96,165,250,.2);border-radius:24px;background:rgba(10,17,32,.6);box-shadow:0 24px 80px rgba(0,0,0,.42);overflow:hidden}
+.landing-showcase img{width:100%;max-height:520px;min-height:190px;object-fit:cover;border-radius:16px}
+.landing-showcase.is-empty{min-height:190px;display:grid;place-items:center;color:rgba(219,234,254,.55);background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(8,14,28,.8))}
+.landing-showcase.is-empty img{display:none}
+.landing-socials{display:flex;justify-content:center;gap:.8rem;margin:1.25rem auto 0}
+.landing-socials a{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:rgba(10,17,32,.78);border:1px solid rgba(96,165,250,.22);color:#dbeafe;font-size:1.15rem;transition:transform .18s,border-color .18s}
+.landing-socials a:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.65)}
+.site-footer-brand{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.55rem;color:rgba(219,234,254,.78);font-weight:700}
+.site-footer-brand .lp-logo{width:24px;height:24px;font-size:.68rem;box-shadow:none}
 .lp-menu-btn{width:38px;height:38px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;color:#cbd5e1;font-size:1.05rem;background:transparent;border:0;cursor:pointer;transition:all .18s}
 .lp-menu-btn:hover{background:rgba(96,165,250,.14);color:#fff}
 .lp-menu{position:absolute;top:calc(100% + .45rem);right:.15rem;min-width:180px;max-width:85vw;padding:.35rem;border-radius:14px;background:rgba(8,14,28,.98);border:1px solid rgba(96,165,250,.25);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 24px 70px rgba(0,0,0,.85);z-index:9999;animation:menuPop .18s ease}
@@ -942,38 +954,11 @@ body.is-subdomain .preview-back{display:none!important}
         <button class="demo-cta" type="button" onclick="openSamplePreview()"><i class="fa-solid fa-eye"></i> Preview a sample profile</button>
       </div>
 
-      <div class="lp-phones">
-        <div class="ph ph-l">
-          <div class="ph-bg" style="background:linear-gradient(165deg,#0f1f3d,#1e40af 55%,#0a1120)"></div>
-          <div class="ph-inner">
-            <div class="ph-avatar" style="background:linear-gradient(135deg,#60a5fa,#2563eb)">A</div>
-            <div class="ph-name">Azre</div>
-            <div class="ph-loc">GFX Artist</div>
-            <div class="ph-socials"><span></span><span></span><span></span><span></span></div>
-            <div class="ph-link"></div><div class="ph-link"></div><div class="ph-link"></div>
-          </div>
-        </div>
-        <div class="ph ph-c">
-          <div class="ph-bg" style="background:linear-gradient(165deg,#0a1e3d,#3b82f6 55%,#0a1120)"></div>
-          <div class="ph-inner">
-            <div class="ph-avatar" style="background:linear-gradient(135deg,#93c5fd,#3b82f6)">V</div>
-            <div class="ph-name">vue</div>
-            <div class="ph-loc">welcome to my page!</div>
-            <div class="ph-socials"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="ph-link hl"></div><div class="ph-link"></div><div class="ph-link"></div><div class="ph-link"></div>
-          </div>
-        </div>
-        <div class="ph ph-r">
-          <div class="ph-bg" style="background:linear-gradient(165deg,#0c1a36,#1d4ed8 55%,#060b18)"></div>
-          <div class="ph-inner">
-            <div class="ph-avatar" style="background:linear-gradient(135deg,#60a5fa,#1d4ed8)">H</div>
-            <div class="ph-name">hris</div>
-            <div class="ph-loc">bioflex.cyou on top!</div>
-            <div class="ph-socials"><span></span><span></span><span></span></div>
-            <div class="ph-link"></div><div class="ph-link"></div><div class="ph-link"></div>
-          </div>
-        </div>
+      <div class="landing-showcase is-empty" id="landing-showcase">
+        <img id="landing-showcase-image" alt="Website profile image">
+        <span id="landing-showcase-placeholder"><i class="fa-solid fa-image"></i> Add your profile image from Website Identity</span>
       </div>
+      <nav class="landing-socials" id="landing-socials" aria-label="Social media links"></nav>
 
       <section class="lp-features">
         <div class="lp-feature">
@@ -994,7 +979,7 @@ body.is-subdomain .preview-back{display:none!important}
       </section>
     </main>
   </div>
-  <footer class="site-footer"><div class="container"><p>&copy; <span id="footer-year"></span> BioFlex &middot; bioflex.cyou</p></div></footer>
+  <footer class="site-footer"><div class="container"><div class="site-footer-brand"><span class="lp-logo footer-site-logo"><i class="fa-solid fa-bolt"></i></span><span class="footer-site-name">BioFlex</span></div><p>&copy; <span id="footer-year"></span> <span class="footer-site-name">BioFlex</span> &middot; <span class="footer-site-domain">bioflex.cyou</span></p></div></footer>
 </div>
 
 <!-- AUTH -->
@@ -1047,13 +1032,13 @@ body.is-subdomain .preview-back{display:none!important}
   <div class="dash-main">
     <div class="dash-mobile-bar">
       <button class="btn btn-ghost btn-icon" onclick="openDrawer()"><i class="fa-solid fa-bars"></i></button>
-      <a href="#/landing" class="brand" data-nav="#/landing" style="font-size:1rem"><div class="brand-logo" style="width:24px;height:24px;font-size:.7rem"><i class="fa-solid fa-bolt"></i></div>Bio<span>Flex</span></a>
+      <a href="#/landing" class="brand" data-nav="#/landing" style="font-size:1rem"><div class="brand-logo" style="width:24px;height:24px;font-size:.7rem"><i class="fa-solid fa-bolt"></i></div><span class="brand-name">BioFlex</span></a>
       <div class="flex items-center gap-2 dash-mobile-actions">
         <button class="dash-user-btn" onclick="navigate('#/preview')" title="View preview">
           <span class="uname">@<span id="mb-username">user</span></span>
           <i class="fa-solid fa-chevron-right"></i>
         </button>
-        <button class="btn btn-ghost btn-icon dash-discord-btn" type="button" onclick="toast('Coming Soon','info')" title="Discord — Coming Soon" aria-label="Discord — Coming Soon"><i class="fa-brands fa-discord"></i></button>
+        <a class="btn btn-ghost btn-icon dash-discord-btn" id="dashboard-discord-link" href="#" target="_blank" rel="noopener noreferrer" title="Open our Discord" aria-label="Open our Discord" hidden><i class="fa-brands fa-discord"></i></a>
       </div>
     </div>
     <div id="dashboard-content" class="dash-content"></div>
@@ -1154,6 +1139,7 @@ const RESERVED = ['admin','dashboard','login','signup','register','api','support
 const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
 
 const PLATFORMS = [
+  {id:'whatsapp',label:'WhatsApp',icon:'fa-brands fa-whatsapp',color:'#25D366',prefix:'wa.me/'},
   {id:'tiktok',label:'TikTok',icon:'fa-brands fa-tiktok',color:'#fff',prefix:'tiktok.com/@'},
   {id:'instagram',label:'Instagram',icon:'fa-brands fa-instagram',color:'#E1306C',prefix:'instagram.com/'},
   {id:'youtube',label:'YouTube',icon:'fa-brands fa-youtube',color:'#ef4444',prefix:'youtube.com/@'},
@@ -1777,6 +1763,21 @@ function renderDrawer(){
   const account=accountPresentation();
   const avatar=account.avatar?'<img src="'+esc(account.avatar)+'" alt="">':'<i class="fa-solid fa-user"></i>';
   d.innerHTML='<div style="padding:1rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center"><div class="flex items-center gap-2"><div class="brand-logo" style="width:26px;height:26px;font-size:.75rem"><i class="fa-solid fa-bolt"></i></div><span style="font-family:\'Space Grotesk\',sans-serif;font-weight:700">BioFlex</span></div><button class="btn btn-ghost btn-icon" type="button" onclick="closeDrawer()" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button></div><nav class="drawer-nav-wrap"><div class="sidebar-nav" id="drawer-nav-account"></div><div class="sidebar-nav" id="drawer-nav-customize"></div></nav><div class="drawer-footer-area"><section class="drawer-support-card"><p>Have a question or need support?</p><button class="drawer-support-btn" type="button" onclick="closeDrawer();toast(\'Help Center — Coming Soon\',\'info\')"><i class="fa-solid fa-circle-question"></i> Help Center</button><p style="margin:.75rem 0 .45rem">Check out your page</p><button class="drawer-page-btn" type="button" onclick="closeDrawer();navigate(\'#/preview\')"><i class="fa-solid fa-arrow-up-right-from-square"></i> My Page</button></section><button class="drawer-share-btn" type="button" onclick="closeDrawer();openShareModal()"><i class="fa-solid fa-share-nodes"></i> Share Your Profile</button><div class="drawer-user-area"><div class="drawer-user-row"><div class="drawer-user-avatar">'+avatar+'</div><div class="drawer-user-copy"><div class="drawer-user-name">'+esc(account.displayName)+'</div><div class="drawer-user-uid">UID '+esc(account.uid)+'</div></div><button class="drawer-quick-trigger" type="button" onclick="toggleQuickMenu()" aria-label="Open Quick Menu" aria-haspopup="true"><i class="fa-solid fa-ellipsis"></i></button></div></div></div>';
+  const currentName=document.querySelector('#screen-landing .lp-brand > span:last-child')?.textContent.trim()||document.querySelector('.brand-name')?.textContent.trim()||'BioFlex';
+  const currentLogo=document.querySelector('.brand-logo img,.lp-logo img');
+  const drawerBrand=d.firstElementChild?.querySelector('.brand-logo');
+  if(drawerBrand){
+    drawerBrand.setAttribute('aria-label',currentName);
+    if(currentLogo){
+      const image=currentLogo.cloneNode();
+      image.alt=currentName+' logo';
+      image.style.cssText='display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit';
+      drawerBrand.replaceChildren(image);
+      drawerBrand.classList.add('has-site-logo');
+    }
+    const drawerName=drawerBrand.nextElementSibling;
+    if(drawerName)drawerName.textContent=currentName;
+  }
   renderNavGroup('drawer-nav-account',NAV_ACCOUNT);
   renderNavGroup('drawer-nav-customize',NAV_CUSTOMIZE);
 }
@@ -2865,7 +2866,7 @@ function openCustomLinkAdd(){
     '<div class="mb-3"><label class="field-label">Title</label><input id="new-link-title" class="input" maxlength="100" placeholder="My website"></div>'+
     '<div class="mb-3"><label class="field-label">URL</label><input id="new-link-url" class="input" placeholder="https://example.com"></div>'+
     '<div class="mb-3"><label class="field-label">Description (optional)</label><input id="new-link-description" class="input" maxlength="180" placeholder="A short note about this link"></div>'+
-    '<div class="mb-3"><label class="field-label">Font Awesome fallback class</label><input id="new-link-icon" class="input" value="fa-solid fa-link"></div>'+
+    '<div class="mb-3"><label class="field-label">Platform icon</label><select id="new-link-platform" class="input">'+PLATFORMS.map(p=>'<option value="'+p.id+'" '+(p.id==='website'?'selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select><div class="settings-row-desc">The platform icon is chosen automatically.</div></div>'+
     '<div><label class="field-label">Custom icon (optional · PNG/JPG/GIF/WebP · max 2MB)</label><input id="new-link-icon-file" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"></div>'+
     '<div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-plus"></i> Add Link</button></div>'
   );
@@ -2876,7 +2877,8 @@ function openCustomLinkAdd(){
     if(!url){toast('Enter a URL.','error');return}
     if(!/^(https?:|mailto:)/i.test(url))url='https://'+url;
     if(!safeUrl(url)){toast('Enter a valid http, https, or mailto URL.','error');return}
-    const row={user_id:App.user.id,title,url,description:m.querySelector('#new-link-description').value.trim()||null,icon:m.querySelector('#new-link-icon').value.trim()||'fa-solid fa-link',position:App.links.reduce((n,l)=>Math.max(n,l.position),-1)+1,is_visible:true};
+    const selectedPlatform=PLATFORMS.find(p=>p.id===m.querySelector('#new-link-platform').value)||PLATFORMS[PLATFORMS.length-1];
+    const row={user_id:App.user.id,title,url,description:m.querySelector('#new-link-description').value.trim()||null,icon:selectedPlatform.icon,position:App.links.reduce((n,l)=>Math.max(n,l.position),-1)+1,is_visible:true};
     const file=m.querySelector('#new-link-icon-file').files[0];
     if(file){try{row.icon_url=await uploadCustomIcon(file)}catch(err){toast(err.message||'Icon upload failed.','error');return}}
     const {data,error}=await db.from('links').insert(row).select().single();
@@ -2939,10 +2941,12 @@ function deleteSocial(id){
 }
 function editLink(id){
   const l=App.links.find(x=>x.id===id);if(!l)return;
-  const m=openModal('<div class="modal-head"><div><h3>Edit Link</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div class="mb-3"><label class="field-label">Title</label><input id="ed-title" class="input" value="'+esc(l.title)+'"></div><div class="mb-3"><label class="field-label">URL</label><input id="ed-url" class="input" value="'+esc(l.url)+'"></div><div class="mb-3"><label class="field-label">Description</label><input id="ed-description" class="input" maxlength="180" value="'+esc(l.description||'')+'"></div><div class="mb-3"><label class="field-label">Font Awesome fallback class</label><input id="ed-icon" class="input" value="'+esc(l.icon||'fa-solid fa-link')+'"></div><div><label class="field-label">Custom icon (PNG/JPG/GIF/WebP · max 2MB)</label><input id="ed-icon-file" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="ed-clear-icon" type="checkbox"> Remove custom icon and use Font Awesome</label></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
+  const matchedPlatform=PLATFORMS.find(p=>p.icon===(l.icon||''))||PLATFORMS[PLATFORMS.length-1];
+  const m=openModal('<div class="modal-head"><div><h3>Edit Link</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div class="mb-3"><label class="field-label">Title</label><input id="ed-title" class="input" value="'+esc(l.title)+'"></div><div class="mb-3"><label class="field-label">URL</label><input id="ed-url" class="input" value="'+esc(l.url)+'"></div><div class="mb-3"><label class="field-label">Description</label><input id="ed-description" class="input" maxlength="180" value="'+esc(l.description||'')+'"></div><div class="mb-3"><label class="field-label">Platform icon</label><select id="ed-platform" class="input">'+PLATFORMS.map(p=>'<option value="'+p.id+'" '+(p.id===matchedPlatform.id?'selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select><div class="settings-row-desc">The platform icon is chosen automatically.</div></div><div><label class="field-label">Custom icon (PNG/JPG/GIF/WebP · max 2MB)</label><input id="ed-icon-file" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="ed-clear-icon" type="checkbox"> Remove custom icon and use Font Awesome</label></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
   m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
   m.querySelector('[data-act=save]').onclick=async()=>{
-    const upd={title:m.querySelector('#ed-title').value.trim()||'Untitled',url:m.querySelector('#ed-url').value.trim(),description:m.querySelector('#ed-description').value.trim()||null,icon:m.querySelector('#ed-icon').value.trim()||'fa-solid fa-link'};
+     const selectedPlatform=PLATFORMS.find(p=>p.id===m.querySelector('#ed-platform').value)||PLATFORMS[PLATFORMS.length-1];
+     const upd={title:m.querySelector('#ed-title').value.trim()||'Untitled',url:m.querySelector('#ed-url').value.trim(),description:m.querySelector('#ed-description').value.trim()||null,icon:selectedPlatform.icon};
     if(!safeUrl(upd.url)&&!upd.url.startsWith('mailto:')){toast('Invalid URL.','error');return}
     const iconFile=m.querySelector('#ed-icon-file').files[0];
     if(iconFile){try{upd.icon_url=await uploadCustomIcon(iconFile)}catch(err){toast(err.message||'Icon upload failed.','error');return}}
@@ -2989,12 +2993,27 @@ function setupDragDrop(container){
 
 function tabTemplates(){
   const templates=Array.isArray(App.siteTemplates)&&App.siteTemplates.length?App.siteTemplates:TEMPLATES;
-  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">Choose a look for your profile. Templates managed by the site admin update live.</p><div class="grid grid-2 md-3 g-4 mt-6">'+templates.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;background:linear-gradient(135deg,'+safeHexColor(t.from,'#07111f')+','+safeHexColor(t.to,'#102b4e')+');position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+safeHexColor(t.accent,'#60a5fa')+';color:#fff">'+esc(t.name)+'</span></div><p class="muted text-xs mt-2">'+esc(t.description||'')+'</p><button class="btn btn-primary btn-sm btn-block mt-3" onclick="applyTemplate(\''+esc(t.slug)+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Apply</button></div>').join('')+'</div>';
+  return '<h1 class="font-display text-3xl font-extrabold">Templates</h1><p class="muted mt-1">Preview a design before applying it. Admin-published templates appear here.</p><div class="grid grid-2 md-3 g-4 mt-6">'+templates.map(t=>'<div class="glass" style="border-radius:14px;padding:1rem"><div style="height:8rem;border-radius:10px;'+templateCardStyle(t)+';position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:.75rem"><span style="padding:.2rem .55rem;border-radius:6px;font-size:.7rem;font-weight:700;background:'+safeHexColor(t.accent,'#60a5fa')+';color:#fff">'+esc(t.name)+'</span></div><p class="muted text-xs mt-2">'+esc(t.description||'')+'</p><div class="grid grid-2 g-2 mt-3"><button class="btn btn-ghost btn-sm" onclick="previewTemplate(\''+esc(t.slug)+'\')"><i class="fa-solid fa-eye"></i> Preview</button><button class="btn btn-primary btn-sm" onclick="applyTemplate(\''+esc(t.slug)+'\')"><i class="fa-solid fa-wand-magic-sparkles"></i> Use template</button></div></div>').join('')+'</div>';
+}
+function templateCardStyle(t){
+  const from=safeHexColor(t.from,'#07111f'),to=safeHexColor(t.to,'#102b4e'),url=safeWebUrl(t.background_url||'');
+  return url?'background:linear-gradient(135deg,rgba(0,0,0,.08),rgba(0,0,0,.18)),url(\''+esc(url)+'\') center/cover,linear-gradient(135deg,'+from+','+to+')':'background:linear-gradient(135deg,'+from+','+to+')';
+}
+function previewTemplate(slug){
+  const t=(Array.isArray(App.siteTemplates)?App.siteTemplates:[]).find(x=>x.slug===slug)||TEMPLATES.find(x=>x.slug===slug);if(!t)return;
+  const url=safeWebUrl(t.background_url||''),isVideo=/\.(mp4|webm)(\?|$)/i.test(url);
+  const media=url?(isVideo?'<video src="'+esc(url)+'" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>':'<div style="position:absolute;inset:0;background:url(\''+esc(url)+'\') center/cover"></div>'):'';
+  const m=openModal('<div class="modal-head"><div><h3>'+esc(t.name)+'</h3><p>'+esc(t.description||'Preview this design, then choose whether to apply it.')+'</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="max-width:320px;min-height:380px;margin:1rem auto;padding:2rem 1.25rem;border-radius:22px;position:relative;overflow:hidden;text-align:center;background:linear-gradient(135deg,'+safeHexColor(t.from,'#07111f')+','+safeHexColor(t.to,'#102b4e')+')">'+media+'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.52))"></div><div style="position:relative;z-index:1;padding-top:2rem;color:'+safeHexColor(t.text_color,'#ffffff')+'">'+(t.default_avatar_url?'<img src="'+esc(safeWebUrl(t.default_avatar_url))+'" alt="" style="width:74px;height:74px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.5)">':'<div style="width:74px;height:74px;margin:auto;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:1.8rem"><i class="fa-solid fa-user"></i></div>')+'<h2 style="margin:.8rem 0 .3rem;font-size:1.3rem">Your profile</h2><p style="opacity:.8">Name, bio, social links and cards</p><div style="height:42px;margin-top:1rem;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.1)"></div><div style="height:42px;margin-top:.65rem;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.1)"></div></div></div><div class="flex justify-end gap-2 mt-4"><button class="btn btn-ghost" data-act="close">Close</button><button class="btn btn-primary" data-act="apply"><i class="fa-solid fa-check"></i> Use template</button></div>');
+  m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
+  m.querySelector('[data-act=apply]').onclick=()=>{closeModal(m);applyTemplate(slug)};
 }
 function applyTemplate(slug){
   const t=(Array.isArray(App.siteTemplates)?App.siteTemplates:[]).find(x=>x.slug===slug)||TEMPLATES.find(x=>x.slug===slug);if(!t)return;
   confirmModal('Apply template?','This will restyle your profile.',async()=>{
-    const upd={background_type:'gradient',background_value:{from:safeHexColor(t.from,'#07111f'),to:safeHexColor(t.to,'#102b4e'),angle:Number(t.angle)||135,url:'',overlay:0.28},accent_color:safeHexColor(t.accent,'#60a5fa'),bg_color:safeHexColor(t.from,'#07111f'),primary_color:safeHexColor(t.accent,'#60a5fa'),secondary_color:safeHexColor(t.to,'#102b4e')};
+    const bgUrl=safeWebUrl(t.background_url||''),isVideo=/\.(mp4|webm)(\?|$)/i.test(bgUrl);
+    const from=safeHexColor(t.from,'#07111f'),to=safeHexColor(t.to,'#102b4e');
+    const upd={background_type:bgUrl?(isVideo?'video':'image'):'gradient',background_url:bgUrl||null,background_value:{from,to,angle:Number(t.angle)||135,url:bgUrl,overlay:0.28},accent_color:safeHexColor(t.accent,'#60a5fa'),bg_color:from,primary_color:safeHexColor(t.accent,'#60a5fa'),secondary_color:to};
+    if(!App.profile.avatar_url&&safeWebUrl(t.default_avatar_url||''))upd.avatar_url=safeWebUrl(t.default_avatar_url);
     const {error}=await db.from('profiles').update(upd).eq('user_id',App.user.id);
     if(error){toast('Failed','error');return}
     App.profile={...App.profile,...upd};
@@ -4204,7 +4223,7 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
 (function(){
   'use strict';
   var app=window.BioFlex, db=app&&app.db;
-  if(!db||window.location.protocol==='file:')return;
+  if(!app)return;
 
   var values={}, timestamps={};
   var defaults={
@@ -4234,10 +4253,29 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
     var name=String(values.site_name||'BioFlex');
     var brand=landing.querySelector('.lp-brand > span:last-child');
     if(brand)brand.textContent=name;
+    document.querySelectorAll('.brand-name,.footer-site-name').forEach(function(el){el.textContent=name});
+    document.querySelectorAll('.brand-logo').forEach(function(mark){
+      var label=mark.nextElementSibling;
+      if(label&&label.tagName==='SPAN')label.textContent=name;
+    });
+    var domain=String(values.root_domain||'bioflex.cyou');
+    document.querySelectorAll('.footer-site-domain').forEach(function(el){el.textContent=domain});
     var pill=landing.querySelector('.lp-pill');
     if(pill)pill.innerHTML='<i class="fa-solid fa-bolt" aria-hidden="true"></i> '+app.esc(get('landing_pill'));
     var heading=landing.querySelector('.lp-title');
-    if(heading)heading.innerHTML=app.esc(get('landing_title'))+'<br><span class="lp-grad">'+app.esc(get('landing_title_grad'))+'</span>';
+    if(heading){
+      var fullHeadline=String(values.landing_headline||[get('landing_title'),get('landing_title_grad')].filter(Boolean).join(' ')).trim().replace(/\s+/g,' ');
+      var splitAt=-1,splitDistance=Infinity;
+      for(var h=0;h<fullHeadline.length;h++){
+        if(fullHeadline[h]===' '){
+          var d=Math.abs(h-fullHeadline.length/2);
+          if(d<splitDistance){splitAt=h;splitDistance=d}
+        }
+      }
+      var headlineFirst=splitAt<0?fullHeadline:fullHeadline.slice(0,splitAt).trim();
+      var headlineSecond=splitAt<0?'':fullHeadline.slice(splitAt+1).trim();
+      heading.innerHTML=app.esc(headlineFirst)+(headlineSecond?'<br><span class="lp-grad">'+app.esc(headlineSecond)+'</span>':'');
+    }
     var subtitle=landing.querySelector('.lp-sub');
     if(subtitle)subtitle.textContent=get('landing_sub');
     var cta=landing.querySelector('.lp-cta');
@@ -4273,16 +4311,52 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       themeRules.push('#screen-landing .lp-title,#screen-landing .lp-feature h3{color:'+branding.text+'!important}');
     }
     theme.textContent=themeRules.join('\n');
-    var logo=landing.querySelector('.lp-logo'),logoUrl=safeUrl(branding.logo_url);
-    if(logo){
+    var logo=landing.querySelector('.lp-logo'),rawLogo=String(branding.logo_url||'');
+    var logoUrl=safeUrl(rawLogo)||(/^data:image\/(?:png|jpeg|webp|gif|avif|svg\+xml);base64,/i.test(rawLogo)?rawLogo:'');
+    document.querySelectorAll('.lp-logo,.brand-logo').forEach(function(mark){
       if(logoUrl){
         var img=document.createElement('img');img.src=logoUrl;img.alt=name+' logo';
         img.style.cssText='width:100%;height:100%;object-fit:contain;border-radius:inherit';
-        logo.replaceChildren(img);
-      }else logo.innerHTML='<i class="fa-solid fa-bolt" aria-hidden="true"></i>';
-      logo.setAttribute('aria-label',name);
+        mark.classList.add('has-site-logo');
+        mark.replaceChildren(img);
+      }else{
+        mark.classList.remove('has-site-logo');
+        mark.innerHTML='<i class="fa-solid fa-bolt" aria-hidden="true"></i>';
+      }
+      mark.setAttribute('aria-label',name);
+    });
+    var showcase=document.getElementById('landing-showcase');
+    var showcaseImage=document.getElementById('landing-showcase-image');
+    var showcasePlaceholder=document.getElementById('landing-showcase-placeholder');
+    var rawImage=String(values.landing_showcase_image||'');
+    var imageUrl=safeUrl(rawImage)||(/^data:image\/(?:png|jpeg|webp|gif|avif);base64,/i.test(rawImage)?rawImage:'');
+    if(showcase&&showcaseImage){
+      showcase.classList.toggle('is-empty',!imageUrl);
+      if(imageUrl){showcaseImage.src=imageUrl;showcaseImage.alt=String(values.landing_showcase_alt||name+' profile');if(showcasePlaceholder)showcasePlaceholder.hidden=true}
+      else{showcaseImage.removeAttribute('src');if(showcasePlaceholder)showcasePlaceholder.hidden=false}
     }
-    var favicon=document.getElementById('profile-favicon'),faviconUrl=safeUrl(branding.favicon_url);
+    var socials=document.getElementById('landing-socials'),socialConfig=values.landing_socials||{};
+    var dashboardDiscord=document.getElementById('dashboard-discord-link');
+    if(dashboardDiscord){
+      var discordUrl=safeUrl(socialConfig.discord);
+      dashboardDiscord.hidden=!discordUrl;
+      if(discordUrl)dashboardDiscord.href=discordUrl;
+      else dashboardDiscord.removeAttribute('href');
+    }
+    if(socials){
+      var socialMeta=[
+        {key:'youtube',icon:'fa-brands fa-youtube',color:'#ef4444',label:'YouTube'},
+        {key:'tiktok',icon:'fa-brands fa-tiktok',color:'#fff',label:'TikTok'},
+        {key:'discord',icon:'fa-brands fa-discord',color:'#5865F2',label:'Discord'}
+      ];
+      socials.innerHTML=socialMeta.map(function(item){
+        var href=safeUrl(socialConfig[item.key]);
+        return href?'<a href="'+app.esc(href)+'" target="_blank" rel="noopener noreferrer" aria-label="'+item.label+'" title="'+item.label+'"><i class="'+item.icon+'" style="color:'+item.color+'"></i></a>':'';
+      }).join('');
+      socials.hidden=!socials.children.length;
+    }
+    var rawFavicon=String(branding.favicon_url||'');
+    var favicon=document.getElementById('profile-favicon'),faviconUrl=safeUrl(rawFavicon)||(/^data:image\/(?:png|jpeg|webp|gif|avif|svg\+xml);base64,/i.test(rawFavicon)?rawFavicon:'');
     if(favicon&&faviconUrl)favicon.href=faviconUrl;
 
     var description=String(values.site_description||defaults.landing_sub);
@@ -4312,7 +4386,7 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
         var header=landing.querySelector('.lp-header');
         if(header)header.insertAdjacentElement('afterend',banner);
       }
-      if(banner)banner.textContent='BioFlex is in maintenance mode. Some actions may be temporarily unavailable.';
+      if(banner)banner.textContent=name+' is in maintenance mode. Some actions may be temporarily unavailable.';
     }else if(banner)banner.remove();
   }
   function receiveRow(row){
@@ -4337,11 +4411,14 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       from:safeHexColor(row.gradient_from,'#07111f'),
       to:safeHexColor(row.gradient_to,'#102b4e'),
       accent:safeHexColor(row.accent_color,'#60a5fa'),
+      text_color:safeHexColor(row.text_color,'#ffffff'),
+      background_url:safeWebUrl(row.background_url||''),
+      default_avatar_url:safeWebUrl(row.default_avatar_url||''),
       angle:Math.max(0,Math.min(360,Number(row.gradient_angle)||135))
     };
   }
   function refreshTemplates(){
-    db.from('templates').select('slug,name,description,category,gradient_from,gradient_to,gradient_angle,accent_color,is_active').order('sort_order')
+    db.from('templates').select('slug,name,description,category,background_url,default_avatar_url,gradient_from,gradient_to,gradient_angle,accent_color,text_color,is_active').order('sort_order')
       .then(function(result){
         if(result.error){console.warn('Could not load site templates:',result.error.message);return}
         app.App.siteTemplates=(result.data||[]).filter(function(row){return row.is_active!==false}).map(normalizeTemplate).filter(Boolean);
@@ -4372,6 +4449,16 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       }).catch(function(error){console.warn('Could not load site announcements:',error)});
   }
 
+  try{
+    var localSettings=JSON.parse(localStorage.getItem('bioflex.site.preview.v1')||'{}');
+    Object.keys(localSettings).forEach(function(key){values[key]=localSettings[key]});
+  }catch(_){}
+  applySettings();
+  window.addEventListener('storage',function(event){
+    if(event.key!=='bioflex.site.preview.v1'||!event.newValue)return;
+    try{Object.assign(values,JSON.parse(event.newValue));applySettings()}catch(_){}
+  });
+  if(!db||window.location.protocol==='file:')return;
   var channel=db.channel('bioflex-public-site-settings')
     .on('postgres_changes',{event:'*',schema:'public',table:'site_settings'},function(payload){
       if(payload.eventType==='DELETE'&&payload.old&&payload.old.key){
