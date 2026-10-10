@@ -145,6 +145,11 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(96,165,250,.15)}
 .auth-form{display:flex;flex-direction:column;gap:.75rem}
 .auth-footer{margin-top:1.35rem;text-align:center;font-size:.85rem;color:rgba(219,234,254,.65)}
+.auth-forgot{align-self:flex-end;margin-top:-.25rem;padding:.2rem .1rem;color:#93c5fd;font-size:.76rem;font-weight:700}
+.auth-forgot:hover{color:#dbeafe;text-decoration:underline}
+.auth-reset-panel{display:grid;gap:.75rem;margin-top:1.1rem}
+.auth-reset-panel .btn{margin-top:.15rem}
+.auth-reset-note{padding:.75rem;border:1px solid rgba(96,165,250,.2);border-radius:11px;background:rgba(59,130,246,.08);color:#bfdbfe;font-size:.77rem;line-height:1.55}
 .dash-shell{display:flex;width:100%;min-height:100vh}
 .dash-sidebar{width:17rem;flex-shrink:0;border-right:1px solid rgba(96,165,250,.1);padding:.85rem;display:none;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;background:rgba(4,6,15,.6);backdrop-filter:blur(16px)}
 @media(min-width:900px){.dash-sidebar{display:flex}}
@@ -236,6 +241,10 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 /* ═══ UPLOAD BOXES: fixed 100px image/video previews and compact audio ═══ */
 .upload-box{border:1.5px dashed rgba(96,165,250,.3);border-radius:14px;padding:1.85rem 1.25rem;text-align:center;cursor:pointer;background:rgba(15,25,50,.3);position:relative;overflow:hidden;transition:border-color .18s}
 .upload-box:hover{border-color:rgba(96,165,250,.55)}
+.upload-box.is-uploading{border-style:solid;border-color:rgba(96,165,250,.55);cursor:progress}
+.upload-progress{position:absolute;inset:auto .65rem .65rem;height:5px;border-radius:99px;background:rgba(4,6,15,.82);overflow:hidden;z-index:3}
+.upload-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:inherit;transition:width .16s ease}
+.upload-progress-label{position:absolute;left:.65rem;bottom:1rem;z-index:3;padding:.22rem .45rem;border-radius:6px;background:rgba(4,6,15,.82);color:#dbeafe;font-size:.65rem;font-weight:700}
 .asset-url-row{display:flex;gap:.45rem;margin-top:.55rem;align-items:center}
 .asset-url-row .input{min-width:0;padding:.62rem .72rem;font-size:.76rem}
 .asset-url-row .btn{padding:.62rem .75rem;flex:0 0 auto}
@@ -815,7 +824,15 @@ body.is-subdomain .preview-back{display:none!important}
 @keyframes demoGradientDrift{to{transform:scale(1.08) translate3d(-1.2%,1%,0)}}
 @media(prefers-reduced-motion:reduce){.demo-bg-motion{animation:none}}
 
- </style>
+ 
+/* Supplied Image Host design direction: blue ambient glass, clear quotas, responsive premium comparison. */
+.ih-tier-panel{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:16px}
+.ih-tier-card{display:flex;flex-direction:column;gap:7px;padding:17px 18px;border-radius:16px;border:1px solid rgba(96,165,250,.18);background:linear-gradient(155deg,rgba(255,255,255,.065),rgba(7,12,24,.68));box-shadow:0 16px 40px -24px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.ih-tier-free{border-color:rgba(148,163,184,.18)}.ih-tier-premium{border-color:rgba(167,139,250,.27);background:radial-gradient(ellipse at 90% 0%,rgba(124,58,237,.15),transparent 55%),linear-gradient(155deg,rgba(255,255,255,.065),rgba(7,12,24,.68))}
+.ih-tier-kicker{display:flex;align-items:center;gap:7px;color:#9db3d4;font-size:.67rem;font-weight:800;letter-spacing:.09em}.ih-tier-premium .ih-tier-kicker{color:#d8b4fe}.ih-tier-card>strong{color:#f8fafc;font-size:1.25rem;line-height:1.2}.ih-tier-card>strong small{font-size:.73rem;font-weight:650;color:#9db3d4}.ih-tier-card>span:not(.ih-tier-kicker){font-size:.76rem;color:#9db3d4}.ih-tier-term{color:#c4b5fd!important}
+.image-host-page{isolation:isolate}.image-host-head{position:relative}.image-host-storage-card{position:relative;overflow:visible}.image-host-drop{min-height:168px;display:grid;place-items:center;border:1.5px dashed rgba(96,165,250,.4);border-radius:20px;background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.14),transparent 72%),linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.015));transition:border-color .2s,background .2s,transform .2s,box-shadow .2s}.image-host-drop:hover,.image-host-drop.is-dragging{border-color:#60a5fa;background:linear-gradient(160deg,rgba(59,130,246,.17),rgba(59,130,246,.045));box-shadow:0 0 0 4px rgba(59,130,246,.1),0 0 35px rgba(59,130,246,.18);transform:translateY(-1px)}.image-host-drop>div{padding:28px 16px;text-align:center}.image-host-drop>div>i{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 12px;border-radius:17px;background:linear-gradient(145deg,rgba(59,130,246,.3),rgba(37,99,235,.1));border:1px solid rgba(96,165,250,.38);color:#bfdbfe;font-size:22px;box-shadow:0 0 30px rgba(59,130,246,.22)}.image-host-drop strong{display:block;color:#eaf1ff;font-size:.98rem}.image-host-upload-limit{display:inline-flex;padding:5px 9px;border-radius:8px;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2);color:#bfdbfe}
+@media(max-width:620px){.ih-tier-panel{grid-template-columns:1fr}.ih-tier-card{padding:15px}.image-host-drop{min-height:145px}}
+</style>
 <style>
 /* BioFlex account switcher and leaderboard finish */
 .bf-account-modal{width:min(100%,470px);padding:1.25rem}
@@ -863,6 +880,9 @@ body.is-subdomain .preview-back{display:none!important}
 .leaderboard-podium-card.place-1 .leaderboard-podium-avatar{width:60px;height:60px;border-color:rgba(251,191,36,.45)}
 .leaderboard-podium-name{font-size:.78rem}
 .leaderboard-podium-views{font-size:.7rem}
+.leaderboard-role-badges{display:flex;justify-content:center;flex-wrap:wrap;gap:.2rem;max-width:100%}
+.leaderboard-role-chip{display:inline-flex;align-items:center;gap:.2rem;padding:.12rem .35rem;border-radius:999px;border:1px solid rgba(148,163,184,.2);background:rgba(15,23,42,.72);font-size:.55rem;font-weight:750;line-height:1.25;white-space:nowrap}
+.leaderboard-row-roles{display:flex;flex-wrap:wrap;gap:.2rem;margin-top:.2rem}
 @media(max-width:520px){
   .bf-account-modal{padding:1rem}
   .leaderboard-podium{gap:.4rem;padding:1.2rem .55rem .8rem}
@@ -1005,9 +1025,18 @@ body.is-subdomain .preview-back{display:none!important}
           <div id="auth-username-status" class="claim-result hidden" style="margin-top:.5rem"></div>
         </div>
         <input id="auth-email" type="email" class="input" placeholder="Email address" required autocomplete="email">
-        <input id="auth-password" type="password" class="input" placeholder="Password (min 8 characters)" required minlength="8" autocomplete="new-password">
+        <input id="auth-password" type="password" class="input" placeholder="Password (min 8 characters)" required minlength="8" autocomplete="current-password">
         <div id="auth-error" class="claim-result bad hidden"></div>
+        <button id="auth-forgot-password" class="auth-forgot" type="button" onclick="requestPasswordReset()">Forgot password?</button>
         <button type="submit" id="auth-submit" class="btn btn-primary btn-block btn-lg"><i class="fa-solid fa-arrow-right-to-bracket" id="auth-submit-icon"></i><span id="auth-submit-text">Sign in</span></button>
+      </form>
+      <form id="auth-reset-panel" class="auth-reset-panel hidden" onsubmit="handlePasswordRecovery(event)">
+        <div class="auth-reset-note"><i class="fa-solid fa-envelope-open-text"></i> Open the secure password-reset link sent to your email, then choose a new password below.</div>
+        <input id="auth-new-password" type="password" class="input" placeholder="New password (min 8 characters)" minlength="8" required autocomplete="new-password">
+        <input id="auth-confirm-password" type="password" class="input" placeholder="Confirm new password" minlength="8" required autocomplete="new-password">
+        <div id="auth-reset-error" class="claim-result bad hidden" role="alert"></div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa-solid fa-key"></i> <span>Update password</span></button>
+        <button type="button" class="btn btn-ghost btn-block" onclick="cancelPasswordRecovery()">Back to sign in</button>
       </form>
       <div class="auth-footer"><span id="auth-toggle-text">Don't have an account?</span><button id="auth-toggle-btn" onclick="toggleAuthMode()" style="color:var(--accent-2);font-weight:700;margin-left:.35rem">Sign up</button></div>
     </div>
@@ -1071,7 +1100,7 @@ body.is-subdomain .preview-back{display:none!important}
       <div class="glass" style="border-radius:16px;padding:1.5rem">
         <div class="feature-icon" style="margin-bottom:.85rem"><i class="fa-solid fa-cloud-arrow-up"></i></div>
         <h3 style="font-size:1rem;font-weight:700">File Hosting</h3>
-        <p class="muted text-sm mt-2">Fast, secure file hosting for images, videos, and audio up to 50MB per file.</p>
+        <p class="muted text-sm mt-2">Upload images, videos, and audio. Supported formats and final upload size depend on the hosting service and browser playback support.</p>
       </div>
       <div class="glass" style="border-radius:16px;padding:1.5rem">
         <div class="feature-icon" style="margin-bottom:.85rem"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
@@ -1134,6 +1163,110 @@ const PIXABAY_API_KEY = '57908058-8f685cd46c57b892f941b1f84';
 const LASTFM_API_KEY = '69d932fd84815c0f9ea5d1793577a1a9';
 const USERNAME_COOLDOWN_HOURS = 24;
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+function telegramApiRequest(url,{method='GET',body=null,onProgress=null}={}){
+  return new Promise((resolve,reject)=>{
+    const xhr=new XMLHttpRequest();
+    xhr.open(method,url,true);
+    xhr.timeout=600000;
+    xhr.onload=()=>{
+      let data;
+      try{data=JSON.parse(xhr.responseText||'{}')}
+      catch(_){reject(new Error('Telegram returned an unreadable response (HTTP '+xhr.status+').'));return}
+      if(xhr.status<200||xhr.status>=300||!data.ok){
+        reject(new Error('Telegram API '+(data.error_code||xhr.status)+': '+(data.description||'request rejected')));
+        return;
+      }
+      resolve(data);
+    };
+    xhr.onerror=()=>reject(new Error('Browser could not connect to Telegram. Check internet/WebView access; SQL will not fix this network/CORS error.'));
+    xhr.ontimeout=()=>reject(new Error('Telegram upload timed out. Try a smaller file or a more stable connection.'));
+    if(onProgress&&xhr.upload)xhr.upload.addEventListener('progress',event=>{
+      if(event.lengthComputable)onProgress(Math.max(0,Math.min(1,event.loaded/event.total)));
+    });
+    xhr.send(body);
+  });
+}
+
+async function getTelegramConfig(){
+  const {data,error}=await db.from('api_keys').select('key_value,key_secret')
+    .eq('provider','telegram').eq('is_active',true).limit(1).maybeSingle();
+  if(error)throw new Error(error.message||'Could not load Telegram settings.');
+  if(!data?.key_value||!data?.key_secret)throw new Error('Telegram bot token and chat ID are missing. Add them in Admin Panel → API Keys.');
+  return {botToken:data.key_value,chatId:data.key_secret};
+}
+
+async function normalizeTelegramImage(file,maxMB=50){
+  const ext=(file.name.split('.').pop()||'').toLowerCase();
+  const mime=(file.type||'').toLowerCase();
+  const image=(mime.startsWith('image/')||['jpg','jpeg','png','gif','webp','avif','bmp','tif','tiff','heic','heif'].includes(ext));
+  if(!image||mime==='image/gif'||ext==='gif'||mime==='image/svg+xml'||ext==='svg')return file;
+  const targetBytes=Math.min(9,maxMB*0.9)*1024*1024;
+  if((mime==='image/jpeg'||mime==='image/png')&&file.size<=targetBytes)return file;
+  if(typeof createImageBitmap!=='function')return file;
+  let bitmap;
+  try{bitmap=await createImageBitmap(file)}catch(_){return file}
+  try{
+    const scale=Math.min(1,4096/Math.max(bitmap.width,bitmap.height));
+    const width=Math.max(1,Math.round(bitmap.width*scale)),height=Math.max(1,Math.round(bitmap.height*scale));
+    const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d',{alpha:true});ctx.drawImage(bitmap,0,0,width,height);
+    const asBlob=(c,type,quality)=>new Promise(resolve=>c.toBlob(resolve,type,quality));
+    let blob=await asBlob(canvas,'image/png');
+    let name=file.name.replace(/\.[^.]+$/,'')+'.png',type='image/png';
+    if(!blob||blob.size>targetBytes){
+      const jpegCanvas=document.createElement('canvas');jpegCanvas.width=width;jpegCanvas.height=height;
+      const jpegCtx=jpegCanvas.getContext('2d');jpegCtx.fillStyle='#ffffff';jpegCtx.fillRect(0,0,width,height);jpegCtx.drawImage(bitmap,0,0,width,height);
+      blob=await asBlob(jpegCanvas,'image/jpeg',0.78);
+      if(blob&&blob.size>targetBytes)blob=await asBlob(jpegCanvas,'image/jpeg',0.62);
+      name=file.name.replace(/\.[^.]+$/,'')+'.jpg';type='image/jpeg';
+    }
+    if(!blob)return file;
+    return new File([blob],name,{type,lastModified:Date.now()});
+  }finally{bitmap.close?.()}
+}
+
+async function uploadTelegramAsset(file, prefix, maxMB, onProgress){
+  if(!file)throw new Error('No file selected.');
+  if(Number.isFinite(maxMB)&&file.size>maxMB*1024*1024)throw new Error('This file must be '+maxMB+'MB or smaller.');
+  if(Number.isFinite(maxMB))file=await normalizeTelegramImage(file,maxMB);
+  if(Number.isFinite(maxMB)&&file.size>maxMB*1024*1024)throw new Error('Processed file is too large (max '+maxMB+'MB).');
+  const {botToken,chatId}=await getTelegramConfig();
+  const ext=(file.name.split('.').pop()||'').toLowerCase();
+  const mime=(file.type||'').toLowerCase();
+  let method='sendDocument',fieldName='document',kind='file';
+  if((mime==='image/gif'||ext==='gif')&&file.size<=50*1024*1024){
+    method='sendAnimation';fieldName='animation';kind='gif';
+  }else if(mime.startsWith('image/')||['jpg','jpeg','png','webp','avif','bmp','tif','tiff','heic','heif','svg'].includes(ext)){
+    kind='image';
+    if((mime!=='image/svg+xml'&&ext!=='svg')&&file.size<=10*1024*1024){method='sendPhoto';fieldName='photo'}
+  }else if(mime.startsWith('video/')||['mp4','webm','mov','m4v','ogv','avi','mkv'].includes(ext)){
+    kind='video';
+    if((mime==='video/mp4'||ext==='mp4')&&file.size<=50*1024*1024){method='sendVideo';fieldName='video'}
+  }else if(mime.startsWith('audio/')||['mp3','m4a','ogg','opus','wav','aac','flac','aiff','wma'].includes(ext)){
+    kind='audio';
+    if(['mp3','m4a'].includes(ext)&&file.size<=50*1024*1024){method='sendAudio';fieldName='audio'}
+  }
+  const form=new FormData();
+  form.append('chat_id',chatId);
+  form.append(fieldName,file,file.name);
+  form.append('disable_notification','true');
+  const result=await telegramApiRequest(`https://api.telegram.org/bot${botToken}/${method}`,{method:'POST',body:form,onProgress});
+  const message=result?.result||{};
+  const sentMedia=fieldName==='photo'?(message.photo||[]).slice(-1)[0]:message[fieldName];
+  if(!sentMedia?.file_id)throw new Error('Telegram accepted the upload but returned no '+kind+' file ID.');
+  const fileResult=await telegramApiRequest(`https://api.telegram.org/bot${botToken}/getFile?file_id=${encodeURIComponent(sentMedia.file_id)}`);
+  if(!fileResult.result?.file_path)throw new Error('Telegram uploaded the file but did not return a file path.');
+  const path=fileResult.result.file_path;
+  if(kind==='gif'&&!/\.gif(?:$|[?#])/i.test(path))kind='video';
+  return {
+    url:`https://api.telegram.org/file/bot${botToken}/${path}`,
+    file_id:sentMedia.file_id,
+    message_id:message.message_id,
+    name:sentMedia.file_name||file.name,
+    size:sentMedia.file_size||file.size,
+    kind
+  };
+}
 
 const RESERVED = ['admin','dashboard','login','signup','register','api','support','help','settings','about','privacy','terms','www','static','assets','root','bioflex','null','undefined','public','cdn','docs','blog','careers','pricing','services','policy'];
 const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
@@ -1234,11 +1367,14 @@ const NAV_CUSTOMIZE = [
   {id:'links',label:'Links',icon:'fa-solid fa-link'},
   {id:'premium',label:'Premium',icon:'fa-solid fa-gem'},
   {id:'image-host',label:'Image Host',icon:'fa-solid fa-cloud-arrow-up'},
+  {id:'video-host',label:'Video Host',icon:'fa-solid fa-video'},
   {id:'templates',label:'Templates',icon:'fa-solid fa-layer-group'},
   {id:'video-library',label:'Video Library',icon:'fa-solid fa-film',badge:'NEW'},
   {id:'music-library',label:'Music Library',icon:'fa-solid fa-music',badge:'NEW'}
 ];
-const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',usernameEffect:'none',usernameAvailable:false,analytics:null,analyticsError:null,publicPresence:null,dashboardPresence:null,previewProfile:null,widgetTimers:[]};
+const DASHBOARD_TAB_KEY='bioflex.dashboard.lastTab.v1';
+const DASHBOARD_HIDDEN_KEY='bioflex.dashboard.wasHidden.v1';
+const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',passwordRecovery:false,usernameEffect:'none',usernameAvailable:false,analytics:null,analyticsError:null,publicPresence:null,dashboardPresence:null,previewProfile:null,widgetTimers:[],entitlementChannel:null,hostFilesChannel:null,entitlementSyncTimer:null};
 const VideoLibrary = {page:1,search:'',category:'',hits:[],total:0,loading:false,requestId:0};
 const MusicLibrary = {search:'',category:'',tracks:[],loading:false,requestId:0,audio:null,activeTrackId:'',previewCache:{},catalogCache:Object.create(null),previewLoadingId:'',playRequestId:0};
 const MUSIC_CATEGORIES = [
@@ -1250,6 +1386,112 @@ const MUSIC_CATEGORIES = [
   {value:'bollywood',label:'Bollywood'}
 ];
 let authFlowPromise=null;
+const ACCOUNT_BADGE_META={
+  owner:{name:'Owner',icon:'fa-crown',color:'#eab308'},
+  staff:{name:'Staff',icon:'fa-shield-halved',color:'#ef4444'},
+  premium:{name:'Premium',icon:'fa-gem',color:'#a855f7'},
+  dev:{name:'Developer',icon:'fa-code',color:'#22c55e'},
+  creator:{name:'Content Creator',icon:'fa-video',color:'#ec4899'},
+  verified:{name:'Verified',icon:'fa-circle-check',color:'#3b82f6'},
+  early:{name:'Early Access',icon:'fa-rocket',color:'#06b6d4'}
+};
+const ACCOUNT_BADGE_PRIORITY=['owner','staff','premium','dev','creator','verified','early'];
+const ACCOUNT_PREMIUM_FEATURES=[
+  {id:'video_library',label:'Video Library'},{id:'music_library',label:'Music Library'},
+  {id:'discord_presence',label:'Discord Presence'},{id:'custom_cursor',label:'Custom Cursor'},
+  {id:'username_effects',label:'Username Effects'},{id:'analytics',label:'Analytics'},
+  {id:'timezone_clock',label:'Timezone Clock'},{id:'now_playing',label:'Now Playing'}
+];
+function accountAssignedBadgeIds(profile){
+  let raw=profile&&profile.badges;
+  if(typeof raw==='string'){try{raw=JSON.parse(raw)}catch(_){raw=raw.split(',')}}
+  if(!Array.isArray(raw)){if(raw&&typeof raw==='object')raw=Object.keys(raw).filter(key=>raw[key]);else raw=[]}
+  const ids=raw.map(function(item){
+    const value=typeof item==='string'?item:item&&typeof item==='object'?(item.id||item.badge||item.name):'';
+    const id=String(value||'').trim().toLowerCase().replace(/[ _-]+/g,' ');
+    return id==='content creator'?'creator':id==='early access'?'early':id==='developer'?'dev':id;
+  }).filter(Boolean);
+  let legacyRole=String(profile&&profile.member_role||'').trim().toLowerCase().replace(/[ _-]+/g,' ');
+  legacyRole=legacyRole==='content creator'?'creator':legacyRole==='developer'?'dev':legacyRole==='early access'?'early':legacyRole;
+  if(legacyRole&&legacyRole!=='user'&&!ids.includes(legacyRole))ids.push(legacyRole);
+  const expiredSubscription=!!(profile&&profile.subscription_expires_at&&['active','expired'].includes(String(profile.subscription_status||''))&&Date.parse(profile.subscription_expires_at)<=Date.now());
+  if(expiredSubscription){const premiumIndex=ids.indexOf('premium');if(premiumIndex>=0)ids.splice(premiumIndex,1);if(!ids.includes('early'))ids.push('early')}
+  if(profile&&profile.is_premium&&!expiredSubscription&&!ids.includes('premium'))ids.push('premium');
+  return Array.from(new Set(ids)).sort(function(a,b){const ai=ACCOUNT_BADGE_PRIORITY.indexOf(a),bi=ACCOUNT_BADGE_PRIORITY.indexOf(b);return (ai<0?99:ai)-(bi<0?99:bi)||a.localeCompare(b)});
+}
+function accountRole(profile){
+  const badges=accountAssignedBadgeIds(profile);
+  for(const id of ACCOUNT_BADGE_PRIORITY){if(id==='early')continue;if(badges.includes(id))return ACCOUNT_BADGE_META[id].name}
+  return 'User';
+}
+function leaderboardRoleBadges(profile){
+  const badges=accountAssignedBadgeIds(profile).filter(function(id){return !!ACCOUNT_BADGE_META[id]});
+  if(!badges.length)return '<span class="leaderboard-role-chip" style="color:#94a3b8"><i class="fa-solid fa-user"></i> Member</span>';
+  return badges.map(function(id){
+    const badge=ACCOUNT_BADGE_META[id];
+    return '<span class="leaderboard-role-chip" style="color:'+badge.color+';border-color:'+badge.color+'55" title="'+esc(badge.name)+'"><i class="fa-solid '+badge.icon+'"></i> '+esc(badge.name)+'</span>';
+  }).join('');
+}
+function accountPremiumFeatureEnabled(profile,featureId){
+  /* All existing creator features are free; only image storage is quota-based. */
+  return true;
+}
+function premiumFeatureGate(title,featureId){
+  return '<section class="glass" style="max-width:680px;margin:3rem auto;padding:2rem;border-radius:18px;text-align:center"><h1 class="font-display text-2xl font-extrabold">'+esc(title)+' is free</h1><p class="muted mt-2">All creator features are free. Only Image Hosting has storage limits and paid upgrades.</p></section>';
+}
+async function openAccountRoles(){
+  let profile=App.profile||{};
+  if(App.user){try{const {data,error}=await db.from('profiles').select('id,user_id,badges,member_role,is_premium,premium_features,image_host_plan,image_storage_limit_mb,subscription_plan,subscription_period,subscription_started_at,subscription_expires_at,subscription_status,video_host_plan,video_storage_limit_mb,video_subscription_plan,video_subscription_period,video_subscription_started_at,video_subscription_expires_at,video_subscription_status').eq('user_id',App.user.id).maybeSingle();if(error)throw error;if(data){applyEntitlementUpdate(data);profile=App.profile}}catch(error){toast('Could not refresh roles: '+(error.message||'database read failed'),'error')}}
+  const ids=accountAssignedBadgeIds(profile);
+  const rows=ids.map(function(id){
+    const meta=ACCOUNT_BADGE_META[id]||{name:id.replace(/\b\w/g,function(c){return c.toUpperCase()}),icon:'fa-award',color:'#93c5fd'};
+    const rank=ACCOUNT_BADGE_PRIORITY.indexOf(id),priority=id==='early'?'Badge':rank>=0?'Rank '+(rank+1):'Badge';
+    return '<div class="glass-soft" style="display:flex;align-items:center;gap:.75rem;padding:.75rem;border-radius:12px;margin-top:.55rem"><span style="width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:'+meta.color+'22;color:'+meta.color+'"><i class="fa-solid '+meta.icon+'"></i></span><span style="flex:1;font-weight:700">'+esc(meta.name)+'</span><span class="text-xs muted">'+priority+'</span></div>';
+  }).join('');
+  const active=ACCOUNT_PREMIUM_FEATURES.filter(function(feature){return accountPremiumFeatureEnabled(profile,feature.id)});
+  const features=active.map(function(feature){return '<span class="member-badge" style="margin:.25rem"><i class="fa-solid fa-unlock-keyhole"></i> '+esc(feature.label)+'</span>'}).join('');
+  const premiumExpired=!!(profile.subscription_expires_at&&['active','expired'].includes(String(profile.subscription_status||''))&&Date.parse(profile.subscription_expires_at)<=Date.now());
+  const premiumActive=!!profile.is_premium&&!premiumExpired;
+  const m=openModal('<div class="modal-head"><div><h3>All roles &amp; badges</h3><p>Overview shows your highest-priority role: <b>'+esc(accountRole(profile))+'</b></p></div><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>'+(rows||'<div class="empty">No assigned roles or badges yet.</div>')+'<div class="glass-soft" style="display:flex;justify-content:space-between;gap:1rem;padding:.75rem;border-radius:12px;margin-top:.75rem"><span>Premium access</span><b style="color:'+(premiumActive?'#c4b5fd':'#cbd5e1')+'">'+(premiumActive?'Active':'Inactive')+'</b></div><div class="mt-3"><b>Enabled premium features</b><div class="mt-2">'+(features||'<span class="text-xs muted">No premium features enabled.</span>')+'</div></div><div class="flex justify-end mt-4"><button class="btn btn-primary" data-act="close">Done</button></div>');
+  m.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(m)}});
+}
+function accountHasImageHostAccess(profile){return true}
+function applyEntitlementUpdate(profile){
+  if(!profile||!App.profile)return;
+  const sameProfile=(profile.id&&App.profile.id&&profile.id===App.profile.id)||(App.user&&profile.user_id&&profile.user_id===App.user.id);
+  if(!sameProfile)return;
+  const oldProfile=App.profile;
+  App.profile={...App.profile,...profile};
+  const badge=document.getElementById('account-member-role');
+  if(badge){const role=accountRole(App.profile),icon=role==='Owner'?'fa-crown':role==='Staff'?'fa-shield-halved':role==='Premium'?'fa-gem':role==='Content Creator'?'fa-video':role==='Developer'?'fa-code':role==='Verified'?'fa-circle-check':'fa-user';badge.innerHTML='<i class="fa-solid '+icon+'"></i> '+esc(role);badge.setAttribute('aria-label','View all assigned roles and badges. Primary role: '+role)}
+  const entitlementKeys=['badges','member_role','is_premium','premium_features','image_host_plan','image_storage_limit_mb','subscription_plan','subscription_period','subscription_started_at','subscription_expires_at','subscription_status','video_host_plan','video_storage_limit_mb','video_subscription_plan','video_subscription_period','video_subscription_started_at','video_subscription_expires_at','video_subscription_status'];
+  const changed=entitlementKeys.some(key=>JSON.stringify(oldProfile[key])!==JSON.stringify(App.profile[key]));
+  if(changed&&['analytics','video-library','music-library'].includes(App.currentTab))renderDashboard();
+  if(changed&&App.currentTab==='premium'&&window.bioflexRefreshPremiumPlanPrices)window.bioflexRefreshPremiumPlanPrices();
+  if(changed&&App.currentTab==='image-host'&&window.bioflexRefreshImageHostQuota)window.bioflexRefreshImageHostQuota();
+  if(changed&&App.currentTab==='video-host'&&window.bioflexRefreshVideoHostQuota)window.bioflexRefreshVideoHostQuota();
+}
+async function refreshAccountEntitlements(){
+  if(!App.user||!App.profile||!App.profile.id)return;
+  try{const {data,error}=await db.from('profiles').select('id,user_id,badges,member_role,is_premium,premium_features,image_host_plan,image_storage_limit_mb,subscription_plan,subscription_period,subscription_started_at,subscription_expires_at,subscription_status,video_host_plan,video_storage_limit_mb,video_subscription_plan,video_subscription_period,video_subscription_started_at,video_subscription_expires_at,video_subscription_status').eq('user_id',App.user.id).maybeSingle();if(!error&&data)applyEntitlementUpdate(data)}catch(_){}
+}
+function watchAccountEntitlements(){
+  if(App.entitlementChannel){try{db.removeChannel(App.entitlementChannel)}catch(_){}}
+  if(App.hostFilesChannel){try{db.removeChannel(App.hostFilesChannel)}catch(_){}App.hostFilesChannel=null}
+  if(App.entitlementSyncTimer)clearInterval(App.entitlementSyncTimer);
+  if(!App.user||!App.profile||!App.profile.id)return;
+  const profileId=App.user.id;
+  if(db.channel)App.entitlementChannel=db.channel('bioflex-entitlements-'+profileId).on('postgres_changes',{event:'UPDATE',schema:'public',table:'profiles',filter:'user_id=eq.'+profileId},payload=>applyEntitlementUpdate(payload.new)).subscribe();
+  if(db.channel)App.hostFilesChannel=db.channel('bioflex-host-files-'+profileId)
+    .on('postgres_changes',{event:'*',schema:'public',table:'telegram_image_host_files',filter:'user_id=eq.'+profileId},()=>{
+      if(App.currentTab==='image-host'){setTimeout(()=>{window.bioflexRefreshImageHostQuota?.();window.bioflexLoadHostedImages?.(true)},180)}
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'telegram_video_host_files',filter:'user_id=eq.'+profileId},()=>{
+      if(App.currentTab==='video-host'){setTimeout(()=>{window.bioflexRefreshVideoHostQuota?.();window.bioflexLoadHostedVideos?.(true)},180)}
+    }).subscribe();
+  App.entitlementSyncTimer=setInterval(refreshAccountEntitlements,20000);
+}
+window.addEventListener('focus',()=>{if(App.user)refreshAccountEntitlements()});
 
 /* HELPERS */
 function esc(s){if(s==null)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
@@ -1343,7 +1585,19 @@ function getSubdomain(){
   return sub;
 }
 
-function navigate(hash){if(getSubdomain()){route();return}if(location.hash===hash){route();return}location.hash=hash}
+function rememberDashboardTab(tab){
+  if(!tab)return;
+  App.currentTab=tab;
+  try{sessionStorage.setItem(DASHBOARD_TAB_KEY,tab);sessionStorage.removeItem(DASHBOARD_HIDDEN_KEY)}catch(_){}
+}
+function navigate(hash){
+  if(getSubdomain()){route();return}
+  const match=String(hash||'').match(/^#\/dashboard\/([^/?#]+)/);
+  if(match)rememberDashboardTab(match[1]);
+  else if(!String(hash||'').startsWith('#/dashboard/')){try{sessionStorage.removeItem(DASHBOARD_HIDDEN_KEY)}catch(_){}}
+  if(location.hash===hash){route();return}
+  location.hash=hash;
+}
 function route(){
   const sub=getSubdomain();
   if(sub){
@@ -1372,7 +1626,20 @@ function route(){
   else if(name==='policy')showScreen('policy');
   else if(name==='profile'){App.publicProfileUsername=slug(raw.split('/')[1]||'');showScreen('preview');renderPreview()}
   else if(name==='demo'){App.demoMode=true;App.publicProfileUsername='sample';document.body.classList.remove('is-subdomain');showScreen('preview');renderPreview()}
-  else if(name==='dashboard'){if(!App.user){navigate('#/login');return}if(!App.profile){showScreen('landing');return}App.currentTab=(raw.split('/')[1])||'overview';showScreen('dashboard');renderDashboard()}
+  else if(name==='dashboard'){
+    if(!App.user){navigate('#/login');return}
+    if(!App.profile){showScreen('landing');return}
+    let tab=raw.split('/')[1]||'';
+    try{
+      const hidden=sessionStorage.getItem(DASHBOARD_HIDDEN_KEY)==='1';
+      const saved=sessionStorage.getItem(DASHBOARD_TAB_KEY)||'';
+      if(hidden&&(!tab||tab==='overview')&&saved)tab=saved;
+      sessionStorage.removeItem(DASHBOARD_HIDDEN_KEY);
+    }catch(_){}
+    App.currentTab=tab||'overview';
+    try{sessionStorage.setItem(DASHBOARD_TAB_KEY,App.currentTab)}catch(_){}
+    showScreen('dashboard');renderDashboard()
+  }
   else if(name==='preview'){showScreen('preview');renderPreview()}
   else showScreen('landing');
 }
@@ -1383,6 +1650,25 @@ function showScreen(name){
   window.scrollTo({top:0,behavior:'instant'});
 }
 window.addEventListener('hashchange',route);
+document.addEventListener('visibilitychange',function(){
+  try{
+    if(document.visibilityState==='hidden'&&location.hash.startsWith('#/dashboard/')){
+      sessionStorage.setItem(DASHBOARD_TAB_KEY,App.currentTab||location.hash.split('/')[2]||'overview');
+      sessionStorage.setItem(DASHBOARD_HIDDEN_KEY,'1');
+    }else if(document.visibilityState==='visible'&&sessionStorage.getItem(DASHBOARD_HIDDEN_KEY)==='1'){
+      const saved=sessionStorage.getItem(DASHBOARD_TAB_KEY)||'';
+      if(saved&&/^#\/dashboard\/(?:overview)?$/.test(location.hash)){
+        sessionStorage.removeItem(DASHBOARD_HIDDEN_KEY);
+        const restored='#/dashboard/'+saved;
+        if(location.hash!==restored)location.replace(location.pathname+location.search+restored);
+        else route();
+      }
+    }
+  }catch(_){}
+});
+window.addEventListener('pagehide',function(){
+  try{if(location.hash.startsWith('#/dashboard/')){sessionStorage.setItem(DASHBOARD_TAB_KEY,App.currentTab||location.hash.split('/')[2]||'overview');sessionStorage.setItem(DASHBOARD_HIDDEN_KEY,'1')}}catch(_){}
+});
 
 /* LANDING USERNAME CLAIM */
 const lpUsernameInput=document.getElementById('lp-username');
@@ -1461,6 +1747,12 @@ function setAuthMode(mode){
   document.getElementById('auth-toggle-btn').textContent=s?'Sign in':'Sign up';
   document.getElementById('auth-username-wrap').classList.toggle('hidden',!s);
   document.getElementById('auth-error').classList.add('hidden');
+  document.getElementById('auth-forgot-password').classList.toggle('hidden',s);
+  document.getElementById('auth-form').classList.toggle('hidden',!!App.passwordRecovery);
+  document.querySelector('.auth-socials').classList.toggle('hidden',!!App.passwordRecovery);
+  document.querySelector('.divider').classList.toggle('hidden',!!App.passwordRecovery);
+  document.getElementById('auth-toggle-text').parentElement.classList.toggle('hidden',!!App.passwordRecovery);
+  document.getElementById('auth-reset-panel').classList.toggle('hidden',!App.passwordRecovery);
   if(s){
     let prefill='';
     try{prefill=sessionStorage.getItem('bioflex.prefillUsername')||''}catch(_){}
@@ -1471,6 +1763,73 @@ function setAuthMode(mode){
   }
 }
 function toggleAuthMode(){setAuthMode(App.authMode==='login'?'signup':'login')}
+function showPasswordRecovery(){
+  const alreadyOpen=App.passwordRecovery;
+  App.passwordRecovery=true;
+  showScreen('auth');
+  setAuthMode('login');
+  if(!alreadyOpen){
+    const error=document.getElementById('auth-reset-error');
+    if(error){error.classList.add('hidden');error.textContent=''}
+    document.getElementById('auth-new-password').value='';
+    document.getElementById('auth-confirm-password').value='';
+  }
+}
+async function requestPasswordReset(){
+  const emailInput=document.getElementById('auth-email'),email=emailInput.value.trim();
+  const error=document.getElementById('auth-error');
+  const button=document.getElementById('auth-forgot-password');
+  error.className='claim-result hidden';
+  if(!email||!emailInput.checkValidity()){error.className='claim-result bad';error.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> Enter a valid account email first.';emailInput.focus();return}
+  if(window.location.protocol==='file:'){error.className='claim-result bad';error.innerHTML='Open this website on its deployed HTTPS domain before requesting a reset link.';return}
+  button.disabled=true;button.textContent='Sending reset link…';
+  try{
+    const redirectTo=new URL(window.location.pathname+'?password-reset=1',window.location.origin).toString();
+    const {error:resetError}=await db.auth.resetPasswordForEmail(email,{redirectTo});
+    if(resetError)throw resetError;
+    error.className='claim-result ok';
+    error.innerHTML='<i class="fa-solid fa-envelope-circle-check"></i> If an account matches this email, a secure reset link has been sent. Check your inbox and spam folder.';
+  }catch(err){
+    error.className='claim-result bad';
+    error.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(err.message||'Could not send a reset email. Try again.');
+  }finally{
+    button.disabled=false;button.textContent='Forgot password?';
+  }
+}
+async function handlePasswordRecovery(event){
+  event.preventDefault();
+  const error=document.getElementById('auth-reset-error');
+  error.classList.add('hidden');error.textContent='';
+  const password=document.getElementById('auth-new-password').value;
+  const confirmation=document.getElementById('auth-confirm-password').value;
+  if(password.length<8){error.textContent='Use at least 8 characters for your new password.';error.classList.remove('hidden');return}
+  if(password!==confirmation){error.textContent='The two passwords do not match.';error.classList.remove('hidden');return}
+  try{
+    const {data,error:sessionError}=await db.auth.getSession();
+    if(sessionError)throw sessionError;
+    if(!data.session)throw new Error('This reset link is invalid or expired. Request a new password-reset email.');
+    const {error:updateError}=await db.auth.updateUser({password});
+    if(updateError)throw updateError;
+    try{await db.auth.signOut()}catch(signOutError){console.warn('Password changed; sign-out cleanup failed:',signOutError)}
+    App.passwordRecovery=false;
+    try{history.replaceState(null,'',window.location.pathname)}catch(_){}
+    setAuthMode('login');
+    const message=document.getElementById('auth-error');
+    message.className='claim-result ok';
+    message.innerHTML='<i class="fa-solid fa-circle-check"></i> Password updated. Sign in with your new password.';
+    toast('Password changed successfully.','success');
+  }catch(err){
+    error.innerHTML='<i class="fa-solid fa-circle-exclamation"></i> '+esc(err.message||'Could not update password.');
+    error.classList.remove('hidden');
+  }
+}
+async function cancelPasswordRecovery(){
+  try{await db.auth.signOut()}catch(_){}
+  App.passwordRecovery=false;
+  try{history.replaceState(null,'',window.location.pathname+'#/login')}catch(_){}
+  setAuthMode('login');
+  route();
+}
 async function signInWith(provider){
   try{
     const errEl=document.getElementById('auth-error');
@@ -1561,6 +1920,9 @@ if(authUsernameInput){
 async function handleLogout(){
   if(App.publicPresence){db.removeChannel(App.publicPresence);App.publicPresence=null}
   if(App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
+  if(App.entitlementChannel){db.removeChannel(App.entitlementChannel);App.entitlementChannel=null}
+  if(App.hostFilesChannel){db.removeChannel(App.hostFilesChannel);App.hostFilesChannel=null}
+  if(App.entitlementSyncTimer){clearInterval(App.entitlementSyncTimer);App.entitlementSyncTimer=null}
   await db.auth.signOut();
   App.user=null;App.profile=null;App.links=[];App.socials=[];
   toast('Signed out.','info');
@@ -1619,6 +1981,7 @@ async function loadUserData(){
     }
   }
   App.profile=profile;
+  watchAccountEntitlements();
   try{sessionStorage.removeItem('bioflex.prefillUsername')}catch(_){}
   App.usernameEffect=profile.username_effect||'none';
   const {data:links}=await db.from('links').select('*').eq('user_id',user.id).order('position');
@@ -1787,27 +2150,30 @@ function closeDrawer(){document.getElementById('drawer').classList.remove('open'
 function renderTab(tab){
   switch(tab){
     case 'overview':return tabOverview();
-    case 'analytics':return tabAnalytics();
+    case 'analytics':return accountPremiumFeatureEnabled(App.profile,'analytics')?tabAnalytics():premiumFeatureGate('Analytics','analytics');
     case 'leaderboard':return tabLeaderboard();
     case 'badges':return tabBadges();
     case 'settings':return tabSettings();
     case 'customize':return tabCustomize();
-    case 'video-library':return tabVideoLibrary();
-    case 'music-library':return tabMusicLibrary();
+    case 'video-library':return accountPremiumFeatureEnabled(App.profile,'video_library')?tabVideoLibrary():premiumFeatureGate('Video Library','video_library');
+    case 'music-library':return accountPremiumFeatureEnabled(App.profile,'music_library')?tabMusicLibrary():premiumFeatureGate('Music Library','music_library');
     case 'links':return tabLinks();
     case 'templates':return tabTemplates();
     case 'premium':return tabPremiumPage();
     case 'image-host':return tabImageHostPage();
+    case 'video-host':return window.tabVideoHostPage?window.tabVideoHostPage():'<div class="image-host-notice">Video Host is loading. Refresh the page and try again.</div>';
     default:return tabOverview();
   }
 }
 function bindTab(tab){
+  if(tab==='overview')refreshAccountEntitlements();
   if(tab==='settings')bindSettings();
   if(tab==='links')bindLinks();
-  if(tab==='video-library')bindVideoLibrary();
-  if(tab==='music-library')bindMusicLibrary();
+  if(tab==='customize')renderLinksList();
+  if(tab==='video-library'&&accountPremiumFeatureEnabled(App.profile,'video_library'))bindVideoLibrary();
+  if(tab==='music-library'&&accountPremiumFeatureEnabled(App.profile,'music_library'))bindMusicLibrary();
   if(tab!=='analytics'&&tab!=='overview'&&App.dashboardPresence){db.removeChannel(App.dashboardPresence);App.dashboardPresence=null}
-  if(tab==='overview'||tab==='analytics')loadAnalytics();
+  if(tab==='overview'||(tab==='analytics'&&accountPremiumFeatureEnabled(App.profile,'analytics')))loadAnalytics();
   if(tab==='overview'||tab==='analytics')startDashboardPresence();
   if(tab==='leaderboard')loadLeaderboard();
 }
@@ -1818,7 +2184,8 @@ function statCard(label,value,icon,color){
 function tabOverview(){
   const p=App.profile;
   const url='https://'+p.username+'.'+ROOT_DOMAIN;
-  return '<div class="flex items-center justify-between gap-3 mb-6 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">'+esc(p.display_name||p.username)+'</h1><p class="muted mt-1">Overview · <b style="color:#fff">@'+esc(p.username)+'</b></p></div><span class="member-badge"><i class="fa-solid fa-user"></i> '+(p.member_role||'user')+'</span></div>'+
+  const role=accountRole(p),roleIcon=role==='Owner'?'fa-crown':role==='Staff'?'fa-shield-halved':role==='Premium'?'fa-gem':role==='Content Creator'?'fa-video':role==='Developer'?'fa-code':role==='Verified'?'fa-circle-check':'fa-user';
+  return '<div class="flex items-center justify-between gap-3 mb-6 flex-wrap"><div><h1 class="font-display text-3xl font-extrabold">'+esc(p.display_name||p.username)+'</h1><p class="muted mt-1">Overview · <b style="color:#fff">@'+esc(p.username)+'</b></p></div><button type="button" class="member-badge account-role-trigger" id="account-member-role" onclick="openAccountRoles()" aria-label="View all assigned roles and badges" style="font-family:inherit;cursor:pointer"><i class="fa-solid '+roleIcon+'"></i> '+esc(role)+'</button></div>'+ 
   '<div class="glass" style="border-radius:16px;padding:1.35rem"><div class="flex items-center justify-between flex-wrap gap-2"><div class="text-xs muted-2 uppercase tracking-widest">Your public URL</div><button class="btn btn-ghost btn-sm" onclick="copyUrl(\''+esc(url)+'\')"><i class="fa-solid fa-copy"></i> Copy</button></div><div class="mt-2"><code style="font-size:.9rem;padding:.35rem .6rem;background:rgba(59,130,246,.15);color:#93c5fd">'+esc(url)+'</code></div></div>'+
     '<div class="grid grid-2 md-4 g-4 mt-6">'+statCard('Profile Views',fmtUID(p.view_count||0),'fa-eye','#60a5fa')+statCard('Live Visitors','<span id="ov-live-value">—</span>','fa-user-check','#4ade80')+statCard('Unique Visitors (30d)','<span id="ov-unique">—</span>','fa-users','#4ade80')+statCard('Link Clicks (30d)','<span id="ov-clicks">—</span>','fa-arrow-pointer','#fbbf24')+statCard('Active Links',fmtUID(App.links.length+App.socials.length),'fa-link','#60a5fa')+'</div>'+
    '<p class="text-xs muted mt-3">Member since '+esc(new Date(p.created_at).toLocaleDateString('en-US',{month:'short',year:'numeric'}))+' · Detailed visitor and click data is privacy-friendly and anonymous.</p><div id="ov-analytics-note" class="info warn mt-4 hidden"></div>';
@@ -1904,7 +2271,9 @@ async function trackAnalyticsEvent(profile,eventType,targetId){
 }
 function trackProfileView(profile){
   if(!analyticsAllowed()||!profile||!profile.id||(App.user&&App.user.id===profile.user_id))return;
-  const viewKey='bioflex.viewed.once.'+profile.id;
+  const resetTime=profile.view_count_reset_at?Date.parse(profile.view_count_reset_at):NaN;
+  const resetToken=Number.isFinite(resetTime)?':'+resetTime:'';
+  const viewKey='bioflex.viewed.once.'+profile.id+resetToken;
   const eventKey='bioflex.analytics.viewed.'+profile.id;
   let firstView=false,recordAnalytics=false;
   try{
@@ -2042,13 +2411,16 @@ function startTimezoneClock(timezone,label){
 
 function tabBadges(){
   const badges=[
-    {name:'Verified',icon:'fa-circle-check',color:'#3b82f6',owned:false,desc:'Assigned by staff'},
-    {name:'Premium',icon:'fa-crown',color:'#fbbf24',owned:false,desc:'Premium subscriber'},
+    {name:'Owner',icon:'fa-crown',color:'#eab308',owned:false,desc:'Website owner'},
     {name:'Staff',icon:'fa-shield-halved',color:'#ef4444',owned:false,desc:'BioFlex team'},
-    {name:'Developer',icon:'fa-code',color:'#4ade80',owned:false,desc:'Verified dev'},
-    {name:'Creator',icon:'fa-sparkles',color:'#a78bfa',owned:false,desc:'Content creator'},
-    {name:'Early Access',icon:'fa-rocket',color:'#f472b6',owned:true,desc:'First 1000 users'}
+    {name:'Premium',icon:'fa-gem',color:'#a855f7',owned:false,desc:'Premium subscriber'},
+    {name:'Developer',icon:'fa-code',color:'#22c55e',owned:false,desc:'Verified developer'},
+    {name:'Content Creator',icon:'fa-video',color:'#ec4899',owned:false,desc:'Content creator'},
+    {name:'Verified',icon:'fa-circle-check',color:'#3b82f6',owned:false,desc:'Assigned by staff'},
+    {name:'Early Access',icon:'fa-rocket',color:'#06b6d4',owned:false,desc:'Early adopter'}
   ];
+  const owned=accountAssignedBadgeIds(App.profile);
+  badges.forEach(b=>{const id=b.name==='Early Access'?'early':b.name==='Content Creator'?'creator':b.name==='Developer'?'dev':b.name.toLowerCase();b.owned=owned.includes(id)});
   return '<h1 class="font-display text-3xl font-extrabold">Badges</h1><p class="muted mt-1">Badges shown next to your name.</p><div class="info warn mt-4"><i class="fa-solid fa-triangle-exclamation"></i><div>Privileged badges are assigned by BioFlex staff only.</div></div><div class="glass badges-shell mt-6" style="border-radius:16px"><div class="badges-grid">'+badges.map(b=>'<article class="glass-soft badge-card"><div class="badge-card-icon" style="background:rgba(96,165,250,.12);color:'+b.color+'"><i class="fa-solid '+b.icon+'"></i></div><div class="badge-card-copy"><strong class="font-semibold" style="font-size:.85rem">'+esc(b.name)+'</strong><span class="text-xs muted-2" title="'+esc(b.desc)+'">'+esc(b.desc)+'</span></div><i class="badge-card-status '+(b.owned?'fa-solid fa-circle-check':'fa-solid fa-lock')+'" style="color:'+(b.owned?'#4ade80':'rgba(219,234,254,.3)')+'" aria-label="'+(b.owned?'Earned':'Locked')+'"></i></article>').join('')+'</div></div>';
 }
 
@@ -2060,18 +2432,18 @@ async function loadLeaderboard(){
   if(!root)return;
   root.innerHTML='<div class="empty"><i class="fa-solid fa-spinner fa-spin"></i><div class="mt-2">Loading leaderboard…</div></div>';
   try{
-    const {data,error}=await db.from('profiles').select('username,display_name,view_count,avatar_url').not('username','is',null).order('view_count',{ascending:false,nullsFirst:false}).limit(100);
+    const {data,error}=await db.from('profiles').select('username,display_name,view_count,avatar_url,badges,is_premium,member_role').not('username','is',null).gt('view_count',0).order('view_count',{ascending:false,nullsFirst:false}).limit(100);
     if(error)throw error;
     const rows=(data||[]).filter(row=>row.username).slice(0,100);
     if(!rows.length){root.innerHTML='<div class="empty"><i class="fa-solid fa-ranking-star"></i><div class="mt-2">No public profiles to rank yet.</div></div>';return}
     const podium=rows.slice(0,3).map((row,index)=>{
       const name=row.display_name||row.username,avatar=safeWebUrl(row.avatar_url||'');
-      return '<button class="leaderboard-podium-card place-'+(index+1)+'" type="button" data-profile-username="'+esc(row.username)+'">'+(index===0?'<span class="leaderboard-crown" aria-label="First place"><i class="fa-solid fa-crown" aria-hidden="true"></i></span>':'')+'<span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><strong class="leaderboard-podium-name">'+esc(name)+'</strong><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+fmtUID(row.view_count||0)+'</span></button>';
+      return '<button class="leaderboard-podium-card place-'+(index+1)+'" type="button" data-profile-username="'+esc(row.username)+'">'+(index===0?'<span class="leaderboard-crown" aria-label="First place"><i class="fa-solid fa-crown" aria-hidden="true"></i></span>':'')+'<span class="leaderboard-podium-rank">#'+(index+1)+'</span><span class="leaderboard-podium-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><strong class="leaderboard-podium-name">'+esc(name)+'</strong><span class="leaderboard-role-badges">'+leaderboardRoleBadges(row)+'</span><span class="leaderboard-podium-views"><i class="fa-solid fa-eye"></i> '+fmtUID(row.view_count||0)+'</span></button>';
     }).join('');
     const remaining=rows.slice(3).map((row,index)=>{
       const rank=index+4;
       const name=row.display_name||row.username,avatar=safeWebUrl(row.avatar_url||'');
-      return '<button class="leaderboard-row" type="button" role="listitem" data-profile-username="'+esc(row.username)+'"><span class="leaderboard-rank">#'+rank+'</span><span class="leaderboard-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><span class="min-w-0"><strong class="truncate" style="display:block">'+esc(name)+'</strong><span class="text-xs muted">@'+esc(row.username)+'</span></span><span class="text-sm tabular-nums"><i class="fa-solid fa-eye muted"></i> '+fmtUID(row.view_count||0)+'</span></button>';
+      return '<button class="leaderboard-row" type="button" role="listitem" data-profile-username="'+esc(row.username)+'"><span class="leaderboard-rank">#'+rank+'</span><span class="leaderboard-avatar">'+(avatar?'<img src="'+esc(avatar)+'" alt="">':esc(name.trim().charAt(0).toUpperCase()||'?'))+'</span><span class="min-w-0"><strong class="truncate" style="display:block">'+esc(name)+'</strong><span class="text-xs muted">@'+esc(row.username)+'</span><span class="leaderboard-row-roles">'+leaderboardRoleBadges(row)+'</span></span><span class="text-sm tabular-nums"><i class="fa-solid fa-eye muted"></i> '+fmtUID(row.view_count||0)+'</span></button>';
     }).join('');
     root.innerHTML='<div class="leaderboard-podium" aria-label="Top three profiles">'+podium+'</div>'+(remaining?'<div class="sidebar-section-label" style="padding:.75rem 1rem .35rem">All Rankings</div>'+remaining:'');
     root.querySelectorAll('[data-profile-username]').forEach(button=>button.addEventListener('click',()=>navigate('#/profile/'+encodeURIComponent(button.dataset.profileUsername))));
@@ -2475,12 +2847,12 @@ function tabCustomize(){
   return (
     '<h1 class="font-display text-3xl font-extrabold">Customize</h1><p class="muted mt-1">Make your BioFlex profile truly yours.</p>'+
     '<div class="card glass mt-6">'+
-      '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Assets Uploader</h3><p>Files upload and attach automatically; no manual direct-link step.</p></div></div>'+
+     '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Assets Uploader</h3><p>Images, video, and audio upload and attach automatically. Playback depends on browser format support.</p></div></div>'+
       '<div class="asset-upload-grid">'+
-        buildUploadBox('bg','Background','Upload JPG, PNG, GIF, MP4 or WebM (max 50MB) — video plays muted','fa-image','JPG, PNG, GIF, MP4, WebM · Max 50MB','backgrounds','background_url',p.background_url)+
+        buildUploadBox('bg','Background','Upload an image or video. Playback depends on browser and file format support.','fa-image','Upload image or video','backgrounds','background_url',p.background_url)+
         buildAudioBox(p.music_url,p.music_title)+
-        buildUploadBox('avatar','Profile Avatar','Square image (max 5MB)','fa-user','JPG, PNG, GIF','avatars','avatar_url',p.avatar_url)+
-        buildUploadBox('cursor','Custom Cursor','PNG cursor (max 1MB). 32x32 best','fa-arrow-pointer','PNG recommended','cursors','cursor_url',p.cursor_url)+
+        buildUploadBox('avatar','Profile Avatar','Image file · max 10MB','fa-user','Any image · max 10MB','avatars','avatar_url',p.avatar_url)+
+        (accountPremiumFeatureEnabled(p,'custom_cursor')?buildUploadBox('cursor','Custom Cursor','Upload an image to use as your cursor.','fa-arrow-pointer','Upload image','cursors','cursor_url',p.cursor_url):'')+
       '</div>'+
     '</div>'+
     '<div class="card glass mt-4">'+
@@ -2536,8 +2908,8 @@ function buildUploadBox(id,label,tip,icon,sub,bucket,field,currentUrl){
   const hasFile=!!currentUrl;
   const isVideo=currentUrl&&isVideoAssetUrl(currentUrl);
   const acceptAttr = field==='background_url'
-    ? 'image/*,video/mp4,video/webm'
-    : (field==='cursor_url' ? 'image/png,image/*' : 'image/*');
+    ? 'image/*,video/*'
+    : 'image/*';
   return '<div>'+
     '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">'+label+' <span class="help" data-tip="'+tip+'">?</span></label>'+
     '<input type="file" id="up-'+id+'" accept="'+acceptAttr+'" style="display:none" onchange="handleUpload(this,\''+bucket+'\',\''+field+'\')">'+
@@ -2545,11 +2917,12 @@ function buildUploadBox(id,label,tip,icon,sub,bucket,field,currentUrl){
       (hasFile
         ? '<div class="upload-preview-wrap">'+(isVideo?'<video class="upload-preview" src="'+esc(currentUrl)+'" muted autoplay loop playsinline preload="metadata"></video>':'<img class="upload-preview" src="'+esc(currentUrl)+'" onerror="this.style.objectFit=\'cover\'">')+'<div class="upload-preview-overlay"><span class="upload-chip">'+currentUrl.split('.').pop().toUpperCase().slice(0,4)+'</span><button class="upload-remove-btn" onclick="event.stopPropagation();removeUpload(\''+field+'\')"><i class="fa-solid fa-xmark"></i></button></div></div>'
         : '<div class="upload-icon"><i class="fa-solid '+icon+'"></i></div><div class="upload-title">Click to upload</div><div class="upload-sub">'+sub+'</div>')+
+      '<div class="upload-progress-label" id="upload-status-'+id+'" hidden>Uploading… 0%</div><div class="upload-progress" id="upload-progress-'+id+'" hidden><span></span></div>'+
     '</div>'+
     (['background_url','avatar_url','cursor_url'].includes(field)
       ? '<div class="asset-url-row"><input class="input" type="url" id="asset-url-'+id+'" placeholder="Paste a direct https:// media URL" aria-label="'+esc(label)+' direct URL"><button class="btn btn-ghost btn-sm" type="button" onclick="applyAssetUrl(\''+field+'\',\''+id+'\')"><i class="fa-solid fa-link"></i> Use link</button></div><div class="asset-url-hint">Use a direct file URL (not a webpage/share link). Upload still works too.</div>'
       : '')+
-    (field==='background_url' ? '<div class="file-info"><i class="fa-solid fa-circle-info"></i><span>Image, GIF, MP4, WebM · <b>Max 50MB</b> · Video is auto-muted</span></div>' : '')+
+    (field==='background_url' ? '<div class="file-info"><i class="fa-solid fa-circle-info"></i><span>Image and video formats are accepted. Playback depends on browser support and the hosting service.</span></div>' : '')+
   '</div>';
 }
 function isUploadedAudioUrl(url){
@@ -2560,7 +2933,7 @@ function buildAudioBox(musicUrl,musicTitle){
   const fileName=musicUrl?musicUrl.split('/').pop():'';
   const audioUrlControl='<div class="asset-url-row"><input class="input" type="url" id="asset-url-audio" value="'+esc(uploadedAudio?'':(musicUrl||''))+'" placeholder="Paste direct audio file URL" aria-label="Audio direct URL"><button class="btn btn-ghost btn-sm" type="button" onclick="applyAssetUrl(\'music_url\',\'audio\')"><i class="fa-solid fa-link"></i> Use link</button></div><div class="asset-url-hint">Paste a direct MP3, OGG, or WAV file URL (not a Spotify/YouTube page). Upload or use a URL.</div>';
   return '<div>'+
-    '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Audio <span class="help" data-tip="MP3 or OGG (max 20MB).">?</span></label>'+
+    '<label style="display:block;font-size:.8rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">Audio <span class="help" data-tip="MP3, M4A, OGG, WAV, and other browser-supported audio. The hosting provider may enforce its own upload limit.">?</span></label>'+
     '<input type="file" id="up-audio" accept="audio/*" style="display:none" onchange="handleUpload(this,\'audio\',\'music_url\')">'+
      '<div class="upload-box audio-upload '+(musicUrl?'has-file':'')+'" id="up-audio-box" onclick="if(!this.classList.contains(\'has-file\'))document.getElementById(\'up-audio\').click()">'+
       (musicUrl
@@ -2572,13 +2945,14 @@ function buildAudioBox(musicUrl,musicTitle){
             '</div>'+
             '<button class="upload-remove-btn" onclick="event.stopPropagation();removeUpload(\'music_url\')"><i class="fa-solid fa-xmark"></i></button>'+
           '</div>'
-        : '<div class="upload-icon"><i class="fa-solid fa-file-audio"></i></div><div class="upload-title">Click to upload audio</div><div class="upload-sub">MP3, OGG, WAV</div>')+
+        : '<div class="upload-icon"><i class="fa-solid fa-file-audio"></i></div><div class="upload-title">Click to upload audio</div><div class="upload-sub">Audio formats supported by your browser</div>')+
+      '<div class="upload-progress-label" id="upload-status-audio" hidden>Uploading… 0%</div><div class="upload-progress" id="upload-progress-audio" hidden><span></span></div>'+
      '</div>'+
       audioUrlControl+
    '</div>';
 }
 function isVideoAssetUrl(value){
-  try{return /\.(mp4|webm|mov|m4v)$/i.test(new URL(value,window.location.href).pathname)}catch(_){return /\.(mp4|webm|mov|m4v)(\?|$)/i.test(String(value||''))}
+  try{return /\.(mp4|webm|mov|m4v|ogv|avi|mkv|mpeg|mpg|3gp|ts|m2ts)$/i.test(new URL(value,window.location.href).pathname)}catch(_){return /\.(mp4|webm|mov|m4v|ogv|avi|mkv|mpeg|mpg|3gp|ts|m2ts)(?:[?#]|$)/i.test(String(value||''))}
 }
 async function applyAssetUrl(field,id){
   const input=document.getElementById('asset-url-'+id);
@@ -2594,7 +2968,7 @@ async function saveAssetUrl(field,url,title){
   const upd={};
   if(field==='background_url'){
     let pathname='';try{pathname=new URL(safe).pathname.toLowerCase()}catch(_){}
-    const type=/\.(mp4|webm|mov|m4v)$/.test(pathname)?'video':(/\.gif$/.test(pathname)?'gif':'image');
+    const type=/\.(mp4|webm|mov|m4v|ogv|avi|mkv|mpeg|mpg|3gp|ts|m2ts)$/.test(pathname)?'video':(/\.gif$/.test(pathname)?'gif':'image');
     upd.background_url=safe;
     upd.background_type=type;
     const oldValue=App.profile.background_value;
@@ -2684,6 +3058,7 @@ async function saveCustomize(){
   toast('All changes saved!','success');
 }
 function openUsernameEffects(){
+  if(!accountPremiumFeatureEnabled(App.profile,'username_effects')){toast('Username Effects is locked for this account.','error');navigate('#/dashboard/premium');return}
   const current=App.usernameEffect||'none';
   const modal=openModal('<div class="modal-head"><div><h3>Username Effects</h3><p>Choose how your username displays.</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div class="effects-grid">'+USERNAME_EFFECTS.map(e=>'<div class="effect-tile '+(e.id===current?'selected':'')+'" data-effect="'+e.id+'"><div class="effect-preview '+e.class+'">semx</div><div class="effect-name">'+esc(e.name)+'</div></div>').join('')+'</div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="cancel">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-check"></i> Save</button></div>');
   modal.querySelectorAll('.effect-tile').forEach(tile=>{
@@ -2708,32 +3083,45 @@ function openUsernameEffects(){
 async function handleUpload(input,bucket,field){
   const file=input.files[0];
   if(!file)return;
-  const maxSizes={avatars:5, background_small:5, backgrounds:50, audio:20, cursors:1};
-  const maxMB = field==='background_url' ? 50 : (maxSizes[bucket]||10);
+  if(field==='cursor_url'&&!accountPremiumFeatureEnabled(App.profile,'custom_cursor')){toast('Custom Cursor is locked for this account.','error');input.value='';return}
+  const maxSizes={avatars:10, background_small:Infinity, backgrounds:Infinity, audio:Infinity, cursors:Infinity};
+  const maxMB = field==='background_url' ? Infinity : (maxSizes[bucket]??Infinity);
+  const ext=(file.name.split('.').pop()||'').toLowerCase();
+  const isImage=(file.type||'').startsWith('image/')||['jpg','jpeg','png','gif','webp','avif','bmp','tif','tiff','heic','heif'].includes(ext);
+  const isVideo=(file.type||'').startsWith('video/')||['mp4','webm','mov','m4v','ogv','avi','mkv','mpeg','mpg','3gp','ts','m2ts'].includes(ext);
+  const boxId=field==='background_url'?'bg':field==='avatar_url'?'avatar':field==='cursor_url'?'cursor':'audio';
+  const box=document.getElementById('up-'+boxId+'-box');
+  const status=document.getElementById('upload-status-'+boxId);
+  const progress=document.getElementById('upload-progress-'+boxId);
+  const progressFill=progress&&progress.querySelector('span');
   if(field==='background_url'){
-    const ext = (file.name.split('.').pop()||'').toLowerCase();
-    const isImage = file.type.startsWith('image/') || ['jpg','jpeg','png','gif','webp','avif'].includes(ext);
-    const isVideo = file.type.startsWith('video/') || ['mp4','webm'].includes(ext);
-    if(!isImage && !isVideo){toast('Only images and videos (MP4/WebM) are allowed for backgrounds.','error');input.value='';return;}
-    if(isVideo && !['mp4','webm'].includes(ext)){toast('Video format must be MP4 or WebM.','error');input.value='';return;}
+    if(!isImage && !isVideo){toast('Choose an image or video file for the background.','error');input.value='';return;}
   }
-  if(file.size > maxMB*1024*1024){toast('File too large. Maximum size for this asset is '+maxMB+'MB.','error');input.value='';return;}
-  toast('Uploading...','info');
+  if(field==='avatar_url'&&!isImage){toast('Choose an image file for your avatar.','error');input.value='';return}
+  if(field==='cursor_url'&&!isImage){toast('Choose an image for your custom cursor.','error');input.value='';return}
+  if(field==='music_url'&&!((file.type||'').startsWith('audio/')||['mp3','m4a','ogg','wav','aac','flac','opus','aiff','wma'].includes(ext))){toast('Choose an audio file.','error');input.value='';return}
+  if(Number.isFinite(maxMB)&&file.size>maxMB*1024*1024){toast('This image must be '+maxMB+'MB or smaller.','error');input.value='';return}
+  if(box){box.classList.add('is-uploading');box.setAttribute('aria-busy','true')}
+  if(status){status.hidden=false;status.textContent='Uploading… 0%'}
+  if(progress){progress.hidden=false;if(progressFill)progressFill.style.width='0%'}
+  if(input)input.disabled=true;
+  toast('Uploading… keep this page open.','info');
   try{
-    const ext=file.name.split('.').pop().toLowerCase();
-    const path=App.user.id+'/'+Date.now()+'.'+ext;
-    const {error}=await db.storage.from(bucket).upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});
-    if(error)throw error;
-    const {data:{publicUrl}}=db.storage.from(bucket).getPublicUrl(path);
+    const uploaded=await uploadTelegramAsset(file,bucket+'/'+App.user.id,maxMB,fraction=>{
+      const percent=Math.max(1,Math.min(96,Math.round(fraction*96)));
+      if(status)status.textContent='Uploading… '+percent+'%';
+      if(progressFill)progressFill.style.width=percent+'%';
+    });
+    if(status)status.textContent='Saving…';
+    if(progressFill)progressFill.style.width='98%';
+    const publicUrl=uploaded.url;
     const upd={};
     if(field==='avatar_url')upd.avatar_url=publicUrl;
     if(field==='music_url'){upd.music_url=publicUrl;upd.music_title=file.name.replace(/\.[^.]+$/,'')}
     if(field==='cursor_url')upd.cursor_url=publicUrl;
     if(field==='background_url'){
       upd.background_url=publicUrl;
-      if(['mp4','webm'].includes(ext))upd.background_type='video';
-      else if(ext==='gif')upd.background_type='gif';
-      else upd.background_type='image';
+      upd.background_type=uploaded.kind==='video'||isVideo?'video':(uploaded.kind==='gif'||ext==='gif'?'gif':'image');
       upd.background_value={...(App.profile.background_value||{}),url:publicUrl};
     }
     const {error:upErr}=await db.from('profiles').update(upd).eq('user_id',App.user.id);
@@ -2745,6 +3133,10 @@ async function handleUpload(input,bucket,field){
     toast('Upload failed: '+(err.message||err),'error');
   }finally{
     input.value='';
+    input.disabled=false;
+    if(box){box.classList.remove('is-uploading');box.removeAttribute('aria-busy')}
+    if(status)status.hidden=true;
+    if(progress)progress.hidden=true;
   }
 }
 async function removeUpload(field){
@@ -2786,7 +3178,7 @@ function togglePlatformPicker(){
   if(btn)btn.innerHTML=expanded?'Show fewer platforms <i class="fa-solid fa-chevron-up"></i>':'Show more platforms <i class="fa-solid fa-chevron-down"></i>';
 }
 function renderLinksList(){
-  const wrap=document.getElementById('links-list');
+  const wrap=document.getElementById('links-list')||document.getElementById('customize-links-list');
   if(!wrap)return;
   if(!App.socials.length&&!App.links.length){wrap.innerHTML='<div class="empty">No links yet. Click a social icon above to add your first link.</div>';return}
   let html='';
@@ -2813,7 +3205,7 @@ function renderLinksList(){
   setupDragDrop(wrap);
 }
 function bindLinks(){renderLinksList()}
-function openSocialPicker(){renderLinksList();window.scrollTo({top:document.getElementById('links-list').offsetTop-100,behavior:'smooth'})}
+function openSocialPicker(){renderLinksList();const target=document.getElementById('links-list')||document.getElementById('customize-social-picker');if(target)target.scrollIntoView({behavior:'smooth',block:'center'})}
 function openSocialAdd(platformId){
   const pf=PLATFORMS.find(p=>p.id===platformId)||PLATFORMS[0];
   let mode='link';
@@ -2823,7 +3215,7 @@ function openSocialAdd(platformId){
     '<div class="seg" id="mode-seg"><button data-mode="link" class="active"><i class="fa-solid fa-link"></i> Link</button><button data-mode="text"><i class="fa-solid fa-font"></i> Text</button></div></div>'+
      '<div class="mt-4"><label style="display:block;font-size:.82rem;font-weight:600;color:#dbeafe;margin-bottom:.5rem">URL or Handle</label>'+
     '<div style="display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18)"><i class="'+pf.icon+'" style="color:'+pf.color+';font-size:1.15rem"></i><input id="social-url" placeholder="'+esc(pf.prefix)+'" style="flex:1;color:#fff"></div></div>'+
-     (platformId==='website'?'<div class="mt-4"><label class="field-label">Custom icon (optional · PNG/JPG/GIF/WebP · max 2MB)</label><input id="social-icon-file" class="input" type="file" accept="image/png,image/jpeg,image/gif,image/webp"><div class="settings-row-desc">If omitted, the Font Awesome globe icon is used.</div></div>':'')+
+     (platformId==='website'?'<div class="mt-4"><label class="field-label">Custom icon (optional · any image · max 10MB)</label><input id="social-icon-file" class="input" type="file" accept="image/*"><div class="settings-row-desc">If omitted, the Font Awesome globe icon is used.</div></div>':'')+
     '<div class="flex items-center justify-between mt-4"><div class="flex items-center gap-3"><button class="btn btn-primary" data-act="add"><i class="fa-solid fa-plus"></i> Add</button><button class="btn btn-ghost btn-sm" onclick="toast(\'Paste full URL or just the handle.\',\'info\')">Need help?</button></div></div>'
   );
   const inp=m.querySelector('#social-url');
@@ -2867,7 +3259,7 @@ function openCustomLinkAdd(){
     '<div class="mb-3"><label class="field-label">URL</label><input id="new-link-url" class="input" placeholder="https://example.com"></div>'+
     '<div class="mb-3"><label class="field-label">Description (optional)</label><input id="new-link-description" class="input" maxlength="180" placeholder="A short note about this link"></div>'+
     '<div class="mb-3"><label class="field-label">Platform icon</label><select id="new-link-platform" class="input">'+PLATFORMS.map(p=>'<option value="'+p.id+'" '+(p.id==='website'?'selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select><div class="settings-row-desc">The platform icon is chosen automatically.</div></div>'+
-    '<div><label class="field-label">Custom icon (optional · PNG/JPG/GIF/WebP · max 2MB)</label><input id="new-link-icon-file" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"></div>'+
+    '<div><label class="field-label">Custom icon (optional · any image · max 10MB)</label><input id="new-link-icon-file" type="file" class="input" accept="image/*"></div>'+
     '<div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-plus"></i> Add Link</button></div>'
   );
   m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
@@ -2888,16 +3280,13 @@ function openCustomLinkAdd(){
 }
 async function uploadCustomIcon(file){
   const ext=(file.name.split('.').pop()||'').toLowerCase();
-  const allowed=['png','jpg','jpeg','gif','webp'];
-  const mimeOk=['image/png','image/jpeg','image/gif','image/webp'].includes((file.type||'').toLowerCase());
-  if(!allowed.includes(ext)||(file.type&&!mimeOk))throw new Error('Choose a PNG, JPG, GIF, or WebP image.');
-  if(file.size>2*1024*1024)throw new Error('Custom icons must be 2MB or smaller.');
-  const path=App.user.id+'/custom-icons/'+Date.now()+'.'+ext;
-  const {error}=await db.storage.from('avatars').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type||'image/'+(ext==='jpg'?'jpeg':ext)});
-  if(error)throw error;
-  const {data}=db.storage.from('avatars').getPublicUrl(path);
-  if(!data?.publicUrl)throw new Error('Could not create a public URL for this icon.');
-  return data.publicUrl;
+  const allowed=['png','jpg','jpeg','gif','webp','avif','bmp','tif','tiff','heic','heif','svg'];
+  const mimeOk=(file.type||'').toLowerCase().startsWith('image/');
+  if(!allowed.includes(ext)&&!mimeOk)throw new Error('Choose an image file.');
+  if(file.size>10*1024*1024)throw new Error('Custom icons must be 10MB or smaller.');
+  const uploaded=await uploadTelegramAsset(file,App.user.id+'/custom-icons',10);
+  if(!uploaded?.url)throw new Error('Could not create a Telegram media URL.');
+  return uploaded.url;
 }
 async function toggleSocialVisibility(id){
   const s=App.socials.find(x=>x.id===id);if(!s)return;
@@ -2916,7 +3305,7 @@ async function toggleLinkVisibility(id){
 function editSocial(id){
   const s=App.socials.find(x=>x.id===id);if(!s)return;
   const pf=PLATFORMS.find(p=>p.id===s.platform)||PLATFORMS[0];
-  const m=openModal('<div class="modal-head"><div><h3>Edit '+esc(pf.label)+'</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18)"><i class="'+pf.icon+'" style="color:'+pf.color+';font-size:1.15rem"></i><input id="edit-url" value="'+esc(s.url)+'" style="flex:1;color:#fff"></div>'+(s.platform==='website'?'<div class="mt-4"><label class="field-label">Replace custom icon (PNG/JPG/GIF/WebP · max 2MB)</label><input id="edit-social-icon" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="clear-social-icon" type="checkbox"> Use the Font Awesome fallback icon</label></div>':'')+'<div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
+  const m=openModal('<div class="modal-head"><div><h3>Edit '+esc(pf.label)+'</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;border-radius:12px;background:rgba(10,17,32,.7);border:1px solid rgba(96,165,250,.18)"><i class="'+pf.icon+'" style="color:'+pf.color+';font-size:1.15rem"></i><input id="edit-url" value="'+esc(s.url)+'" style="flex:1;color:#fff"></div>'+(s.platform==='website'?'<div class="mt-4"><label class="field-label">Replace custom icon (any image · max 10MB)</label><input id="edit-social-icon" type="file" class="input" accept="image/*"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="clear-social-icon" type="checkbox"> Use the Font Awesome fallback icon</label></div>':'')+'<div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
   m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
   m.querySelector('[data-act=save]').onclick=async()=>{
     const u=m.querySelector('#edit-url').value.trim();
@@ -2942,7 +3331,7 @@ function deleteSocial(id){
 function editLink(id){
   const l=App.links.find(x=>x.id===id);if(!l)return;
   const matchedPlatform=PLATFORMS.find(p=>p.icon===(l.icon||''))||PLATFORMS[PLATFORMS.length-1];
-  const m=openModal('<div class="modal-head"><div><h3>Edit Link</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div class="mb-3"><label class="field-label">Title</label><input id="ed-title" class="input" value="'+esc(l.title)+'"></div><div class="mb-3"><label class="field-label">URL</label><input id="ed-url" class="input" value="'+esc(l.url)+'"></div><div class="mb-3"><label class="field-label">Description</label><input id="ed-description" class="input" maxlength="180" value="'+esc(l.description||'')+'"></div><div class="mb-3"><label class="field-label">Platform icon</label><select id="ed-platform" class="input">'+PLATFORMS.map(p=>'<option value="'+p.id+'" '+(p.id===matchedPlatform.id?'selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select><div class="settings-row-desc">The platform icon is chosen automatically.</div></div><div><label class="field-label">Custom icon (PNG/JPG/GIF/WebP · max 2MB)</label><input id="ed-icon-file" type="file" class="input" accept="image/png,image/jpeg,image/gif,image/webp"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="ed-clear-icon" type="checkbox"> Remove custom icon and use Font Awesome</label></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
+  const m=openModal('<div class="modal-head"><div><h3>Edit Link</h3></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div class="mb-3"><label class="field-label">Title</label><input id="ed-title" class="input" value="'+esc(l.title)+'"></div><div class="mb-3"><label class="field-label">URL</label><input id="ed-url" class="input" value="'+esc(l.url)+'"></div><div class="mb-3"><label class="field-label">Description</label><input id="ed-description" class="input" maxlength="180" value="'+esc(l.description||'')+'"></div><div class="mb-3"><label class="field-label">Platform icon</label><select id="ed-platform" class="input">'+PLATFORMS.map(p=>'<option value="'+p.id+'" '+(p.id===matchedPlatform.id?'selected':'')+'>'+esc(p.label)+'</option>').join('')+'</select><div class="settings-row-desc">The platform icon is chosen automatically.</div></div><div><label class="field-label">Custom icon (PNG/JPG/GIF/WebP · max 10MB)</label><input id="ed-icon-file" type="file" class="input" accept="image/*"><label class="text-xs muted mt-2" style="display:flex;align-items:center;gap:.4rem"><input id="ed-clear-icon" type="checkbox"> Remove custom icon and use Font Awesome</label></div><div class="flex justify-end gap-2 mt-5"><button class="btn btn-ghost" data-act="close">Cancel</button><button class="btn btn-primary" data-act="save"><i class="fa-solid fa-floppy-disk"></i> Save</button></div>');
   m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
   m.querySelector('[data-act=save]').onclick=async()=>{
      const selectedPlatform=PLATFORMS.find(p=>p.id===m.querySelector('#ed-platform').value)||PLATFORMS[PLATFORMS.length-1];
@@ -3001,7 +3390,7 @@ function templateCardStyle(t){
 }
 function previewTemplate(slug){
   const t=(Array.isArray(App.siteTemplates)?App.siteTemplates:[]).find(x=>x.slug===slug)||TEMPLATES.find(x=>x.slug===slug);if(!t)return;
-  const url=safeWebUrl(t.background_url||''),isVideo=/\.(mp4|webm)(\?|$)/i.test(url);
+  const url=safeWebUrl(t.background_url||''),isVideo=isVideoAssetUrl(url);
   const media=url?(isVideo?'<video src="'+esc(url)+'" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>':'<div style="position:absolute;inset:0;background:url(\''+esc(url)+'\') center/cover"></div>'):'';
   const m=openModal('<div class="modal-head"><div><h3>'+esc(t.name)+'</h3><p>'+esc(t.description||'Preview this design, then choose whether to apply it.')+'</p></div><button class="modal-close" data-act="close"><i class="fa-solid fa-xmark"></i></button></div><div style="max-width:320px;min-height:380px;margin:1rem auto;padding:2rem 1.25rem;border-radius:22px;position:relative;overflow:hidden;text-align:center;background:linear-gradient(135deg,'+safeHexColor(t.from,'#07111f')+','+safeHexColor(t.to,'#102b4e')+')">'+media+'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.52))"></div><div style="position:relative;z-index:1;padding-top:2rem;color:'+safeHexColor(t.text_color,'#ffffff')+'">'+(t.default_avatar_url?'<img src="'+esc(safeWebUrl(t.default_avatar_url))+'" alt="" style="width:74px;height:74px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.5)">':'<div style="width:74px;height:74px;margin:auto;border-radius:50%;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:1.8rem"><i class="fa-solid fa-user"></i></div>')+'<h2 style="margin:.8rem 0 .3rem;font-size:1.3rem">Your profile</h2><p style="opacity:.8">Name, bio, social links and cards</p><div style="height:42px;margin-top:1rem;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.1)"></div><div style="height:42px;margin-top:.65rem;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.1)"></div></div></div><div class="flex justify-end gap-2 mt-4"><button class="btn btn-ghost" data-act="close">Close</button><button class="btn btn-primary" data-act="apply"><i class="fa-solid fa-check"></i> Use template</button></div>');
   m.querySelectorAll('[data-act=close]').forEach(b=>b.onclick=()=>closeModal(m));
@@ -3010,7 +3399,7 @@ function previewTemplate(slug){
 function applyTemplate(slug){
   const t=(Array.isArray(App.siteTemplates)?App.siteTemplates:[]).find(x=>x.slug===slug)||TEMPLATES.find(x=>x.slug===slug);if(!t)return;
   confirmModal('Apply template?','This will restyle your profile.',async()=>{
-    const bgUrl=safeWebUrl(t.background_url||''),isVideo=/\.(mp4|webm)(\?|$)/i.test(bgUrl);
+    const bgUrl=safeWebUrl(t.background_url||''),isVideo=isVideoAssetUrl(bgUrl);
     const from=safeHexColor(t.from,'#07111f'),to=safeHexColor(t.to,'#102b4e');
     const upd={background_type:bgUrl?(isVideo?'video':'image'):'gradient',background_url:bgUrl||null,background_value:{from,to,angle:Number(t.angle)||135,url:bgUrl,overlay:0.28},accent_color:safeHexColor(t.accent,'#60a5fa'),bg_color:from,primary_color:safeHexColor(t.accent,'#60a5fa'),secondary_color:to};
     if(!App.profile.avatar_url&&safeWebUrl(t.default_avatar_url||''))upd.avatar_url=safeWebUrl(t.default_avatar_url);
@@ -3040,7 +3429,7 @@ function tabSettings(){
     '<div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-user"></i></div><div><h3>Account</h3><p>Your details</p></div></div>'+
     '<div class="mb-4"><label class="field-label" for="settings-display-name">Display Name</label><div class="flex items-center gap-2 flex-wrap"><input id="settings-display-name" class="input" maxlength="60" placeholder="Your display name" value="'+esc(p.display_name||'')+'" style="flex:1;min-width:180px"><button class="btn btn-primary" id="save-display-name" type="button"><i class="fa-solid fa-check"></i> Save</button></div><p class="settings-row-desc">Shown as the main name on your profile and dashboard.</p></div>'+
     '<div class="grid grid-2 g-4"><div><label class="field-label">Username</label><input class="input" value="'+esc(p.username)+'" disabled></div><div><label class="field-label">Email</label><input class="input" value="'+esc(App.user.email||'')+'" disabled></div></div>'+
-    '<div class="flex items-center gap-3 mt-4"><span class="member-badge"><i class="fa-solid fa-user"></i> '+(p.member_role||'user')+'</span></div>'+
+    '<div class="flex items-center gap-3 mt-4"><span class="member-badge"><i class="fa-solid fa-user"></i> '+esc(accountRole(p))+'</span></div>'+
   '</div>'+
   '<div class="glass mt-4" style="border-radius:16px;padding:1.5rem;border:1px solid rgba(248,113,113,.3)">'+
     '<div class="card-header"><div class="card-header-icon" style="background:rgba(248,113,113,.15);color:#fca5a5"><i class="fa-solid fa-triangle-exclamation"></i></div><div><h3 style="color:#fca5a5">Danger Zone</h3><p>Irreversible actions</p></div></div>'+
@@ -3187,18 +3576,20 @@ async function renderPreview(){
   const layout='bio-template';
   setProfileMetadata(profile);
 
-  if(profile.cursor_url){document.body.style.cursor='url('+profile.cursor_url+') 16 16, auto'}
-  else{document.body.style.cursor=''}
+  if(profile.cursor_url&&accountPremiumFeatureEnabled(profile,'custom_cursor')){document.body.style.cursor='url('+profile.cursor_url+') 16 16, auto'}else{document.body.style.cursor=''}
 
   const bgEl=document.getElementById('preview-bg');
   const bgType=profile.background_type||'gradient';
   const bgVal=profile.background_value||(layout==='bio-template'?{from:'#08080b',to:'#171522',angle:135,overlay:0.25}:{from:'#0a1120',to:'#1d4ed8',angle:135,overlay:0.35});
   const bgUrl = profile.background_url || bgVal.url || '';
-  const isVideoBg = bgUrl.match(/\.(mp4|webm)(\?|$)/i);
+  const isVideoBg = bgType==='video'||isVideoAssetUrl(bgUrl);
+  const isGifBg = bgType==='gif'||/\.gif(?:[?#]|$)/i.test(bgUrl);
 
   let bgHtml='';
   if(bgUrl && isVideoBg){
     bgHtml = '<video class="bg-media" src="'+esc(bgUrl)+'" autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback style="pointer-events:none"></video>';
+  } else if(bgUrl && isGifBg){
+    bgHtml = '<div class="bg-media" style="background-image:url(\''+esc(bgUrl)+'\');background-size:cover;background-position:center"></div>';
   } else if(bgUrl){
     bgHtml = '<div class="bg-media" style="background-image:url(\''+esc(bgUrl)+'\');background-size:cover;background-position:center"></div>';
   } else if(bgType==='solid'){
@@ -3223,7 +3614,7 @@ async function renderPreview(){
   document.body.style.fontFamily="'"+profile.font_family+"',Inter,sans-serif";
 
   const bioClass={none:'',fade:'bio-fade',typewriter:'bio-tw',shimmer:'bio-shimmer',glow:'bio-glow'}[profile.bio_animation||'none']||'';
-  const ue=(USERNAME_EFFECTS.find(e=>e.id===(profile.username_effect||'none'))||{}).class||'';
+  const ue=accountPremiumFeatureEnabled(profile,'username_effects')?((USERNAME_EFFECTS.find(e=>e.id===(profile.username_effect||'none'))||{}).class||''):'';
   const initial=(profile.display_name||profile.username||'?').charAt(0).toUpperCase();
   const avatar=profile.avatar_url
     ?'<img src="'+esc(profile.avatar_url)+'" alt="" onerror="this.outerHTML=\'<div class=\\\'av-inner\\\'>'+esc(initial)+'</div>\'">'
@@ -3250,11 +3641,11 @@ async function renderPreview(){
   const glowName=profile.glow_username?'text-shadow:0 0 12px '+(profile.accent_color||'#3b82f6')+',0 0 24px '+(profile.accent_color||'#3b82f6'):'';
   const tag = profile.location_text ? ('✦ '+profile.location_text+' ✦') : '';
   const discordId=String(profile.discord_server_id||'');
-  const discordHtml=/^\d{17,20}$/.test(discordId)
+  const discordHtml=accountPremiumFeatureEnabled(profile,'discord_presence')&&/^\d{17,20}$/.test(discordId)
     ?'<section class="discord-widget glass" aria-label="Discord server widget"><div class="flex items-center gap-2 mb-3"><i class="fa-brands fa-discord" style="color:#7289da"></i><span class="font-semibold text-sm">Discord Community</span></div><iframe title="Discord server widget" src="https://discord.com/widget?id='+discordId+'&theme=dark" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowtransparency="true"></iframe></section>'
     :'';
   const discordUserId=String(extras.discord_user_id||'');
-  const presenceHtml=/^\d{17,20}$/.test(discordUserId)
+  const presenceHtml=accountPremiumFeatureEnabled(profile,'discord_presence')&&/^\d{17,20}$/.test(discordUserId)
     ?'<section id="discord-presence-widget" class="presence-widget profile-widget glass" aria-label="Discord presence"><img class="presence-avatar" data-presence-avatar alt="" loading="lazy"><div style="min-width:0"><div class="font-semibold text-sm"><i class="fa-brands fa-discord" style="color:#7289da;margin-right:.35rem"></i><span class="presence-status-dot"></span><span data-presence-status>Loading Discord status…</span></div><div class="widget-subtitle" data-presence-activity>Public status via Lanyard</div></div></section>'
     :'';
   const nowUrl=safeWebUrl(extras.now_url);
@@ -3262,10 +3653,10 @@ async function renderPreview(){
   const nowArtist=String(extras.now_artist||'').trim();
   const service=String(extras.music_service||'spotify');
   const serviceIcon=service==='lastfm'?'fa-brands fa-lastfm':service==='spotify'?'fa-brands fa-spotify':'fa-solid fa-music';
-  const nowPlayingHtml=nowTitle
+  const nowPlayingHtml=accountPremiumFeatureEnabled(profile,'now_playing')&&nowTitle
     ?'<section class="now-playing-widget profile-widget glass" aria-label="Now Playing"><div class="presence-widget" style="padding:0"><div class="now-playing-art"><i class="'+serviceIcon+'" style="color:'+(service==='lastfm'?'#f87171':'#4ade80')+'"></i></div><div style="min-width:0;flex:1"><div class="font-semibold text-sm">Now Playing · '+esc(service==='lastfm'?'Last.fm':service==='spotify'?'Spotify':'Music')+'</div><div class="truncate" style="font-size:.84rem;color:#fff;margin-top:.15rem">'+esc(nowTitle)+'</div><div class="widget-subtitle">'+esc(nowArtist||'Listening now')+'</div></div>'+(nowUrl?'<a class="btn btn-ghost btn-sm" href="'+esc(nowUrl)+'" target="_blank" rel="noopener noreferrer" aria-label="Open track"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>':'')+'</div></section>'
     :'';
-  const timezoneHtml=extras.timezone
+  const timezoneHtml=accountPremiumFeatureEnabled(profile,'timezone_clock')&&extras.timezone
     ?'<section class="timezone-widget profile-widget glass" aria-label="Local time"><div class="widget-subtitle" id="timezone-caption">'+esc(extras.timezone_label||extras.timezone)+'</div><div id="timezone-clock" class="timezone-clock">--:--</div></section>'
     :'';
   const previewBody=document.getElementById('preview-body');
@@ -3294,7 +3685,7 @@ async function renderPreview(){
     '<footer class="mt-10 text-center text-xs" style="text-transform:uppercase;letter-spacing:.15em;color:rgba(219,234,254,.4)">Powered by <b style="color:#93c5fd">BioFlex</b></footer>';
 
   startDiscordPresence(discordUserId);
-  startTimezoneClock(extras.timezone,extras.timezone_label);
+  if(accountPremiumFeatureEnabled(profile,'timezone_clock'))startTimezoneClock(extras.timezone,extras.timezone_label);
   if(profile.music_url) setupPlayer(profile);
   else setupEnterOverlay(profile,null);
 }
@@ -3466,7 +3857,10 @@ async function boot(){
   document.querySelectorAll('.footer-yr').forEach(el=>el.textContent=yr);
   const pd=document.getElementById('policy-date');if(pd)pd.textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 
-  if(getSubdomain()){
+  const resetHashParams=new URLSearchParams(String(window.location.hash||'').replace(/^#/,''));
+  const resetSearchParams=new URLSearchParams(window.location.search);
+  const resetRequested=resetSearchParams.get('password-reset')==='1'||resetSearchParams.get('type')==='recovery'||resetHashParams.get('type')==='recovery';
+  if(getSubdomain()&&!resetRequested){
     /* Hide back button on public profile view */
     document.body.classList.add('is-subdomain');
     const backBtn=document.querySelector('.preview-back');
@@ -3476,18 +3870,31 @@ async function boot(){
     return;
   }
 
+  if(resetRequested)showPasswordRecovery();
+  const resetLinkError=resetSearchParams.get('error_description')||resetHashParams.get('error_description');
+  if(resetLinkError){
+    const panelError=document.getElementById('auth-reset-error');
+    if(panelError){panelError.textContent=resetLinkError;panelError.classList.remove('hidden')}
+  }
+
   db.auth.onAuthStateChange((event,session)=>{
-    if(session?.user&&(event==='SIGNED_IN'||event==='INITIAL_SESSION')){
+    if(event==='PASSWORD_RECOVERY'){
+      showPasswordRecovery();
+      return;
+    }
+    if(session?.user&&!App.passwordRecovery&&(event==='SIGNED_IN'||event==='INITIAL_SESSION')){
       setTimeout(()=>{void completeAuthFlow()},0);
     }
   });
   try{
     const {data,error}=await db.auth.getSession();
     if(error)throw error;
+    if(resetRequested){showPasswordRecovery();return}
     if(data.session){await completeAuthFlow();return}
   }catch(err){
     toast('Could not restore your sign-in: '+(err.message||'Please try again.'),'error');
   }
+  if(App.passwordRecovery)return;
   route();
 }
 
@@ -3790,7 +4197,7 @@ async function renderConfiguredSampleProfile(custom){
     bio:String(data.bio||'').slice(0,280),
     location_text:String(data.location_text||'').slice(0,60),
     avatar_url:safeWebUrl(data.avatar_url),
-    background_type:'gradient',
+    background_type:String(data.background_type||(isVideoAssetUrl(data.background_url)?'video':(/\.gif(?:[?#]|$)/i.test(String(data.background_url||''))?'gif':(data.background_url?'image':'gradient')))),
     background_url:safeWebUrl(data.background_url),
     background_value:{
       from:safeColor(bgValue.from,'#050b18'),
@@ -3874,29 +4281,32 @@ async function renderLocalSampleProfile(){
 const bioflexPreviewBeforeDemo=renderPreview;
 renderPreview=async function(){if(App.demoMode)return renderLocalSampleProfile();return bioflexPreviewBeforeDemo()};
 
-/* BDT price-preview pages. Checkout deliberately stops at Coming Soon. */
-function planPageMarkup(kind){
-  const premium=kind==='premium',name=premium?'Premium':'Image Host',price=premium?'৳1,100':'৳150';
-  const icon=premium?'fa-gem':'fa-cloud-arrow-up';
-  const copy=premium?'A planned upgrade for creators who want more profile customization and premium styling.':'A planned image-hosting add-on for profile artwork and shareable image links.';
-  const benefit=premium?'Premium styling, expanded customization, and priority profile options are planned for this tier.':'Image uploads and hosted image links are planned as an add-on.';
-  return '<div class="plan-page"><button class="btn btn-ghost btn-sm" type="button" onclick="navigate(\'#/dashboard/overview\')"><i class="fa-solid fa-arrow-left"></i> Overview</button>'+
-    '<section class="plan-page-card mt-5"><div class="plan-page-mark"><i class="fa-solid '+icon+'"></i></div><div class="plan-page-kicker">BioFlex creator plans · Bangladesh</div><h1 class="plan-page-title">'+name+'</h1>'+
-    '<p class="plan-page-copy">'+copy+'</p><div class="plan-page-price">'+price+' <small>one time · BDT</small></div>'+
-    '<div class="plan-page-note"><i class="fa-solid '+icon+'"></i><span>'+benefit+'</span></div>'+
-    '<button class="btn btn-primary btn-block btn-lg btn-purchase" type="button" onclick="openBioFlexPurchase(\''+(premium?'premium':'image')+'\')"><i class="fa-solid fa-bag-shopping"></i> Purchase option <span aria-hidden="true">·</span> Coming Soon</button>'+
-    '<p class="text-xs muted mt-3">Draft preview price only. Checkout and payment are not connected; final price may change.</p></section></div>';
+/* Premium subscriptions and Image Host entry point. */
+const IMAGE_HOST_DISCORD_URL='https://discord.com/channels/1433382145858207858/1557936627928530986';
+function premiumSubscriptionMarkup(){
+  var profile=App.profile||{},expired=!!(profile.subscription_expires_at&&['active','expired'].includes(String(profile.subscription_status||''))&&Date.parse(profile.subscription_expires_at)<=Date.now());
+  var active=!!(profile.is_premium&&!expired)||accountAssignedBadgeIds(profile).includes('premium');
+    var videoExpired=!!(profile.video_subscription_expires_at&&Date.parse(profile.video_subscription_expires_at)<=Date.now());
+  var videoActive=String(profile.video_host_plan||'free')!=='free'&&profile.video_subscription_status==='active'&&!!profile.video_subscription_expires_at&&!videoExpired;
+  var imageUntil=active&&profile.subscription_expires_at&&!expired?' · expires '+new Date(profile.subscription_expires_at).toLocaleDateString('en-BD',{timeZone:'Asia/Dhaka'}):'';
+  var videoUntil=videoActive?' · expires '+new Date(profile.video_subscription_expires_at).toLocaleDateString('en-BD',{timeZone:'Asia/Dhaka'}):'';
+  return '<div class="premium-subscription-page"><header class="premium-subscription-hero"><div><span class="image-host-premium"><i class="fa-solid fa-gem"></i> BIOFLEX PREMIUM</span><h1 class="font-display text-3xl font-extrabold mt-3">Hosting plans, managed separately</h1><p class="muted mt-2">Choose separate Image Hosting and Video Hosting storage plans. Each subscription expires at the end of its own term.</p></div><div style="display:grid;gap:.4rem"><span id="bioflex-premium-current-status" class="premium-current-status '+(active?'active':'')+'"><i class="fa-solid '+(active?'fa-circle-check':'fa-circle-minus')+'"></i> Image Host · '+(active?'Premium active':'Free plan')+imageUntil+'</span><span id="bioflex-video-premium-current-status" class="premium-current-status '+(videoActive?'active':'')+'"><i class="fa-solid '+(videoActive?'fa-circle-check':'fa-circle-minus')+'"></i> Video Host · '+(videoActive?'Premium active':'Free plan')+videoUntil+'</span></div></header><section class="premium-subscription-section"><div class="premium-subscription-section-head"><div><div class="image-host-eyebrow"><i class="fa-solid fa-image"></i> IMAGE HOST PLANS</div><h2 class="font-display text-xl font-bold mt-1">Image Hosting · 1–50 GB</h2><p class="text-sm muted mt-1">Free: 200 MB total / 5 MB per image. Premium: selected total quota / 50 MB per image.</p></div></div><div class="premium-billing-switch" role="group" aria-label="Image Hosting billing period"><button type="button" class="active" data-premium-period="monthly">Monthly</button><button type="button" data-premium-period="weekly">Weekly</button><button type="button" data-premium-period="yearly">Yearly</button></div><div id="bioflex-premium-plans" class="premium-plan-grid">'+premiumPlanCardsMarkup('image')+'</div><div class="premium-subscription-foot"><i class="fa-brands fa-discord"></i><span>Image plan requests are handled by the team through Discord.</span></div></section><section class="premium-subscription-section"><div class="premium-subscription-section-head"><div><div class="image-host-eyebrow"><i class="fa-solid fa-video"></i> VIDEO HOST PLANS</div><h2 class="font-display text-xl font-bold mt-1">Video Hosting · 1–50 GB</h2><p class="text-sm muted mt-1">Free: 500 MB total / 20 MB per video. Premium: selected total quota / 20 MB per video. Video links are hosted in Telegram.</p></div></div><div class="premium-billing-switch" role="group" aria-label="Video Hosting billing period"><button type="button" class="active" data-video-premium-period="monthly">Monthly</button><button type="button" data-video-premium-period="weekly">Weekly</button><button type="button" data-video-premium-period="yearly">Yearly</button></div><div id="bioflex-video-premium-plans" class="premium-plan-grid">'+premiumPlanCardsMarkup('video')+'</div><div class="premium-subscription-foot"><i class="fa-brands fa-discord"></i><span>Video plan requests are handled separately; activating Image Hosting does not activate Video Hosting.</span></div></section><section class="premium-benefits-grid"><article class="premium-benefit-card"><i class="fa-solid fa-hard-drive"></i><strong>Separate storage quotas</strong><span>Image and video files use independent plans and storage totals.</span></article><article class="premium-benefit-card"><i class="fa-solid fa-calendar-check"></i><strong>Separate expiry dates</strong><span>Weekly, monthly, and yearly access expires independently per service.</span></article><article class="premium-benefit-card"><i class="fa-solid fa-user-shield"></i><strong>Admin-activated plans</strong><span>An admin confirms payment and grants access to the selected hosting service.</span></article></section></div>';
 }
-function tabPremiumPage(){return planPageMarkup('premium')}
-function tabImageHostPage(){return planPageMarkup('image')}
+function premiumPlanCardsMarkup(service){
+  var tiers=[1,2,3,4,5,10,20,50],imagePrices={1:99,2:149,3:199,4:249,5:299,10:499,20:899,50:1799},videoPrices={1:149,2:249,3:349,4:449,5:549,10:999,20:1799,50:3499},video=service==='video',prices=video?videoPrices:imagePrices,priceAttr=video?'data-video-premium-plan-price':'data-premium-plan-price',fileCap=video?'20 MB per video':'50 MB per image';
+  return tiers.map(function(gb){return '<article class="premium-plan-card"><div class="premium-plan-card-top"><span class="premium-plan-icon"><i class="fa-solid '+(video?'fa-video':'fa-hard-drive')+'"></i></span><span class="premium-plan-badge">PREMIUM</span></div><h3><span class="premium-plan-size">'+gb+' GB</span><span>storage</span></h3><div class="premium-plan-price" '+priceAttr+'="'+gb+'" data-billing-period="monthly">৳'+prices[gb]+'<small> BDT / month</small></div><p>'+gb+' GB storage · '+fileCap+'</p><a class="btn btn-primary premium-plan-select" href="'+IMAGE_HOST_DISCORD_URL+'" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Choose plan</a></article>'}).join('');
+}
+function tabPremiumPage(){return premiumSubscriptionMarkup()}
+function tabImageHostPage(){return '<section class="glass" style="max-width:680px;margin:3rem auto;padding:2rem;border-radius:18px;text-align:center"><h1 class="font-display text-2xl font-extrabold">Image Host</h1><p class="muted mt-2">Manage your image uploads and current storage.</p><button class="btn btn-primary mt-4" type="button" onclick="navigate(\'#/dashboard/image-host\')">Open Image Host</button></section>'}
 function openBioFlexPurchase(kind){
-  const premium=kind==='premium',name=premium?'BioFlex Premium':'Image Host',price=premium?'৳1,100':'৳150';
-  const modal=openModal('<div class="plan-modal"><div class="modal-head"><div><h3>'+name+'</h3><p>'+price+' BDT · one-time preview price</p></div><button class="modal-close" data-act="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="plan-mark"><i class="fa-solid '+(premium?'fa-gem':'fa-cloud-arrow-up')+'"></i></div><h2 class="plan-coming">COMING SOON</h2><p class="plan-copy">Purchase and payment are not available yet. No payment will be taken.</p><button class="btn btn-primary btn-block" type="button" data-act="purchase"><i class="fa-solid fa-bag-shopping"></i> Purchase</button><button class="btn btn-ghost btn-block mt-3" type="button" data-act="close">Close</button></div>');
-  modal.querySelectorAll('[data-act="close"]').forEach(function(button){button.onclick=function(){closeModal(modal)}});
-  modal.querySelector('[data-act="purchase"]').onclick=function(){closeModal(modal);toast('Coming Soon — payment is not enabled yet.','info')};
+  if(kind==='premium'){navigate('#/dashboard/premium');return}
+  window.open(IMAGE_HOST_DISCORD_URL,'_blank','noopener,noreferrer');
 }
-const bioflexLegacyPlanModal=openPlanModal;
-openPlanModal=function(kind){return kind==='image'||kind==='premium'?openBioFlexPurchase(kind):bioflexLegacyPlanModal(kind)};
+openPlanModal=function(kind){
+  if(kind==='image'||kind==='premium')return openBioFlexPurchase(kind);
+  toast('Premium plans are available from the Premium page.','info');
+  navigate('#/dashboard/customize');
+};
 
 /* First-login setup wizard. Completion is remembered per account in this browser. */
 const BIOFLEX_GUIDED_STEPS=[
@@ -4400,6 +4810,9 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       if(app.App&&app.App.demoMode&&typeof window.renderPreview==='function')window.renderPreview();
     }
     applySettings();
+    if((row.key==='image_host_pricing'||row.key==='video_host_pricing')&&window.bioflexRefreshPremiumPlanPrices){
+      window.bioflexRefreshPremiumPlanPrices();
+    }
   }
 
   function normalizeTemplate(row){
@@ -4479,6 +4892,753 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
       }
     });
   window.addEventListener('beforeunload',function(){db.removeChannel(channel)});
+})();
+</script>
+<style>
+/* Social icon editor preview and account-owned public image library. */
+.image-host-page{max-width:1100px}
+.image-host-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.image-host-notice{padding:.9rem 1rem;border-radius:12px;border:1px solid rgba(96,165,250,.2);background:rgba(10,17,32,.55);color:rgba(219,234,254,.78);font-size:.8rem;line-height:1.6}
+.image-host-drop{display:flex;align-items:center;justify-content:center;min-height:170px;padding:1.35rem;text-align:center;border:1.5px dashed rgba(96,165,250,.35);border-radius:18px;background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.13),transparent 70%),rgba(10,17,32,.38);cursor:pointer;transition:border-color .2s,background .2s,transform .2s,box-shadow .2s}
+.image-host-drop:hover,.image-host-drop.is-dragging{border-color:#60a5fa;background:radial-gradient(ellipse at 50% 0%,rgba(59,130,246,.22),transparent 72%),rgba(30,58,138,.16);transform:translateY(-1px);box-shadow:0 16px 40px rgba(37,99,235,.12)}
+.image-host-drop i{display:block;font-size:1.5rem;color:#93c5fd;margin-bottom:.5rem}
+.image-host-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:1rem;margin-top:1rem}
+.image-host-item{min-width:0;overflow:hidden;border:1px solid rgba(96,165,250,.17);border-radius:16px;background:linear-gradient(145deg,rgba(15,23,42,.78),rgba(8,14,29,.76));box-shadow:0 12px 30px rgba(0,0,0,.17);transition:transform .2s,border-color .2s,box-shadow .2s}
+.image-host-item:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.42);box-shadow:0 18px 42px rgba(37,99,235,.14)}
+.image-host-thumb{width:100%;height:165px;display:grid;place-items:center;background:rgba(2,6,18,.55);overflow:hidden}
+.image-host-thumb img{width:100%;height:100%;object-fit:contain}
+.video-host-item .image-host-thumb{height:auto;aspect-ratio:9/16;max-height:440px;background:linear-gradient(145deg,#101c35,#02040a)}
+.video-host-item .image-host-thumb video{display:block;width:100%;height:100%;object-fit:cover;background:#02040a}
+.image-host-meta{padding:.8rem}
+.image-host-actions{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem}
+.image-host-actions .btn{flex:1 1 auto;justify-content:center}
+.image-host-meta{padding:.75rem}
+.image-host-name{font-size:.78rem;font-weight:700;overflow-wrap:anywhere}
+.image-host-size{font-size:.68rem;color:rgba(219,234,254,.52);margin-top:.2rem}
+.image-host-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
+.image-host-actions .btn{flex:1;min-width:75px}
+.image-host-meter{height:10px;overflow:hidden;border-radius:99px;background:rgba(148,163,184,.18);margin-top:.6rem}
+.image-host-meter>span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#38bdf8,#818cf8);transition:width .2s ease}
+.image-host-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.65rem;margin-top:1rem}
+.image-host-plan{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.8rem;border:1px solid rgba(96,165,250,.18);border-radius:11px;background:rgba(8,14,29,.5)}
+.image-host-plan strong{font-size:.82rem}.image-host-plan-price{font-weight:800;color:#bfdbfe;white-space:nowrap}
+@media(max-width:560px){.image-host-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}.image-host-thumb{height:135px}.image-host-actions .btn{font-size:.68rem;padding:.4rem .5rem}}
+.image-host-premium{display:inline-flex;align-items:center;gap:.35rem;padding:.34rem .62rem;border:1px solid rgba(196,181,253,.34);border-radius:999px;background:linear-gradient(120deg,rgba(168,85,247,.2),rgba(99,102,241,.12));color:#ddd6fe;font-size:.68rem;font-weight:800;letter-spacing:.02em}
+.image-host-storage-card{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:1rem;padding:1.1rem;border:1px solid rgba(129,140,248,.2);border-radius:18px;background:radial-gradient(ellipse at 15% 0%,rgba(79,70,229,.17),transparent 60%),linear-gradient(135deg,rgba(15,23,42,.97),rgba(8,14,29,.94));box-shadow:0 18px 50px rgba(0,0,0,.2)}
+.image-host-storage-main{min-width:0;padding:.25rem .25rem .2rem}
+.image-host-storage-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.image-host-eyebrow{font-size:.62rem;font-weight:800;letter-spacing:.14em;color:#a5b4fc}
+.image-host-storage-title{margin-top:.35rem;font-size:1.05rem;font-weight:750;color:#f8fafc}
+.image-host-storage-amount{display:flex;align-items:baseline;gap:.65rem;flex-wrap:wrap;margin-top:1rem}
+.image-host-storage-amount strong{font-size:1.2rem;letter-spacing:-.025em;color:#fff}
+.image-host-meter{height:11px;background:rgba(148,163,184,.16);margin-top:.75rem}
+.image-host-meter>span{background:linear-gradient(90deg,#38bdf8,#818cf8,#c084fc)}
+.image-host-meter-legend{display:flex;justify-content:space-between;gap:.5rem;margin-top:.45rem;color:rgba(219,234,254,.54);font-size:.65rem}
+.image-host-meter-legend i{display:inline-block;width:7px;height:7px;margin-right:.25rem;border-radius:50%;background:#818cf8}
+.image-host-storage-menu-wrap{position:relative}
+.image-host-more-menu{width:34px;height:34px;border:1px solid rgba(148,163,184,.2);border-radius:10px;color:#cbd5e1;background:rgba(15,23,42,.8);cursor:pointer}
+.image-host-more-menu:hover{border-color:rgba(165,180,252,.55);color:#fff}
+.image-host-storage-popover{position:absolute;z-index:20;right:0;top:42px;width:220px;padding:.8rem;border:1px solid rgba(148,163,184,.22);border-radius:13px;background:#0b1220;box-shadow:0 18px 40px rgba(0,0,0,.42)}
+.image-host-popover-title{margin-bottom:.55rem;color:#e0e7ff;font-size:.78rem;font-weight:800}
+.image-host-popover-row{display:flex;justify-content:space-between;gap:.5rem;padding:.38rem 0;border-top:1px solid rgba(148,163,184,.1);color:#94a3b8;font-size:.68rem}
+.image-host-popover-row strong{color:#f8fafc;text-align:right}
+.image-host-upgrade-box{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:1rem;border:1px solid rgba(167,139,250,.2);border-radius:14px;background:linear-gradient(145deg,rgba(124,58,237,.14),rgba(30,41,59,.3))}
+.image-host-upgrade-icon{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:rgba(168,85,247,.18);color:#d8b4fe}
+.image-host-upgrade-title{margin-top:.55rem;font-size:.87rem;font-weight:800;color:#fff}
+.image-host-upgrade-box p{margin-top:.3rem;line-height:1.45}
+.image-host-upgrade-btn{width:100%;justify-content:center;margin-top:.7rem}
+.image-host-plan{min-height:58px;padding:.7rem .75rem}
+.image-host-plan strong{font-size:.75rem}
+.image-host-plan-price{font-size:.8rem}
+.image-host-plan-cta{font-size:.62rem;color:#a5b4fc;margin-top:.2rem}
+.image-host-upload-limit{margin-top:.5rem;color:#a5b4fc;font-size:.68rem;font-weight:700}
+.image-host-premium.is-free{border-color:rgba(148,163,184,.24);background:rgba(100,116,139,.12);color:#cbd5e1}
+.ih-preview-lightbox{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(3,6,14,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.ih-preview-lightbox img{display:block;max-width:min(94vw,1200px);max-height:84vh;object-fit:contain;border:1px solid rgba(96,165,250,.32);border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,.72),0 0 55px rgba(59,130,246,.22)}
+.ih-preview-lightbox-actions{position:absolute;top:18px;right:18px;display:flex;gap:8px}
+.ih-preview-lightbox-actions button{padding:10px 13px;border:1px solid rgba(255,255,255,.18);border-radius:11px;background:rgba(15,23,42,.86);color:#fff;cursor:pointer}
+.ih-preview-lightbox-actions button:hover{background:rgba(37,99,235,.85)}
+.ih-preview-lightbox-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:7px 11px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(15,23,42,.78);color:#cbd5e1;font-size:.72rem}
+ .ih-preview-lightbox:fullscreen,.ih-preview-lightbox.host-preview-fullscreen{padding:0;background:#000}
+ .ih-preview-lightbox:fullscreen img,.ih-preview-lightbox.host-preview-fullscreen img{width:100vw;height:100vh;max-width:100vw;max-height:100vh;border:0;border-radius:0;box-shadow:none}
+ .video-host-item video.host-preview-fullscreen{position:fixed!important;inset:0;z-index:100001;width:100vw!important;height:100vh!important;max-width:none;max-height:none;object-fit:contain;background:#000}
+ @media(max-width:560px){.ih-preview-lightbox-actions{top:10px;right:10px;gap:5px}.ih-preview-lightbox-actions button{padding:8px 9px;font-size:.7rem}}
+.image-host-page{max-width:1180px;margin:1rem auto 2rem;padding:clamp(1rem,2.5vw,2rem);border:1px solid rgba(148,163,184,.14);border-radius:24px;background:linear-gradient(155deg,rgba(12,20,38,.97),rgba(7,12,25,.98));box-shadow:0 24px 70px rgba(0,0,0,.3)}
+.image-host-head{align-items:center;padding:0 0 1rem;border-bottom:1px solid rgba(148,163,184,.12)}
+.image-host-head h1{font-size:clamp(1.35rem,2.8vw,1.9rem);letter-spacing:-.035em}
+.image-host-head p{max-width:46rem;color:#94a3b8;font-size:.86rem}
+.image-host-storage-card{grid-template-columns:minmax(0,1fr) minmax(180px,220px);gap:1.15rem;padding:1.1rem;border:1px solid rgba(148,163,184,.13);border-radius:18px;background:linear-gradient(145deg,rgba(17,27,47,.96),rgba(10,17,31,.94));box-shadow:0 12px 30px rgba(0,0,0,.16)}
+.image-host-upgrade-box{border-color:rgba(96,165,250,.16);background:rgba(15,23,42,.52)}
+.image-host-drop{min-height:142px;padding:1rem;border:1px dashed rgba(125,160,210,.35);border-radius:16px;background:rgba(13,22,39,.58)}
+.image-host-drop:hover,.image-host-drop.is-dragging{transform:none;border-color:#7db1ff;background:rgba(41,75,126,.18);box-shadow:0 0 0 3px rgba(96,165,250,.08)}
+.image-host-drop>div{padding:14px}
+.image-host-drop>div>i{width:44px;height:44px;margin:0 auto 10px;border-radius:13px;font-size:18px;box-shadow:none}
+.image-host-drop strong{font-size:.9rem}
+.image-host-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,235px),1fr));gap:14px;margin-top:.75rem}
+.image-host-item{overflow:hidden;border:1px solid rgba(148,163,184,.14);border-radius:15px;background:linear-gradient(160deg,rgba(19,29,48,.9),rgba(10,16,29,.96));box-shadow:0 8px 24px rgba(0,0,0,.15);transition:border-color .18s,transform .18s,box-shadow .18s}
+.image-host-item:hover{transform:translateY(-2px);border-color:rgba(125,170,235,.36);box-shadow:0 14px 32px rgba(0,0,0,.25)}
+.image-host-thumb{height:auto;aspect-ratio:16/10;background:#080e19}
+.image-host-thumb img{object-fit:cover}
+.video-host-item .image-host-thumb{height:auto;aspect-ratio:16/10;max-height:none;background:#080e19}
+.video-host-item .image-host-thumb video{object-fit:contain}
+.image-host-meta{padding:.75rem .8rem .8rem}
+.image-host-name{font-size:.76rem;color:#e2e8f0}
+.image-host-size{font-size:.67rem;color:#8b9bb2}
+.image-host-actions{gap:.4rem;margin-top:.65rem}
+.image-host-actions .btn{min-width:0;padding:.45rem .55rem;border-radius:9px;font-size:.69rem}
+.host-library-heading{display:flex;align-items:end;justify-content:space-between;gap:.75rem;margin:1.2rem 0 .45rem}
+.host-library-heading h3{margin:0;color:#edf3fc;font-size:.98rem;font-weight:750;letter-spacing:-.015em}
+.host-library-heading p{margin:.2rem 0 0;color:#8492a8;font-size:.7rem}
+.host-library-count{padding:.28rem .55rem;border:1px solid rgba(148,163,184,.14);border-radius:999px;background:rgba(15,23,42,.68);color:#a9bad1;font-size:.66rem;font-weight:700;white-space:nowrap}
+.host-media-fallback{display:flex;width:100%;height:100%;min-height:130px;flex-direction:column;align-items:center;justify-content:center;gap:.45rem;padding:1rem;background:radial-gradient(ellipse at 50% 0%,rgba(96,165,250,.11),transparent 70%),#0a1220;color:#91a2bb;text-align:center;font-size:.72rem}
+.host-media-fallback i{font-size:1.3rem;color:#7fa6d8}
+.host-media-fallback a{color:#a8c7f4;text-decoration:underline;text-underline-offset:3px}
+.host-media-error{padding:.7rem;border:1px solid rgba(248,113,113,.16);border-radius:10px;background:rgba(127,29,29,.1);color:#fca5a5;font-size:.72rem;line-height:1.5}
+.image-host-status-line{min-height:1.25rem;color:#8392a8;font-size:.72rem}
+@media(max-width:640px){
+ .image-host-page{margin:.55rem auto 1rem;padding:.85rem;border-radius:18px}
+ .image-host-head{align-items:flex-start}
+ .image-host-storage-card{grid-template-columns:minmax(0,1fr);padding:.9rem}
+ .image-host-upgrade-box{display:grid;grid-template-columns:34px 1fr;align-items:center;column-gap:.65rem}
+ .image-host-upgrade-icon{grid-row:1/3}.image-host-upgrade-title{margin-top:0}.image-host-upgrade-box p{grid-column:2}.image-host-upgrade-btn{grid-column:1/-1}
+ .image-host-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .image-host-meta{padding:.58rem}
+ .image-host-actions .btn{flex:1 1 calc(50% - .4rem);font-size:.64rem;padding:.42rem .3rem}
+ .image-host-drop{min-height:126px}
+}
+@media(max-width:360px){.image-host-grid{grid-template-columns:minmax(0,1fr)}}
+.premium-subscription-page{max-width:1100px;margin:0 auto}
+.premium-subscription-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;padding:1.5rem;border:1px solid rgba(167,139,250,.22);border-radius:20px;background:radial-gradient(ellipse at 12% 0%,rgba(124,58,237,.2),transparent 58%),linear-gradient(135deg,rgba(15,23,42,.96),rgba(8,14,29,.96))}
+.premium-subscription-hero h1{max-width:620px}
+.premium-current-status{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .8rem;border:1px solid rgba(148,163,184,.22);border-radius:999px;color:#cbd5e1;background:rgba(15,23,42,.7);font-size:.73rem;font-weight:750;white-space:nowrap}
+.premium-current-status.active{border-color:rgba(167,139,250,.4);background:rgba(124,58,237,.15);color:#ddd6fe}
+.premium-subscription-section{margin-top:1rem;padding:1.3rem;border:1px solid rgba(148,163,184,.15);border-radius:18px;background:rgba(10,16,31,.76)}
+.premium-billing-switch{display:flex;width:max-content;max-width:100%;gap:.2rem;margin-top:1rem;padding:.25rem;border:1px solid rgba(167,139,250,.2);border-radius:12px;background:rgba(5,10,22,.72)}
+.premium-billing-switch button{min-width:86px;padding:.52rem .85rem;border-radius:9px;color:#a5b4fc;font-size:.73rem;font-weight:750;cursor:pointer}
+.premium-billing-switch button.active{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;box-shadow:0 4px 14px rgba(79,70,229,.28)}
+.premium-plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.65rem;margin-top:1rem}
+.premium-plan-card{position:relative;min-width:0;padding:.82rem;border:1px solid rgba(167,139,250,.18);border-radius:15px;background:linear-gradient(155deg,rgba(30,27,75,.48),rgba(8,14,29,.8));transition:transform .16s,border-color .16s,box-shadow .16s}
+.premium-plan-card:hover{transform:translateY(-2px);border-color:rgba(196,181,253,.48);box-shadow:0 12px 30px rgba(76,29,149,.15)}
+.premium-plan-card-top{display:flex;align-items:center;justify-content:space-between}
+.premium-plan-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:rgba(139,92,246,.16);color:#c4b5fd}
+.premium-plan-badge{padding:.25rem .48rem;border-radius:999px;background:rgba(168,85,247,.14);color:#ddd6fe;font-size:.58rem;font-weight:800}
+.premium-plan-card h3{display:flex;align-items:baseline;gap:.3rem;flex-wrap:wrap;margin-top:.65rem;font-size:.72rem;font-weight:650;color:#94a3b8}
+.premium-plan-card h3 span{font-size:.7rem;color:#94a3b8;font-weight:600}
+.premium-plan-card h3 .premium-plan-size{font-size:1.02rem;color:#f8fafc;font-weight:850}
+.premium-plan-price{margin-top:.25rem;color:#e9d5ff;font-size:1.06rem;font-weight:850;white-space:nowrap}
+.premium-plan-price small{font-size:.58rem;color:#a5b4fc;font-weight:700}
+.premium-plan-card p{min-height:2.3em;margin:.42rem 0 .7rem;color:#94a3b8;font-size:.62rem;line-height:1.45}
+.premium-plan-select{width:100%;justify-content:center;font-size:.7rem}
+.premium-subscription-foot{display:flex;align-items:center;gap:.5rem;margin-top:1rem;color:#94a3b8;font-size:.7rem}
+.premium-subscription-foot i{color:#818cf8}
+.premium-benefits-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin-top:.8rem}
+.premium-benefit-card{display:grid;grid-template-columns:28px 1fr;align-items:center;column-gap:.65rem;padding:.85rem;border:1px solid rgba(148,163,184,.13);border-radius:13px;background:rgba(15,23,42,.55)}
+.premium-benefit-card i{grid-row:1/3;color:#c4b5fd}
+.premium-benefit-card strong{font-size:.72rem;color:#e2e8f0}
+.premium-benefit-card span{margin-top:.15rem;color:#94a3b8;font-size:.61rem;line-height:1.45}
+@media(max-width:620px){.premium-benefits-grid{grid-template-columns:1fr}.premium-subscription-hero{padding:1.1rem}.premium-subscription-section{padding:1rem}.premium-plan-grid{grid-template-columns:repeat(auto-fit,minmax(142px,1fr))}.premium-billing-switch{width:100%}.premium-billing-switch button{flex:1;min-width:0}}
+@media(max-width:620px){.image-host-storage-card{grid-template-columns:1fr}.image-host-upgrade-box{display:grid;grid-template-columns:34px 1fr;align-items:center;column-gap:.65rem}.image-host-upgrade-icon{grid-row:1/3}.image-host-upgrade-title{margin-top:0}.image-host-upgrade-box p{grid-column:2}.image-host-upgrade-btn{grid-column:1/-1}.image-host-storage-amount strong{font-size:1rem}}
+</style>
+<script>
+/* Add a live Social Icons preview and Telegram-backed Image Host management. */
+(function(){
+  'use strict';
+  var app=window.BioFlex,db=app&&app.db;
+  if(!app||!db)return;
+  var IMAGE_PAGE_SIZE=100;
+  var imageHost={offset:0,hasMore:false,loading:false,pricing:null,usedBytes:0,limitBytes:209715200,isOwner:false,isPremium:false,perImageLimitMb:5,profile:null,quotaReady:false};
+  var videoHost={offset:0,hasMore:false,loading:false,pricing:null,usedBytes:0,limitBytes:524288000,isOwner:false,isPremium:false,perVideoLimitMb:20,profile:null,quotaReady:false};
+  var premiumExpiryTimer=null;
+  var IMAGE_HOST_PLAN_GB=[1,2,3,4,5,10,20,50],billingPeriod='monthly',videoBillingPeriod='monthly';
+  var DEFAULT_IMAGE_HOST_PRICING={free_mb:200,plans:{'1':99,'2':149,'3':199,'4':249,'5':299,'10':499,'20':899,'50':1799},periods:{weekly:{'1':30,'2':45,'3':60,'4':75,'5':90,'10':150,'20':270,'50':540},monthly:{'1':99,'2':149,'3':199,'4':249,'5':299,'10':499,'20':899,'50':1799},yearly:{'1':990,'2':1490,'3':1990,'4':2490,'5':2990,'10':4990,'20':8990,'50':17990}},custom_per_gb:60};
+  var DEFAULT_VIDEO_HOST_PRICING={free_mb:500,plans:{'1':149,'2':249,'3':349,'4':449,'5':549,'10':999,'20':1799,'50':3499},periods:{weekly:{'1':49,'2':79,'3':109,'4':139,'5':169,'10':299,'20':549,'50':999},monthly:{'1':149,'2':249,'3':349,'4':449,'5':549,'10':999,'20':1799,'50':3499},yearly:{'1':1490,'2':2490,'3':3490,'4':4490,'5':5490,'10':9990,'20':17990,'50':34990}},custom_per_gb:0};
+  function normalizeImageHostPricing(value){
+    if(typeof value==='string'){try{value=JSON.parse(value)}catch(_){value={}}}
+    var source=value&&typeof value==='object'?value:{},plans=source.plans&&typeof source.plans==='object'?source.plans:{},stored=source.periods&&typeof source.periods==='object'?source.periods:{};
+    var result={free_mb:Number.isFinite(Number(source.free_mb))&&Number(source.free_mb)>=0?Number(source.free_mb):200,plans:{},periods:{weekly:{},monthly:{},yearly:{}},custom_per_gb:Number.isFinite(Number(source.custom_per_gb))&&Number(source.custom_per_gb)>=0?Number(source.custom_per_gb):60};
+    ['weekly','monthly','yearly'].forEach(function(period){IMAGE_HOST_PLAN_GB.forEach(function(gb){var amount=Number(stored[period]&&stored[period][String(gb)]),legacy=Number(plans[String(gb)]);var fallback=period==='monthly'&&Number.isFinite(legacy)&&legacy>=0?legacy:DEFAULT_IMAGE_HOST_PRICING.periods[period][String(gb)];result.periods[period][String(gb)]=Number.isFinite(amount)&&amount>=0?amount:fallback})});
+    result.plans=result.periods.monthly;
+    return result;
+  }
+  function normalizeVideoHostPricing(value){
+    if(typeof value==='string'){try{value=JSON.parse(value)}catch(_){value={}}}
+    var source=value&&typeof value==='object'?value:{},plans=source.plans&&typeof source.plans==='object'?source.plans:{},stored=source.periods&&typeof source.periods==='object'?source.periods:{};
+    var result={free_mb:500,plans:{},periods:{weekly:{},monthly:{},yearly:{}},custom_per_gb:0};
+    ['weekly','monthly','yearly'].forEach(function(period){IMAGE_HOST_PLAN_GB.forEach(function(gb){var amount=Number(stored[period]&&stored[period][String(gb)]),legacy=Number(plans[String(gb)]),fallback=period==='monthly'&&Number.isFinite(legacy)&&legacy>=0?legacy:DEFAULT_VIDEO_HOST_PRICING.periods[period][String(gb)];result.periods[period][String(gb)]=Number.isFinite(amount)&&amount>=0?amount:fallback})});
+    result.plans=result.periods.monthly;
+    return result;
+  }
+  function imageHostMarkup(){
+    return '<div class="image-host-page">'+
+      '<header class="image-host-head"><div><div style="display:flex;align-items:center;gap:.65rem;flex-wrap:wrap"><h1 class="font-display text-3xl font-extrabold">Image Host</h1><span id="bioflex-image-host-plan-badge" class="image-host-premium is-free"><i class="fa-solid fa-hard-drive"></i> Free</span></div><p class="muted mt-1">A polished home for your image uploads, links, and previews.</p></div><div style="display:flex;gap:.5rem;align-items:center"><button class="btn btn-ghost btn-icon" type="button" aria-label="Refresh images" title="Refresh" onclick="bioflexLoadHostedImages(true);bioflexRefreshImageHostQuota()"><i class="fa-solid fa-rotate"></i></button></div></header>'+
+      '<section class="image-host-storage-card mt-4"><div class="image-host-storage-main"><div class="image-host-storage-top"><div><div class="image-host-eyebrow"><i class="fa-solid fa-hard-drive"></i> LIVE STORAGE</div><div class="image-host-storage-title">Your image space</div><p id="bioflex-image-free-label" class="text-sm muted mt-1">Image Host plan · Free</p></div><div class="image-host-storage-menu-wrap"><button id="bioflex-image-more-menu" class="image-host-more-menu" type="button" aria-label="Storage options" aria-expanded="false" aria-controls="bioflex-image-storage-popover"><i class="fa-solid fa-ellipsis"></i></button><div id="bioflex-image-storage-popover" class="image-host-storage-popover" hidden><div class="image-host-popover-title"><i class="fa-solid fa-hard-drive"></i> Current Storage</div><div class="image-host-popover-row"><span>Used</span><strong id="bioflex-image-popover-used">Loading…</strong></div><div class="image-host-popover-row"><span>Total</span><strong id="bioflex-image-popover-total">—</strong></div><div class="image-host-popover-row"><span>Per image</span><strong id="bioflex-image-popover-file-limit">5 MB max</strong></div></div></div></div><div class="image-host-storage-amount"><strong id="bioflex-image-usage">Loading storage…</strong><span id="bioflex-image-quota-note" class="text-xs muted">Checking your storage…</span></div><div class="image-host-meter" role="progressbar" aria-label="Image storage used" aria-valuemin="0" aria-valuemax="100"><span id="bioflex-image-meter"></span></div><div class="image-host-meter-legend"><span><i></i> Used</span><span id="bioflex-image-meter-caption">Live usage</span></div></div><aside class="image-host-upgrade-box"><div class="image-host-upgrade-icon"><i class="fa-solid fa-gem"></i></div><div class="image-host-upgrade-title">Unlock Premium</div><p class="text-xs muted">Choose a Premium subscription and storage plan that fits your needs.</p><button class="btn btn-primary image-host-upgrade-btn" type="button" onclick="bioflexOpenImageHostPlans()"><i class="fa-solid fa-arrow-up"></i> View Premium</button></aside></section>'+
+        '<section class="ih-tier-panel" id="bioflex-image-host-tier" aria-label="Image Host plan limits"><div class="ih-tier-card ih-tier-free"><span class="ih-tier-kicker"><i class="fa-solid fa-hard-drive"></i> FREE / EARLY ACCESS</span><strong>5 MB <small>per image</small></strong><span>200 MB total storage</span></div></section>'+
+      '<section class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div><h3>Upload images</h3><p>Select one or more image files, or drag them into the upload area.</p></div></div>'+
+      '<input id="bioflex-image-files" type="file" accept="image/*" multiple hidden onchange="bioflexUploadHostedImages(this.files)">'+
+      '<div id="bioflex-image-drop" class="image-host-drop" role="button" tabindex="0" onclick="document.getElementById(\'bioflex-image-files\').click()"><div><i class="fa-solid fa-images"></i><strong>Choose image files or drop them here</strong><div class="text-xs muted mt-1">PNG, JPG, GIF, WebP, SVG, AVIF, and other browser-supported images</div><div id="bioflex-image-file-limit" class="image-host-upload-limit">Free upload limit: 5 MB per image</div></div></div>'+
+       '<div class="host-library-heading"><div><h3>Your images</h3><p>Recent uploads · open a preview or copy the share link</p></div><span id="bioflex-image-count" class="host-library-count">0 items</span></div><div id="bioflex-image-status" class="image-host-status-line" aria-live="polite"></div><div class="image-host-grid" id="bioflex-image-grid"></div>'+
+      '<div class="flex justify-center mt-4"><button id="bioflex-image-more" class="btn btn-ghost btn-sm" type="button" onclick="bioflexLoadHostedImages(false)" hidden>Load more</button></div></section>'+
+      '</div>';
+  }
+  function videoHostMarkup(){
+    return '<div class="image-host-page">'+
+      '<header class="image-host-head"><div><div style="display:flex;align-items:center;gap:.65rem;flex-wrap:wrap"><h1 class="font-display text-3xl font-extrabold">Video Host</h1><span id="bioflex-video-host-plan-badge" class="image-host-premium is-free"><i class="fa-solid fa-hard-drive"></i> Free</span></div><p class="muted mt-1">Upload video files only. Copy a direct link, preview, or remove your uploads.</p></div><div style="display:flex;gap:.5rem;align-items:center"><button class="btn btn-ghost btn-icon" type="button" aria-label="Refresh videos" title="Refresh" onclick="bioflexLoadHostedVideos(true);bioflexRefreshVideoHostQuota()"><i class="fa-solid fa-rotate"></i></button></div></header>'+
+       '<section class="image-host-storage-card mt-4"><div class="image-host-storage-main"><div class="image-host-storage-top"><div><div class="image-host-eyebrow"><i class="fa-solid fa-video"></i> LIVE VIDEO STORAGE</div><div class="image-host-storage-title">Your video space</div><p id="bioflex-video-host-plan-label" class="text-sm muted mt-1">Video Host · Free · 500 MB</p><p id="bioflex-video-host-expiry" class="text-xs muted mt-1">Free plan · no expiry</p></div><div class="image-host-storage-menu-wrap"><button id="bioflex-video-host-more-menu" class="image-host-more-menu" type="button" aria-label="Video storage details" aria-expanded="false"><i class="fa-solid fa-ellipsis"></i></button><div id="bioflex-video-host-popover" class="image-host-storage-popover" hidden><div class="image-host-popover-title"><i class="fa-solid fa-video"></i> Video limits</div><div class="image-host-popover-row"><span>Used</span><strong id="bioflex-video-host-used">Loading…</strong></div><div class="image-host-popover-row"><span>Total</span><strong id="bioflex-video-host-total">—</strong></div><div class="image-host-popover-row"><span>Per video</span><strong id="bioflex-video-host-per-file-limit">20 MB max</strong></div></div></div></div><div class="image-host-storage-amount"><strong id="bioflex-video-host-usage">Loading storage…</strong><span id="bioflex-video-host-quota-note" class="text-xs muted">Checking your storage…</span></div><div class="image-host-meter" role="progressbar" aria-label="Video storage used" aria-valuemin="0" aria-valuemax="100"><span id="bioflex-video-host-meter"></span></div><div class="image-host-meter-legend"><span><i></i> Used</span><span id="bioflex-video-host-meter-caption">Live usage</span></div></div><aside class="image-host-upgrade-box"><div class="image-host-upgrade-icon"><i class="fa-solid fa-gem"></i></div><div class="image-host-upgrade-title">Video plans</div><p class="text-xs muted">Choose a separate Video Hosting storage quota and term.</p><button class="btn btn-primary image-host-upgrade-btn" type="button" onclick="navigate(\'#/dashboard/premium\')"><i class="fa-solid fa-arrow-up"></i> View Video Plans</button></aside></section>'+
+        '<section class="ih-tier-panel" id="bioflex-video-host-tier" aria-label="Video Host plan limits"><div class="ih-tier-card ih-tier-free"><span class="ih-tier-kicker"><i class="fa-solid fa-hard-drive"></i> FREE / EARLY ACCESS</span><strong>20 MB <small>per video</small></strong><span>500 MB total storage</span></div></section>'+
+       '<section class="card glass mt-4"><div class="card-header"><div class="card-header-icon"><i class="fa-solid fa-video"></i></div><div><h3>Upload videos</h3><p id="bioflex-video-host-upload-copy">Only video files are accepted. Free: 20 MB per video / 500 MB total. Premium: 200 MB per video / your assigned storage plan.</p></div></div>'+
+      '<input id="bioflex-video-host-files" type="file" accept="video/*,.mp4,.webm,.mov,.m4v,.ogv,.avi,.mkv,.mpeg,.mpg,.3gp" multiple hidden onchange="bioflexUploadHostedVideos(this.files)">'+
+       '<div id="bioflex-video-host-drop" class="image-host-drop" role="button" tabindex="0" onclick="document.getElementById(\'bioflex-video-host-files\').click()"><div><i class="fa-solid fa-film"></i><strong>Choose videos or drop them here</strong><div class="text-xs muted mt-1">MP4, WebM, MOV, M4V, OGV, AVI, MKV, MPEG, MPG, 3GP, and other video MIME types</div><div id="bioflex-video-host-file-limit" class="image-host-upload-limit">20 MB maximum per video</div></div></div>'+
+       '<div class="host-library-heading"><div><h3>Your videos</h3><p>Recent uploads · play a clip or copy its share link</p></div><span id="bioflex-video-host-count" class="host-library-count">0 items</span></div><div id="bioflex-video-host-status" class="image-host-status-line" aria-live="polite"></div><div class="image-host-grid" id="bioflex-video-host-grid"></div>'+
+      '<div class="flex justify-center mt-4"><button id="bioflex-video-host-more" class="btn btn-ghost btn-sm" type="button" onclick="bioflexLoadHostedVideos(false)" hidden>Load more</button></div></section>'+
+      '</div>';
+  }
+  function setVideoHostStatus(message,isError){var node=document.getElementById('bioflex-video-host-status');if(node){node.textContent=message||'';node.style.color=isError?'#fca5a5':''}}
+  function videoHostMarkupEscape(value){return esc(value==null?'':String(value))}
+  function telegramFileDownloadUrl(botToken,filePath){
+    var clean=String(filePath||'').replace(/^\/+/,'');
+    return 'https://api.telegram.org/file/bot'+botToken+'/'+clean.split('/').map(function(part){return encodeURIComponent(part)}).join('/');
+  }
+  function attachHostMediaFallbacks(grid){
+    if(!grid)return;
+    grid.querySelectorAll('[data-host-media]').forEach(function(media){
+      if(media.dataset.fallbackReady)return;
+      media.dataset.fallbackReady='true';
+      media.addEventListener('error',function(){
+        var isVideo=media.tagName==='VIDEO';
+        var source=isVideo?(media.currentSrc||media.querySelector('source')&&media.querySelector('source').src||media.src):media.src;
+        var fallback=document.createElement('div');fallback.className='host-media-fallback';
+        var icon=document.createElement('i');icon.className='fa-solid '+(isVideo?'fa-circle-play':'fa-image');icon.setAttribute('aria-hidden','true');
+        var label=document.createElement('span');label.textContent=isVideo?'This browser could not play this video preview.':'Image preview could not be loaded.';
+        fallback.append(icon,label);
+        if(source){var link=document.createElement('a');link.href=source;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open original file';fallback.append(link)}
+        media.replaceWith(fallback);
+      });
+    });
+  }
+  function hostOwnerAccess(profile){
+    return accountAssignedBadgeIds(profile).includes('owner')||String(profile&&profile.member_role||'').trim().toLowerCase()==='owner';
+  }
+  function toggleHostFullscreen(element){
+    if(!element)return;
+    var isCurrent=document.fullscreenElement===element||document.webkitFullscreenElement===element;
+    if(isCurrent){
+      var exit=document.exitFullscreen||document.webkitExitFullscreen;
+      if(exit)try{exit.call(document)}catch(_){}
+      element.classList.remove('host-preview-fullscreen');
+      return;
+    }
+    if(element.classList.contains('host-preview-fullscreen')){
+      element.classList.remove('host-preview-fullscreen');
+      return;
+    }
+    var request=element.requestFullscreen||element.webkitRequestFullscreen;
+    if(request){
+      try{var result=request.call(element);if(result&&typeof result.catch==='function')result.catch(function(){element.classList.add('host-preview-fullscreen')})}
+      catch(_){element.classList.add('host-preview-fullscreen')}
+    }else element.classList.add('host-preview-fullscreen');
+  }
+  async function downloadHostedMedia(url,fileName){
+    var safe=safeUrl(url);
+    if(!safe){app.toast('Download link is unavailable.','error');return}
+    var name=String(fileName||'download').replace(/[\\/\u0000-\u001f]/g,'_').slice(0,180)||'download';
+    try{
+      var response=await fetch(safe,{mode:'cors',credentials:'omit'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      var blob=await response.blob(),objectUrl=URL.createObjectURL(blob),anchor=document.createElement('a');
+      anchor.href=objectUrl;anchor.download=name;anchor.style.display='none';document.body.appendChild(anchor);anchor.click();anchor.remove();
+      setTimeout(function(){URL.revokeObjectURL(objectUrl)},60000);
+      app.toast('Download started.','success');
+    }catch(error){
+      var fallback=document.createElement('a');fallback.href=safe;fallback.target='_blank';fallback.rel='noopener noreferrer';fallback.download=name;fallback.style.display='none';
+      document.body.appendChild(fallback);fallback.click();fallback.remove();
+      app.toast('Telegram did not allow a forced download. The original file link was opened; use your browser’s Save/Download option.','error');
+    }
+  }
+  function fullscreenHostedVideo(button){
+    var card=button&&button.closest('.video-host-item'),video=card&&card.querySelector('video');
+    if(!video){app.toast('Video preview is unavailable.','error');return}
+    if(video.webkitEnterFullscreen&&!video.requestFullscreen&&!video.webkitRequestFullscreen){
+      try{video.webkitEnterFullscreen();return}catch(_){}
+    }
+    toggleHostFullscreen(video);
+  }
+  function videoHostActive(profile){
+    return String(profile&&profile.video_host_plan||'free').toLowerCase()!=='free'&&profile&&profile.video_subscription_status==='active'&&!!profile.video_subscription_expires_at&&Date.parse(profile.video_subscription_expires_at)>Date.now();
+  }
+  function renderVideoHostQuota(){
+    var usage=document.getElementById('bioflex-video-host-usage'),meter=document.getElementById('bioflex-video-host-meter');if(!usage||!meter)return;
+    var used=Math.max(0,videoHost.usedBytes),total=videoHost.limitBytes,percent=videoHost.isOwner?0:total>0?Math.min(100,used/total*100):100;
+    var badge=document.getElementById('bioflex-video-host-plan-badge'),label=document.getElementById('bioflex-video-host-plan-label'),expiry=document.getElementById('bioflex-video-host-expiry');
+    var tier=videoHost.isOwner?'Owner':videoHost.isPremium?'Premium':'Free';
+    if(badge){badge.classList.toggle('is-free',!videoHost.isPremium&&!videoHost.isOwner);badge.innerHTML='<i class="fa-solid '+(videoHost.isOwner?'fa-crown':videoHost.isPremium?'fa-gem':'fa-hard-drive')+'"></i> '+tier}
+    if(label)label.textContent='Video Host · '+tier+' · '+(videoHost.isOwner?'Unlimited storage':formatBytes(total));
+    if(expiry){var until=videoHost.profile&&videoHost.profile.video_subscription_expires_at;expiry.textContent=videoHost.isOwner?'Owner access · no app quota':videoHost.isPremium&&until?'Expires '+new Date(until).toLocaleString('en-BD',{timeZone:'Asia/Dhaka',dateStyle:'medium',timeStyle:'short'}):'Free plan · no expiry'}
+    usage.textContent=formatBytes(used)+' used / '+(videoHost.isOwner?'Unlimited':formatBytes(total));meter.style.width=percent.toFixed(2)+'%';
+    var note=document.getElementById('bioflex-video-host-quota-note');if(note)note.textContent=videoHost.isOwner?'Unlimited app storage and no per-video app size limit. Telegram transfer limits still apply.':percent>=100?'Video storage full. Delete a video or choose a larger plan.':formatBytes(Math.max(0,total-used))+' available · '+videoHost.perVideoLimitMb+' MB max per video.';
+    var perVideo=document.getElementById('bioflex-video-host-per-file-limit');if(perVideo)perVideo.textContent=videoHost.isOwner?'Unlimited':videoHost.perVideoLimitMb+' MB max';
+    var uploadLimit=document.getElementById('bioflex-video-host-file-limit');if(uploadLimit)uploadLimit.textContent=videoHost.isOwner?'Owner: no app-imposed per-video size limit':' '+videoHost.perVideoLimitMb+' MB maximum per video';
+    var uploadCopy=document.getElementById('bioflex-video-host-upload-copy');if(uploadCopy)uploadCopy.textContent=videoHost.isOwner?'Owner access: unlimited app storage and no app-imposed per-video size limit. Telegram may enforce its own transfer ceiling.':'Only video files are accepted. '+(videoHost.isPremium?'Premium: 200 MB per video':'Free: 20 MB per video / 500 MB total')+'.';
+    var upgradeTitle=document.querySelector('.image-host-upgrade-title'),upgradeCopy=document.querySelector('.image-host-upgrade-box p'),upgradeButton=document.querySelector('.image-host-upgrade-btn');
+    if(upgradeTitle)upgradeTitle.textContent=videoHost.isOwner?'Owner access':'Video plans';
+    if(upgradeCopy&&videoHost.isOwner)upgradeCopy.textContent='Unlimited app storage and no app-imposed per-video size limit. Telegram may enforce its own transfer ceiling.';
+    if(upgradeButton)upgradeButton.hidden=videoHost.isOwner;
+    var usedNode=document.getElementById('bioflex-video-host-used'),totalNode=document.getElementById('bioflex-video-host-total'),caption=document.getElementById('bioflex-video-host-meter-caption');
+    if(usedNode)usedNode.textContent=formatBytes(used);if(totalNode)totalNode.textContent=videoHost.isOwner?'Unlimited':formatBytes(total);if(caption)caption.textContent=videoHost.isOwner?'Owner · unlimited':percent.toFixed(1)+'% used';
+    var tierPanel=document.querySelector('#bioflex-video-host-tier .ih-tier-card');
+    if(tierPanel){tierPanel.classList.toggle('ih-tier-free',!videoHost.isPremium&&!videoHost.isOwner);tierPanel.innerHTML='<span class="ih-tier-kicker"><i class="fa-solid '+(videoHost.isOwner?'fa-crown':videoHost.isPremium?'fa-gem':'fa-hard-drive')+'"></i> '+(videoHost.isOwner?'OWNER':videoHost.isPremium?'PREMIUM':'FREE / EARLY ACCESS')+'</span><strong>'+(videoHost.isOwner?'Unlimited':videoHost.perVideoLimitMb+' MB')+' <small>per video</small></strong><span>'+(videoHost.isOwner?'Unlimited storage':formatBytes(total)+' total storage')+'</span>'}
+  }
+  async function loadVideoHostQuota(){
+    videoHost.quotaReady=false;var usage=document.getElementById('bioflex-video-host-usage');if(usage)usage.textContent='Loading storage…';
+    if(!app.App.user)return;
+    try{
+      var results=await Promise.all([
+         db.from('profiles').select('user_id,badges,member_role,video_host_plan,video_storage_limit_mb,video_subscription_plan,video_subscription_period,video_subscription_started_at,video_subscription_expires_at,video_subscription_status').eq('user_id',app.App.user.id).maybeSingle(),
+        db.from('site_settings').select('value').eq('key','video_host_pricing').maybeSingle(),
+        db.rpc('get_telegram_video_host_usage')
+      ]);
+      if(results[0].error)throw results[0].error;
+      if(results[2].error)throw new Error('Video storage quota unavailable: '+results[2].error.message);
+      videoHost.profile=results[0].data||app.App.profile||{};
+      videoHost.profile.video_host_plan=videoHost.profile.video_host_plan||'free';
+      videoHost.profile.video_storage_limit_mb=Number(videoHost.profile.video_storage_limit_mb??500);
+      app.App.profile={...app.App.profile,...videoHost.profile};
+      videoHost.pricing=normalizeVideoHostPricing(results[1].data&&results[1].data.value);
+      videoHost.usedBytes=Math.max(0,Number(results[2].data)||0);
+       videoHost.isOwner=hostOwnerAccess(videoHost.profile);
+       videoHost.isPremium=videoHostActive(videoHost.profile);
+      var plan=videoHost.isPremium?String(videoHost.profile.video_host_plan).toLowerCase():'free',limitMb=500;
+      if(/^(1|2|3|4|5|10|20|50)gb$/.test(plan))limitMb=Number(plan.replace('gb',''))*1024;
+       videoHost.limitBytes=videoHost.isOwner?Infinity:limitMb*1048576;
+       videoHost.perVideoLimitMb=videoHost.isOwner?Infinity:videoHost.isPremium?200:20;
+       videoHost.quotaReady=true;renderVideoHostQuota();
+    }catch(error){
+      videoHost.quotaReady=false;if(usage)usage.textContent='Storage limit unavailable';
+      var note=document.getElementById('bioflex-video-host-quota-note');if(note)note.textContent=error.message||'The Video Host storage quota could not be verified.';
+    }
+  }
+  function videoFileLike(file){
+    var ext=String(file&&file.name||'').split('.').pop().toLowerCase();
+    return !!file&&((String(file.type||'').toLowerCase().startsWith('video/'))||['mp4','webm','mov','m4v','ogv','avi','mkv','mpeg','mpg','3gp','ts','m2ts','wmv'].indexOf(ext)>=0);
+  }
+  function safeVideoName(name){
+    var clean=String(name||'video').normalize('NFKC').replace(/[\\/]/g,'-').replace(/[^\p{L}\p{N}._ -]/gu,'-').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^\.+/,'').slice(0,150);
+    return clean||('video-'+Date.now()+'.mp4');
+  }
+  async function uploadHostedVideos(fileList){
+    if(!app.App.user){setVideoHostStatus('Please sign in before uploading videos.',true);return}
+    var files=Array.from(fileList||[]),rejected=files.filter(function(file){return !videoFileLike(file)});
+    files=files.filter(videoFileLike);
+    if(rejected.length)setVideoHostStatus('Only video files are accepted; skipped '+rejected.length+' other file(s).',true);
+    if(!files.length)return;
+    var input=document.getElementById('bioflex-video-host-files');if(input)input.disabled=true;
+    try{
+      if(!videoHost.quotaReady)await loadVideoHostQuota();
+      if(!videoHost.quotaReady)throw new Error('Video storage quota could not be verified. Refresh the page or contact an administrator.');
+      var tableCheck=await db.from('telegram_video_host_files').select('id').eq('user_id',app.App.user.id).limit(1);
+      if(tableCheck.error)throw new Error('Video storage is temporarily unavailable: '+tableCheck.error.message);
+      for(var i=0;i<files.length;i++){
+        var file=files[i],name=safeVideoName(file.name),dot=name.lastIndexOf('.'),suffix=dot>0?name.slice(dot):'',stem=dot>0?name.slice(0,dot):name;
+        name=stem+'-'+Date.now()+'-'+i+suffix;
+        if(file.size>videoHost.perVideoLimitMb*1048576)throw new Error(name+' is larger than '+videoHost.perVideoLimitMb+' MB, the per-video limit.');
+        if(videoHost.usedBytes>=videoHost.limitBytes||videoHost.usedBytes+file.size>videoHost.limitBytes)throw new Error(videoHost.usedBytes>=videoHost.limitBytes?'Video storage is full ('+formatBytes(videoHost.limitBytes)+'). Delete videos or assign a larger plan.':'This video would exceed your total storage. Only '+formatBytes(Math.max(0,videoHost.limitBytes-videoHost.usedBytes))+' remains.');
+        setVideoHostStatus('Uploading '+(i+1)+' of '+files.length+': '+name);
+         var uploaded=await uploadTelegramAsset(file,'video-host/'+app.App.user.id,videoHost.perVideoLimitMb,function(fraction){setVideoHostStatus('Uploading '+(i+1)+' of '+files.length+': '+name+' · '+Math.round(fraction*96)+'%')});
+        var saved=await db.from('telegram_video_host_files').insert({user_id:app.App.user.id,file_name:name,file_id:uploaded.file_id,telegram_message_id:uploaded.message_id,mime_type:file.type||'video/mp4',file_size:uploaded.size||file.size});
+        if(saved.error){try{await deleteTelegramImageMessage(uploaded.message_id)}catch(_){}throw saved.error}
+        videoHost.usedBytes+=Number(uploaded.size||file.size);renderVideoHostQuota();
+      }
+      setVideoHostStatus(files.length+' video(s) uploaded to Telegram.');await loadHostedVideos(true);
+    }catch(error){setVideoHostStatus('Upload failed: '+(error&&error.message||'Check Telegram settings and refresh the page.'),true)}
+    finally{if(input){input.disabled=false;input.value=''}}
+  }
+  async function loadHostedVideos(reset){
+    var grid=document.getElementById('bioflex-video-host-grid');if(!grid||videoHost.loading)return;
+    if(!app.App.user){grid.innerHTML='<div class="image-host-notice">Sign in to manage your video uploads.</div>';return}
+    if(reset){videoHost.offset=0;videoHost.hasMore=false;grid.innerHTML=''}
+    videoHost.loading=true;setVideoHostStatus('Loading your videos…');
+    try{
+      var result=await db.from('telegram_video_host_files').select('id,file_name,file_id,telegram_message_id,mime_type,file_size,created_at').eq('user_id',app.App.user.id).order('created_at',{ascending:false}).range(videoHost.offset,videoHost.offset+IMAGE_PAGE_SIZE-1);
+      if(result.error)throw result.error;
+      var rows=(result.data||[]).filter(function(item){return !!item&&!!item.id&&!!item.file_id});
+      videoHost.offset+=rows.length;videoHost.hasMore=rows.length===IMAGE_PAGE_SIZE;
+      if(reset&&!rows.length)grid.innerHTML='<div class="empty" style="grid-column:1/-1">No videos uploaded yet.</div>';
+      var config=rows.length?await getTelegramConfig():null;
+      var resolved=await Promise.all(rows.map(async function(item){
+         try{var response=await telegramApiRequest('https://api.telegram.org/bot'+config.botToken+'/getFile?file_id='+encodeURIComponent(item.file_id));var path=response.result&&response.result.file_path;item.url=path?telegramFileDownloadUrl(config.botToken,path):''}catch(_){item.url=''}
+        return item;
+      }));
+      var html=resolved.map(function(item){
+        var date=item.created_at?new Date(item.created_at).toLocaleDateString('en-BD',{timeZone:'Asia/Dhaka'}):'Telegram video';
+         var preview=item.url?'<video data-host-media="video" controls preload="metadata" playsinline webkit-playsinline style="width:100%;height:100%;object-fit:contain"><source src="'+esc(item.url)+'" type="'+esc(item.mime_type||'video/mp4')+'"></video>':'<div class="host-media-fallback"><i class="fa-solid fa-circle-play"></i><span>Video URL unavailable</span></div>';
+         var copy=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexCopyHostedVideoUrl(decodeURIComponent(\''+encodeURIComponent(item.url).replace(/'/g,'%27')+'\'))"><i class="fa-solid fa-copy"></i> Copy link</button>':'<button class="btn btn-ghost btn-sm" disabled>URL unavailable</button>';
+         var download=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexDownloadHostedMedia(decodeURIComponent(\''+encodeURIComponent(item.url).replace(/'/g,'%27')+'\'),decodeURIComponent(\''+encodeURIComponent(item.file_name).replace(/'/g,'%27')+'\'))"><i class="fa-solid fa-download"></i> Download</button>':'';
+         var fullscreen=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexFullscreenHostedVideo(this)" title="Full screen"><i class="fa-solid fa-expand"></i> Full screen</button>':'';
+         return '<article class="image-host-item video-host-item"><div class="image-host-thumb">'+preview+'</div><div class="image-host-meta"><div class="image-host-name" title="'+esc(item.file_name)+'">'+esc(item.file_name)+'</div><div class="image-host-size">'+formatBytes(item.file_size)+' · '+esc(date)+'</div><div class="image-host-actions">'+copy+fullscreen+download+'<button class="btn btn-danger btn-sm" type="button" onclick="bioflexDeleteHostedVideo(\''+encodeURIComponent(item.id)+'\',decodeURIComponent(\''+encodeURIComponent(item.file_name).replace(/'/g,'%27')+'\'))"><i class="fa-solid fa-trash"></i> Delete</button></div></div></article>';
+      }).join('');
+       if(html){grid.insertAdjacentHTML('beforeend',html);attachHostMediaFallbacks(grid)}
+       var count=document.getElementById('bioflex-video-host-count');if(count)count.textContent=grid.querySelectorAll('.image-host-item').length+' items';
+      var more=document.getElementById('bioflex-video-host-more');if(more)more.hidden=!videoHost.hasMore;
+      setVideoHostStatus(rows.length?'Loaded '+videoHost.offset+' video(s).':'');
+    }catch(error){
+      setVideoHostStatus('Could not load videos: '+(error&&error.message||'Refresh the page or contact an administrator.'),true);
+      if(reset)grid.innerHTML='<div class="image-host-notice" style="grid-column:1/-1">Video storage is temporarily unavailable. Refresh the page or contact an administrator.</div>';
+      var more=document.getElementById('bioflex-video-host-more');if(more)more.hidden=true;
+    }finally{videoHost.loading=false}
+  }
+  async function copyHostedVideoUrl(url){
+    if(typeof window.copyText==='function')return window.copyText(url,'Direct video URL copied.');
+    try{await navigator.clipboard.writeText(url);app.toast('Direct video URL copied.','success')}catch(_){app.toast('Could not copy this URL.','error')}
+  }
+  async function deleteHostedVideo(id,name){
+    if(!confirm('Delete '+name+' permanently from Telegram?'))return;
+    try{
+      var selected=await db.from('telegram_video_host_files').select('telegram_message_id').eq('id',decodeURIComponent(id)).eq('user_id',app.App.user.id).maybeSingle();
+      if(selected.error)throw selected.error;if(!selected.data)throw new Error('Video record not found.');
+      await deleteTelegramImageMessage(selected.data.telegram_message_id);
+      var result=await db.from('telegram_video_host_files').delete().eq('id',decodeURIComponent(id)).eq('user_id',app.App.user.id);if(result.error)throw result.error;
+      app.toast('Video deleted.','success');await Promise.all([loadHostedVideos(true),loadVideoHostQuota()]);
+    }catch(error){app.toast('Delete failed: '+(error&&error.message||'Telegram could not delete this message.'),'error')}
+  }
+  function setupVideoHost(){
+    var drop=document.getElementById('bioflex-video-host-drop'),button=document.getElementById('bioflex-video-host-more-menu'),popover=document.getElementById('bioflex-video-host-popover');
+    if(button&&popover&&!button.dataset.ready){button.dataset.ready='true';button.addEventListener('click',function(event){event.stopPropagation();popover.hidden=!popover.hidden;button.setAttribute('aria-expanded',String(!popover.hidden))});document.addEventListener('click',function(event){if(!popover.contains(event.target)&&!button.contains(event.target)){popover.hidden=true;button.setAttribute('aria-expanded','false')}})}
+    if(!drop||drop.dataset.ready)return;drop.dataset.ready='true';
+    drop.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('bioflex-video-host-files').click()}});
+    ['dragenter','dragover'].forEach(function(type){drop.addEventListener(type,function(event){event.preventDefault();drop.classList.add('is-dragging')})});
+    ['dragleave','drop'].forEach(function(type){drop.addEventListener(type,function(event){event.preventDefault();drop.classList.remove('is-dragging')})});
+    drop.addEventListener('drop',function(event){uploadHostedVideos(event.dataTransfer&&event.dataTransfer.files)});
+  }
+  window.tabImageHostPage=imageHostMarkup;
+  window.tabVideoHostPage=videoHostMarkup;
+  window.bioflexLoadHostedImages=loadHostedImages;
+  window.bioflexUploadHostedImages=uploadHostedImages;
+  window.bioflexRenameHostedImage=renameHostedImage;
+  window.bioflexDeleteHostedImage=deleteHostedImage;
+  window.bioflexCopyHostedImageUrl=copyHostedImageUrl;
+  window.bioflexRefreshImageHostQuota=loadImageHostQuota;
+  window.bioflexRefreshVideoHostQuota=loadVideoHostQuota;
+  window.bioflexLoadHostedVideos=loadHostedVideos;
+  window.bioflexUploadHostedVideos=uploadHostedVideos;
+  window.bioflexDeleteHostedVideo=deleteHostedVideo;
+  window.bioflexCopyHostedVideoUrl=copyHostedVideoUrl;
+  window.bioflexDownloadHostedMedia=downloadHostedMedia;
+  window.bioflexFullscreenHostedVideo=fullscreenHostedVideo;
+  window.bioflexOpenImageHostPlans=openImageHostPlans;
+  window.bioflexPreviewHostedImage=previewHostedImage;
+  if(typeof window.bindTab==='function'){
+    var baseBindTab=window.bindTab;
+    window.bindTab=function(tab){
+      var result=baseBindTab.apply(this,arguments);
+      if(tab==='image-host')setTimeout(function(){setupImageHost();loadImageHostQuota();loadHostedImages(true)},0);
+      if(tab==='video-host')setTimeout(function(){setupVideoHost();loadVideoHostQuota();loadHostedVideos(true)},0);
+      if(tab==='premium')setTimeout(loadPremiumPlanPrices,0);
+      if(tab==='customize')setTimeout(renderSocialPreview,0);
+      return result;
+    };
+  }
+
+  function setupImageHost(){
+    var drop=document.getElementById('bioflex-image-drop');
+    var menuButton=document.getElementById('bioflex-image-more-menu');
+    var popover=document.getElementById('bioflex-image-storage-popover');
+    if(menuButton&&popover&&!menuButton.dataset.ready){
+      menuButton.dataset.ready='true';
+      menuButton.addEventListener('click',function(event){event.stopPropagation();var open=popover.hidden;popover.hidden=!open;menuButton.setAttribute('aria-expanded',String(open))});
+      document.addEventListener('click',function(event){if(!popover.contains(event.target)&&!menuButton.contains(event.target)){popover.hidden=true;menuButton.setAttribute('aria-expanded','false')}});
+    }
+    if(!drop||drop.dataset.ready)return;
+    drop.dataset.ready='true';
+    drop.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('bioflex-image-files').click()}});
+    ['dragenter','dragover'].forEach(function(type){drop.addEventListener(type,function(event){event.preventDefault();drop.classList.add('is-dragging')})});
+    ['dragleave','drop'].forEach(function(type){drop.addEventListener(type,function(event){event.preventDefault();drop.classList.remove('is-dragging')})});
+    drop.addEventListener('drop',function(event){uploadHostedImages(event.dataTransfer&&event.dataTransfer.files)});
+  }
+  function setImageStatus(message,isError){
+    var status=document.getElementById('bioflex-image-status');
+    if(status){status.textContent=message||'';status.style.color=isError?'#fca5a5':''}
+  }
+  async function loadPremiumPlanPrices(){
+    var container=document.getElementById('bioflex-premium-plans');
+    var videoContainer=document.getElementById('bioflex-video-premium-plans');
+    if(!container&&!videoContainer)return;
+    try{
+      var requests=[
+        db.from('site_settings').select('value').eq('key','image_host_pricing').maybeSingle(),
+        db.from('site_settings').select('value').eq('key','video_host_pricing').maybeSingle()
+      ];
+      if(app.App.user)requests.push(db.from('profiles').select('is_premium,badges,image_host_plan,subscription_period,subscription_expires_at,subscription_status,video_host_plan,video_subscription_period,video_subscription_expires_at,video_subscription_status').eq('user_id',app.App.user.id).maybeSingle());
+      var results=await Promise.all(requests),pricing=normalizeImageHostPricing(results[0].data&&results[0].data.value),videoPricing=normalizeVideoHostPricing(results[1].data&&results[1].data.value);
+      IMAGE_HOST_PLAN_GB.forEach(function(gb){
+        var price=container&&container.querySelector('[data-premium-plan-price="'+gb+'"]');
+        if(price)price.innerHTML='৳'+Number(pricing.periods[billingPeriod][String(gb)]).toLocaleString('en-BD')+'<small> BDT / '+billingPeriod.replace('ly','')+'</small>';
+        var videoPrice=videoContainer&&videoContainer.querySelector('[data-video-premium-plan-price="'+gb+'"]');
+        if(videoPrice)videoPrice.innerHTML='৳'+Number(videoPricing.periods[videoBillingPeriod][String(gb)]).toLocaleString('en-BD')+'<small> BDT / '+videoBillingPeriod.replace('ly','')+'</small>';
+      });
+      var profile=app.App.user&&results[2]&&results[2].data||app.App.profile||{};
+      var expired=!!(profile.subscription_expires_at&&['active','expired'].includes(String(profile.subscription_status||''))&&Date.parse(profile.subscription_expires_at)<=Date.now());
+      var premium=(!expired&&!!profile.is_premium)||accountAssignedBadgeIds(profile).includes('premium')||(!expired&&String(profile.image_host_plan||'free').toLowerCase()!=='free');
+      var status=document.getElementById('bioflex-premium-current-status');
+      if(status){var imageUntil=premium&&profile.subscription_expires_at&&!expired?' · expires '+new Date(profile.subscription_expires_at).toLocaleDateString('en-BD',{timeZone:'Asia/Dhaka'}):'';status.classList.toggle('active',premium);status.innerHTML='<i class="fa-solid '+(premium?'fa-circle-check':'fa-circle-minus')+'"></i> Image Host · '+(premium?'Premium active':'Free plan')+imageUntil}
+      var videoExpired=!!(profile.video_subscription_expires_at&&Date.parse(profile.video_subscription_expires_at)<=Date.now());
+      var videoPremium=String(profile.video_host_plan||'free').toLowerCase()!=='free'&&profile.video_subscription_status==='active'&&!!profile.video_subscription_expires_at&&!videoExpired;
+      var videoStatus=document.getElementById('bioflex-video-premium-current-status');
+      if(videoStatus){var videoUntil=videoPremium&&profile.video_subscription_expires_at?' · expires '+new Date(profile.video_subscription_expires_at).toLocaleDateString('en-BD',{timeZone:'Asia/Dhaka'}):'';videoStatus.classList.toggle('active',videoPremium);videoStatus.innerHTML='<i class="fa-solid '+(videoPremium?'fa-circle-check':'fa-circle-minus')+'"></i> Video Host · '+(videoPremium?'Premium active':'Free plan')+videoUntil}
+      if(premiumExpiryTimer)clearTimeout(premiumExpiryTimer);
+      var expiries=[Date.parse(profile.subscription_expires_at||''),Date.parse(profile.video_subscription_expires_at||'')].filter(function(value){return Number.isFinite(value)&&value>Date.now()});
+      if(expiries.length)premiumExpiryTimer=setTimeout(loadPremiumPlanPrices,Math.min(Math.min.apply(Math,expiries)-Date.now()+100,2147483000));
+    }catch(_){}
+  }
+  window.bioflexRefreshPremiumPlanPrices=loadPremiumPlanPrices;
+  document.addEventListener('click',function(event){
+    var button=event.target&&event.target.closest?event.target.closest('[data-premium-period]'):null;
+    if(!button)return;
+    billingPeriod=['weekly','monthly','yearly'].indexOf(button.dataset.premiumPeriod)>=0?button.dataset.premiumPeriod:'monthly';
+    document.querySelectorAll('[data-premium-period]').forEach(function(item){var selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected))});
+    loadPremiumPlanPrices();
+  });
+  document.addEventListener('click',function(event){
+    var button=event.target&&event.target.closest?event.target.closest('[data-video-premium-period]'):null;
+    if(!button)return;
+    videoBillingPeriod=['weekly','monthly','yearly'].indexOf(button.dataset.videoPremiumPeriod)>=0?button.dataset.videoPremiumPeriod:'monthly';
+    document.querySelectorAll('[data-video-premium-period]').forEach(function(item){var selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected))});
+    loadPremiumPlanPrices();
+  });
+  function openImageHostPlans(){
+    if(typeof window.navigate==='function')window.navigate('#/dashboard/premium');
+  }
+  function renderImageHostQuota(){
+    var freeLabel=document.getElementById('bioflex-image-free-label');
+    var usage=document.getElementById('bioflex-image-usage');
+    var meter=document.getElementById('bioflex-image-meter');
+    var note=document.getElementById('bioflex-image-quota-note');
+    if(!usage||!meter)return;
+    var planBadge=document.getElementById('bioflex-image-host-plan-badge'),fileLimitLabel=document.getElementById('bioflex-image-file-limit');
+     var tier=imageHost.isOwner?'Owner':imageHost.isPremium?'Premium':'Free';
+     if(planBadge){planBadge.classList.toggle('is-free',!imageHost.isPremium&&!imageHost.isOwner);planBadge.innerHTML='<i class="fa-solid '+(imageHost.isOwner?'fa-crown':imageHost.isPremium?'fa-gem':'fa-hard-drive')+'"></i> '+tier}
+    if(freeLabel)freeLabel.textContent='Image Host plan · '+tier;
+    if(fileLimitLabel)fileLimitLabel.textContent=imageHost.isOwner?'Owner: no app-imposed per-image size limit':(imageHost.isPremium?'Premium':'Free')+' upload limit: '+imageHost.perImageLimitMb+' MB per image';
+    var upgradeTitle=document.querySelector('.image-host-upgrade-title'),upgradeCopy=document.querySelector('.image-host-upgrade-box p'),upgradeButton=document.querySelector('.image-host-upgrade-btn');
+    if(upgradeTitle)upgradeTitle.textContent=imageHost.isOwner?'Owner access':imageHost.isPremium?'Premium active':'Unlock Premium';
+    if(upgradeCopy)upgradeCopy.textContent=imageHost.isOwner?'Unlimited app storage and no app-imposed per-image size limit. Telegram may enforce its own transfer ceiling.':imageHost.isPremium?'Premium is active with '+formatBytes(imageHost.limitBytes)+' of assigned image storage.':'Premium access includes your selected storage plan and subscription term.';
+    if(upgradeButton){upgradeButton.hidden=imageHost.isOwner;upgradeButton.innerHTML='<i class="fa-solid '+(imageHost.isPremium?'fa-sliders':'fa-arrow-up')+'"></i> '+(imageHost.isPremium?'Manage Premium':'View Premium')}
+    var used=Math.max(0,imageHost.usedBytes),popoverUsed=document.getElementById('bioflex-image-popover-used'),popoverTotal=document.getElementById('bioflex-image-popover-total'),popoverFileLimit=document.getElementById('bioflex-image-popover-file-limit');
+    if(popoverUsed)popoverUsed.textContent=formatBytes(used);
+    if(popoverTotal)popoverTotal.textContent=imageHost.isOwner?'Unlimited':formatBytes(imageHost.limitBytes);
+    if(popoverFileLimit)popoverFileLimit.textContent=imageHost.isOwner?'No app limit':imageHost.perImageLimitMb+' MB max';
+    var total=imageHost.limitBytes,used=Math.max(0,imageHost.usedBytes);
+    usage.textContent=formatBytes(used)+' used / '+(imageHost.isOwner?'Unlimited':formatBytes(total));
+    var percent=imageHost.isOwner?0:total>0?Math.min(100,used/total*100):100;
+    meter.style.width=percent.toFixed(2)+'%';
+    if(note)note.textContent=imageHost.isOwner?'Unlimited app storage and no per-image app size limit. Telegram may enforce its own transfer ceiling.':percent>=100?'Storage full. Delete an image or choose a larger plan.':formatBytes(Math.max(0,total-used))+' available · '+imageHost.perImageLimitMb+' MB max per image.';
+    var caption=document.getElementById('bioflex-image-meter-caption');if(caption)caption.textContent=imageHost.isOwner?'Owner · unlimited':Math.min(100,percent).toFixed(1)+'% used';
+    var tierPanel=document.querySelector('#bioflex-image-host-tier .ih-tier-card');
+    if(tierPanel){tierPanel.classList.toggle('ih-tier-free',!imageHost.isPremium&&!imageHost.isOwner);tierPanel.innerHTML='<span class="ih-tier-kicker"><i class="fa-solid '+(imageHost.isOwner?'fa-crown':imageHost.isPremium?'fa-gem':'fa-hard-drive')+'"></i> '+(imageHost.isOwner?'OWNER':imageHost.isPremium?'PREMIUM':'FREE / EARLY ACCESS')+'</span><strong>'+(imageHost.isOwner?'Unlimited':imageHost.perImageLimitMb+' MB')+' <small>per image</small></strong><span>'+(imageHost.isOwner?'Unlimited storage':formatBytes(imageHost.limitBytes)+' total storage')+'</span>'}
+  }
+  async function loadImageHostQuota(){
+    imageHost.quotaReady=false;
+    var usage=document.getElementById('bioflex-image-usage');
+    if(usage)usage.textContent='Loading storage…';
+    if(!app.App.user)return;
+    try{
+      var results=await Promise.all([
+        db.from('profiles').select('user_id,badges,member_role,is_premium,image_host_plan,image_storage_limit_mb,subscription_plan,subscription_period,subscription_expires_at,subscription_status').eq('user_id',app.App.user.id).maybeSingle(),
+        db.from('site_settings').select('value').eq('key','image_host_pricing').maybeSingle(),
+        db.rpc('get_telegram_image_host_usage')
+      ]);
+      if(results[0].error)throw results[0].error;
+      if(results[2].error)throw new Error('Image storage quota unavailable: '+results[2].error.message);
+      imageHost.profile=results[0].data||app.App.profile||{};
+      imageHost.profile.image_host_plan=imageHost.profile.image_host_plan||'free';
+      imageHost.profile.image_storage_limit_mb=Number(imageHost.profile.image_storage_limit_mb??200);
+      app.App.profile={...app.App.profile,...imageHost.profile};
+      imageHost.pricing=normalizeImageHostPricing(results[1].data&&results[1].data.value);
+      imageHost.usedBytes=Math.max(0,Number(results[2].data)||0);
+        var assignedBadges=accountAssignedBadgeIds(imageHost.profile);
+        imageHost.isOwner=hostOwnerAccess(imageHost.profile);
+       var plan=String(imageHost.profile.image_host_plan||'free').toLowerCase();
+       var expired=!!(imageHost.profile.subscription_expires_at&&['active','expired'].includes(String(imageHost.profile.subscription_status||''))&&Date.parse(imageHost.profile.subscription_expires_at)<=Date.now());
+       if(expired)plan='free';
+       imageHost.isPremium=(!expired&&!!imageHost.profile.is_premium)||(assignedBadges.includes('premium')&&(!expired||plan==='free'))||(!expired&&plan!=='free');
+        var limitMb=200;
+       if(/^(1|2|3|4|5|10|20|50)gb$/.test(plan))limitMb=Number(plan.replace('gb',''))*1024;
+      else if(plan==='custom')limitMb=Math.max(0,Number(imageHost.profile.image_storage_limit_mb)||0);
+         imageHost.perImageLimitMb=imageHost.isOwner?Infinity:imageHost.isPremium?50:5;
+         imageHost.limitBytes=imageHost.isOwner?Infinity:limitMb*1048576;
+      imageHost.quotaReady=true;
+      renderImageHostQuota();
+    }catch(error){
+      imageHost.quotaReady=false;
+      if(usage)usage.textContent='Storage limit unavailable';
+      var note=document.getElementById('bioflex-image-quota-note');
+      if(note)note.textContent=error.message||'The Image Host storage quota could not be verified.';
+    }
+  }
+  function formatBytes(value){
+    var bytes=Number(value)||0;if(bytes<1024)return bytes+' B';
+    var units=['KB','MB','GB'];var size=bytes/1024,index=0;
+    while(size>=1024&&index<units.length-1){size/=1024;index++}
+    return size.toFixed(size>=10?1:2)+' '+units[index];
+  }
+  function safeImageName(name){
+    var clean=String(name||'image').normalize('NFKC').replace(/[\\/]/g,'-').replace(/[^\p{L}\p{N}._ -]/gu,'-').replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^\.+/,'').slice(0,150);
+    return clean||('image-'+Date.now()+'.png');
+  }
+   function previewHostedImage(url,fileName){
+    var safe=safeUrl(url);
+    if(!safe){app.toast('Preview link is unavailable.','error');return}
+     var prior=document.getElementById('bioflex-image-preview-lightbox');if(prior)prior.remove();
+     var overlay=document.createElement('div');overlay.id='bioflex-image-preview-lightbox';overlay.className='ih-preview-lightbox';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Image preview');
+     var image=document.createElement('img');image.src=safe;image.alt='Full-size image preview';image.loading='eager';
+      image.addEventListener('error',function(){var fallback=document.createElement('div');fallback.className='host-media-fallback';var message=document.createElement('span');message.textContent='The original image could not be fetched from Telegram.';var link=document.createElement('a');link.href=safe;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open original file';fallback.append(message,link);image.replaceWith(fallback)});
+     var actions=document.createElement('div');actions.className='ih-preview-lightbox-actions';
+     var copy=document.createElement('button');copy.type='button';copy.innerHTML='<i class="fa-solid fa-copy"></i> Copy link';copy.addEventListener('click',function(event){event.stopPropagation();copyHostedImageUrl(safe)});
+      var download=document.createElement('button');download.type='button';download.innerHTML='<i class="fa-solid fa-download"></i> Download';download.addEventListener('click',function(event){event.stopPropagation();downloadHostedMedia(safe,fileName||'image')});
+      var fullscreen=document.createElement('button');fullscreen.type='button';fullscreen.innerHTML='<i class="fa-solid fa-expand"></i> Full screen';fullscreen.addEventListener('click',function(event){event.stopPropagation();toggleHostFullscreen(overlay)});
+     var close=document.createElement('button');close.type='button';close.setAttribute('aria-label','Close preview');close.innerHTML='<i class="fa-solid fa-xmark"></i> Close';close.addEventListener('click',function(event){event.stopPropagation();overlay.remove()});
+      actions.append(copy,download,fullscreen,close);
+     var hint=document.createElement('div');hint.className='ih-preview-lightbox-hint';hint.textContent='Click outside the image or press Escape to close';
+     overlay.append(image,actions,hint);overlay.addEventListener('click',function(event){if(event.target===overlay)overlay.remove()});
+     overlay.addEventListener('keydown',function(event){if(event.key==='Escape')overlay.remove()});
+     document.body.appendChild(overlay);close.focus();
+  }
+  function imageLike(file){
+    var ext=String(file.name||'').split('.').pop().toLowerCase();
+    var video=['mp4','webm','mov','m4v','ogv','avi','mkv','mpeg','mpg','3gp','ts','m2ts'];
+    if((file.type||'').toLowerCase().startsWith('video/')||video.indexOf(ext)>=0)return false;
+    return (file.type||'').toLowerCase().startsWith('image/')||
+      ['jpg','jpeg','png','gif','webp','avif','bmp','tif','tiff','heic','heif','svg','ico'].indexOf(ext)>=0;
+  }
+  function encodedArg(value){return encodeURIComponent(String(value)).replace(/'/g,'%27')}
+  async function uploadHostedImages(fileList){
+    if(!app.App.user){setImageStatus('Please sign in before uploading images.',true);return}
+    var files=Array.from(fileList||[]);
+    if(!files.length)return;
+    var rejected=files.filter(function(file){return !imageLike(file)});
+    files=files.filter(imageLike);
+    if(rejected.length)setImageStatus('Skipped '+rejected.length+' non-image file(s). Video uploads are not supported.',true);
+    if(!files.length)return;
+    var input=document.getElementById('bioflex-image-files');
+    if(input)input.disabled=true;
+    try{
+      if(!imageHost.quotaReady)await loadImageHostQuota();
+      if(!imageHost.quotaReady)throw new Error('Storage limit could not be verified. Refresh the page or contact an administrator.');
+      var tableCheck=await db.from('telegram_image_host_files').select('id').eq('user_id',app.App.user.id).limit(1);
+      if(tableCheck.error)throw new Error('Image storage is temporarily unavailable: '+tableCheck.error.message);
+      for(var i=0;i<files.length;i++){
+        var file=files[i],originalName=safeImageName(file.name),dot=originalName.lastIndexOf('.');
+        var suffix=dot>0?originalName.slice(dot):'',stem=dot>0?originalName.slice(0,dot):originalName;
+        var name=stem+'-'+Date.now()+'-'+i+suffix;
+        if(file.size>imageHost.perImageLimitMb*1048576)throw new Error(name+' is larger than '+imageHost.perImageLimitMb+' MB, the '+(imageHost.isPremium?'Premium':'Free')+' per-image limit.');
+        if(imageHost.usedBytes>=imageHost.limitBytes||imageHost.usedBytes+file.size>imageHost.limitBytes){
+          throw new Error(imageHost.usedBytes>=imageHost.limitBytes?'Image storage is full ('+formatBytes(imageHost.limitBytes)+'). Delete images or assign a larger plan.':'This image would exceed your total storage. Only '+formatBytes(Math.max(0,imageHost.limitBytes-imageHost.usedBytes))+' remains.');
+        }
+        setImageStatus('Uploading '+(i+1)+' of '+files.length+': '+name);
+        var uploaded=await uploadTelegramAsset(file,'image-host/'+app.App.user.id,imageHost.perImageLimitMb,function(fraction){
+          var percent=Math.max(1,Math.min(96,Math.round(fraction*96)));
+          setImageStatus('Uploading '+(i+1)+' of '+files.length+': '+name+' · '+percent+'%');
+        });
+        var insertResult=await db.from('telegram_image_host_files').insert({
+          user_id:app.App.user.id,
+          file_name:name,
+          file_id:uploaded.file_id,
+          telegram_message_id:uploaded.message_id,
+          mime_type:file.type||null,
+          file_size:uploaded.size||file.size
+        });
+        if(insertResult.error){
+          try{await deleteTelegramImageMessage(uploaded.message_id)}catch(_){}
+          throw insertResult.error;
+        }
+        imageHost.usedBytes+=Number(uploaded.size||file.size);
+        renderImageHostQuota();
+      }
+      setImageStatus(files.length+' image(s) uploaded to Telegram.');
+      await loadHostedImages(true);
+    }catch(error){
+      setImageStatus('Upload failed: '+(error&&error.message||'Check Telegram settings and the metadata table setup.'),true);
+    }finally{
+      if(input){input.disabled=false;input.value=''}
+    }
+  }
+  async function deleteTelegramImageMessage(messageId){
+    var config=await getTelegramConfig(),form=new FormData();
+    form.append('chat_id',config.chatId);
+    form.append('message_id',String(messageId));
+    var result=await telegramApiRequest('https://api.telegram.org/bot'+config.botToken+'/deleteMessage',{method:'POST',body:form});
+    if(!result.result)throw new Error('Telegram did not delete the message.');
+    return true;
+  }
+  async function loadHostedImages(reset){
+    var grid=document.getElementById('bioflex-image-grid');
+    if(!grid||imageHost.loading)return;
+    if(!app.App.user){grid.innerHTML='<div class="image-host-notice">Sign in to manage your image uploads.</div>';return}
+    if(reset){imageHost.offset=0;imageHost.hasMore=false;grid.innerHTML=''}
+    imageHost.loading=true;setImageStatus('Loading your images…');
+    try{
+      var result=await db.from('telegram_image_host_files').select('id,file_name,file_id,telegram_message_id,mime_type,file_size,created_at')
+        .eq('user_id',app.App.user.id).order('created_at',{ascending:false}).range(imageHost.offset,imageHost.offset+IMAGE_PAGE_SIZE-1);
+      if(result.error)throw result.error;
+      var usable=(result.data||[]).filter(function(item){return !!item&&!!item.id&&!!item.file_id});
+      imageHost.offset+=usable.length;imageHost.hasMore=usable.length===IMAGE_PAGE_SIZE;
+      if(reset&&!usable.length)grid.innerHTML='<div class="empty" style="grid-column:1/-1">No images uploaded yet.</div>';
+      var config=usable.length?await getTelegramConfig():null;
+      var resolved=await Promise.all(usable.map(async function(item){
+        try{
+          var fileResult=await telegramApiRequest('https://api.telegram.org/bot'+config.botToken+'/getFile?file_id='+encodeURIComponent(item.file_id));
+          var path=fileResult.result&&fileResult.result.file_path;
+           item.url=path?telegramFileDownloadUrl(config.botToken,path):'';
+        }catch(_){item.url=''}
+        return item;
+      }));
+      var html=resolved.map(function(item){
+        var date=item.created_at?new Date(item.created_at).toLocaleDateString():'Telegram image';
+         var thumb=item.url?'<img data-host-media="image" loading="lazy" src="'+esc(item.url)+'" alt="'+esc(item.file_name)+'">':'<div class="host-media-fallback"><i class="fa-solid fa-image"></i><span>Image URL unavailable</span></div>';
+        var copy=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexCopyHostedImageUrl(decodeURIComponent(\''+encodedArg(item.url)+'\'))"><i class="fa-solid fa-copy"></i> Copy link</button>':'<button class="btn btn-ghost btn-sm" type="button" disabled title="Telegram could not refresh this file URL"><i class="fa-solid fa-link"></i> URL unavailable</button>';
+        var preview=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexPreviewHostedImage(decodeURIComponent(\''+encodedArg(item.url)+'\'),decodeURIComponent(\''+encodedArg(item.file_name)+'\'))"><i class="fa-solid fa-eye"></i> Preview</button>':'';
+        var download=item.url?'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexDownloadHostedMedia(decodeURIComponent(\''+encodedArg(item.url)+'\'),decodeURIComponent(\''+encodedArg(item.file_name)+'\'))"><i class="fa-solid fa-download"></i> Download</button>':'';
+        return '<article class="image-host-item"><div class="image-host-thumb">'+thumb+'</div><div class="image-host-meta"><div class="image-host-name" title="'+esc(item.file_name)+'">'+esc(item.file_name)+'</div><div class="image-host-size">'+formatBytes(item.file_size)+' · '+esc(date)+'</div><div class="image-host-actions">'+preview+copy+download+'<button class="btn btn-ghost btn-sm" type="button" onclick="bioflexRenameHostedImage(\''+encodedArg(item.id)+'\',decodeURIComponent(\''+encodedArg(item.file_name)+'\'))"><i class="fa-solid fa-pen"></i> Rename</button><button class="btn btn-danger btn-sm" type="button" onclick="bioflexDeleteHostedImage(\''+encodedArg(item.id)+'\',decodeURIComponent(\''+encodedArg(item.file_name)+'\'))"><i class="fa-solid fa-trash"></i> Delete</button></div></div></article>';
+      }).join('');
+       if(html){grid.insertAdjacentHTML('beforeend',html);attachHostMediaFallbacks(grid)}
+       var count=document.getElementById('bioflex-image-count');if(count)count.textContent=grid.querySelectorAll('.image-host-item').length+' items';
+      var more=document.getElementById('bioflex-image-more');if(more)more.hidden=!imageHost.hasMore;
+      setImageStatus(usable.length?'Loaded '+imageHost.offset+' image(s).':'');
+    }catch(error){
+      setImageStatus('Could not load images: '+(error&&error.message||'Video storage is temporarily unavailable. Refresh the page or contact an administrator.'),true);
+      if(reset)grid.innerHTML='<div class="image-host-notice" style="grid-column:1/-1">Image storage is temporarily unavailable. Refresh the page or contact an administrator.</div>';
+      var more=document.getElementById('bioflex-image-more');if(more)more.hidden=true;
+    }finally{imageHost.loading=false}
+  }
+  async function copyHostedImageUrl(url){
+    if(typeof window.copyText==='function')return window.copyText(url,'Direct image URL copied.');
+    try{await navigator.clipboard.writeText(url);app.toast('Direct image URL copied.','success')}
+    catch(_){app.toast('Could not copy this URL.','error')}
+  }
+  async function renameHostedImage(id,oldName){
+    var proposed=window.prompt('New image filename (keep the file extension):',oldName);
+    if(proposed===null)return;
+    var name=safeImageName(proposed.trim());
+    if(!name||name===oldName){if(name===oldName)return;app.toast('Enter a valid filename.','error');return}
+    var dot=oldName.lastIndexOf('.'),oldExt=dot>=0?oldName.slice(dot).toLowerCase():'';
+    if(oldExt&&name.toLowerCase().slice(-oldExt.length)!==oldExt)name+=oldExt;
+    try{
+      var result=await db.from('telegram_image_host_files').update({file_name:name})
+        .eq('id',id).eq('user_id',app.App.user.id);
+      if(result.error)throw result.error;
+      app.toast('Display name changed. Telegram keeps the original uploaded filename.','success');await loadHostedImages(true);
+    }catch(error){app.toast('Rename failed: '+(error&&error.message||'Check the metadata table permissions.'),'error')}
+  }
+  async function deleteHostedImage(id,name){
+    if(!window.confirm('Permanently delete '+name+'? This cannot be undone.'))return;
+    try{
+      var selected=await db.from('telegram_image_host_files').select('telegram_message_id').eq('id',id).eq('user_id',app.App.user.id).maybeSingle();
+      if(selected.error)throw selected.error;
+      if(!selected.data)throw new Error('Image record not found.');
+      await deleteTelegramImageMessage(selected.data.telegram_message_id);
+      var result=await db.from('telegram_image_host_files').delete().eq('id',id).eq('user_id',app.App.user.id);
+      if(result.error)throw result.error;
+      app.toast('Image deleted.','success');await Promise.all([loadHostedImages(true),loadImageHostQuota()]);
+    }catch(error){app.toast('Delete failed: '+(error&&error.message||'Telegram could not delete this message. The bot must be able to delete messages in the storage chat.'),'error')}
+  }
 })();
 </script>
 <script>
