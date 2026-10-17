@@ -1311,13 +1311,52 @@ async function uploadTelegramAsset(file, prefix, maxMB, onProgress){
   const path=fileResult.result.file_path;
   if(kind==='gif'&&!/\.gif(?:$|[?#])/i.test(path))kind='video';
   return {
-    url:`https://api.telegram.org/file/bot${botToken}/${path}`,
+    url:`https://api.telegram.org/file/bot${botToken}/${path}#bf_tg_file_id=${encodeURIComponent(sentMedia.file_id)}`,
     file_id:sentMedia.file_id,
     message_id:message.message_id,
     name:sentMedia.file_name||file.name,
     size:sentMedia.file_size||file.size,
     kind
   };
+}
+
+function telegramAssetFileId(value){
+  try{
+    const url=new URL(String(value||''));
+    if(url.hostname!=='api.telegram.org'||!url.pathname.includes('/file/bot/'))return '';
+    return new URLSearchParams(url.hash.slice(1)).get('bf_tg_file_id')||'';
+  }catch(_){return ''}
+}
+function telegramAssetDownloadUrl(botToken,filePath,fileId){
+  return `https://api.telegram.org/file/bot${botToken}/${filePath}#bf_tg_file_id=${encodeURIComponent(fileId)}`;
+}
+async function refreshTelegramAssetUrl(value,config){
+  const fileId=telegramAssetFileId(value);
+  if(!fileId)return value;
+  try{
+    const cfg=config||await getTelegramConfig();
+    const response=await telegramApiRequest(`https://api.telegram.org/bot${cfg.botToken}/getFile?file_id=${encodeURIComponent(fileId)}`);
+    const filePath=response?.result?.file_path;
+    return filePath?telegramAssetDownloadUrl(cfg.botToken,filePath,fileId):value;
+  }catch(_){return value}
+}
+async function refreshTelegramProfileMedia(profile,links=[],socials=[]){
+  if(!profile)return {profile,links,socials};
+  const backgroundValue=profile.background_value&&typeof profile.background_value==='object'?profile.background_value:{};
+  const urls=[profile.avatar_url,profile.cursor_url,profile.music_url,profile.background_url,backgroundValue.url,
+    ...links.map(item=>item&&item.icon_url),...socials.map(item=>item&&item.icon_url)];
+  if(!urls.some(telegramAssetFileId))return {profile,links,socials};
+  const config=await getTelegramConfig().catch(()=>null);
+  if(!config)return {profile,links,socials};
+  const resolved=await Promise.all(urls.map(value=>refreshTelegramAssetUrl(value,config)));
+  let i=0;
+  const nextProfile={...profile};
+  for(const field of ['avatar_url','cursor_url','music_url','background_url'])nextProfile[field]=resolved[i++];
+  const refreshedBackground=resolved[i++];
+  if(refreshedBackground!==backgroundValue.url)nextProfile.background_value={...backgroundValue,url:refreshedBackground};
+  const nextLinks=links.map(item=>({...item,icon_url:resolved[i++]}));
+  const nextSocials=socials.map(item=>({...item,icon_url:resolved[i++]}));
+  return {profile:nextProfile,links:nextLinks,socials:nextSocials};
 }
 
 const RESERVED = ['admin','dashboard','login','signup','register','api','support','help','settings','about','privacy','terms','www','static','assets','root','bioflex','null','undefined','public','cdn','docs','blog','careers','pricing','services','policy'];
@@ -3733,6 +3772,9 @@ async function renderPreview(){
     document.getElementById('preview-body').innerHTML='<div class="empty" style="margin-top:4rem">No profile to preview.</div>';
     return;
   }
+  const refreshedMedia=await refreshTelegramProfileMedia(profile,links,socials);
+  profile=refreshedMedia.profile;links=refreshedMedia.links;socials=refreshedMedia.socials;
+  if(requestedProfile){App.previewProfile=profile;App.previewLinks=links;App.previewSocials=socials}
   const extras=profileExtras(profile);
   const layout='bio-template';
   setProfileMetadata(profile);
