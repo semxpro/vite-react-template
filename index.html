@@ -348,6 +348,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border:none;border-ra
 .presence-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;background:rgba(96,165,250,.15);flex:none}
 .presence-status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:.35rem;background:#64748b}
 .presence-status-dot.online{background:#4ade80}.presence-status-dot.idle{background:#facc15}.presence-status-dot.dnd{background:#f87171}
+.presence-status-dot.mobile{width:auto;height:auto;margin-right:.35rem;background:transparent;color:#4ade80;font-size:.82rem;vertical-align:middle}
 .widget-subtitle{font-size:.73rem;color:rgba(219,234,254,.58);margin-top:.15rem}
 .now-playing-art{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,rgba(29,185,84,.32),rgba(59,130,246,.22));font-size:1.1rem;flex:none}
 .timezone-clock{font:700 1.25rem 'JetBrains Mono',monospace;color:#e0f2fe}
@@ -1358,6 +1359,20 @@ async function refreshTelegramProfileMedia(profile,links=[],socials=[]){
   const nextSocials=socials.map(item=>({...item,icon_url:resolved[i++]}));
   return {profile:nextProfile,links:nextLinks,socials:nextSocials};
 }
+async function refreshTelegramTemplateMedia(templates){
+  if(!Array.isArray(templates)||!templates.length)return templates||[];
+  const fields=['background_url','default_avatar_url','music_url','preview_image'];
+  const urls=templates.flatMap(template=>fields.map(field=>template&&template[field]));
+  if(!urls.some(telegramAssetFileId))return templates;
+  const config=await getTelegramConfig().catch(()=>null);
+  if(!config)return templates;
+  const refreshed=await Promise.all(urls.map(value=>refreshTelegramAssetUrl(value,config)));
+  return templates.map((template,index)=>{
+    const next={...template};
+    fields.forEach((field,fieldIndex)=>{next[field]=refreshed[index*fields.length+fieldIndex]});
+    return next;
+  });
+}
 
 const RESERVED = ['admin','dashboard','login','signup','register','api','support','help','settings','about','privacy','terms','www','static','assets','root','bioflex','null','undefined','public','cdn','docs','blog','careers','pricing','services','policy'];
 const USERNAME_RE = /^[a-z0-9_-]{3,30}$/;
@@ -1479,6 +1494,7 @@ const DASHBOARD_TAB_KEY='bioflex.dashboard.lastTab.v1';
 const DASHBOARD_HIDDEN_KEY='bioflex.dashboard.wasHidden.v1';
 const App = {user:null,profile:null,links:[],socials:[],currentTab:'overview',authMode:'login',passwordRecovery:false,usernameEffect:'none',usernameAvailable:false,analytics:null,analyticsError:null,publicPresence:null,dashboardPresence:null,previewProfile:null,widgetTimers:[],entitlementChannel:null,hostFilesChannel:null,entitlementSyncTimer:null,featureFlags:Object.create(null),featureFlagsLoaded:false,featureFlagsChannel:null};
 const VideoLibrary = {page:1,search:'',category:'',hits:[],total:0,loading:false,requestId:0};
+App.discordPresenceConnections=[];
 const MusicLibrary = {search:'',category:'',tracks:[],loading:false,requestId:0,audio:null,activeTrackId:'',previewCache:{},catalogCache:Object.create(null),previewLoadingId:'',playRequestId:0};
 const MUSIC_CATEGORIES = [
   {value:'',label:'All vibes · English + Hindi'},
@@ -1530,10 +1546,8 @@ function accountRole(profile){
 function leaderboardRoleBadges(profile){
   const badges=accountAssignedBadgeIds(profile).filter(function(id){return !!ACCOUNT_BADGE_META[id]});
   if(!badges.length)return '<span class="leaderboard-role-chip" style="color:#94a3b8"><i class="fa-solid fa-user"></i> Member</span>';
-  return badges.map(function(id){
-    const badge=ACCOUNT_BADGE_META[id];
-    return '<span class="leaderboard-role-chip" style="color:'+badge.color+';border-color:'+badge.color+'55" title="'+esc(badge.name)+'"><i class="fa-solid '+badge.icon+'"></i> '+esc(badge.name)+'</span>';
-  }).join('');
+  const id=badges[0],badge=ACCOUNT_BADGE_META[id];
+  return '<span class="leaderboard-role-chip" style="color:'+badge.color+';border-color:'+badge.color+'55" title="'+esc(badge.name)+'"><i class="fa-solid '+badge.icon+'"></i> '+esc(badge.name)+'</span>';
 }
 function accountPremiumFeatureEnabled(profile,featureId){
   /* Admin-managed global flags take effect immediately when present; keep a safe
@@ -2492,6 +2506,14 @@ function startPublicPresence(profile){
 function clearWidgetTimers(){
   (App.widgetTimers||[]).forEach(timer=>clearInterval(timer));
   App.widgetTimers=[];
+  (App.discordPresenceConnections||[]).forEach(connection=>{
+    connection.closed=true;
+    if(connection.heartbeat)clearInterval(connection.heartbeat);
+    if(connection.reconnect)clearTimeout(connection.reconnect);
+    if(connection.fallbackPoll)clearInterval(connection.fallbackPoll);
+    try{connection.socket&&connection.socket.close()}catch(_){}
+  });
+  App.discordPresenceConnections=[];
 }
 function startDiscordPresence(userId){
   if(!/^\d{17,20}$/.test(String(userId||'')))return;
@@ -2501,30 +2523,98 @@ function startDiscordPresence(userId){
   const activityText=widget.querySelector('[data-presence-activity]');
   const avatar=widget.querySelector('[data-presence-avatar]');
   const statusDot=widget.querySelector('.presence-status-dot');
-  const update=async()=>{
+  const connection={closed:false,socket:null,heartbeat:null,reconnect:null,fallbackPoll:null};
+  App.discordPresenceConnections.push(connection);
+  const showUnavailable=()=>{
+    if(!widget.isConnected)return;
+    statusText.textContent='Discord user';
+    activityText.textContent='Presence unavailable · account must opt in to Lanyard';
+    statusDot.className='presence-status-dot';
+    statusDot.replaceChildren();
+  };
+  const renderPresence=data=>{
+    if(!data||!widget.isConnected)return;
+    const user=data.discord_user||{},status=String(data.discord_status||'offline'),clientStatus=data.client_status||{};
+    statusText.textContent=user.global_name||user.username||'Discord user';
+    const mobileOnline=String(clientStatus.mobile||'').toLowerCase()==='online';
+    statusDot.className='presence-status-dot'+(mobileOnline?' mobile':status==='online'?' online':status==='idle'?' idle':'');
+    statusDot.replaceChildren();
+    statusDot.setAttribute('aria-label',mobileOnline?'Online on mobile':status==='online'?'Online':status==='idle'?'Idle':'');
+    if(mobileOnline){
+      const mobileIcon=document.createElement('i');
+      mobileIcon.className='fa-solid fa-mobile-screen-button';
+      mobileIcon.setAttribute('aria-hidden','true');
+      statusDot.appendChild(mobileIcon);
+    }
+    const activities=Array.isArray(data.activities)?data.activities:[];
+    const custom=activities.find(item=>item&&item.type===4);
+    const activity=activities.find(item=>item&&item.type!==4);
+    activityText.replaceChildren();
+    if(status==='offline'){
+      activityText.textContent='Offline';
+    }else if(custom&&(custom.state||custom.emoji)){
+      const emoji=custom.emoji;
+      if(emoji&&emoji.id&&/^\d{17,20}$/.test(String(emoji.id))){
+        const image=document.createElement('img');
+        image.src='https://cdn.discordapp.com/emojis/'+encodeURIComponent(emoji.id)+'.'+(emoji.animated?'gif':'png')+'?size=24&quality=lossless';
+        image.alt=String(emoji.name||'Discord status emoji');
+        image.style.cssText='width:1.05em;height:1.05em;object-fit:contain;vertical-align:-.16em;margin-right:.3em';
+        activityText.appendChild(image);
+      }else if(emoji&&emoji.name){
+        const emojiText=document.createElement('span');
+        emojiText.textContent=emoji.name+' ';
+        activityText.appendChild(emojiText);
+      }
+      if(custom.state)activityText.appendChild(document.createTextNode(String(custom.state)));
+    }else if(activity){
+      activityText.textContent=[activity.name,activity.details,activity.state].filter(Boolean).join(' · ');
+    }else{
+      activityText.textContent=status==='online'||status==='dnd'?'Online':status==='idle'?'Idle':'';
+    }
+    if(user.id&&user.avatar)avatar.src='https://cdn.discordapp.com/avatars/'+encodeURIComponent(user.id)+'/'+encodeURIComponent(user.avatar)+'.png?size=128';
+    else avatar.removeAttribute('src');
+    widget.dataset.presenceReady='true';
+  };
+  const poll=async()=>{
+    if(connection.closed||!widget.isConnected)return;
     try{
       const response=await fetch('https://api.lanyard.rest/v1/users/'+encodeURIComponent(userId),{headers:{Accept:'application/json'},cache:'no-store'});
       if(!response.ok)throw new Error('Presence service unavailable');
       const payload=await response.json();
       if(!payload||!payload.success||!payload.data)throw new Error('Account is not connected to Lanyard');
-      const data=payload.data,user=data.discord_user||{},status=String(data.discord_status||'offline');
-      statusText.textContent=(user.global_name||user.username||'Discord user')+' · '+status;
-      statusDot.className='presence-status-dot '+(status==='online'?'online':status==='idle'?'idle':status==='dnd'?'dnd':'');
-      const activity=(data.activities||[]).filter(a=>a.type!==4).slice(0,1)[0];
-      const custom=(data.activities||[]).find(a=>a.type===4);
-      const activityLabel=activity?[activity.name,activity.details,activity.state].filter(Boolean).join(' · '):custom?(custom.state||'Custom status'):status==='offline'?'Offline':'Online';
-      activityText.textContent=activityLabel;
-      if(user.id&&user.avatar)avatar.src='https://cdn.discordapp.com/avatars/'+encodeURIComponent(user.id)+'/'+encodeURIComponent(user.avatar)+'.png?size=128';
-      else avatar.removeAttribute('src');
-      widget.dataset.presenceReady='true';
-    }catch(_){
-      statusText.textContent='Discord status unavailable';
-      activityText.textContent='The account must be opted in to Lanyard for public presence.';
-      statusDot.className='presence-status-dot';
-    }
+      renderPresence(payload.data);
+    }catch(_){showUnavailable()}
   };
-  update();
-  App.widgetTimers.push(setInterval(update,30000));
+  const connect=()=>{
+    if(connection.closed||!widget.isConnected)return;
+    if(!window.WebSocket){connection.reconnect=setTimeout(connect,5000);return}
+    try{
+      const socket=new WebSocket('wss://api.lanyard.rest/socket');
+      connection.socket=socket;
+      socket.onmessage=event=>{
+        let message;
+        try{message=JSON.parse(event.data)}catch(_){return}
+        if(message.op===1){
+          const interval=Math.max(10000,Number(message.d&&message.d.heartbeat_interval)||30000);
+          if(connection.heartbeat)clearInterval(connection.heartbeat);
+          connection.heartbeat=setInterval(()=>{
+            if(socket.readyState===1)socket.send(JSON.stringify({op:3}));
+          },interval);
+          if(socket.readyState===1)socket.send(JSON.stringify({op:2,d:{subscribe_to_id:String(userId)}}));
+        }else if(message.op===0&&message.d){
+          renderPresence(message.d);
+        }
+      };
+      socket.onclose=()=>{
+        if(connection.heartbeat){clearInterval(connection.heartbeat);connection.heartbeat=null}
+        if(!connection.closed)connection.reconnect=setTimeout(connect,5000);
+      };
+      socket.onerror=()=>{try{socket.close()}catch(_){}};
+    }catch(_){if(!connection.closed)connection.reconnect=setTimeout(connect,5000)}
+  };
+  poll();
+  connect();
+  connection.fallbackPoll=setInterval(()=>{if(!connection.socket||connection.socket.readyState!==1)poll()},30000);
 }
 function startTimezoneClock(timezone,label){
   if(!timezone)return;
@@ -5060,9 +5150,9 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
   }
   function refreshTemplates(){
      db.from('templates').select('slug,name,description,category,background_url,default_avatar_url,gradient_from,gradient_to,gradient_angle,accent_color,text_color,is_active,created_at,template_type,html_code,css_code,js_code,external_libraries,preview_image,music_url,sort_order').order('sort_order')
-      .then(function(result){
+      .then(async function(result){
         if(result.error){console.warn('Could not load site templates:',result.error.message);return}
-        app.App.siteTemplates=(result.data||[]).filter(function(row){return row.is_active!==false}).map(normalizeTemplate).filter(Boolean);
+        app.App.siteTemplates=await refreshTelegramTemplateMedia((result.data||[]).filter(function(row){return row.is_active!==false}).map(normalizeTemplate).filter(Boolean));
         if(app.App.user&&app.App.currentTab==='templates'&&typeof window.renderDashboard==='function')window.renderDashboard();
       }).catch(function(error){console.warn('Could not load site templates:',error)});
   }
@@ -6338,10 +6428,10 @@ window.BioFlex={App,db,toast,navigate,safeUrl,esc,getSubdomain};
     const slug=String(profile&&profile.active_template_slug||'').trim();
     if(!slug)return null;
     let template=templateForSlug(slug);
-    if(template)return template;
+    if(template)return (await refreshTelegramTemplateMedia([template]))[0]||template;
     try{
       const result=await db.from('templates').select('*').eq('slug',slug).eq('is_active',true).maybeSingle();
-      if(!result.error&&result.data)return result.data;
+      if(!result.error&&result.data)return (await refreshTelegramTemplateMedia([result.data]))[0]||result.data;
     }catch(_){}
     return null;
   }
